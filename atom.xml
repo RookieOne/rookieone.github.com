@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>The Absent Minded Coder</title>
+  <link href="http://yoursite.com/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2011-08-28T19:40:52-05:00</updated>
+  <id>http://yoursite.com/</id>
+  <author>
+    <name>Jonathan Birkholz</name>
+    
+  </author>
+
+  
+  <entry>
+    <title>JB Sample Post</title>
+    <link href="http://yoursite.com/blog/2011/08/28/jb-sample-post/"/>
+    <updated>2011-08-28T15:24:00-05:00</updated>
+    <id>http://yoursite.com/blog/2011/08/28/jb-sample-post</id>
+    <content type="html">&lt;p&gt;Take a look at this awesome code!&lt;/p&gt;
+
+&lt;p&gt;``` ruby&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;puts &quot;Hello World&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+</content>
+  </entry>
+  
+</feed>
