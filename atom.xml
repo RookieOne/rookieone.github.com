@@ -4,7 +4,7 @@
   <title>The Absent Minded Coder</title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2011-08-28T19:40:52-05:00</updated>
+  <updated>2011-08-28T20:21:33-05:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name>Jonathan Birkholz</name>
@@ -22,6 +22,115 @@
 &lt;p&gt;``` ruby&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;puts &quot;Hello World&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;``` ruby&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require 'gravtastic'
+require 'score_it'
+require 'virgil'
+
+class Profile
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Badgeable::Subject
+  include Gravtastic
+  include ScoreIt::Subject 
+  include Virgil::Teachable
+  include CodeMav::WriterModule
+  include CodeMav::SpeakerModule
+  include CodeMav::CoderModule
+  include CodeMav::KnowledgeModule
+  include CodeMav::ExperienceModule
+  include CodeMav::SocialModule
+  include CodeMav::Taggable
+  include CodeMav::Locatable
+  include CodeMav::Indexable
+  include CodeMav::Followable
+  include CodeMav::HasBacklogItems
+  include CodeMav::Autodiscoverable
+
+  gravtastic
+
+  field :showcase, :type =&amp;gt; Boolean, :default =&amp;gt; false
+  field :api_id, :type =&amp;gt; Integer
+  field :name, :type =&amp;gt; String
+  field :email, :type =&amp;gt; String
+  field :username, :type =&amp;gt; String
+  field :gravatar_id, :type =&amp;gt; String
+  index :username, :unique =&amp;gt; true
+
+  field :can_manage_tags, :type =&amp;gt; Boolean, :default =&amp;gt; false
+  field :is_moderator, :type =&amp;gt; Boolean, :default =&amp;gt; false
+
+  def gravatar_id
+    Digest::MD5.hexdigest(self.email)
+  end
+
+  def can_manage_tags?
+    can_manage_tags
+  end
+
+  def moderator?
+    is_moderator
+  end
+
+  belongs_to :user
+
+  scope :by_username, lambda { |uname| where(:username =&amp;gt; uname) }
+  scope :named, lambda { |name| { :where =&amp;gt; { :name =&amp;gt; name } } }
+  scope :showcase, lambda { where(:showcase =&amp;gt; true) }
+
+  def display_name
+    (self.name.blank? || self.name.nil?) ? self.username : self.name
+  end
+
+  def to_param
+    username
+  end
+
+  def sync!
+    stack_overflow_profile.sync! unless stack_overflow_profile.nil?
+    git_hub_profile.sync! unless git_hub_profile.nil?
+    bitbucket_profile.sync! unless bitbucket_profile.nil?
+    speaker_rate_profile.sync! unless speaker_rate_profile.nil?
+    slide_share_profile.sync! unless slide_share_profile.nil?
+    twitter_profile.sync! unless twitter_profile.nil?
+  end
+
+  class &amp;lt;&amp;lt; self
+    def sync_all!
+      profiles_to_sync = Profile.all.to_a
+      profiles_to_sync.each do |p|
+        begin
+          p.sync!
+        rescue
+            puts &quot;ERROR on syncing #{p.display_name}'s profile&quot;
+        end
+      end
+    end
+
+    def stack_overflow
+      where(:stack_overflow_profile.exists =&amp;gt; true)
+    end
+
+    def top_stack_overflow
+      stack_overflow.desc('stack_overflow_profile.reputation')
+    end
+
+    def search(query, options = {})
+      search = Sunspot.new_search(Profile)
+      search.build do
+        keywords query do
+        end
+      end
+      search.execute
+    end
+  end
+
+end
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;```&lt;/p&gt;
