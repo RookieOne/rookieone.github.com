@@ -4,7 +4,7 @@
   <title>The Absent Minded Coder</title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2011-08-28T20:21:33-05:00</updated>
+  <updated>2011-08-28T20:54:26-05:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name>Jonathan Birkholz</name>
@@ -28,7 +28,9 @@
 
 &lt;p&gt;``` ruby&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;require 'gravtastic'
+&lt;pre&gt;&lt;code&gt;5000
+# comment
+require 'gravtastic'
 require 'score_it'
 require 'virgil'
 
