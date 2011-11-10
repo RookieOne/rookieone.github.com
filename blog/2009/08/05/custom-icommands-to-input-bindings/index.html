@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>I am RookieOne: How to bind custom ICommands to Input Bindings</title>
+  <meta name="author" content="Jonathan Birkholz">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://www.iamrookieone.com/blog/2009/08/05/custom-icommands-to-input-bindings/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="I am RookieOne" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">I am RookieOne</a></h1>
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:www.iamrookieone.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">How to Bind Custom ICommands to Input Bindings</h1>
+    
+    
+
+
+
+
+<time datetime="2009-08-05 08:00:00 -0500" pubdate  updated >Aug 5<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+<div class="entry-content"><p>If you are developing using any sort of V-VM-M pattern, you are already loving the awesome binding powers of Wpf.</p>
+
+<p>And you should also be loving ICommand and binding buttons to ICommand properties on your VM.</p>
+
+<p>What you might have discovered is that binding ICommands to Keys and other input gestures is not as easy as it was with vanilla Routed Commands.</p>
+
+<p>But have no fear! There is a solution.</p>
+
+<p>By utilizing Josh Smith&#8217;s <a href="http://joshsmithonwpf.wordpress.com/2008/07/22/enable-elementname-bindings-with-elementspy/">Element Spy trick</a> and creating a custom InputBinding, we can gain the functionality of binding an ICommand to a Key, etc.</p>
+
+<p>Here is my custom input binding :</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">MyInputBinding</span> <span class="p">:</span> <span class="n">KeyBinding</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>  <span class="cp">#region Fields</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">DependencyProperty</span> <span class="n">BoundCommandProperty</span> <span class="p">=</span>
+</div><div class='line'>                    <span class="n">DependencyProperty</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="s">&quot;BoundCommand&quot;</span><span class="p">,</span>
+</div><div class='line'>                                                <span class="k">typeof</span> <span class="p">(</span><span class="n">ICommand</span><span class="p">),</span>
+</div><div class='line'>                                                <span class="k">typeof</span> <span class="p">(</span><span class="n">MyInputBinding</span><span class="p">),</span>
+</div><div class='line'>                                                <span class="k">new</span> <span class="nf">PropertyMetadata</span><span class="p">(</span><span class="n">OnBoundCommandChanged</span><span class="p">));</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="cp">#endregion</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="cp">#region Properties</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">public</span> <span class="n">ICommand</span> <span class="n">BoundCommand</span>
+</div><div class='line'>  <span class="p">{</span>
+</div><div class='line'>    <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">GetValue</span><span class="p">(</span><span class="n">BoundCommandProperty</span><span class="p">)</span> <span class="k">as</span> <span class="n">ICommand</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>    <span class="k">set</span> <span class="p">{</span> <span class="n">SetValue</span><span class="p">(</span><span class="n">BoundCommandProperty</span><span class="p">,</span> <span class="k">value</span><span class="p">);}</span>
+</div><div class='line'>  <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="cp">#endregion</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="cp">#region Methods</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">OnBoundCommandChanged</span><span class="p">(</span><span class="n">DependencyObject</span> <span class="n">obj</span><span class="p">,</span> <span class="n">DependencyPropertyChangedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</div><div class='line'>  <span class="p">{</span>
+</div><div class='line'>    <span class="n">MyInputBinding</span> <span class="n">binding</span> <span class="p">=</span> <span class="n">obj</span> <span class="k">as</span> <span class="n">MyInputBinding</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">binding</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">binding</span><span class="p">.</span><span class="n">Command</span> <span class="p">=</span> <span class="n">e</span><span class="p">.</span><span class="n">NewValue</span> <span class="k">as</span> <span class="n">ICommand</span><span class="p">;</span>
+</div><div class='line'>  <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="cp">#endregion</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Then when you combine the use of the ElementSpy, your xaml looks like:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+</pre></td><td class='code' width='100%'><pre><code class='xml'><div class='line'><span class="nt">&lt;Window.Resources&gt;</span>
+</div><div class='line'>  <span class="nt">&lt;InputBindingSandbox:ElementSpy</span> <span class="na">x:Key=</span><span class="s">&quot;spy&quot;</span> <span class="nt">/&gt;</span>
+</div><div class='line'><span class="nt">&lt;/Window.Resources&gt;</span>
+</div><div class='line'><span class="nt">&lt;Window.InputBindings&gt;</span>
+</div><div class='line'>  <span class="nt">&lt;InputBindingSandbox:MyInputBinding</span> <span class="na">BoundCommand=</span><span class="s">&quot;{Binding Source={StaticResource spy},</span>
+</div><div class='line'><span class="s">                                                           Path=Element.DataContext.MyCommand}&quot;</span>
+</div><div class='line'>                                    <span class="na">Key=</span><span class="s">&quot;Enter&quot;</span> <span class="nt">/&gt;</span>
+</div><div class='line'><span class="nt">&lt;/Window.InputBindings&gt;</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Naturally the custom input binding is very simple and does not expose the Command Parameter nor the Command Target, etc. But the basic pattern is there so feel free to utilize and extend.</p>
+
+<p>Happy coding!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jonathan Birkholz</span></span>
+
+      
+
+
+
+
+<time datetime="2009-08-05 08:00:00 -0500" pubdate  updated >Aug 5<span>th</span>, 2009</time>
+
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/C-/'>C#</a>, <a class='category' href='/blog/categories/WPF/'>WPF</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.iamrookieone.com/blog/2009/08/05/custom-icommands-to-input-bindings/" data-via="" data-counturl="http://www.iamrookieone.com/blog/2009/08/05/custom-icommands-to-input-bindings/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2009/12/17/the-goal/">The Goal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/12/16/jaded-net/">Jaded .Net</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/12/15/examining-how-we-develop-software/">Examining how we develop software</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/11/25/named-command-decorator/">Named Command Decorator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/10/29/aop-structure-map/">Aop INotifyPropertyChanged StructureMap</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Jonathan Birkholz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

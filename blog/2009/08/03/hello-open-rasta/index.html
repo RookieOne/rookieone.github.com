@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>I am RookieOne: Hello Open Rasta</title>
+  <meta name="author" content="Jonathan Birkholz">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://www.iamrookieone.com/blog/2009/08/03/hello-open-rasta/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="I am RookieOne" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">I am RookieOne</a></h1>
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:www.iamrookieone.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Hello Open Rasta</h1>
+    
+    
+
+
+
+
+<time datetime="2009-08-03 00:00:00 -0500" pubdate  updated >Aug 3<span>rd</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+<div class="entry-content"><p>So Ryan, the apostle of everything on the web, has been spreading the gospel of Open Rasta for months. Tonight I decided that finally, I should download and give this fantastical framework a shot.</p>
+
+<p>For an explanation on what OpenRasta is and is not, I shall direct you to their sites:</p>
+
+<p><a href="http://trac.caffeine-it.com/openrasta/wiki/Doc">Open Rasta Documentation</a>
+<a href="http://www.ohloh.net/p/openrasta">Open Rasta Download Home</a>
+What I am going to do is just describe my experience trying their framework for the first time.</p>
+
+<p>I am a person that likes to learn by trying so I immediately jumped to the ‘creating your first OpenRasta website’ (<a href="http://svn.caffeine-it.com/openrasta/trunk/doc/content/Tutorials/Create-First-Site.html">here</a>). I have looked at some of Ryan’s code and have survived several conversations with Ryan over the framework. ;) I believe that is enough preparation for at least a simple tutorial.</p>
+
+<p>Well I go to the modifying the web.config section and was left with a broken solution. Apparently from the time the tutorial was written and the time I downloaded the version 2.0.2039.312, the handlers and modules all moved to another assembly. I had a gut feeling it moved and when I talked to Ryan, he confirmed my suspicions. Supposedly he is going to try and update the tutorial.</p>
+
+<p>In the meantime, just change ….&#8221;OpenRasta.Web.OpenRastaHandler, OpenRasta&#8221;</p>
+
+<p>to… &#8220;OpenRasta.Hosting.AspNet.OpenRastaHandler, OpenRasta.Hosting.AspNet&#8221;</p>
+
+<p>So change the assembly reference from the OpenRasta.dll to the OpenRasta.Hosting.AspNet.dll</p>
+
+<p>I assume if you are reading this you have the skill set to modify said correction for the other references.</p>
+
+<p>After that I breezed through the creation of the ‘Home’ resource and the ‘Home’ handler. No duh? Any programmer can make a couple of classes. :)</p>
+
+<p>I’m at the configuration section and I have to say, I love the fluent interface. Anyone who has talked to me in the past 6 months knows I love the pattern. It instantly makes any framework extremely approachable.</p>
+
+<p>The tutorial has you making a manual configuration. I tried to find an auto configuration just using some intellisense with no luck. I will investigate this further. If I was going to use OpenRasta I would definitely want a convention based solution. Even with a nice fluent interface, I really don’t want to manually create all my mappings by hand.</p>
+
+<p>But there is something to be said for simply creating a mapping like :</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">ResourceSpace</span><span class="p">.</span><span class="n">Has</span>
+</div><div class='line'>    <span class="p">.</span><span class="n">ResourcesOfType</span><span class="p">&lt;</span><span class="n">Home</span><span class="p">&gt;()</span>
+</div><div class='line'>    <span class="p">.</span><span class="n">AtUri</span><span class="p">(</span><span class="s">&quot;/home&quot;</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">.</span><span class="n">HandledBy</span><span class="p">&lt;</span><span class="n">HomeHandler</span><span class="p">&gt;();</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I ran the app expecting the 405 method error as the tutorial predicts.. and got an empty page. I was using FireFox, so I jumped over to IE and was then greeted by the 405 error. I assume FireFox is either handling the problem gracefully or I don’t have some settings setup to display these errors. /shrug</p>
+
+<p>So then I created my ‘Get’ method on my HomeHandler. One of the things that did attract me to OpenRasta was the POCO handlers. I’ve grown to appreciate very clean code with some acceptable conventions. Just makes life easier. I can focus on the domain problem and not the intricacies of any given framework.</p>
+
+<p>Most of this seemingly new re-invention of HTTP as ESB, REST, Atom.. etc is interesting in that its a reexamining of a technology we use all the time. I haven’t done web development in roughly 3 years. The majority of my experience is in smart client apps. That is just the way my career and projects played out for me. The websites I created were always very basic and probably crap if judged by web developer gurus.</p>
+
+<p>Anyway.</p>
+
+<p>We click links and magically we get a web page. We don’t really think much about it. Sort of like turning on a light switch or starting your car. We just expect things to work and don’t really worry about it. How many drivers can actually explain a combustion engine?</p>
+
+<p>There is a lot going on in the background to make the web work. This new (new to me at least) area of development is leveraging the tech the way it was supposed to be used (if I am to believe the pioneers in this arena). A lot of this is a change of perspective. And with any change of perspective it can take awhile to make the transition.</p>
+
+<p>After that side trip down my ramblings, we come back to me having a handler with a Get method. Now I have graduated to a 406 error (as expected by the tutorial).</p>
+
+<p>I then created my view as the tutorial suggested. Now upon trying to fluently configure.. I ran into a snag. Again the tutorial is out dated (which is fine for an open source and still growing framework).</p>
+
+<p>I had to add the “OpenRasta.Codecs.WebForms.dll” to the solution.</p>
+
+<p>Also the fluent configuration suggested is…</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">ResourceSpace</span><span class="p">.</span><span class="n">Has</span><span class="p">.</span><span class="n">ResourcesOfType</span><span class="p">&lt;</span><span class="n">Home</span><span class="p">&gt;()</span>
+</div><div class='line'>        <span class="p">.</span><span class="n">AtUri</span><span class="p">(</span><span class="s">&quot;/home&quot;</span><span class="p">)</span>
+</div><div class='line'>        <span class="p">.</span><span class="n">HandledBy</span><span class="p">&lt;</span><span class="n">HomeHandler</span><span class="p">&gt;()</span>
+</div><div class='line'>        <span class="p">.</span><span class="n">AndRendededByAspx</span><span class="p">(</span><span class="s">&quot;~/Views/HomeView.aspx&quot;</span><span class="p">);</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>But since the AndRendededByAspx is obselete, the code should now be:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">ResourceSpace</span><span class="p">.</span><span class="n">Has</span><span class="p">.</span><span class="n">ResourcesOfType</span><span class="p">&lt;</span><span class="n">Home</span><span class="p">&gt;()</span>
+</div><div class='line'>                    <span class="p">.</span><span class="n">AtUri</span><span class="p">(</span><span class="s">&quot;/home&quot;</span><span class="p">)</span>
+</div><div class='line'>                    <span class="p">.</span><span class="n">HandledBy</span><span class="p">&lt;</span><span class="n">HomeHandler</span><span class="p">&gt;()</span>
+</div><div class='line'>                    <span class="p">.</span><span class="n">RenderedByAspx</span><span class="p">(</span><span class="s">&quot;~/Views/HomeView.aspx&quot;</span><span class="p">);</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I then continued the tutorial until I had my Home View that displayed my lovely welcome message.</p>
+
+<p>Yay! I got my first Open Rasta page to work. :)</p>
+
+<p>Feel free to investigate my project at my Git Hub repository:</p>
+
+<p><a href="http://github.com/RookieOne/OpenRastaExperiment/tree/TutorialCompletion">http://github.com/RookieOne/OpenRastaExperiment/tree/TutorialCompletion</a></p>
+
+<p>I’m going to be continuing to change the master branch but the TutorialCompletion branch should remain unchanged.</p>
+
+<p>SO check out OpenRasta and their (and my) tutorial. Its short and is a great window into viewing the web in a slightly different manner.</p>
+
+<p>Thanks for your time!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jonathan Birkholz</span></span>
+
+      
+
+
+
+
+<time datetime="2009-08-03 00:00:00 -0500" pubdate  updated >Aug 3<span>rd</span>, 2009</time>
+
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/C-/'>C#</a>, <a class='category' href='/blog/categories/Open-Rasta/'>Open Rasta</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.iamrookieone.com/blog/2009/08/03/hello-open-rasta/" data-via="" data-counturl="http://www.iamrookieone.com/blog/2009/08/03/hello-open-rasta/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2009/12/17/the-goal/">The Goal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/12/16/jaded-net/">Jaded .Net</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/12/15/examining-how-we-develop-software/">Examining how we develop software</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/11/25/named-command-decorator/">Named Command Decorator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/10/29/aop-structure-map/">Aop INotifyPropertyChanged StructureMap</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Jonathan Birkholz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

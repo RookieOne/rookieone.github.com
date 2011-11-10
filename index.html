@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>The Absent Minded Coder</title>
+  <title>I am RookieOne</title>
   <meta name="author" content="Jonathan Birkholz">
   
 
@@ -16,13 +16,13 @@
 
   
 
-  <link rel="canonical" href="http://yoursite.com/index.html"/>
+  <link rel="canonical" href="http://www.iamrookieone.com/index.html"/>
   <link href="/favicon.png" rel="shortcut icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="The Absent Minded Coder" type="application/atom+xml"/>
+  <link href="/atom.xml" rel="alternate" title="I am RookieOne" type="application/atom+xml"/>
   
 
   
@@ -55,10 +55,7 @@
 
 <body  >
   <header><hgroup>
-  <h1><a href="/">The Absent Minded Coder</a></h1>
-  
-    <h2>Write it down!</h2>
-  
+  <h1><a href="/">I am RookieOne</a></h1>
 </hgroup>
 
 </header>
@@ -68,13 +65,14 @@
 </ul>
 <form action="http://google.com/search" method="get">
   <fieldset role="site-search">
-    <input type="hidden" name="q" value="site:yoursite.com" />
+    <input type="hidden" name="q" value="site:www.iamrookieone.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
 </ul>
 
 </nav>
@@ -88,27 +86,366 @@
     
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2011/08/28/jb-sample-post/">JB Sample Post</a></h1>
+      <h1 class="entry-title"><a href="/blog/2009/12/17/the-goal/">The Goal</a></h1>
     
     
-      <p class="meta">
 
 
 
 
-<time datetime="2011-08-28 15:24:00 -0500" pubdate  updated >Aug 28<span>th</span>, 2011</time>
+<time datetime="2009-12-17 00:00:00 -0600" pubdate  updated >Dec 17<span>th</span>, 2009</time>
 
 
-</p>
-    
+
   </header>
 
 
-  <div class="entry-content"><p>Take a look at this awesome code!</p>
+
+  <div class="entry-content"><p>With my current mindset that things are broken, I dive into my current readings including The Goal and The Toyota Way.</p>
+
+<p><a href="http://www.amazon.com/Goal-Process-Ongoing-Improvement/dp/0884271781%3FSubscriptionId%3D0JTCV5ZMHMF7ZYTXGFR2%26tag%3Dbrdicr-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D0884271781">The Goal: A Process of Ongoing Improvement</a></p>
+
+<p><img class='' src='/images/the-goal.jpg' width='' height='' alt='' title=''></p>
+
+<p>I read The Goal back in my business graduate school days (about 5 years ago), but now its reading has a whole new impact. I am seeing more into the book after 5 years of working in software than I did as a fresh college graduate. Some of the mental exercises the protagonist in the book is going through I am going through as well. As he wrestles answering questions concerning his factory, I am wrestling with the questions concerning my software projects.</p>
+
+<p>The first exercise is to define &#8216;the goal&#8217; for his company and all companies. Of course the protagonist takes a long time to come to the logical conclusion that it&#8217;s to make money.</p>
+
+<blockquote><p>Every company&#8217;s goal is to make money.</p></blockquote>
+
+<p>As a software consulting company, how do we make money?</p>
+
+<blockquote><p>We make money by winning a bid for a project and then performing the work to complete the project within budget.</p></blockquote>
+
+<p>That seems pretty simple. Nothing about data access technologies, TDD, user stories, or any sort of architecture or design pattern.</p>
+
+<blockquote><p>If you need X done and will pay $Y then we should do X for less than $Y.</p></blockquote>
+
+<p>Why is it so hard to deliver on that?</p>
+
+<ol>
+<li>Define X</li>
+<li>Estimate Y</li>
+<li>…something</li>
+<li>Profit!</li>
+</ol>
+
+
+<p>If we scope a project then we need to know what X is. Simple to say, but man is it difficult to capture!</p>
+
+<p>X is always in motion, a moving target. The client changes their mind, we have scope creep, and what appears simple always ends up being more complex. We all know this! Its the one constant with software development. Things are going to change.</p>
+
+<p>From my perspective, SOLID and design patterns focus on writing code that is more adaptive to change.</p>
+
+<blockquote><p>SOLID and design patterns in of themselves do NOT move us towards our goal by reducing the cost of writing software.</p>
+
+<p>SOLID and design patterns move us towards our goal when our software has to change because the cost of the change has been reduced.</p></blockquote>
+
+<p>The principles and patterns also provide a common language for developers. That common language moves us closer to the goal because current and new developers can grok more of the design in less time. And time = money.</p>
+
+<p>Where does testing fit into all this?</p>
+
+<p>Testing allows us to keep track of the quality of our production. Or.. does it? After some re-examination I want to say testing adds no quality. That will have to be another post.</p>
+
+<p>Testing provides a way to measure our progress towards X. We know we are moving towards X because we can have tests that verify we are delivering towards our promise. When I mention testing I am using a broad definition and including all sorts of tests from UAT testers to automated unit tests.</p>
+
+<p>So what does Test Driven Development (TDD) provide? TDD focuses every bit of code towards satisfying a test. If every test is relevant towards progress towards X, then TDD focuses our development towards productive work. Logically any work not moving us towards delivering X to our clients is unproductive work.</p>
+
+<p>What conclusions have I come to?</p>
+
+<p>The goal of a software consulting company is to make money. We make money by completing X under $Y. One of the important steps is to then define what X is. We know X will change so we should write code that is adaptive to change, but we need to balance that with only writing code that moves us towards delivering X.</p>
+
+<ul>
+<li>We achieve more flexible and understandable code by using SOLID and design patterns.</li>
+<li>We measure our progress towards X by passing tests.</li>
+<li>TDD focuses our coding towards productive work.</li>
+</ul>
+
+
+<p>I started to write about estimation in this section but have decided to move it to another post.</p>
+
+<p>After thinking about estimation, it has nothing to do with knowing what X is. Estimation has to do with what we think $Y is. X is what X is regardless if it takes you 3 hours or 3 months to deliver.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/12/16/jaded-net/">Jaded .Net</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-12-16 00:00:00 -0600" pubdate  updated >Dec 16<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>I love talking with Ryan and others passionate about new technology and languages. Lately though I have been increasingly jaded with anything ‘new’.</p>
+
+<p>How many different data technologies do we need? ADO .Net, Nhibernate, Linq-2-SQL, Entity Framework version.. whatever. We have been connecting to databases for over 20 years so why are we still worrying about this?!</p>
+
+<p>The sheer number of UI frameworks is reaching the point of ridiculousness. I was reading the WPF Disciples Google Group and ran across this post. Paul Stovell listed all the MVVM, MVC, MVC frameworks he knew of (around 11). Then everyone was commenting with their own ‘me too’ response.</p>
+
+<p>Am I the only one who finds that utterly hilarious? How many frameworks do we need?!</p>
+
+<p>Ryan is extremely involved with Ruby, Python, F#, and the other ‘new’ languages to the .Net Framework. I have been delaying learning Ruby for too long, because it&#8217;s hard to get motivated to learn a new language. I see the potential and the possibilities, but I quickly get discouraged and uninterested.</p>
+
+<p>I have to ask myself… why am I jaded? Why am I disinterested in things that used to excite me?</p>
+
+<p>The more I thought about it, the more the conclusion became crystal clear. Every project I have been a part of has had the same problems. None of the problems were technology related.</p>
+
+<p>Why would I get excited about a solution to a problem I don’t have?</p>
+
+<p>Reminds me of Karl Pilkington’s comment about this picture of twins on one of the Ricky Gervais podcasts. Karl saw a picture of a set of twins on an office desk (obviously the kids of the guy sitting at the desk). His great idea was since they look alike and are dressed alike, the parent could just have the picture of one of them and save space. Ricky Gervais then commented something like :</p>
+
+<p>What you have there is the best non-solution to a problem that doesn’t exist.</p>
+
+<p>And that is pretty much how I feel about most of the technological innovations these days.</p>
+
+<p>For example: can someone explain to me how Oslo is going to help me? I am also not sold on RIA or anything Cloud related. The technology is interesting, but I can’t justify where I would use any of this stuff.</p>
+
+<p><img class='left ' src='/images/shoveling-coal.jpg' width='240' height='165' alt=''Shoveling Coal'' title=''Shoveling Coal''></p>
+
+<p>Sometimes I feel like a lone engineer shoveling coal into a furnace on a runaway train. I don&#8217;t know where we are going, where we have been, and all I hear is FASTER, FASTER!</p>
+
+<p>When I scream for help, I get delivered a better shovel.</p>
+
+<p>I don&#8217;t want a better shovel, I want to know why I am shoveling so much coal!!!</p>
+
+<p>Can&#8217;t we do more with less? Can’t we slow down? Do we even know why we are in this train?!</p>
+
+<p>Lately the murmurings on different blogs, podcasts, and developers has been that software development has gotten too complicated. How can that be true when we have tons of tools and frameworks that should make life easier? jQuery makes Javascript easier. Pick your favorite Data Access tool / ORM makes data access easier. Any number of UI frameworks makes UI construction easier. So why do we think things are more complicated? Shouldn’t our life be easier?</p>
+
+<p>The majority of projects are always behind, always over budgeted, and always unclear on where they are and where they are going. This has been my experience spanning multiple companies and multiple positions on different teams. I am fully humble enough to recognize that “I” might be the problem, but I doubt it. There is enough shared pain through my conversations with other developers to recognize its a industry wide problem.</p>
+
+<p>The only project I was a part of that didn’t feel this way had a full time Project Manager and a team full of very skilled developers. To me it didn’t feel like the project was better run, it was just we had enough skilled team members to overcome any poor execution or poor planning. That isn’t saying our PM wasn’t an all star because he was. My point is that although the project was a ‘success’ I didn’t feel like it was successful because we had a great methodology. We just powered through any complications.</p>
+
+<p>Every project (including that last ‘successful’ one) always had mad dashes of insane hours of work followed by listless lulls as we waited for one thing or another. I never felt I had enough time to do my work and other activities related to work (ie blog, present, create frameworks)</p>
+
+<p>Where am I going with this? I wanted to capture my state of mind and why I am re-examining how and why I develop.</p>
+
+<p>The status quo will burn me out.</p>
+
+<p>The ole definition of insanity : Doing the same thing over and over again expecting different results.</p>
+
+<p>I am tired of doing the same thing, so what can I do different? Why is there this constant pain? I know there are solutions and it&#8217;s time for me to document my mental journey as I search for answers. Maybe my breadcrumbs will help those that follow.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/12/15/examining-how-we-develop-software/">Examining How We Develop Software</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-12-15 00:00:00 -0600" pubdate  updated >Dec 15<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>What I am starting is a mental exercise exploring how my view on software development is changing. Since this is a basically a brain dump, treat it as such. Feel free to comment on what I say&#8230; offer advice and opinions. Maybe there is something you can sympathize with.</p>
+
+<p>What has started me thinking along these lines has been my recent readings of The Toyota Way and my re-reading of The Goal.</p>
+
+<p>The Toyota Way</p>
+
+<p><img class='' src='/images/toyota-way.jpg' width='108' height='160' alt=''The Toyota Way'' title=''The Toyota Way''></p>
+
+<p>The Goal: A Process of Ongoing Improvement</p>
+
+<p><img class='' src='/images/the-goal.jpg' width='108' height='160' alt=''The Goal'' title=''The Goal''></p>
+
+<p>Both readings have me re-examining my career and software development. Asking questions like, Are we focused on the right things?</p>
+
+<p>Anyway here are the posts:</p>
+
+<ul>
+<li>Jaded .Net</li>
+<li>The Goal</li>
+<li>Estimating the Impossible</li>
+</ul>
+
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/11/25/named-command-decorator/">Named Command Decorator</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-11-25 00:00:00 -0600" pubdate  updated >Nov 25<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Here is the problem, we have a list of ‘commands’ we wish to show depending on what view model / entity is active. If we just had a collection of ICommands, we could show buttons but what would their content be?</p>
+
+<p>My solution is to use the decorator pattern to decorate commands with a Name that can be used as the content for the buttons.</p>
+
+<p>My decorator looks like :</p>
 
 <figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">puts</span> <span class="s2">&quot;Hello World&quot;</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">NamedCommand</span> <span class="p">:</span> <span class="n">ICommand</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="nf">NamedCommand</span><span class="p">(</span><span class="n">ICommand</span> <span class="n">decoratedCommand</span><span class="p">,</span> <span class="kt">string</span> <span class="n">name</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">_DecoratedCommand</span> <span class="p">=</span> <span class="n">decoratedCommand</span><span class="p">;</span>
+</div><div class='line'>        <span class="n">Name</span> <span class="p">=</span> <span class="n">name</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">readonly</span> <span class="n">ICommand</span> <span class="n">_DecoratedCommand</span><span class="p">;</span>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Execute</span><span class="p">(</span><span class="kt">object</span> <span class="n">parameter</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">_DecoratedCommand</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">parameter</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">bool</span> <span class="nf">CanExecute</span><span class="p">(</span><span class="kt">object</span> <span class="n">parameter</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="k">return</span> <span class="n">_DecoratedCommand</span><span class="p">.</span><span class="n">CanExecute</span><span class="p">(</span><span class="n">parameter</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="k">event</span> <span class="n">EventHandler</span> <span class="n">CanExecuteChanged</span><span class="p">;</span>
+</div><div class='line'><span class="p">}</span>
 </div></code></pre></td></tr></table></div></figure>
+
+<p>I then created an extension method on ICommand :</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">static</span> <span class="n">ICommand</span> <span class="nf">Name</span><span class="p">(</span><span class="k">this</span> <span class="n">ICommand</span> <span class="n">command</span><span class="p">,</span> <span class="kt">string</span> <span class="n">name</span><span class="p">)</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">return</span> <span class="k">new</span> <span class="nf">NamedCommand</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>So in the code I can now do:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">Commands</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">ActionCommand</span><span class="p">(</span><span class="n">OnOpen</span><span class="p">).</span><span class="n">Name</span><span class="p">(</span><span class="s">&quot;Open&quot;</span><span class="p">));</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>For my WPF visual, I have a DataTemplate :</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='xml'><div class='line'><span class="nt">&lt;DataTemplate</span> <span class="na">DataType=</span><span class="s">&quot;{x:Type Commands:NamedCommand}&quot;</span> <span class="nt">&gt;</span>
+</div><div class='line'>    <span class="nt">&lt;Button</span> <span class="na">Content=</span><span class="s">&quot;{Binding Name}&quot;</span>
+</div><div class='line'>           <span class="na">Command=</span><span class="s">&quot;{Binding }&quot;</span> <span class="nt">/&gt;</span>
+</div><div class='line'><span class="nt">&lt;/DataTemplate&gt;</span>
+</div></code></pre></td></tr></table></div></figure>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/10/29/aop-structure-map/">Aop INotifyPropertyChanged StructureMap</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-10-29 00:00:00 -0500" pubdate  updated >Oct 29<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Anyone who has worked with INotifyPropertyChanged knows that this simple interface can be a royal pain in the ass.</p>
+
+<p>To try and eliminate the pain, people have created some great solutions using AOP : IL weaving (<a href="www.postsharp.org">PostSharp</a>) and using a proxy (<a href="http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html">Castle Dynamic Proxy</a>).</p>
+
+<p>PostSharp has a little too much voodoo for me atm. I think I will warm up to it though and re-examine using PostSharp on my next solution. But for now, I wanted to use Castle Project’s Dynamic Proxy.</p>
+
+<p>Naturally since Castle also has a very popular IoC container in Windsor, most examples marry Dynamic Proxy and Windsor to form an AOP INotifyPropertyChanged solution.</p>
+
+<p>Since I am using StructureMap for this project, I endeavored to create my own solution using Dynamic Proxy.</p>
+
+<p>My first attempt I shared at the Virtual Brown Bag look liked it worked but in reality I was constructing my objects twice.</p>
+
+<p>Once with SM and once with the Proxy generator.</p>
+
+<p>I had to go back to the drawing board and posted my problem at the SM google group. <a href="http://groups.google.com/group/structuremap-users/browse_thread/thread/1a6b19ce8152db1b?hl=en">http://groups.google.com/group/structuremap-users/browse_thread/thread/1a6b19ce8152db1b?hl=en</a></p>
+
+<p>I believe the syntax given to me was an older version of SM. For the record, I am using version 2.5.3.0</p>
+
+<p>But it did direct me to the general idea on where I should start looking. I ended up needing to create an IBuildInterceptor.</p>
 
 <figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
@@ -150,177 +487,451 @@
 <span class='line'>38</span>
 <span class='line'>39</span>
 <span class='line'>40</span>
-<span class='line'>41</span>
-<span class='line'>42</span>
-<span class='line'>43</span>
-<span class='line'>44</span>
-<span class='line'>45</span>
-<span class='line'>46</span>
-<span class='line'>47</span>
-<span class='line'>48</span>
-<span class='line'>49</span>
-<span class='line'>50</span>
-<span class='line'>51</span>
-<span class='line'>52</span>
-<span class='line'>53</span>
-<span class='line'>54</span>
-<span class='line'>55</span>
-<span class='line'>56</span>
-<span class='line'>57</span>
-<span class='line'>58</span>
-<span class='line'>59</span>
-<span class='line'>60</span>
-<span class='line'>61</span>
-<span class='line'>62</span>
-<span class='line'>63</span>
-<span class='line'>64</span>
-<span class='line'>65</span>
-<span class='line'>66</span>
-<span class='line'>67</span>
-<span class='line'>68</span>
-<span class='line'>69</span>
-<span class='line'>70</span>
-<span class='line'>71</span>
-<span class='line'>72</span>
-<span class='line'>73</span>
-<span class='line'>74</span>
-<span class='line'>75</span>
-<span class='line'>76</span>
-<span class='line'>77</span>
-<span class='line'>78</span>
-<span class='line'>79</span>
-<span class='line'>80</span>
-<span class='line'>81</span>
-<span class='line'>82</span>
-<span class='line'>83</span>
-<span class='line'>84</span>
-<span class='line'>85</span>
-<span class='line'>86</span>
-<span class='line'>87</span>
-<span class='line'>88</span>
-<span class='line'>89</span>
-<span class='line'>90</span>
-<span class='line'>91</span>
-<span class='line'>92</span>
-<span class='line'>93</span>
-<span class='line'>94</span>
-<span class='line'>95</span>
-<span class='line'>96</span>
-<span class='line'>97</span>
-<span class='line'>98</span>
-<span class='line'>99</span>
-<span class='line'>100</span>
-<span class='line'>101</span>
-<span class='line'>102</span>
-<span class='line'>103</span>
-<span class='line'>104</span>
-<span class='line'>105</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="mi">5000</span>
-</div><div class='line'><span class="c1"># comment</span>
-</div><div class='line'><span class="nb">require</span> <span class="s1">&#39;gravtastic&#39;</span>
-</div><div class='line'><span class="nb">require</span> <span class="s1">&#39;score_it&#39;</span>
-</div><div class='line'><span class="nb">require</span> <span class="s1">&#39;virgil&#39;</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">MyBuildInterceptor</span> <span class="p">:</span> <span class="n">IBuildInterceptor</span>
+</div><div class='line'>   <span class="p">{</span>
+</div><div class='line'>       <span class="k">public</span> <span class="nf">MyBuildInterceptor</span><span class="p">(</span><span class="n">Type</span> <span class="n">concreteType</span><span class="p">)</span>
+</div><div class='line'>       <span class="p">{</span>
+</div><div class='line'>           <span class="n">_ConcreteType</span> <span class="p">=</span> <span class="n">concreteType</span><span class="p">;</span>
+</div><div class='line'>       <span class="p">}</span>
 </div><div class='line'>
-</div><div class='line'><span class="k">class</span> <span class="nc">Profile</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">Mongoid</span><span class="o">::</span><span class="no">Document</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">Mongoid</span><span class="o">::</span><span class="no">Timestamps</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">Badgeable</span><span class="o">::</span><span class="no">Subject</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">Gravtastic</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">ScoreIt</span><span class="o">::</span><span class="no">Subject</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">Virgil</span><span class="o">::</span><span class="no">Teachable</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">CodeMav</span><span class="o">::</span><span class="no">WriterModule</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">CodeMav</span><span class="o">::</span><span class="no">SpeakerModule</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">CodeMav</span><span class="o">::</span><span class="no">CoderModule</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">CodeMav</span><span class="o">::</span><span class="no">KnowledgeModule</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">CodeMav</span><span class="o">::</span><span class="no">ExperienceModule</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">CodeMav</span><span class="o">::</span><span class="no">SocialModule</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">CodeMav</span><span class="o">::</span><span class="no">Taggable</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">CodeMav</span><span class="o">::</span><span class="no">Locatable</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">CodeMav</span><span class="o">::</span><span class="no">Indexable</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">CodeMav</span><span class="o">::</span><span class="no">Followable</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">CodeMav</span><span class="o">::</span><span class="no">HasBacklogItems</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">CodeMav</span><span class="o">::</span><span class="no">Autodiscoverable</span>
+</div><div class='line'>       <span class="k">readonly</span> <span class="n">Type</span> <span class="n">_ConcreteType</span><span class="p">;</span>
 </div><div class='line'>
-</div><div class='line'>  <span class="n">gravtastic</span>
+</div><div class='line'>       <span class="k">public</span> <span class="kt">object</span> <span class="nf">Build</span><span class="p">(</span><span class="n">BuildSession</span> <span class="n">buildSession</span><span class="p">,</span> <span class="n">Type</span> <span class="n">pluginType</span><span class="p">,</span> <span class="n">Instance</span> <span class="n">instance</span><span class="p">)</span>
+</div><div class='line'>       <span class="p">{</span>
+</div><div class='line'>           <span class="n">var</span> <span class="n">constructorArgs</span> <span class="p">=</span> <span class="n">_ConcreteType</span>
+</div><div class='line'>               <span class="p">.</span><span class="n">GetConstructors</span><span class="p">()</span>
+</div><div class='line'>               <span class="p">.</span><span class="n">FirstOrDefault</span><span class="p">()</span>
+</div><div class='line'>               <span class="p">.</span><span class="n">GetParameters</span><span class="p">()</span>
+</div><div class='line'>               <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">buildSession</span><span class="p">.</span><span class="n">CreateInstance</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">ParameterType</span><span class="p">))</span>
+</div><div class='line'>               <span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
 </div><div class='line'>
-</div><div class='line'>  <span class="n">field</span> <span class="ss">:showcase</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="no">Boolean</span><span class="p">,</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="kp">false</span>
-</div><div class='line'>  <span class="n">field</span> <span class="ss">:api_id</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="nb">Integer</span>
-</div><div class='line'>  <span class="n">field</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="nb">String</span>
-</div><div class='line'>  <span class="n">field</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="nb">String</span>
-</div><div class='line'>  <span class="n">field</span> <span class="ss">:username</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="nb">String</span>
-</div><div class='line'>  <span class="n">field</span> <span class="ss">:gravatar_id</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="nb">String</span>
-</div><div class='line'>  <span class="n">index</span> <span class="ss">:username</span><span class="p">,</span> <span class="ss">:unique</span> <span class="o">=&gt;</span> <span class="kp">true</span>
 </div><div class='line'>
-</div><div class='line'>  <span class="n">field</span> <span class="ss">:can_manage_tags</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="no">Boolean</span><span class="p">,</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="kp">false</span>
-</div><div class='line'>  <span class="n">field</span> <span class="ss">:is_moderator</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="no">Boolean</span><span class="p">,</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</div><div class='line'>           <span class="n">var</span> <span class="n">interceptors</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">IInterceptor</span><span class="p">&gt;</span>
+</div><div class='line'>                                  <span class="p">{</span>
+</div><div class='line'>                                      <span class="k">new</span> <span class="nf">NotifyInterceptor</span><span class="p">()</span>
+</div><div class='line'>                                  <span class="p">}</span>
+</div><div class='line'>                                  <span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
 </div><div class='line'>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">gravatar_id</span>
-</div><div class='line'>    <span class="no">Digest</span><span class="o">::</span><span class="no">MD5</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
-</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>           <span class="k">return</span> <span class="k">new</span> <span class="nf">ProxyGenerator</span><span class="p">().</span><span class="n">CreateClassProxy</span><span class="p">(</span><span class="n">_ConcreteType</span><span class="p">,</span> <span class="n">interceptors</span><span class="p">,</span> <span class="n">constructorArgs</span><span class="p">);</span>
+</div><div class='line'>       <span class="p">}</span>
 </div><div class='line'>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">can_manage_tags?</span>
-</div><div class='line'>    <span class="n">can_manage_tags</span>
-</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>       <span class="k">public</span> <span class="n">IBuildPolicy</span> <span class="nf">Clone</span><span class="p">()</span>
+</div><div class='line'>       <span class="p">{</span>
+</div><div class='line'>           <span class="k">return</span> <span class="n">InnerPolicy</span><span class="p">.</span><span class="n">Clone</span><span class="p">();</span>
+</div><div class='line'>       <span class="p">}</span>
 </div><div class='line'>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">moderator?</span>
-</div><div class='line'>    <span class="n">is_moderator</span>
-</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>       <span class="k">public</span> <span class="k">void</span> <span class="nf">EjectAll</span><span class="p">()</span>
+</div><div class='line'>       <span class="p">{</span>
+</div><div class='line'>           <span class="n">InnerPolicy</span><span class="p">.</span><span class="n">EjectAll</span><span class="p">();</span>
+</div><div class='line'>       <span class="p">}</span>
 </div><div class='line'>
-</div><div class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="n">scope</span> <span class="ss">:by_username</span><span class="p">,</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="n">uname</span><span class="o">|</span> <span class="n">where</span><span class="p">(</span><span class="ss">:username</span> <span class="o">=&gt;</span> <span class="n">uname</span><span class="p">)</span> <span class="p">}</span>
-</div><div class='line'>  <span class="n">scope</span> <span class="ss">:named</span><span class="p">,</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span> <span class="p">{</span> <span class="ss">:where</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="nb">name</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span>
-</div><div class='line'>  <span class="n">scope</span> <span class="ss">:showcase</span><span class="p">,</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="ss">:showcase</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">display_name</span>
-</div><div class='line'>    <span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">blank?</span> <span class="o">||</span> <span class="nb">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">nil?</span><span class="p">)</span> <span class="p">?</span> <span class="nb">self</span><span class="o">.</span><span class="n">username</span> <span class="p">:</span> <span class="nb">self</span><span class="o">.</span><span class="n">name</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">to_param</span>
-</div><div class='line'>    <span class="n">username</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">sync!</span>
-</div><div class='line'>    <span class="n">stack_overflow_profile</span><span class="o">.</span><span class="n">sync!</span> <span class="k">unless</span> <span class="n">stack_overflow_profile</span><span class="o">.</span><span class="n">nil?</span>
-</div><div class='line'>    <span class="n">git_hub_profile</span><span class="o">.</span><span class="n">sync!</span> <span class="k">unless</span> <span class="n">git_hub_profile</span><span class="o">.</span><span class="n">nil?</span>
-</div><div class='line'>    <span class="n">bitbucket_profile</span><span class="o">.</span><span class="n">sync!</span> <span class="k">unless</span> <span class="n">bitbucket_profile</span><span class="o">.</span><span class="n">nil?</span>
-</div><div class='line'>    <span class="n">speaker_rate_profile</span><span class="o">.</span><span class="n">sync!</span> <span class="k">unless</span> <span class="n">speaker_rate_profile</span><span class="o">.</span><span class="n">nil?</span>
-</div><div class='line'>    <span class="n">slide_share_profile</span><span class="o">.</span><span class="n">sync!</span> <span class="k">unless</span> <span class="n">slide_share_profile</span><span class="o">.</span><span class="n">nil?</span>
-</div><div class='line'>    <span class="n">twitter_profile</span><span class="o">.</span><span class="n">sync!</span> <span class="k">unless</span> <span class="n">twitter_profile</span><span class="o">.</span><span class="n">nil?</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
-</div><div class='line'>    <span class="k">def</span> <span class="nf">sync_all!</span>
-</div><div class='line'>      <span class="n">profiles_to_sync</span> <span class="o">=</span> <span class="no">Profile</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">to_a</span>
-</div><div class='line'>      <span class="n">profiles_to_sync</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span>
-</div><div class='line'>        <span class="k">begin</span>
-</div><div class='line'>          <span class="nb">p</span><span class="o">.</span><span class="n">sync!</span>
-</div><div class='line'>        <span class="k">rescue</span>
-</div><div class='line'>            <span class="nb">puts</span> <span class="s2">&quot;ERROR on syncing </span><span class="si">#{</span><span class="nb">p</span><span class="o">.</span><span class="n">display_name</span><span class="si">}</span><span class="s2">&#39;s profile&quot;</span>
-</div><div class='line'>        <span class="k">end</span>
-</div><div class='line'>      <span class="k">end</span>
-</div><div class='line'>    <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="k">def</span> <span class="nf">stack_overflow</span>
-</div><div class='line'>      <span class="n">where</span><span class="p">(</span><span class="ss">:stack_overflow_profile</span><span class="o">.</span><span class="n">exists</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
-</div><div class='line'>    <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="k">def</span> <span class="nf">top_stack_overflow</span>
-</div><div class='line'>      <span class="n">stack_overflow</span><span class="o">.</span><span class="n">desc</span><span class="p">(</span><span class="s1">&#39;stack_overflow_profile.reputation&#39;</span><span class="p">)</span>
-</div><div class='line'>    <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{})</span>
-</div><div class='line'>      <span class="n">search</span> <span class="o">=</span> <span class="no">Sunspot</span><span class="o">.</span><span class="n">new_search</span><span class="p">(</span><span class="no">Profile</span><span class="p">)</span>
-</div><div class='line'>      <span class="n">search</span><span class="o">.</span><span class="n">build</span> <span class="k">do</span>
-</div><div class='line'>        <span class="n">keywords</span> <span class="n">query</span> <span class="k">do</span>
-</div><div class='line'>        <span class="k">end</span>
-</div><div class='line'>      <span class="k">end</span>
-</div><div class='line'>      <span class="n">search</span><span class="o">.</span><span class="n">execute</span>
-</div><div class='line'>    <span class="k">end</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'><span class="k">end</span>
+</div><div class='line'>       <span class="k">public</span> <span class="n">IBuildPolicy</span> <span class="n">InnerPolicy</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>   <span class="p">}</span>
 </div></code></pre></td></tr></table></div></figure>
+
+<p>To register my ViewModels I created a convention using a TypeScanner</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">MyNotifyConvention</span> <span class="p">:</span> <span class="n">ITypeScanner</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Process</span><span class="p">(</span><span class="n">Type</span> <span class="n">type</span><span class="p">,</span> <span class="n">PluginGraph</span> <span class="n">graph</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">type</span><span class="p">.</span><span class="n">GetInterface</span><span class="p">(</span><span class="s">&quot;IViewModel&quot;</span><span class="p">)</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</div><div class='line'>            <span class="k">return</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="n">var</span> <span class="n">interfaceType</span> <span class="p">=</span> <span class="n">type</span><span class="p">.</span><span class="n">GetInterfaces</span><span class="p">().</span><span class="n">FirstOrDefault</span><span class="p">(</span><span class="n">i</span> <span class="p">=&gt;</span> <span class="n">i</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">&quot;ViewModel&quot;</span><span class="p">)</span>
+</div><div class='line'>                                                            <span class="p">&amp;&amp;</span> <span class="n">i</span><span class="p">.</span><span class="n">Name</span> <span class="p">!=</span> <span class="s">&quot;IViewModel&quot;</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">interfaceType</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</div><div class='line'>            <span class="k">return</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="n">graph</span><span class="p">.</span><span class="n">Configure</span><span class="p">(</span><span class="n">r</span> <span class="p">=&gt;</span>
+</div><div class='line'>                        <span class="n">r</span><span class="p">.</span><span class="n">ForRequestedType</span><span class="p">(</span><span class="n">interfaceType</span><span class="p">)</span>
+</div><div class='line'>                        <span class="p">.</span><span class="n">InterceptConstructionWith</span><span class="p">(</span><span class="k">new</span> <span class="n">MyBuildInterceptor</span><span class="p">(</span><span class="n">type</span><span class="p">))</span>
+</div><div class='line'>                        <span class="p">.</span><span class="n">TheDefaultIsConcreteType</span><span class="p">(</span><span class="n">type</span><span class="p">));</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I then used a Dynamic Proxy Interceptor that I basically copy and pasted from Serial Seb’s example.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">NotifyInterceptor</span> <span class="p">:</span> <span class="n">IInterceptor</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Intercept</span><span class="p">(</span><span class="n">IInvocation</span> <span class="n">invocation</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="c1">// let the original call go through first, so we can notify *after*</span>
+</div><div class='line'>        <span class="n">invocation</span><span class="p">.</span><span class="n">Proceed</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">invocation</span><span class="p">.</span><span class="n">Method</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">StartsWith</span><span class="p">(</span><span class="s">&quot;set_&quot;</span><span class="p">))</span>
+</div><div class='line'>        <span class="p">{</span>
+</div><div class='line'>            <span class="kt">string</span> <span class="n">propertyName</span> <span class="p">=</span> <span class="n">invocation</span><span class="p">.</span><span class="n">Method</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Substring</span><span class="p">(</span><span class="m">4</span><span class="p">);</span>
+</div><div class='line'>            <span class="n">RaisePropertyChangedEvent</span><span class="p">(</span><span class="n">invocation</span><span class="p">,</span> <span class="n">propertyName</span><span class="p">,</span> <span class="n">invocation</span><span class="p">.</span><span class="n">TargetType</span><span class="p">);</span>
+</div><div class='line'>        <span class="p">}</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">RaisePropertyChangedEvent</span><span class="p">(</span><span class="n">IInvocation</span> <span class="n">invocation</span><span class="p">,</span> <span class="kt">string</span> <span class="n">propertyName</span><span class="p">,</span> <span class="n">Type</span> <span class="n">type</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="c1">// get the field storing the delegate list that are stored by the event.</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">methodInfo</span> <span class="p">=</span> <span class="n">type</span><span class="p">.</span><span class="n">GetMethod</span><span class="p">(</span><span class="s">&quot;RaisePropertyChanged&quot;</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">methodInfo</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</div><div class='line'>        <span class="p">{</span>
+</div><div class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">type</span><span class="p">.</span><span class="n">BaseType</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+</div><div class='line'>                <span class="n">RaisePropertyChangedEvent</span><span class="p">(</span><span class="n">invocation</span><span class="p">,</span> <span class="n">propertyName</span><span class="p">,</span> <span class="n">type</span><span class="p">.</span><span class="n">BaseType</span><span class="p">);</span>
+</div><div class='line'>        <span class="p">}</span>
+</div><div class='line'>        <span class="k">else</span> <span class="c1">// info != null</span>
+</div><div class='line'>        <span class="p">{</span>
+</div><div class='line'>            <span class="n">methodInfo</span><span class="p">.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">invocation</span><span class="p">.</span><span class="n">InvocationTarget</span><span class="p">,</span> <span class="k">new</span> <span class="kt">object</span><span class="p">[]</span> <span class="p">{</span><span class="n">propertyName</span><span class="p">});</span>
+</div><div class='line'>        <span class="p">}</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Instead of looking for the PropertyChanged Handler, I create a RaisePropertyChanged method and use that. Although I could raise the event using the field method Seb was using, WPF wasn’t updating the binding. I didn’t really bother to investigate and just rolled with this solution.</p>
+
+<p>So that’s my solution and I’ll start using it in my current solution. Naturally I will clean up the code some more etc. Feel free to use this for any of your own projects. You can also get the solution at my GitHub:</p>
+
+<p><a href="http://github.com/RookieOne/StructureMapAopNotify">http://github.com/RookieOne/StructureMapAopNotify</a></p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/10/27/london-time/">London Time?</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-10-27 00:00:00 -0500" pubdate  updated >Oct 27<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>A friend ping’d me on gchat and asked if he had a DateTime object with our time in Texas, how could he get the time in London.</p>
+
+<p>I quickly threw together this example on how I would do it.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">DateTime</span> <span class="n">time</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">TimeZoneInfo</span> <span class="n">londonTimeZone</span> <span class="p">=</span> <span class="n">TimeZoneInfo</span>
+</div><div class='line'>    <span class="p">.</span><span class="n">GetSystemTimeZones</span><span class="p">()</span>
+</div><div class='line'>    <span class="p">.</span><span class="n">FirstOrDefault</span><span class="p">(</span><span class="n">t</span> <span class="p">=&gt;</span> <span class="n">t</span><span class="p">.</span><span class="n">DisplayName</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">&quot;London&quot;</span><span class="p">));</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">DateTime</span> <span class="n">londonTime</span> <span class="p">=</span> <span class="n">TimeZoneInfo</span><span class="p">.</span><span class="n">ConvertTime</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">londonTimeZone</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Its {0} here&quot;</span><span class="p">,</span> <span class="n">time</span><span class="p">);</span>
+</div><div class='line'><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;But its {0} in London&quot;</span><span class="p">,</span> <span class="n">londonTime</span><span class="p">);</span>
+</div><div class='line'><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Blimey!&quot;</span><span class="p">);</span>
+</div><div class='line'><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
+</div></code></pre></td></tr></table></div></figure>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/10/22/vbb-summary/">Virtual Brown Bag 10/22/09</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-10-22 00:00:00 -0500" pubdate  updated >Oct 22<span>nd</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Today was a great virtual brown bag. Claudio will have a more exhaustive list of what was discussed, but I thought I would share some links to stuff I talked about.</p>
+
+<h3>Creating a Generic Type using Reflection</h3>
+
+<p><a href="http://geekswithblogs.net/marcel/archive/2007/03/24/109722.aspx">http://geekswithblogs.net/marcel/archive/2007/03/24/109722.aspx</a></p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">object</span> <span class="nf">CreateGeneric</span><span class="p">(</span><span class="n">Type</span> <span class="n">generic</span><span class="p">,</span> <span class="n">Type</span> <span class="n">innerType</span><span class="p">,</span> <span class="k">params</span> <span class="kt">object</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">System</span><span class="p">.</span><span class="n">Type</span> <span class="n">specificType</span> <span class="p">=</span> <span class="n">generic</span><span class="p">.</span><span class="n">MakeGenericType</span><span class="p">(</span><span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">Type</span><span class="p">[]</span> <span class="p">{</span> <span class="n">innerType</span> <span class="p">});</span>
+</div><div class='line'>    <span class="k">return</span> <span class="n">Activator</span><span class="p">.</span><span class="n">CreateInstance</span><span class="p">(</span><span class="n">specificType</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<h3>StackOverflow Question from Marvin</h3>
+
+<p><a href="http://stackoverflow.com/questions/1532991/help-with-a-windows-service-scheduled-task-that-must-use-a-web-browser-and-file-d">http://stackoverflow.com/questions/1532991/help-with-a-windows-service-scheduled-task-that-must-use-a-web-browser-and-file-d </a></p>
+
+<p>As Marvin and Claudio talked, I threw together an example on how I would solve the problem. Hopefully we can hear back from Marvin on whether it worked. :)</p>
+
+<p>The code snippet is here : <a href="http://codesnippets.joyent.com/posts/show/2345">http://codesnippets.joyent.com/posts/show/2345</a></p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">var</span> <span class="n">url</span> <span class="p">=</span> <span class="s">&quot;http://www.codinghorror.com/blog/files/exported-font-and-colors-for-jeff-atwood-sept-19.zip&quot;</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">var</span> <span class="n">request</span> <span class="p">=</span> <span class="n">WebRequest</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">HttpWebRequest</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="n">GetResponse</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">var</span> <span class="n">readStream</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">GetResponseStream</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">var</span> <span class="n">fileStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FileStream</span><span class="p">(</span><span class="s">@&quot;C:\temp\dlZip.zip&quot;</span><span class="p">,</span> <span class="n">FileMode</span><span class="p">.</span><span class="n">Create</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'><span class="kt">int</span> <span class="n">readByte</span> <span class="p">=</span> <span class="n">readStream</span><span class="p">.</span><span class="n">ReadByte</span><span class="p">();</span>
+</div><div class='line'><span class="k">while</span><span class="p">(</span><span class="n">readByte</span> <span class="p">!=</span> <span class="p">-</span><span class="m">1</span><span class="p">)</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">fileStream</span><span class="p">.</span><span class="n">WriteByte</span><span class="p">((</span><span class="kt">byte</span><span class="p">)</span><span class="n">readByte</span><span class="p">);</span>
+</div><div class='line'>    <span class="n">readByte</span> <span class="p">=</span> <span class="n">readStream</span><span class="p">.</span><span class="n">ReadByte</span><span class="p">();</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">fileStream</span><span class="p">.</span><span class="n">Flush</span><span class="p">();</span>
+</div><div class='line'><span class="n">fileStream</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<h3>Using StructureMap with Castle Dynamic Proxy for INotifyPropertyChanged AOP</h3>
+
+<p>For creating the DynamicProxy interceptor I based my code off of : <a href="http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html">http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html</a></p>
+
+<p>The entire solution can be found here : <a href="http://github.com/RookieOne/StructureMapAopNotify">http://github.com/RookieOne/StructureMapAopNotify</a></p>
+
+<p>All in all, a darn good Virtual Brown Bag. :)</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/10/19/new-career-at-eps/">My New Career at Code / EPS</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-10-19 00:00:00 -0500" pubdate  updated >Oct 19<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>It’s been over a week since I started at Code / EPS and I have to say I am loving it here.</p>
+
+<p><img class='right ' src='/images/career-at-eps.jpg' width='224' height='184' alt=''Computer at EPS'' title=''Computer at EPS''></p>
+
+<p>My computer came in on Friday and I spent most of the day setting it up. Everyone knows the drill of installing Visual Studio, Office, third party tools, etc. It’s a ritual of blessing a new computer for programming work. The picture on the right was taken with my iPhone. The two 24 inch monitors are freakin awesome!</p>
+
+<p>There are a lot of intangibles that make working at EPS fun and a perfect fit for me at this time. Sharing an office with Claudio is a huge perk.  Having Markus as a boss is also a pleasant change. Most bosses can be disconnected from the current pulse on software development. Markus stays up to date and is also passionate about being cutting edge. Its nice working with people you respect and can learn from.</p>
+
+<p>I also like that I am not working at the client. Having worked at the clients offices for several years, I began to dislike the random commutes, unknown work conditions, and random hardware configurations. :(</p>
+
+<p>Here I have an office, with a window. I have a nice computer setup so that I can maximize my productivity. I know where I will be 2-3 months out. All in all, a nice change that adds peace of mind. I can now focus on my next phase in my career.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/09/29/catapult-to-eps/">Catapult -> EPS</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-09-29 00:00:00 -0500" pubdate  updated >Sep 29<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>If you have not heard already, I am leaving Catapult Systems to go join the team at EPS Consulting.</p>
+
+<p>Catapult Systems is a fantastic company. They are a NSI (National Systems Integrator) and have 12 Microsoft competencies. They were awarded the 2009 Microsoft Worldwide Partner Conference Award for Custom Development Solutions.</p>
+
+<p><a href="http://www.catapultsystems.com/About/News/Articles/Pages/CatapultSystemsWinsEliteMicrosoftWorldwidePartneroftheYearAward.aspx">http://www.catapultsystems.com/About/News/Articles/Pages/CatapultSystemsWinsEliteMicrosoftWorldwidePartneroftheYearAward.aspx</a></p>
+
+<p>I will have to put a little plug in here and say I was part of the team at Wisenbaker. :)</p>
+
+<p>My departure has nothing to do with an exodus from Catapult. Catapult has positioned itself as a Microsoft Consulting company. I focus on Custom Application Development. What that means is I have very little interest in Sharepoint, EPM, Infrastructure, etc. I view selling and producing custom software products as a very different task than rolling out Windows 7.</p>
+
+<p>I also really want to focus more on training, presenting, and overall community activity. While Catapult encouraged this behavior (particularly Mark Whitmire), it was all done outside my normal duties. With EPS and some changes Markus has in store, we hope to make that part of my duties and expectations.</p>
+
+<p>My move is about my goals being slightly different than Catapult’s goals while EPS’s goals are more aligned with what I want to achieve. For example, at Houston TechFest I had some EPS coworkers come up and offer their support and advice. It was greatly appreciated. Their attendance and conversations made it clear they are pleased to have me on the team and are there to make me better at what I want to do.</p>
+
+<p>I still have lots of good friends at Catapult : Ryan Riley, David Morton, John McPherson, Apollo Gonzalez, Rafael Perez, etc.</p>
+
+<p>They have great ideas on revolutionizing the Application Development practice and I wish them the best of luck.</p>
+
+<p>For me, I am really looking forward to working with the team at EPS. I’ve gotten to know Markus and Claudio (and others at EPS) over the past couple of months and am really impressed with them. This is my first time to be going to a company where I already know people (and respect their professionalism and skill level).</p>
+
+<p>I will still be doing Virtual Brown Bags with Claudio and will now be in a situation where it should be easier for me to participate. Before I had to arrange rooms with the client and never knew if I could have privacy, etc. It was a pain.</p>
+
+<p>My last day at Catapult will be Sept 30th. I then go on a brief vacation to Colorado to visit my Dad at the family mountain home. I come back on the 7th and start the new gig on the 8th. :D</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/09/28/houston-techfest/">Houston Techfest 2009</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-09-28 00:00:00 -0500" pubdate  updated >Sep 28<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Wow! That was lots of fun! I got the chance to see and talk to a lot of my friends who I haven’t seen in awhile.</p>
+
+<p>Also, it was nice to be finally finished with my two presentations. Both were fun but I will admit to liking my Evolve Your Code material a bit more than the WPF Input Validation. They were both a lot of work. Be sure to thank presenters. I knew work went into the presentations but I didn’t appreciate how much until I tried to do two. I learned a lesson with that decision. Never do 2 new presentations. It’s way too much work and both suffer from neglect. I will write a post on all my presentation lessons later.</p>
+
+<p>Without the 2 presentations looming over me and my new job, I should be able to get back to blogging more. I love sharing what I know, even if its just to myself months from now when I forget everything. :)</p>
+
+<p>For the slides I am trying out slideshare and am also using Git Hub for the slides and solutions.</p>
+
+<h4>Evolve Your Code:</h4>
+
+<p><a href="http://www.slideshare.net/RookieOne/evolve-your-code">http://www.slideshare.net/RookieOne/evolve-your-code</a></p>
+
+<p><a href="http://github.com/RookieOne/Evolve-Your-Code">http://github.com/RookieOne/Evolve-Your-Code</a></p>
+
+<h4>WPF Input Validation:</h4>
+
+<p><a href="http://www.slideshare.net/RookieOne/wpf-validation">http://www.slideshare.net/RookieOne/wpf-validation</a></p>
+
+<p><a href="http://github.com/RookieOne/WPF-Input-Validation">http://github.com/RookieOne/WPF-Input-Validation</a></p>
 </div>
   
   
@@ -330,6 +941,8 @@
 
 <nav role="pagination">
   <div>
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -344,7 +957,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2011/08/28/jb-sample-post/">JB Sample Post</a>
+        <a href="/blog/2009/12/17/the-goal/">The Goal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/12/16/jaded-net/">Jaded .Net</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/12/15/examining-how-we-develop-software/">Examining how we develop software</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/11/25/named-command-decorator/">Named Command Decorator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/10/29/aop-structure-map/">Aop INotifyPropertyChanged StructureMap</a>
       </li>
     
   </ul>

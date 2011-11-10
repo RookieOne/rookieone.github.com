@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title>The Absent Minded Coder</title>
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2011-08-28T20:54:26-05:00</updated>
-  <id>http://yoursite.com/</id>
+  <title>I am RookieOne</title>
+  <link href="http://www.iamrookieone.com/atom.xml" rel="self"/>
+  <link href="http://www.iamrookieone.com/"/>
+  <updated>2011-11-09T20:05:20-06:00</updated>
+  <id>http://www.iamrookieone.com/</id>
   <author>
     <name>Jonathan Birkholz</name>
     
@@ -13,129 +13,1451 @@
 
   
   <entry>
-    <title>JB Sample Post</title>
-    <link href="http://yoursite.com/blog/2011/08/28/jb-sample-post/"/>
-    <updated>2011-08-28T15:24:00-05:00</updated>
-    <id>http://yoursite.com/blog/2011/08/28/jb-sample-post</id>
-    <content type="html">&lt;p&gt;Take a look at this awesome code!&lt;/p&gt;
+    <title>The Goal</title>
+    <link href="http://www.iamrookieone.com/blog/2009/12/17/the-goal/"/>
+    <updated>2009-12-17T00:00:00-06:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/12/17/the-goal</id>
+    <content type="html">&lt;p&gt;With my current mindset that things are broken, I dive into my current readings including The Goal and The Toyota Way.&lt;/p&gt;
 
-&lt;p&gt;``` ruby&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Goal-Process-Ongoing-Improvement/dp/0884271781%3FSubscriptionId%3D0JTCV5ZMHMF7ZYTXGFR2%26tag%3Dbrdicr-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D0884271781&quot;&gt;The Goal: A Process of Ongoing Improvement&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;puts &quot;Hello World&quot;
+&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/the-goal.jpg' width='' height='' alt='' title=''&gt;&lt;/p&gt;
+
+&lt;p&gt;I read The Goal back in my business graduate school days (about 5 years ago), but now its reading has a whole new impact. I am seeing more into the book after 5 years of working in software than I did as a fresh college graduate. Some of the mental exercises the protagonist in the book is going through I am going through as well. As he wrestles answering questions concerning his factory, I am wrestling with the questions concerning my software projects.&lt;/p&gt;
+
+&lt;p&gt;The first exercise is to define 'the goal' for his company and all companies. Of course the protagonist takes a long time to come to the logical conclusion that it's to make money.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Every company's goal is to make money.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;As a software consulting company, how do we make money?&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;We make money by winning a bid for a project and then performing the work to complete the project within budget.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;That seems pretty simple. Nothing about data access technologies, TDD, user stories, or any sort of architecture or design pattern.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;If you need X done and will pay $Y then we should do X for less than $Y.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;Why is it so hard to deliver on that?&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Define X&lt;/li&gt;
+&lt;li&gt;Estimate Y&lt;/li&gt;
+&lt;li&gt;…something&lt;/li&gt;
+&lt;li&gt;Profit!&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;If we scope a project then we need to know what X is. Simple to say, but man is it difficult to capture!&lt;/p&gt;
+
+&lt;p&gt;X is always in motion, a moving target. The client changes their mind, we have scope creep, and what appears simple always ends up being more complex. We all know this! Its the one constant with software development. Things are going to change.&lt;/p&gt;
+
+&lt;p&gt;From my perspective, SOLID and design patterns focus on writing code that is more adaptive to change.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;SOLID and design patterns in of themselves do NOT move us towards our goal by reducing the cost of writing software.&lt;/p&gt;
+
+&lt;p&gt;SOLID and design patterns move us towards our goal when our software has to change because the cost of the change has been reduced.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;The principles and patterns also provide a common language for developers. That common language moves us closer to the goal because current and new developers can grok more of the design in less time. And time = money.&lt;/p&gt;
+
+&lt;p&gt;Where does testing fit into all this?&lt;/p&gt;
+
+&lt;p&gt;Testing allows us to keep track of the quality of our production. Or.. does it? After some re-examination I want to say testing adds no quality. That will have to be another post.&lt;/p&gt;
+
+&lt;p&gt;Testing provides a way to measure our progress towards X. We know we are moving towards X because we can have tests that verify we are delivering towards our promise. When I mention testing I am using a broad definition and including all sorts of tests from UAT testers to automated unit tests.&lt;/p&gt;
+
+&lt;p&gt;So what does Test Driven Development (TDD) provide? TDD focuses every bit of code towards satisfying a test. If every test is relevant towards progress towards X, then TDD focuses our development towards productive work. Logically any work not moving us towards delivering X to our clients is unproductive work.&lt;/p&gt;
+
+&lt;p&gt;What conclusions have I come to?&lt;/p&gt;
+
+&lt;p&gt;The goal of a software consulting company is to make money. We make money by completing X under $Y. One of the important steps is to then define what X is. We know X will change so we should write code that is adaptive to change, but we need to balance that with only writing code that moves us towards delivering X.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We achieve more flexible and understandable code by using SOLID and design patterns.&lt;/li&gt;
+&lt;li&gt;We measure our progress towards X by passing tests.&lt;/li&gt;
+&lt;li&gt;TDD focuses our coding towards productive work.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;I started to write about estimation in this section but have decided to move it to another post.&lt;/p&gt;
+
+&lt;p&gt;After thinking about estimation, it has nothing to do with knowing what X is. Estimation has to do with what we think $Y is. X is what X is regardless if it takes you 3 hours or 3 months to deliver.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Jaded .Net</title>
+    <link href="http://www.iamrookieone.com/blog/2009/12/16/jaded-net/"/>
+    <updated>2009-12-16T00:00:00-06:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/12/16/jaded-net</id>
+    <content type="html">&lt;p&gt;I love talking with Ryan and others passionate about new technology and languages. Lately though I have been increasingly jaded with anything ‘new’.&lt;/p&gt;
+
+&lt;p&gt;How many different data technologies do we need? ADO .Net, Nhibernate, Linq-2-SQL, Entity Framework version.. whatever. We have been connecting to databases for over 20 years so why are we still worrying about this?!&lt;/p&gt;
+
+&lt;p&gt;The sheer number of UI frameworks is reaching the point of ridiculousness. I was reading the WPF Disciples Google Group and ran across this post. Paul Stovell listed all the MVVM, MVC, MVC frameworks he knew of (around 11). Then everyone was commenting with their own ‘me too’ response.&lt;/p&gt;
+
+&lt;p&gt;Am I the only one who finds that utterly hilarious? How many frameworks do we need?!&lt;/p&gt;
+
+&lt;p&gt;Ryan is extremely involved with Ruby, Python, F#, and the other ‘new’ languages to the .Net Framework. I have been delaying learning Ruby for too long, because it's hard to get motivated to learn a new language. I see the potential and the possibilities, but I quickly get discouraged and uninterested.&lt;/p&gt;
+
+&lt;p&gt;I have to ask myself… why am I jaded? Why am I disinterested in things that used to excite me?&lt;/p&gt;
+
+&lt;p&gt;The more I thought about it, the more the conclusion became crystal clear. Every project I have been a part of has had the same problems. None of the problems were technology related.&lt;/p&gt;
+
+&lt;p&gt;Why would I get excited about a solution to a problem I don’t have?&lt;/p&gt;
+
+&lt;p&gt;Reminds me of Karl Pilkington’s comment about this picture of twins on one of the Ricky Gervais podcasts. Karl saw a picture of a set of twins on an office desk (obviously the kids of the guy sitting at the desk). His great idea was since they look alike and are dressed alike, the parent could just have the picture of one of them and save space. Ricky Gervais then commented something like :&lt;/p&gt;
+
+&lt;p&gt;What you have there is the best non-solution to a problem that doesn’t exist.&lt;/p&gt;
+
+&lt;p&gt;And that is pretty much how I feel about most of the technological innovations these days.&lt;/p&gt;
+
+&lt;p&gt;For example: can someone explain to me how Oslo is going to help me? I am also not sold on RIA or anything Cloud related. The technology is interesting, but I can’t justify where I would use any of this stuff.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class='left ' src='http://www.iamrookieone.com/images/shoveling-coal.jpg' width='240' height='165' alt=''Shoveling Coal'' title=''Shoveling Coal''&gt;&lt;/p&gt;
+
+&lt;p&gt;Sometimes I feel like a lone engineer shoveling coal into a furnace on a runaway train. I don't know where we are going, where we have been, and all I hear is FASTER, FASTER!&lt;/p&gt;
+
+&lt;p&gt;When I scream for help, I get delivered a better shovel.&lt;/p&gt;
+
+&lt;p&gt;I don't want a better shovel, I want to know why I am shoveling so much coal!!!&lt;/p&gt;
+
+&lt;p&gt;Can't we do more with less? Can’t we slow down? Do we even know why we are in this train?!&lt;/p&gt;
+
+&lt;p&gt;Lately the murmurings on different blogs, podcasts, and developers has been that software development has gotten too complicated. How can that be true when we have tons of tools and frameworks that should make life easier? jQuery makes Javascript easier. Pick your favorite Data Access tool / ORM makes data access easier. Any number of UI frameworks makes UI construction easier. So why do we think things are more complicated? Shouldn’t our life be easier?&lt;/p&gt;
+
+&lt;p&gt;The majority of projects are always behind, always over budgeted, and always unclear on where they are and where they are going. This has been my experience spanning multiple companies and multiple positions on different teams. I am fully humble enough to recognize that “I” might be the problem, but I doubt it. There is enough shared pain through my conversations with other developers to recognize its a industry wide problem.&lt;/p&gt;
+
+&lt;p&gt;The only project I was a part of that didn’t feel this way had a full time Project Manager and a team full of very skilled developers. To me it didn’t feel like the project was better run, it was just we had enough skilled team members to overcome any poor execution or poor planning. That isn’t saying our PM wasn’t an all star because he was. My point is that although the project was a ‘success’ I didn’t feel like it was successful because we had a great methodology. We just powered through any complications.&lt;/p&gt;
+
+&lt;p&gt;Every project (including that last ‘successful’ one) always had mad dashes of insane hours of work followed by listless lulls as we waited for one thing or another. I never felt I had enough time to do my work and other activities related to work (ie blog, present, create frameworks)&lt;/p&gt;
+
+&lt;p&gt;Where am I going with this? I wanted to capture my state of mind and why I am re-examining how and why I develop.&lt;/p&gt;
+
+&lt;p&gt;The status quo will burn me out.&lt;/p&gt;
+
+&lt;p&gt;The ole definition of insanity : Doing the same thing over and over again expecting different results.&lt;/p&gt;
+
+&lt;p&gt;I am tired of doing the same thing, so what can I do different? Why is there this constant pain? I know there are solutions and it's time for me to document my mental journey as I search for answers. Maybe my breadcrumbs will help those that follow.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Examining how we develop software</title>
+    <link href="http://www.iamrookieone.com/blog/2009/12/15/examining-how-we-develop-software/"/>
+    <updated>2009-12-15T00:00:00-06:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/12/15/examining-how-we-develop-software</id>
+    <content type="html">&lt;p&gt;What I am starting is a mental exercise exploring how my view on software development is changing. Since this is a basically a brain dump, treat it as such. Feel free to comment on what I say... offer advice and opinions. Maybe there is something you can sympathize with.&lt;/p&gt;
+
+&lt;p&gt;What has started me thinking along these lines has been my recent readings of The Toyota Way and my re-reading of The Goal.&lt;/p&gt;
+
+&lt;p&gt;The Toyota Way&lt;/p&gt;
+
+&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/toyota-way.jpg' width='108' height='160' alt=''The Toyota Way'' title=''The Toyota Way''&gt;&lt;/p&gt;
+
+&lt;p&gt;The Goal: A Process of Ongoing Improvement&lt;/p&gt;
+
+&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/the-goal.jpg' width='108' height='160' alt=''The Goal'' title=''The Goal''&gt;&lt;/p&gt;
+
+&lt;p&gt;Both readings have me re-examining my career and software development. Asking questions like, Are we focused on the right things?&lt;/p&gt;
+
+&lt;p&gt;Anyway here are the posts:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Jaded .Net&lt;/li&gt;
+&lt;li&gt;The Goal&lt;/li&gt;
+&lt;li&gt;Estimating the Impossible&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <title>Named Command Decorator</title>
+    <link href="http://www.iamrookieone.com/blog/2009/11/25/named-command-decorator/"/>
+    <updated>2009-11-25T00:00:00-06:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/11/25/named-command-decorator</id>
+    <content type="html">&lt;p&gt;Here is the problem, we have a list of ‘commands’ we wish to show depending on what view model / entity is active. If we just had a collection of ICommands, we could show buttons but what would their content be?&lt;/p&gt;
+
+&lt;p&gt;My solution is to use the decorator pattern to decorate commands with a Name that can be used as the content for the buttons.&lt;/p&gt;
+
+&lt;p&gt;My decorator looks like :&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class NamedCommand : ICommand
+{
+    public NamedCommand(ICommand decoratedCommand, string name)
+    {
+        _DecoratedCommand = decoratedCommand;
+        Name = name;
+    }
+
+    readonly ICommand _DecoratedCommand;
+    public string Name { get; set; }
+
+    public void Execute(object parameter)
+    {
+        _DecoratedCommand.Execute(parameter);
+    }
+
+    public bool CanExecute(object parameter)
+    {
+        return _DecoratedCommand.CanExecute(parameter);
+    }
+
+    public event EventHandler CanExecuteChanged;
+} 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;```&lt;/p&gt;
 
-&lt;p&gt;``` ruby&lt;/p&gt;
+&lt;p&gt;I then created an extension method on ICommand :&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;5000
-# comment
-require 'gravtastic'
-require 'score_it'
-require 'virgil'
+&lt;p&gt;``` csharp&lt;/p&gt;
 
-class Profile
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Badgeable::Subject
-  include Gravtastic
-  include ScoreIt::Subject 
-  include Virgil::Teachable
-  include CodeMav::WriterModule
-  include CodeMav::SpeakerModule
-  include CodeMav::CoderModule
-  include CodeMav::KnowledgeModule
-  include CodeMav::ExperienceModule
-  include CodeMav::SocialModule
-  include CodeMav::Taggable
-  include CodeMav::Locatable
-  include CodeMav::Indexable
-  include CodeMav::Followable
-  include CodeMav::HasBacklogItems
-  include CodeMav::Autodiscoverable
-
-  gravtastic
-
-  field :showcase, :type =&amp;gt; Boolean, :default =&amp;gt; false
-  field :api_id, :type =&amp;gt; Integer
-  field :name, :type =&amp;gt; String
-  field :email, :type =&amp;gt; String
-  field :username, :type =&amp;gt; String
-  field :gravatar_id, :type =&amp;gt; String
-  index :username, :unique =&amp;gt; true
-
-  field :can_manage_tags, :type =&amp;gt; Boolean, :default =&amp;gt; false
-  field :is_moderator, :type =&amp;gt; Boolean, :default =&amp;gt; false
-
-  def gravatar_id
-    Digest::MD5.hexdigest(self.email)
-  end
-
-  def can_manage_tags?
-    can_manage_tags
-  end
-
-  def moderator?
-    is_moderator
-  end
-
-  belongs_to :user
-
-  scope :by_username, lambda { |uname| where(:username =&amp;gt; uname) }
-  scope :named, lambda { |name| { :where =&amp;gt; { :name =&amp;gt; name } } }
-  scope :showcase, lambda { where(:showcase =&amp;gt; true) }
-
-  def display_name
-    (self.name.blank? || self.name.nil?) ? self.username : self.name
-  end
-
-  def to_param
-    username
-  end
-
-  def sync!
-    stack_overflow_profile.sync! unless stack_overflow_profile.nil?
-    git_hub_profile.sync! unless git_hub_profile.nil?
-    bitbucket_profile.sync! unless bitbucket_profile.nil?
-    speaker_rate_profile.sync! unless speaker_rate_profile.nil?
-    slide_share_profile.sync! unless slide_share_profile.nil?
-    twitter_profile.sync! unless twitter_profile.nil?
-  end
-
-  class &amp;lt;&amp;lt; self
-    def sync_all!
-      profiles_to_sync = Profile.all.to_a
-      profiles_to_sync.each do |p|
-        begin
-          p.sync!
-        rescue
-            puts &quot;ERROR on syncing #{p.display_name}'s profile&quot;
-        end
-      end
-    end
-
-    def stack_overflow
-      where(:stack_overflow_profile.exists =&amp;gt; true)
-    end
-
-    def top_stack_overflow
-      stack_overflow.desc('stack_overflow_profile.reputation')
-    end
-
-    def search(query, options = {})
-      search = Sunspot.new_search(Profile)
-      search.build do
-        keywords query do
-        end
-      end
-      search.execute
-    end
-  end
-
-end
+&lt;pre&gt;&lt;code&gt;public static ICommand Name(this ICommand command, string name)
+{
+    return new NamedCommand(command, name);
+}
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;So in the code I can now do:&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Commands.Add(new ActionCommand(OnOpen).Name(&quot;Open&quot;));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;For my WPF visual, I have a DataTemplate :&lt;/p&gt;
+
+&lt;p&gt;``` xml&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;DataTemplate DataType=&quot;{x:Type Commands:NamedCommand}&quot; &amp;gt;
+    &amp;lt;Button Content=&quot;{Binding Name}&quot;
+           Command=&quot;{Binding }&quot; /&amp;gt;
+&amp;lt;/DataTemplate&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Aop INotifyPropertyChanged StructureMap</title>
+    <link href="http://www.iamrookieone.com/blog/2009/10/29/aop-structure-map/"/>
+    <updated>2009-10-29T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/10/29/aop-structure-map</id>
+    <content type="html">&lt;p&gt;Anyone who has worked with INotifyPropertyChanged knows that this simple interface can be a royal pain in the ass.&lt;/p&gt;
+
+&lt;p&gt;To try and eliminate the pain, people have created some great solutions using AOP : IL weaving (&lt;a href=&quot;www.postsharp.org&quot;&gt;PostSharp&lt;/a&gt;) and using a proxy (&lt;a href=&quot;http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html&quot;&gt;Castle Dynamic Proxy&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;PostSharp has a little too much voodoo for me atm. I think I will warm up to it though and re-examine using PostSharp on my next solution. But for now, I wanted to use Castle Project’s Dynamic Proxy.&lt;/p&gt;
+
+&lt;p&gt;Naturally since Castle also has a very popular IoC container in Windsor, most examples marry Dynamic Proxy and Windsor to form an AOP INotifyPropertyChanged solution.&lt;/p&gt;
+
+&lt;p&gt;Since I am using StructureMap for this project, I endeavored to create my own solution using Dynamic Proxy.&lt;/p&gt;
+
+&lt;p&gt;My first attempt I shared at the Virtual Brown Bag look liked it worked but in reality I was constructing my objects twice.&lt;/p&gt;
+
+&lt;p&gt;Once with SM and once with the Proxy generator.&lt;/p&gt;
+
+&lt;p&gt;I had to go back to the drawing board and posted my problem at the SM google group. &lt;a href=&quot;http://groups.google.com/group/structuremap-users/browse_thread/thread/1a6b19ce8152db1b?hl=en&quot;&gt;http://groups.google.com/group/structuremap-users/browse_thread/thread/1a6b19ce8152db1b?hl=en&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I believe the syntax given to me was an older version of SM. For the record, I am using version 2.5.3.0&lt;/p&gt;
+
+&lt;p&gt;But it did direct me to the general idea on where I should start looking. I ended up needing to create an IBuildInterceptor.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class MyBuildInterceptor : IBuildInterceptor
+   {
+       public MyBuildInterceptor(Type concreteType)
+       {
+           _ConcreteType = concreteType;
+       }
+
+       readonly Type _ConcreteType;
+
+       public object Build(BuildSession buildSession, Type pluginType, Instance instance)
+       {
+           var constructorArgs = _ConcreteType
+               .GetConstructors()
+               .FirstOrDefault()
+               .GetParameters()
+               .Select(p =&amp;gt; buildSession.CreateInstance(p.ParameterType))
+               .ToArray();
+
+
+           var interceptors = new List&amp;lt;IInterceptor&amp;gt;
+                                  {
+                                      new NotifyInterceptor()
+                                  }
+                                  .ToArray();
+
+           return new ProxyGenerator().CreateClassProxy(_ConcreteType, interceptors, constructorArgs);
+       }
+
+       public IBuildPolicy Clone()
+       {
+           return InnerPolicy.Clone();
+       }
+
+       public void EjectAll()
+       {
+           InnerPolicy.EjectAll();
+       }
+
+       public IBuildPolicy InnerPolicy { get; set; }
+   }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;To register my ViewModels I created a convention using a TypeScanner&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class MyNotifyConvention : ITypeScanner
+{
+    public void Process(Type type, PluginGraph graph)
+    {
+
+        if (type.GetInterface(&quot;IViewModel&quot;) == null)
+            return;
+
+        var interfaceType = type.GetInterfaces().FirstOrDefault(i =&amp;gt; i.Name.Contains(&quot;ViewModel&quot;)
+                                                            &amp;amp;&amp;amp; i.Name != &quot;IViewModel&quot;);
+
+        if (interfaceType == null)
+            return;
+
+        graph.Configure(r =&amp;gt;
+                        r.ForRequestedType(interfaceType)
+                        .InterceptConstructionWith(new MyBuildInterceptor(type))
+                        .TheDefaultIsConcreteType(type));
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;I then used a Dynamic Proxy Interceptor that I basically copy and pasted from Serial Seb’s example.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class NotifyInterceptor : IInterceptor
+{
+    public void Intercept(IInvocation invocation)
+    {
+        // let the original call go through first, so we can notify *after*
+        invocation.Proceed();
+
+        if (invocation.Method.Name.StartsWith(&quot;set_&quot;))
+        {
+            string propertyName = invocation.Method.Name.Substring(4);
+            RaisePropertyChangedEvent(invocation, propertyName, invocation.TargetType);
+        }
+    }
+
+    void RaisePropertyChangedEvent(IInvocation invocation, string propertyName, Type type)
+    {
+        // get the field storing the delegate list that are stored by the event.
+        var methodInfo = type.GetMethod(&quot;RaisePropertyChanged&quot;);
+
+        if (methodInfo == null)
+        {
+            if (type.BaseType != null)
+                RaisePropertyChangedEvent(invocation, propertyName, type.BaseType);
+        }
+        else // info != null
+        {
+            methodInfo.Invoke(invocation.InvocationTarget, new object[] {propertyName});
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Instead of looking for the PropertyChanged Handler, I create a RaisePropertyChanged method and use that. Although I could raise the event using the field method Seb was using, WPF wasn’t updating the binding. I didn’t really bother to investigate and just rolled with this solution.&lt;/p&gt;
+
+&lt;p&gt;So that’s my solution and I’ll start using it in my current solution. Naturally I will clean up the code some more etc. Feel free to use this for any of your own projects. You can also get the solution at my GitHub:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://github.com/RookieOne/StructureMapAopNotify&quot;&gt;http://github.com/RookieOne/StructureMapAopNotify&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>London Time?</title>
+    <link href="http://www.iamrookieone.com/blog/2009/10/27/london-time/"/>
+    <updated>2009-10-27T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/10/27/london-time</id>
+    <content type="html">&lt;p&gt;A friend ping’d me on gchat and asked if he had a DateTime object with our time in Texas, how could he get the time in London.&lt;/p&gt;
+
+&lt;p&gt;I quickly threw together this example on how I would do it.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DateTime time = DateTime.Now;
+
+TimeZoneInfo londonTimeZone = TimeZoneInfo
+    .GetSystemTimeZones()
+    .FirstOrDefault(t =&amp;gt; t.DisplayName.Contains(&quot;London&quot;));
+
+DateTime londonTime = TimeZoneInfo.ConvertTime(time, londonTimeZone);
+
+Console.WriteLine(&quot;Its {0} here&quot;, time);
+Console.WriteLine(&quot;But its {0} in London&quot;, londonTime);
+Console.WriteLine(&quot;Blimey!&quot;);
+Console.ReadLine();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Virtual Brown Bag 10/22/09</title>
+    <link href="http://www.iamrookieone.com/blog/2009/10/22/vbb-summary/"/>
+    <updated>2009-10-22T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/10/22/vbb-summary</id>
+    <content type="html">&lt;p&gt;Today was a great virtual brown bag. Claudio will have a more exhaustive list of what was discussed, but I thought I would share some links to stuff I talked about.&lt;/p&gt;
+
+&lt;h3&gt;Creating a Generic Type using Reflection&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://geekswithblogs.net/marcel/archive/2007/03/24/109722.aspx&quot;&gt;http://geekswithblogs.net/marcel/archive/2007/03/24/109722.aspx&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public static object CreateGeneric(Type generic, Type innerType, params object[] args)
+{
+    System.Type specificType = generic.MakeGenericType(new System.Type[] { innerType });
+    return Activator.CreateInstance(specificType, args);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;h3&gt;StackOverflow Question from Marvin&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/1532991/help-with-a-windows-service-scheduled-task-that-must-use-a-web-browser-and-file-d&quot;&gt;http://stackoverflow.com/questions/1532991/help-with-a-windows-service-scheduled-task-that-must-use-a-web-browser-and-file-d &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;As Marvin and Claudio talked, I threw together an example on how I would solve the problem. Hopefully we can hear back from Marvin on whether it worked. :)&lt;/p&gt;
+
+&lt;p&gt;The code snippet is here : &lt;a href=&quot;http://codesnippets.joyent.com/posts/show/2345&quot;&gt;http://codesnippets.joyent.com/posts/show/2345&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var url = &quot;http://www.codinghorror.com/blog/files/exported-font-and-colors-for-jeff-atwood-sept-19.zip&quot;;
+
+var request = WebRequest.Create(url) as HttpWebRequest;
+
+var response = request.GetResponse();
+
+var readStream = response.GetResponseStream();
+
+var fileStream = new FileStream(@&quot;C:\temp\dlZip.zip&quot;, FileMode.Create);
+
+int readByte = readStream.ReadByte();
+while(readByte != -1)
+{
+    fileStream.WriteByte((byte)readByte);
+    readByte = readStream.ReadByte();
+}
+
+fileStream.Flush();
+fileStream.Close();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;h3&gt;Using StructureMap with Castle Dynamic Proxy for INotifyPropertyChanged AOP&lt;/h3&gt;
+
+&lt;p&gt;For creating the DynamicProxy interceptor I based my code off of : &lt;a href=&quot;http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html&quot;&gt;http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The entire solution can be found here : &lt;a href=&quot;http://github.com/RookieOne/StructureMapAopNotify&quot;&gt;http://github.com/RookieOne/StructureMapAopNotify&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;All in all, a darn good Virtual Brown Bag. :)&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>My New Career at Code / EPS</title>
+    <link href="http://www.iamrookieone.com/blog/2009/10/19/new-career-at-eps/"/>
+    <updated>2009-10-19T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/10/19/new-career-at-eps</id>
+    <content type="html">&lt;p&gt;It’s been over a week since I started at Code / EPS and I have to say I am loving it here.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class='right ' src='http://www.iamrookieone.com/images/career-at-eps.jpg' width='224' height='184' alt=''Computer at EPS'' title=''Computer at EPS''&gt;&lt;/p&gt;
+
+&lt;p&gt;My computer came in on Friday and I spent most of the day setting it up. Everyone knows the drill of installing Visual Studio, Office, third party tools, etc. It’s a ritual of blessing a new computer for programming work. The picture on the right was taken with my iPhone. The two 24 inch monitors are freakin awesome!&lt;/p&gt;
+
+&lt;p&gt;There are a lot of intangibles that make working at EPS fun and a perfect fit for me at this time. Sharing an office with Claudio is a huge perk.  Having Markus as a boss is also a pleasant change. Most bosses can be disconnected from the current pulse on software development. Markus stays up to date and is also passionate about being cutting edge. Its nice working with people you respect and can learn from.&lt;/p&gt;
+
+&lt;p&gt;I also like that I am not working at the client. Having worked at the clients offices for several years, I began to dislike the random commutes, unknown work conditions, and random hardware configurations. :(&lt;/p&gt;
+
+&lt;p&gt;Here I have an office, with a window. I have a nice computer setup so that I can maximize my productivity. I know where I will be 2-3 months out. All in all, a nice change that adds peace of mind. I can now focus on my next phase in my career.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Catapult -> EPS</title>
+    <link href="http://www.iamrookieone.com/blog/2009/09/29/catapult-to-eps/"/>
+    <updated>2009-09-29T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/09/29/catapult-to-eps</id>
+    <content type="html">&lt;p&gt;If you have not heard already, I am leaving Catapult Systems to go join the team at EPS Consulting.&lt;/p&gt;
+
+&lt;p&gt;Catapult Systems is a fantastic company. They are a NSI (National Systems Integrator) and have 12 Microsoft competencies. They were awarded the 2009 Microsoft Worldwide Partner Conference Award for Custom Development Solutions.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.catapultsystems.com/About/News/Articles/Pages/CatapultSystemsWinsEliteMicrosoftWorldwidePartneroftheYearAward.aspx&quot;&gt;http://www.catapultsystems.com/About/News/Articles/Pages/CatapultSystemsWinsEliteMicrosoftWorldwidePartneroftheYearAward.aspx&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I will have to put a little plug in here and say I was part of the team at Wisenbaker. :)&lt;/p&gt;
+
+&lt;p&gt;My departure has nothing to do with an exodus from Catapult. Catapult has positioned itself as a Microsoft Consulting company. I focus on Custom Application Development. What that means is I have very little interest in Sharepoint, EPM, Infrastructure, etc. I view selling and producing custom software products as a very different task than rolling out Windows 7.&lt;/p&gt;
+
+&lt;p&gt;I also really want to focus more on training, presenting, and overall community activity. While Catapult encouraged this behavior (particularly Mark Whitmire), it was all done outside my normal duties. With EPS and some changes Markus has in store, we hope to make that part of my duties and expectations.&lt;/p&gt;
+
+&lt;p&gt;My move is about my goals being slightly different than Catapult’s goals while EPS’s goals are more aligned with what I want to achieve. For example, at Houston TechFest I had some EPS coworkers come up and offer their support and advice. It was greatly appreciated. Their attendance and conversations made it clear they are pleased to have me on the team and are there to make me better at what I want to do.&lt;/p&gt;
+
+&lt;p&gt;I still have lots of good friends at Catapult : Ryan Riley, David Morton, John McPherson, Apollo Gonzalez, Rafael Perez, etc.&lt;/p&gt;
+
+&lt;p&gt;They have great ideas on revolutionizing the Application Development practice and I wish them the best of luck.&lt;/p&gt;
+
+&lt;p&gt;For me, I am really looking forward to working with the team at EPS. I’ve gotten to know Markus and Claudio (and others at EPS) over the past couple of months and am really impressed with them. This is my first time to be going to a company where I already know people (and respect their professionalism and skill level).&lt;/p&gt;
+
+&lt;p&gt;I will still be doing Virtual Brown Bags with Claudio and will now be in a situation where it should be easier for me to participate. Before I had to arrange rooms with the client and never knew if I could have privacy, etc. It was a pain.&lt;/p&gt;
+
+&lt;p&gt;My last day at Catapult will be Sept 30th. I then go on a brief vacation to Colorado to visit my Dad at the family mountain home. I come back on the 7th and start the new gig on the 8th. :D&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Houston Techfest 2009</title>
+    <link href="http://www.iamrookieone.com/blog/2009/09/28/houston-techfest/"/>
+    <updated>2009-09-28T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/09/28/houston-techfest</id>
+    <content type="html">&lt;p&gt;Wow! That was lots of fun! I got the chance to see and talk to a lot of my friends who I haven’t seen in awhile.&lt;/p&gt;
+
+&lt;p&gt;Also, it was nice to be finally finished with my two presentations. Both were fun but I will admit to liking my Evolve Your Code material a bit more than the WPF Input Validation. They were both a lot of work. Be sure to thank presenters. I knew work went into the presentations but I didn’t appreciate how much until I tried to do two. I learned a lesson with that decision. Never do 2 new presentations. It’s way too much work and both suffer from neglect. I will write a post on all my presentation lessons later.&lt;/p&gt;
+
+&lt;p&gt;Without the 2 presentations looming over me and my new job, I should be able to get back to blogging more. I love sharing what I know, even if its just to myself months from now when I forget everything. :)&lt;/p&gt;
+
+&lt;p&gt;For the slides I am trying out slideshare and am also using Git Hub for the slides and solutions.&lt;/p&gt;
+
+&lt;h4&gt;Evolve Your Code:&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.slideshare.net/RookieOne/evolve-your-code&quot;&gt;http://www.slideshare.net/RookieOne/evolve-your-code&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://github.com/RookieOne/Evolve-Your-Code&quot;&gt;http://github.com/RookieOne/Evolve-Your-Code&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4&gt;WPF Input Validation:&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.slideshare.net/RookieOne/wpf-validation&quot;&gt;http://www.slideshare.net/RookieOne/wpf-validation&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://github.com/RookieOne/WPF-Input-Validation&quot;&gt;http://github.com/RookieOne/WPF-Input-Validation&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Monads</title>
+    <link href="http://www.iamrookieone.com/blog/2009/08/19/monads/"/>
+    <updated>2009-08-19T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/08/19/monads</id>
+    <content type="html">&lt;p&gt;Ryan is the monad king. Ok.. well maybe not the king. But he has a big megaphone and drops a ‘monad’ bomb daily. He has been doing some fantastic work in F# and C# using monads. He shares his code and I just stare… going WTF is this!&lt;/p&gt;
+
+&lt;p&gt;I know the basic concepts of what a monad is mostly due to random discussions. I never put any solid research time into what it is… why I would use it… and where does it fit into the larger scheme of my personal development toolkit.&lt;/p&gt;
+
+&lt;p&gt;I started my adventure in learning where I normally start… wikipedia.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Monad_%28functional_programming%29&quot;&gt;http://en.wikipedia.org/wiki/Monad_%28functional_programming%29&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Whoa.. lots of new terms thrown at me. Here are some random notes and crazy thoughts I am pulling out (mostly for myself).&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;a monad is a kind of &lt;a href=&quot;http://en.wikipedia.org/wiki/Abstract_data_type&quot;&gt;abstract data type&lt;/a&gt; used to represent &lt;a href=&quot;http://en.wikipedia.org/wiki/Computation&quot;&gt;computations&lt;/a&gt; (instead of data in the &lt;a href=&quot;http://en.wikipedia.org/wiki/Domain_model&quot;&gt;domain model&lt;/a&gt;)&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;That sparks some ideas. Anyone who talks to me on a regular basis knows I am a huge Greg Young CQS fan. I think I’ve always been circling around these ideas but Greg’s insights just pulled away the haze and brought into focus the essence of what always bothered me.&lt;/p&gt;
+
+&lt;p&gt;For more information on Greg Young’s CQS, I would suggest &lt;a href=&quot;http://jonathan-oliver.blogspot.com/2009/03/dddd-and-cqs-getting-started.html&quot;&gt;http://jonathan-oliver.blogspot.com/2009/03/dddd-and-cqs-getting-started.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Jonathan has compiled a great set of links to get introduced to the ideas. I am by no means an expert, but I consider myself a CQS disciple. :)&lt;/p&gt;
+
+&lt;p&gt;Back to monads.&lt;/p&gt;
+
+&lt;p&gt;The idea of the ‘domain’ being a ‘computation’ or ‘action’ more than data makes me think there might be a connection to explore.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Monads allow the programmer to chain actions together to build a pipeline, in which each action is decorated with additional processing rules provided by the monad.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;This makes me think of the ‘reconstruction’ of a domain object by processing its events. That would be a neat POC to put together.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;The return operation puts a value from a plain type into a monadic container of type M. The bind operation performs the reverse process, extracting the original value from the container and passing it to the associated next function in the pipeline.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;I am still unclear on the whole wrapping business. I think I will revisit this again after going to another location to learn about monads.&lt;/p&gt;
+
+&lt;p&gt;So I moved over to Channel 9 and began to watch:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/shows/Going+Deep/Brian-Beckman-The-Zen-of-Expressing-State-The-State-Monad/&quot;&gt;http://channel9.msdn.com/shows/Going+Deep/Brian-Beckman-The-Zen-of-Expressing-State-The-State-Monad/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Here are some random notes / quotes:&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Only two types of variables. A bound variable and a free variable. Bound variable is a function argument. A free variable has to be looked up somewhere else.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;State monad takes a state and spits out a state, content pair.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Composition is good :)&lt;/p&gt;
+
+&lt;p&gt;Mathematics is the art of abstraction and precision&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;Is functional programming and monads a disruptive technology? Although it technically isn’t that ‘new’. I think it might be. The comments around an army of OO programmers and the difficulty for learning to think functionally just resonates with the idea that functional programming is a disruptive technology (even though functional programming isn’t new).&lt;/p&gt;
+
+&lt;p&gt;Ok… That was a pretty rough first day. Lots of terms and pictures and strange code thrown my way. It’s time to process the information. I’m pretty sure I will need to watch that video about 5 times in-between coding this stuff. I plan on trying Brian’s exercises along with watching ‘&lt;a href=&quot;http://channel9.msdn.com/shows/Going+Deep/Brian-Beckman-Dont-fear-the-Monads/&quot;&gt;Don’t Fear the Monad&lt;/a&gt;’ (another Brian Beckman presentation).&lt;/p&gt;
+
+&lt;p&gt;Ryan already has completed the first exercise in C# and F#. I will work on my own version of the C# exercise and then look at his code. I don’t think I will dive into F# right now. I played with the language about 2 weeks ago but all I did was create ‘Hello World’. There is a F# user group meeting on August 27th where I ‘might’ try to code these exercises.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>How do I hide columns with a Wpf GridView</title>
+    <link href="http://www.iamrookieone.com/blog/2009/08/07/hide-columns-with-wpf-gridview/"/>
+    <updated>2009-08-07T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/08/07/hide-columns-with-wpf-gridview</id>
+    <content type="html">&lt;p&gt;In my current project we ran across a problem where we wanted to hide certain columns in a grid view based on domain criteria.&lt;/p&gt;
+
+&lt;p&gt;We looked into custom grid headers, attached properties, custom controls, etc. Every path lead to a very complex and more importantly custom solution.&lt;/p&gt;
+
+&lt;p&gt;I spent an afternoon playing around and came up with this solution which we are using today.&lt;/p&gt;
+
+&lt;p&gt;It’s simple, easy to follow, and doesn’t require any custom code. All it uses is the power of style and triggers. The biggest knock is OH NOES! you have a bit of duplication in your xaml.&lt;/p&gt;
+
+&lt;p&gt;What is it?&lt;/p&gt;
+
+&lt;p&gt;Well, you set the ‘View’ property in your style. Then you utilize style triggers to swap out the View.&lt;/p&gt;
+
+&lt;p&gt;Yup.. easy.. simple… no mess.&lt;/p&gt;
+
+&lt;p&gt;Example :&lt;/p&gt;
+
+&lt;p&gt;``` xml&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;Style x:Key=&quot;listViewStyle&quot; TargetType=&quot;ListView&quot;&amp;gt; 
+    &amp;lt;Setter Property=&quot;View&quot;&amp;gt; 
+        &amp;lt;Setter.Value&amp;gt;
+
+            &amp;lt;GridView&amp;gt; 
+                &amp;lt;GridViewColumn Header=&quot;Name&quot; 
+                                DisplayMemberBinding=&quot;{Binding Name}&quot; /&amp;gt;                        
+                &amp;lt;GridViewColumn Header=&quot;Salary&quot; 
+                                DisplayMemberBinding=&quot;{Binding Salary}&quot; /&amp;gt; 
+            &amp;lt;/GridView&amp;gt;
+
+        &amp;lt;/Setter.Value&amp;gt; 
+    &amp;lt;/Setter&amp;gt;
+
+    &amp;lt;Style.Triggers&amp;gt; 
+        &amp;lt;DataTrigger Binding=&quot;{Binding HideCols}&quot; Value=&quot;True&quot;&amp;gt;
+
+            &amp;lt;Setter Property=&quot;View&quot;&amp;gt; 
+                &amp;lt;Setter.Value&amp;gt;
+
+                    &amp;lt;GridView&amp;gt; 
+                        &amp;lt;GridViewColumn Header=&quot;Name&quot; 
+                                        DisplayMemberBinding=&quot;{Binding Name}&quot; /&amp;gt;                                
+                    &amp;lt;/GridView&amp;gt;
+
+                &amp;lt;/Setter.Value&amp;gt; 
+            &amp;lt;/Setter&amp;gt;
+
+        &amp;lt;/DataTrigger&amp;gt; 
+    &amp;lt;/Style.Triggers&amp;gt; 
+&amp;lt;/Style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Virtual Brown Bag Summary 8/6/09</title>
+    <link href="http://www.iamrookieone.com/blog/2009/08/06/vbb-summary/"/>
+    <updated>2009-08-06T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/08/06/vbb-summary</id>
+    <content type="html">&lt;p&gt;Today's Brown Bag was lots of fun.&lt;/p&gt;
+
+&lt;p&gt;Claudio was off educating the masses (I believe in Denver when I talked to him last). I gladly picked up the MC duties again. Although I love doing it, there is a good deal of stress preparing for the brown bag.&lt;/p&gt;
+
+&lt;p&gt;Will people show? Will I have to talk all by myself? What the hell am I going to say?!&lt;/p&gt;
+
+&lt;p&gt;But today went great. I read Matthew Podwysocki's blog post &lt;a href=&quot;http://codebetter.com/matthewpodwysocki/2009/08/05/spec-and-boogie-released-on-codeplex/&quot;&gt;Spec# and Boogie Released on CodePlex&lt;/a&gt; and decided I would do a brief demo of Spec#. I spent around 30-40 minutes just playing with the older version of Spec# I found at the &lt;a href=&quot;http://research.microsoft.com/en-us/projects/specsharp/&quot;&gt;Microsoft Research&lt;/a&gt; site in preparation for the BB.&lt;/p&gt;
+
+&lt;p&gt;I was surprised at how much I picked up. Granted I have played with &lt;a href=&quot;http://research.microsoft.com/en-us/projects/contracts/&quot;&gt;CodeContracts&lt;/a&gt; before so I was familiar with some of the concepts. Design by Contract is definitely a new school of coding thought. Its taking some time for me to assimilate the termniology and intentions. I know I have barely begun the journey necessary to fully understand and leverage this coding methodology.&lt;/p&gt;
+
+&lt;p&gt;For the BB, I just opened a Spec# Console project and we just started to code the stuff I learned just 30 minutes ago. I think it went well. We played with the non-null ! ... we set the reference types to default to non null. We setup some pre-conditions using 'requires' and tested some post conditions with 'ensures'. We didn't really use 'modifies' and our one attempt at invariant worked for a simple scenario but failed with another scenario.&lt;/p&gt;
+
+&lt;p&gt;I forgot to record the BB. So I plan on using the new 2009 release of Spec# and doing a screencast covering the same material. At least we can record the same material if not the exact BB.&lt;/p&gt;
+
+&lt;p&gt;Thanks to everyone who attended and especially those who asked questions! I hope to chat with you guys again next week. I always look forward to Brown Bag Thursdays!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>MVVM - The no code behind challenge</title>
+    <link href="http://www.iamrookieone.com/blog/2009/08/05/mvvm-no-code-behind-challenge/"/>
+    <updated>2009-08-05T10:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/08/05/mvvm-no-code-behind-challenge</id>
+    <content type="html">&lt;p&gt;Glenn Block has an excellent post titled “The spirit of MYYM, it’s not a code counting exercise”. The &lt;a href=&quot;http://codebetter.com/glennblock/2009/08/03/the-spirit-of-mvvm-viewmodel-it-s-not-a-code-counting-exercise/&quot;&gt;post&lt;/a&gt; can be found at CodeBetter.&lt;/p&gt;
+
+&lt;p&gt;I thoroughly enjoyed the post and greatly appreciate practical discussions on WPF/SL application patterns. I am a bit of a WPF nut having lived and breathed xaml for over 2 years. I’ve been a part of 2 successful WPF projects (both in production). In both scenarios I acted as the defacto WPF guru.&lt;/p&gt;
+
+&lt;p&gt;This last project was a typical line of business application and we used the ViewModel pattern with Prism. I bring all this up to share my background with WPF and ViewModels.&lt;/p&gt;
+
+&lt;p&gt;Concerning the content of the post, I agree with Glenn on the majority of the content. The Commands and Parameters especially rings true. I found that whenever I went with option A [using element binding to a command parameter] I ended up refactoring it to option B [binding the ‘selected’ item to a property on the ViewModel]. Although a neat use of xaml, in practice the binding to the property just allowed more flexibility that indubitable becomes necessary with future changes and demands (not to mention testing opportunities).&lt;/p&gt;
+
+&lt;p&gt;With both projects we didn’t have the luxury of a full time designer. In both scenarios I argued there was plenty of work for a designer, but alas the resources just weren’t there. We were able to use a designer for a decent chunk of hours, but more could have been done. The applications were definitely better off for having every hour we could get from any designer resource. I believe the last project persuaded many that indeed there was enough work for a full time designer, so maybe I can hope for a designer with a future application.&lt;/p&gt;
+
+&lt;p&gt;I say this because I can not speak towards what its like having a designer in Blend all the time working on Views. When we used a designer resource, they would work in Blend and then a go-between developer / designer would take the xaml and integrate it with our ResourceDictionaries.&lt;/p&gt;
+
+&lt;p&gt;What I would like to address is the ‘no code behind’ philosophy compared to the code behind practicality.&lt;/p&gt;
+
+&lt;p&gt;Two years ago when I was floundering for WPF information and blogs, I ran across a blog post (I want to say it was Josh Smith) where the writer stated something like : “if something is easier to do in the code behind then its okay to do it in the code behind.”&lt;/p&gt;
+
+&lt;p&gt;He was arguing that a crap load of xaml vs a couple lines of code behind isn’t an argument at all. The code behind is the best choice. Naturally clearer intentions and code maintainability takes precedence over having a dogmatic “everything in xaml” approach.&lt;/p&gt;
+
+&lt;p&gt;With this last LoB Prism application, we had some choices to make when we were deciding on how the client should be made up.&lt;/p&gt;
+
+&lt;p&gt;Do we use UserControls as Views or (as Ryan Riley brought up) do we use Data Templates as views. I felt at the time the team wasn’t ready for that leap to Data Templates as views. I considered the code behind of a User Control as a placebo safety net for a team struggling with the WPF learning curve. What I did do was firmly encouraged a no code behind policy. A “no code behind” challenge if you will.&lt;/p&gt;
+
+&lt;p&gt;If I were to go back to the beginning and make that View decision again, I would go with the Data Templates as views. The team did very well without using the code behind. A Data Template view would have brought more benefits than the cost of having no code behind. Often we found ourselves thinking.. if this view was a data template and not a user control, then we could more easier do X.&lt;/p&gt;
+
+&lt;p&gt;I have championed the “no code behind” stance internal to Catapult and to other developers. Yes you can legitimately use the code behind to accomplish certain tasks. More often than not though (in my experience), the use of the code behind has more to do with the prejudices carried over from WinForms development. Having a strict no code behind stance forces developers to learn and change the way they think about coding functionality into the UI.&lt;/p&gt;
+
+&lt;p&gt;Glenn came up with a scenario (albiet a overly simplified one) of where he felt a code behind had some value. The scenario described is:&lt;/p&gt;
+
+&lt;p&gt;'”The user clicks a Save button on the Edit Order screen which requires some UI cue to the user such as an hourglass while the order is saving, and another cue once the Order has saved.”&lt;/p&gt;
+
+&lt;p&gt;He argues that the code in the xaml is less testable. He even suggests the solution I made. He also recognizes others my disagree. Count me in the disagreement camp.&lt;/p&gt;
+
+&lt;p&gt;I created a simple project that uses Attached Dependency properties to accomplish this simple scenario. This isn’t a “throw down the gauntlet” sort of thing and I didn’t really write it for Glenn. A coworker emailed Glenn’s blog and I responded in an email describing my solution. He then asked to see it in action. So I coded it up.&lt;/p&gt;
+
+&lt;p&gt;He also asked me to post a comment on Glenn’s post, but I don’t really see the point especially since I agree with the information Glenn is sharing and his opinions are built on experience &amp;amp; expertise. I really had no disagreement and the solution Glenn already knows of. /shrug&lt;/p&gt;
+
+&lt;p&gt;Anyway.. you can find the solution here : &lt;a href=&quot;http://github.com/RookieOne/AttachedAnimation/tree/master&quot;&gt;http://github.com/RookieOne/AttachedAnimation/tree/master&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>How to bind custom ICommands to Input Bindings</title>
+    <link href="http://www.iamrookieone.com/blog/2009/08/05/custom-icommands-to-input-bindings/"/>
+    <updated>2009-08-05T08:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/08/05/custom-icommands-to-input-bindings</id>
+    <content type="html">&lt;p&gt;If you are developing using any sort of V-VM-M pattern, you are already loving the awesome binding powers of Wpf.&lt;/p&gt;
+
+&lt;p&gt;And you should also be loving ICommand and binding buttons to ICommand properties on your VM.&lt;/p&gt;
+
+&lt;p&gt;What you might have discovered is that binding ICommands to Keys and other input gestures is not as easy as it was with vanilla Routed Commands.&lt;/p&gt;
+
+&lt;p&gt;But have no fear! There is a solution.&lt;/p&gt;
+
+&lt;p&gt;By utilizing Josh Smith's &lt;a href=&quot;http://joshsmithonwpf.wordpress.com/2008/07/22/enable-elementname-bindings-with-elementspy/&quot;&gt;Element Spy trick&lt;/a&gt; and creating a custom InputBinding, we can gain the functionality of binding an ICommand to a Key, etc.&lt;/p&gt;
+
+&lt;p&gt;Here is my custom input binding :&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class MyInputBinding : KeyBinding
+{
+  #region Fields
+
+  private static readonly DependencyProperty BoundCommandProperty = 
+                    DependencyProperty.Register(&quot;BoundCommand&quot;,
+                                                typeof (ICommand),
+                                                typeof (MyInputBinding),
+                                                new PropertyMetadata(OnBoundCommandChanged));
+
+  #endregion
+
+  #region Properties
+
+  public ICommand BoundCommand
+  {
+    get { return GetValue(BoundCommandProperty) as ICommand; }
+    set { SetValue(BoundCommandProperty, value);}
+  }
+
+  #endregion
+
+  #region Methods
+
+  private static void OnBoundCommandChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+  {
+    MyInputBinding binding = obj as MyInputBinding;
+
+    if (binding == null) return;
+
+    binding.Command = e.NewValue as ICommand;
+  }
+
+  #endregion
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Then when you combine the use of the ElementSpy, your xaml looks like:&lt;/p&gt;
+
+&lt;p&gt;``` xml&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;Window.Resources&amp;gt; 
+  &amp;lt;InputBindingSandbox:ElementSpy x:Key=&quot;spy&quot; /&amp;gt;
+&amp;lt;/Window.Resources&amp;gt;
+&amp;lt;Window.InputBindings&amp;gt;
+  &amp;lt;InputBindingSandbox:MyInputBinding BoundCommand=&quot;{Binding Source={StaticResource spy},
+                                                           Path=Element.DataContext.MyCommand}&quot;
+                                    Key=&quot;Enter&quot; /&amp;gt;
+&amp;lt;/Window.InputBindings&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Naturally the custom input binding is very simple and does not expose the Command Parameter nor the Command Target, etc. But the basic pattern is there so feel free to utilize and extend.&lt;/p&gt;
+
+&lt;p&gt;Happy coding!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>ItemsSourceChanged Event using Attached Dependency Properties</title>
+    <link href="http://www.iamrookieone.com/blog/2009/08/05/items-source-changed/"/>
+    <updated>2009-08-05T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/08/05/items-source-changed</id>
+    <content type="html">&lt;p&gt;If you stumble across this blog, you might have been searching for the non-existent ItemsSourceChanged event on a ListBox or ListView in Wpf.&lt;/p&gt;
+
+&lt;p&gt;Yeah... it isn't there and it sucks.&lt;/p&gt;
+
+&lt;p&gt;But, there is a workable that I wouldn't define as a hack. More of a Wpf extension. :D&lt;/p&gt;
+
+&lt;p&gt;I am a huge fan of Attached Dependency Properties. They are a perfect tool to extend the functionality of closed controls. Attached Dependency Properties also circumvent the pain of created your own custom control.&lt;/p&gt;
+
+&lt;p&gt;I am going to use an attached dependency property to mimic an ItemsSource Changed event.&lt;/p&gt;
+
+&lt;p&gt;The full code :&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/// &amp;lt;summary&amp;gt;
+/// ItemsSourceChanged Behavior uses an Attached Dependency Property
+/// to add and raise a rotued event whenever an ItemsControl's ItemsSource property
+/// changes. Also looks for INotifyCollectionChanged on the ItemsSource and raises the
+/// event on every collection changed event
+/// &amp;lt;/summary&amp;gt;
+
+public static  class ItemsSourceChangedBehavior
+{
+  /// &amp;lt;summary&amp;gt;
+  /// ItemsSourceChanged Attached Dependency Property with Callback method
+  /// &amp;lt;/summary&amp;gt;
+  public static readonly DependencyProperty ItemsSourceChangedProperty =
+                                            DependencyProperty.RegisterAttached(&quot;ItemsSourceChanged&quot;,
+                                             typeof(bool), typeof(ItemsSourceChangedBehavior),
+                                             new FrameworkPropertyMetadata(false, OnItemsSourceChanged));
+
+  /// &amp;lt;summary&amp;gt;
+  /// Static Get method allowing easy Xaml usage and to simplify the
+  /// GetValue process
+  /// &amp;lt;/summary&amp;gt;
+  /// &amp;lt;param name=&quot;obj&quot;&amp;gt;The dependency obj.&amp;lt;/param&amp;gt;
+  /// &amp;lt;returns&amp;gt;True or False&amp;lt;/returns&amp;gt;
+  public static bool GetItemsSourceChanged(DependencyObject obj)
+  {
+    return (bool)obj.GetValue(ItemsSourceChangedProperty);
+  }
+
+  /// &amp;lt;summary&amp;gt;
+  /// Static Set method allowing easy Xaml usage and to simplify the
+  /// Setvalue process
+  /// &amp;lt;/summary&amp;gt;
+  /// &amp;lt;param name=&quot;obj&quot;&amp;gt;The obj.&amp;lt;/param&amp;gt;
+  /// &amp;lt;param name=&quot;value&quot;&amp;gt;if set to &amp;lt;c&amp;gt;true&amp;lt;/c&amp;gt; [value].&amp;lt;/param&amp;gt;
+  public static void SetItemsSourceChanged(DependencyObject obj, bool value)
+  {
+    obj.SetValue(ItemsSourceChangedProperty, value);
+  }
+
+  /// &amp;lt;summary&amp;gt;
+  /// Dependency Property Changed Call Back method. This will be called anytime
+  /// the ItemsSourceChangedProperty value changes on a Dependency Object
+  /// &amp;lt;/summary&amp;gt;
+  /// &amp;lt;param name=&quot;obj&quot;&amp;gt;The obj.&amp;lt;/param&amp;gt;
+  /// &amp;lt;param name=&quot;e&quot;&amp;gt;The &amp;lt;see cref=&quot;System.Windows.DependencyPropertyChangedEventArgs&quot;/&amp;gt; instance containing the event data.&amp;lt;/param&amp;gt;
+  private static void OnItemsSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+  {
+    ItemsControl itemsControl = obj as ItemsControl;
+
+    if (itemsControl == null)
+      return;
+
+    bool oldValue = (bool)e.OldValue;
+    bool newValue = (bool)e.NewValue;
+
+    if (!oldValue &amp;amp;&amp;amp; newValue) // If changed from false to true
+    {           
+      // Create a binding to the ItemsSourceProperty on the ItemsControl
+      Binding b = new Binding
+                      {
+                         Source = itemsControl,
+                         Path = new PropertyPath(ItemsControl.ItemsSourceProperty)
+                      };
+
+      // Since the ItemsSourceListenerProperty is now bound to the
+      // ItemsSourceProperty on the ItemsControl, whenever the 
+      // ItemsSourceProperty changes the ItemsSourceListenerProperty
+      // callback method will execute
+      itemsControl.SetBinding(ItemsSourceListenerProperty, b);
+    }
+    else if (oldValue &amp;amp;&amp;amp; !newValue) // If changed from true to false
+    {
+      // Clear Binding on the ItemsSourceListenerProperty
+      BindingOperations.ClearBinding(itemsControl, ItemsSourceListenerProperty);
+    }
+  }
+
+  #endregion
+
+  #region Items Source Listener Property
+
+  /// &amp;lt;summary&amp;gt;
+  /// The ItemsSourceListener Attached Dependency Property is a private property
+  /// the ItemsSourceChangedBehavior will use silently to bind to the ItemsControl
+  /// ItemsSourceProperty.
+  /// Once bound, the callback method will execute anytime the ItemsSource property changes
+  /// &amp;lt;/summary&amp;gt;
+  private static readonly DependencyProperty ItemsSourceListenerProperty =
+       DependencyProperty.RegisterAttached(&quot;ItemsSourceListener&quot;,
+                                           typeof(object), typeof(ItemsSourceChangedBehavior),
+                                           new FrameworkPropertyMetadata(null, OnItemsSourceListenerChanged));
+
+
+  /// &amp;lt;summary&amp;gt;
+  /// Dependency Property Changed Call Back method. This will be called anytime
+  /// the ItemsSourceListenerProperty value changes on a Dependency Object
+  /// &amp;lt;/summary&amp;gt;
+  /// &amp;lt;param name=&quot;obj&quot;&amp;gt;The obj.&amp;lt;/param&amp;gt;
+  /// &amp;lt;param name=&quot;e&quot;&amp;gt;The &amp;lt;see cref=&quot;System.Windows.DependencyPropertyChangedEventArgs&quot;/&amp;gt; instance containing the event data.&amp;lt;/param&amp;gt;
+  private static void OnItemsSourceListenerChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+  {
+    ItemsControl itemsControl = obj as ItemsControl;
+
+    if (itemsControl == null)
+      return; 
+
+   INotifyCollectionChanged collection = e.NewValue as INotifyCollectionChanged;
+
+   if (collection != null)
+   {
+     collection.CollectionChanged += delegate
+                                           {
+                                             itemsControl.RaiseEvent(new RoutedEventArgs(ItemsSourceChangedEvent));
+                                           };
+   }
+
+   if (GetItemsSourceChanged(itemsControl))
+     itemsControl.RaiseEvent(new RoutedEventArgs(ItemsSourceChangedEvent));
+ }
+
+ #endregion
+
+ #region Items Source Changed Event
+
+ /// &amp;lt;summary&amp;gt;
+ /// Routed Event to raise whenever the ItemsSource changes on an ItemsControl
+ /// &amp;lt;/summary&amp;gt;
+ public static readonly RoutedEvent ItemsSourceChangedEvent =
+      EventManager.RegisterRoutedEvent(&quot;ItemsSourceChanged&quot;, 
+                                       RoutingStrategy.Bubble, 
+                                       typeof(RoutedEventHandler),
+                                       typeof(ItemsControl));
+
+ #endregion
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;By setting the ItemsSourceChanged property on any ItemsControl to true, the ItemsSourceListener property will be bound to the ItemsSource property. The ItemsSourceListener callback will be executed anytime the ItemsSource changes and therefore can raise the ItemsSourceChanged routed event.&lt;/p&gt;
+
+&lt;p&gt;Also if the ItemsSource implements INotifyCollectionChanged, I added a delegate so that on the CollectionChanged event, the ItemsSourceChanged event will also be raised.&lt;/p&gt;
+
+&lt;p&gt;Feel free to use the code and adapt it to your needs.&lt;/p&gt;
+
+&lt;p&gt;Peace out!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>New PC! Hello Win 7 and 64 bit goodness</title>
+    <link href="http://www.iamrookieone.com/blog/2009/08/04/new-pc/"/>
+    <updated>2009-08-04T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/08/04/new-pc</id>
+    <content type="html">&lt;p&gt;About 5 years ago I decided that I had enough of building my own PCs. It stopped being fun for me and became a chore. So at that time I came up with an experimental PC purchasing plan. I would spend $2k-$3k on a PC that will then last 3 years and then upgrade.&lt;/p&gt;
+
+&lt;p&gt;The plan worked great. So great in fact that my last PC lasted 5 years. :D&lt;/p&gt;
+
+&lt;p&gt;Its still a great PC. At the time I mostly gamed. Sure I was coding at work, but when I got home, I was gaming. Therefore, the specifications for the computer were gaming related. In end the PC’s specs were roughly : 3 Ghz intel p4; 3 gigs of ram; 512mb PCI-E x16 Nvidia&lt;/p&gt;
+
+&lt;p&gt;Still a great machine for gaming.&lt;/p&gt;
+
+&lt;p&gt;But now I spend near 100% of my time coding. When I do game, my friends and I all have xboxs. Its cheaper and easier to hook up online and play than a PC. At least I think so.&lt;/p&gt;
+
+&lt;p&gt;Now when I code, I have multiple Visual Studio sessions open, maybe streaming a video, maybe downloading files, etc. My poor single processor PC was under a very demanding load.&lt;/p&gt;
+
+&lt;p&gt;But riding in to save the day is my new PC I bought from Dell.&lt;/p&gt;
+
+&lt;p&gt;Its specs:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;XPS 730X, Intel Core3 I7-950 (3.06GHz, 8MB cache)&lt;/li&gt;
+&lt;li&gt;6GB Multi-Channel DDR3 at 1066MHZ (3x2GB DIMM)&lt;/li&gt;
+&lt;li&gt;SLi, Dual nVidia GeForce 9800G512MB&lt;/li&gt;
+&lt;li&gt;300GB Western Digital Velociraptor - SATA-II, 3GB/S 10000RPM, 16MB Cache&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;Niiiiice. :) The thing is freaking enormous.&lt;/p&gt;
+
+&lt;p&gt;This is my first PC with a multiple core and with a 64 bit processor (and OS).&lt;/p&gt;
+
+&lt;p&gt;So far tonight I’ve done nothing but install Win 7 and an assortment of applications. Its amazing how many little addons and applications you forget you use on a daily basis.&lt;/p&gt;
+
+&lt;p&gt;I am not an OS guy. I don’t really care for command lines nor all the super duper features. I just like things to work. I am one of the few out in there that liked Vista and didn’t find anything wrong with it.&lt;/p&gt;
+
+&lt;p&gt;But Win 7 is supposedly da bomb so why not upgrade? The most I’ve noticed about Windows 7 is the new taskbar (which I like). I think the main trend I’ve noticed going from Vista to Win 7 is that the most common tasks I do are closer… if that makes sense. So things that were 2 clicks away are now 1 click away.&lt;/p&gt;
+
+&lt;p&gt;I’m going to get back to playing with my new toy. I look forward to the many years of development I will get out of this machine.&lt;/p&gt;
+
+&lt;p&gt;Life is good.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Acase().for(patternType.FluentInterfaces).create()</title>
+    <link href="http://www.iamrookieone.com/blog/2009/08/03/fluent-interfaces/"/>
+    <updated>2009-08-03T15:24:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/08/03/fluent-interfaces</id>
+    <content type="html">&lt;p&gt;When I was first exposed to the idea of fluent interfaces my response was… big flipping deal.&lt;/p&gt;
+
+&lt;p&gt;It wasn’t until I actively started using fluent interfaces in my code did I begin to see their power and elegance.&lt;/p&gt;
+
+&lt;p&gt;What is a fluent interface? Here is the obligatory link to wikipedia ;)&lt;/p&gt;
+
+&lt;p&gt;In simple terms, its returning a type instead of void in order to achieve method chaining.&lt;/p&gt;
+
+&lt;p&gt;The end goal of the method chaining is to provide a more readable interface and code.&lt;/p&gt;
+
+&lt;p&gt;First, does it break the Law of Demeter?&lt;/p&gt;
+
+&lt;p&gt;Law of Demeter doesn’t equal the number of periods. I am of the opinion fluent interfaces do not violate the Law of Demeter.&lt;/p&gt;
+
+&lt;p&gt;What is LoD? Another link to wiki and here is a link to a stack overflow on this very subject! :)&lt;/p&gt;
+
+&lt;p&gt;To me, Law of Demeter is about restricting communication between objects.&lt;/p&gt;
+
+&lt;p&gt;A common violation of LoD (imho) is the exposure of a list property on an object. I believe this serves as a good example of LoD as well as being an example on how to make a fluent interface. :)&lt;/p&gt;
+
+&lt;p&gt;A Person object has a name and a list of friends.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Person
+{
+  public string Name { get; set; }
+  public List&amp;lt;Person&amp;gt; Friends { get; set; }
+
+  public Person()
+  {
+    Friends = new List&amp;lt;Person&amp;gt;();
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;I could then add friends by…&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var roger = new Person{ Name=&quot;Roger&quot; };
+roger.Friends.Add(new Person { Name = &quot;Eddie&quot; });
+roger.Friends.Add(new Person { Name = &quot;Freddie&quot; });
+roger.Friends.Add(new Person { Name = &quot;Gordie&quot; });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Now this is pretty typical, so what’s the problem?&lt;/p&gt;
+
+&lt;p&gt;Well my code knows WAY too much about Person. I know it has a list of friends and if they change that list to say a dictionary, I am hosed.&lt;/p&gt;
+
+&lt;p&gt;Not only that, but poor Person class… people can add friends to his collection without him every knowing. What if some additional logic needs to be done when adding a friend?&lt;/p&gt;
+
+&lt;p&gt;What if the person wants to record the birth date of every friend so they can send out birthday cards? Person is SOL.&lt;/p&gt;
+
+&lt;p&gt;As for Law of Demeter, my code is using the Person object to communicate through to the List&lt;Person&gt;. I am exposing my code to changes in Person.&lt;/p&gt;
+
+&lt;p&gt;Let’s change Person to eliminate this problem.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Person2
+{
+  public string Name { get; set; }
+  private readonly List&amp;lt;Person2&amp;gt; _friends;
+
+  public Person2()
+  {
+    _friends = new List&amp;lt;Person2&amp;gt;();
+  }
+
+  public void AddFriend(Person2 friend)
+  {
+    _friends.Add(friend);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Now the only way to add a friend is through Person. Yippie!&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var roger2 = new Person2 {Name = &quot;Roger&quot;};
+roger2.AddFriend(new Person2 { Name = &quot;Eddie&quot; });
+roger2.AddFriend(new Person2 { Name = &quot;Freddie&quot; });
+roger2.AddFriend(new Person2 { Name = &quot;Gordie&quot; });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;If I wanted to make this a fluent interface all I would need to do is instead of returning void, return the Person class.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Person3
+{
+  public string Name { get; set; }
+  private readonly List&amp;lt;Person3&amp;gt; _friends;
+
+  public Person3()
+  {
+    _friends = new List&amp;lt;Person3&amp;gt;();
+  }
+
+  public Person3 AddFriend(Person3 friend)
+  {
+    _friends.Add(friend);
+   return this;
+ }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Now I can do the same logic like…&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var roger3 = new Person3 { Name = &quot;Roger&quot; }
+              .AddFriend(new Person3 { Name = &quot;Eddie&quot; })
+              .AddFriend(new Person3 { Name = &quot;Freddie&quot; })
+              .AddFriend(new Person3 { Name = &quot;Gordie&quot; });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;That is pretty cool, but fluent interfaces really shine with the builder pattern.&lt;/p&gt;
+
+&lt;p&gt;This time around I want to force construction of a person through a builder and have the builder use a fluent interface. Notice my Person’s constructor and fields are private. I embed the builder class within the Person class so the builder has access to the constructor and fields. In this manner only my builder class has access to constructing a person. My builder can now act as an anti-corruption layer for Person.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Person4
+{
+  private string _name;
+  private List&amp;lt;Person4&amp;gt; _friends;
+
+  private Person4()
+  {
+    _friends = new List&amp;lt;Person4&amp;gt;();
+  }
+
+  public Person4 AddFriend(Person4 friend)
+  {
+    _friends.Add(friend);
+    return this;
+  }
+
+  public static PersonBuilder createAPerson()
+  {
+    return new PersonBuilder();
+  }
+
+  public class PersonBuilder
+  {
+    private Person4 _person;
+    public PersonBuilder()
+    {
+      _person = new Person4();
+    }
+
+    public PersonBuilder named(string name)
+    {
+      _person._name = name;
+      return this;
+    }
+
+    public PersonBuilder withFriend(Person4 friend)
+    {
+      _person.AddFriend(friend);
+      return this;
+    }
+
+    public PersonBuilder withaFriendNamed(string name)
+    {
+      var friend = createAPerson().named(name).finish();
+      _person.AddFriend(friend);
+      return this;
+    }
+
+    public Person4 finish()
+    {
+      return _person;
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Now to create Roger and his friends I do..&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var roger4 = Person4.createAPerson()
+                     .named(&quot;Roger&quot;)
+                     .withaFriendNamed(&quot;Eddie&quot;)
+                     .withaFriendNamed(&quot;Freddie&quot;)
+                     .withaFriendNamed(&quot;Gordie&quot;)
+                     .finish();   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;It’s a simple example but maybe it sparked some ideas on how to use fluent interfaces to chain methods and make your code more approachable to people without Computer Science degrees. :D&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Toggling Read Only with WPF</title>
+    <link href="http://www.iamrookieone.com/blog/2009/08/03/toggling-read-only-with-WPF/"/>
+    <updated>2009-08-03T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/08/03/toggling-read-only-with-WPF</id>
+    <content type="html">&lt;p&gt;Ayende tweeted a brief code snippet of some WPF he threw together (well I assume he threw it together).&lt;/p&gt;
+
+&lt;p&gt;You can see the code snippet here : &lt;a href=&quot;http://pastie.org/568259&quot;&gt;http://pastie.org/568259&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;He asked : Someone PLEASE tell me there is a better way than this (WPF)&lt;/p&gt;
+
+&lt;p&gt;I tweeted a brief snippet response to improve that tiny bit. The snippet can be found here : &lt;a href=&quot;http://codesnippets.joyent.com/posts/show/2221&quot;&gt;http://codesnippets.joyent.com/posts/show/2221&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;But I couldn’t just leave it at that. I wanted to show a different approach to solving the same problem.  * A later tweet explained his problem was more a datacontext issue, which the snippet I provided should fix. This post does take a different look at how to approach handling read only controls.&lt;/p&gt;
+
+&lt;p&gt;How can we make a control ‘read only’ through binding?&lt;/p&gt;
+
+&lt;p&gt;The solution can be found here on my Git Hub Repository : &lt;a href=&quot;http://github.com/RookieOne/WpfTogglingReadOnly&quot;&gt;http://github.com/RookieOne/WpfTogglingReadOnly&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ignoring all the other machinations, the money xaml is in the TextBoxStyle found in the Styles\TextBoxStyles.xaml resource dictionary.&lt;/p&gt;
+
+&lt;p&gt;``` xml&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;Style x:Key=&quot;TextBoxStyle&quot; TargetType=&quot;TextBox&quot;&amp;gt;        
+
+    &amp;lt;Style.Triggers&amp;gt;
+
+        &amp;lt;Trigger Property=&quot;AttachedBehaviors:ReadOnlyBehavior.IsReadOnly&quot; Value=&quot;True&quot;&amp;gt;
+
+            &amp;lt;!-- Readonly Template --&amp;gt;
+            &amp;lt;Setter Property=&quot;Template&quot;&amp;gt;
+                &amp;lt;Setter.Value&amp;gt;
+                    &amp;lt;ControlTemplate TargetType=&quot;TextBox&quot;&amp;gt;
+                        &amp;lt;TextBlock Text=&quot;{TemplateBinding Text}&quot; /&amp;gt;
+                    &amp;lt;/ControlTemplate&amp;gt;
+                &amp;lt;/Setter.Value&amp;gt;
+            &amp;lt;/Setter&amp;gt;
+
+        &amp;lt;/Trigger&amp;gt;
+
+    &amp;lt;/Style.Triggers&amp;gt;
+
+&amp;lt;/Style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;As you can see I use the IsReadOnly property on the base view model as a data trigger and then completely swap out the control template for the text box. This allows for complete customization of the read only look. It also pushes this functionality out into a style to be reused through the entire application.&lt;/p&gt;
+
+&lt;p&gt;Other things to note with the project (for those unfamiliar with the following practices):&lt;/p&gt;
+
+&lt;h3&gt;1. Data Templates as Views&lt;/h3&gt;
+
+&lt;p&gt;``` xml&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;DataTemplate DataType=&quot;{x:Type PersonView:PersonViewModel}&quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;So whenever WPF tries to resolve the PersonViewModel in a container, it will use this DataTemplate since I did not provide a key but only a DataType.&lt;/p&gt;
+
+&lt;p&gt;So in Window1 I can do…&lt;/p&gt;
+
+&lt;p&gt;``` xml&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;ContentControl&amp;gt;
+    &amp;lt;PersonView:PersonViewModel /&amp;gt;
+&amp;lt;/ContentControl&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Again this is a very simple scenario so I am ignoring any presentation patterns on how the ViewModel is placed or ‘shown’. Also ignoring how dependencies can be resolved, etc.&lt;/p&gt;
+
+&lt;p&gt;And even though this is a content control, this works for items controls as well. So consider a stack of ‘views’. You could be accomplish this simply by placing a collection of ViewModels in an ItemsControl.&lt;/p&gt;
+
+&lt;p&gt;But really… that’s for another post.&lt;/p&gt;
+
+&lt;h3&gt;2. Expression for INotifyPropertyChanged&lt;/h3&gt;
+
+&lt;p&gt;I am also using a LambdaExpression to implement INotifyPropertyChanged. Essentially achieving safe notification and eliminating those nasty magic strings.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public string FirstName
+{
+    get { return _firstName; }
+    set
+    {
+        _firstName = value;
+        OnPropertyChanged(this, m =&amp;gt; m.FirstName);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Anyway.. that was a quick project I threw together. I hope it was helpful.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Hello Open Rasta</title>
+    <link href="http://www.iamrookieone.com/blog/2009/08/03/hello-open-rasta/"/>
+    <updated>2009-08-03T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2009/08/03/hello-open-rasta</id>
+    <content type="html">&lt;p&gt;So Ryan, the apostle of everything on the web, has been spreading the gospel of Open Rasta for months. Tonight I decided that finally, I should download and give this fantastical framework a shot.&lt;/p&gt;
+
+&lt;p&gt;For an explanation on what OpenRasta is and is not, I shall direct you to their sites:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://trac.caffeine-it.com/openrasta/wiki/Doc&quot;&gt;Open Rasta Documentation&lt;/a&gt;
+&lt;a href=&quot;http://www.ohloh.net/p/openrasta&quot;&gt;Open Rasta Download Home&lt;/a&gt;
+What I am going to do is just describe my experience trying their framework for the first time.&lt;/p&gt;
+
+&lt;p&gt;I am a person that likes to learn by trying so I immediately jumped to the ‘creating your first OpenRasta website’ (&lt;a href=&quot;http://svn.caffeine-it.com/openrasta/trunk/doc/content/Tutorials/Create-First-Site.html&quot;&gt;here&lt;/a&gt;). I have looked at some of Ryan’s code and have survived several conversations with Ryan over the framework. ;) I believe that is enough preparation for at least a simple tutorial.&lt;/p&gt;
+
+&lt;p&gt;Well I go to the modifying the web.config section and was left with a broken solution. Apparently from the time the tutorial was written and the time I downloaded the version 2.0.2039.312, the handlers and modules all moved to another assembly. I had a gut feeling it moved and when I talked to Ryan, he confirmed my suspicions. Supposedly he is going to try and update the tutorial.&lt;/p&gt;
+
+&lt;p&gt;In the meantime, just change ….&quot;OpenRasta.Web.OpenRastaHandler, OpenRasta&quot;&lt;/p&gt;
+
+&lt;p&gt;to… &quot;OpenRasta.Hosting.AspNet.OpenRastaHandler, OpenRasta.Hosting.AspNet&quot;&lt;/p&gt;
+
+&lt;p&gt;So change the assembly reference from the OpenRasta.dll to the OpenRasta.Hosting.AspNet.dll&lt;/p&gt;
+
+&lt;p&gt;I assume if you are reading this you have the skill set to modify said correction for the other references.&lt;/p&gt;
+
+&lt;p&gt;After that I breezed through the creation of the ‘Home’ resource and the ‘Home’ handler. No duh? Any programmer can make a couple of classes. :)&lt;/p&gt;
+
+&lt;p&gt;I’m at the configuration section and I have to say, I love the fluent interface. Anyone who has talked to me in the past 6 months knows I love the pattern. It instantly makes any framework extremely approachable.&lt;/p&gt;
+
+&lt;p&gt;The tutorial has you making a manual configuration. I tried to find an auto configuration just using some intellisense with no luck. I will investigate this further. If I was going to use OpenRasta I would definitely want a convention based solution. Even with a nice fluent interface, I really don’t want to manually create all my mappings by hand.&lt;/p&gt;
+
+&lt;p&gt;But there is something to be said for simply creating a mapping like :&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ResourceSpace.Has
+    .ResourcesOfType&amp;lt;Home&amp;gt;()
+    .AtUri(&quot;/home&quot;)
+    .HandledBy&amp;lt;HomeHandler&amp;gt;();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;I ran the app expecting the 405 method error as the tutorial predicts.. and got an empty page. I was using FireFox, so I jumped over to IE and was then greeted by the 405 error. I assume FireFox is either handling the problem gracefully or I don’t have some settings setup to display these errors. /shrug&lt;/p&gt;
+
+&lt;p&gt;So then I created my ‘Get’ method on my HomeHandler. One of the things that did attract me to OpenRasta was the POCO handlers. I’ve grown to appreciate very clean code with some acceptable conventions. Just makes life easier. I can focus on the domain problem and not the intricacies of any given framework.&lt;/p&gt;
+
+&lt;p&gt;Most of this seemingly new re-invention of HTTP as ESB, REST, Atom.. etc is interesting in that its a reexamining of a technology we use all the time. I haven’t done web development in roughly 3 years. The majority of my experience is in smart client apps. That is just the way my career and projects played out for me. The websites I created were always very basic and probably crap if judged by web developer gurus.&lt;/p&gt;
+
+&lt;p&gt;Anyway.&lt;/p&gt;
+
+&lt;p&gt;We click links and magically we get a web page. We don’t really think much about it. Sort of like turning on a light switch or starting your car. We just expect things to work and don’t really worry about it. How many drivers can actually explain a combustion engine?&lt;/p&gt;
+
+&lt;p&gt;There is a lot going on in the background to make the web work. This new (new to me at least) area of development is leveraging the tech the way it was supposed to be used (if I am to believe the pioneers in this arena). A lot of this is a change of perspective. And with any change of perspective it can take awhile to make the transition.&lt;/p&gt;
+
+&lt;p&gt;After that side trip down my ramblings, we come back to me having a handler with a Get method. Now I have graduated to a 406 error (as expected by the tutorial).&lt;/p&gt;
+
+&lt;p&gt;I then created my view as the tutorial suggested. Now upon trying to fluently configure.. I ran into a snag. Again the tutorial is out dated (which is fine for an open source and still growing framework).&lt;/p&gt;
+
+&lt;p&gt;I had to add the “OpenRasta.Codecs.WebForms.dll” to the solution.&lt;/p&gt;
+
+&lt;p&gt;Also the fluent configuration suggested is…&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ResourceSpace.Has.ResourcesOfType&amp;lt;Home&amp;gt;()
+        .AtUri(&quot;/home&quot;)
+        .HandledBy&amp;lt;HomeHandler&amp;gt;()
+        .AndRendededByAspx(&quot;~/Views/HomeView.aspx&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;But since the AndRendededByAspx is obselete, the code should now be:&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ResourceSpace.Has.ResourcesOfType&amp;lt;Home&amp;gt;()
+                    .AtUri(&quot;/home&quot;)
+                    .HandledBy&amp;lt;HomeHandler&amp;gt;()
+                    .RenderedByAspx(&quot;~/Views/HomeView.aspx&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;I then continued the tutorial until I had my Home View that displayed my lovely welcome message.&lt;/p&gt;
+
+&lt;p&gt;Yay! I got my first Open Rasta page to work. :)&lt;/p&gt;
+
+&lt;p&gt;Feel free to investigate my project at my Git Hub repository:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://github.com/RookieOne/OpenRastaExperiment/tree/TutorialCompletion&quot;&gt;http://github.com/RookieOne/OpenRastaExperiment/tree/TutorialCompletion&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I’m going to be continuing to change the master branch but the TutorialCompletion branch should remain unchanged.&lt;/p&gt;
+
+&lt;p&gt;SO check out OpenRasta and their (and my) tutorial. Its short and is a great window into viewing the web in a slightly different manner.&lt;/p&gt;
+
+&lt;p&gt;Thanks for your time!&lt;/p&gt;
 </content>
   </entry>
   

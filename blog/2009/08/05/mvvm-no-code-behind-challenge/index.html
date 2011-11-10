@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>I am RookieOne: MVVM - The no code behind challenge</title>
+  <meta name="author" content="Jonathan Birkholz">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://www.iamrookieone.com/blog/2009/08/05/mvvm-no-code-behind-challenge/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="I am RookieOne" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">I am RookieOne</a></h1>
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:www.iamrookieone.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">MVVM - the No Code Behind Challenge</h1>
+    
+    
+
+
+
+
+<time datetime="2009-08-05 10:00:00 -0500" pubdate  updated >Aug 5<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+<div class="entry-content"><p>Glenn Block has an excellent post titled “The spirit of MYYM, it’s not a code counting exercise”. The <a href="http://codebetter.com/glennblock/2009/08/03/the-spirit-of-mvvm-viewmodel-it-s-not-a-code-counting-exercise/">post</a> can be found at CodeBetter.</p>
+
+<p>I thoroughly enjoyed the post and greatly appreciate practical discussions on WPF/SL application patterns. I am a bit of a WPF nut having lived and breathed xaml for over 2 years. I’ve been a part of 2 successful WPF projects (both in production). In both scenarios I acted as the defacto WPF guru.</p>
+
+<p>This last project was a typical line of business application and we used the ViewModel pattern with Prism. I bring all this up to share my background with WPF and ViewModels.</p>
+
+<p>Concerning the content of the post, I agree with Glenn on the majority of the content. The Commands and Parameters especially rings true. I found that whenever I went with option A [using element binding to a command parameter] I ended up refactoring it to option B [binding the ‘selected’ item to a property on the ViewModel]. Although a neat use of xaml, in practice the binding to the property just allowed more flexibility that indubitable becomes necessary with future changes and demands (not to mention testing opportunities).</p>
+
+<p>With both projects we didn’t have the luxury of a full time designer. In both scenarios I argued there was plenty of work for a designer, but alas the resources just weren’t there. We were able to use a designer for a decent chunk of hours, but more could have been done. The applications were definitely better off for having every hour we could get from any designer resource. I believe the last project persuaded many that indeed there was enough work for a full time designer, so maybe I can hope for a designer with a future application.</p>
+
+<p>I say this because I can not speak towards what its like having a designer in Blend all the time working on Views. When we used a designer resource, they would work in Blend and then a go-between developer / designer would take the xaml and integrate it with our ResourceDictionaries.</p>
+
+<p>What I would like to address is the ‘no code behind’ philosophy compared to the code behind practicality.</p>
+
+<p>Two years ago when I was floundering for WPF information and blogs, I ran across a blog post (I want to say it was Josh Smith) where the writer stated something like : “if something is easier to do in the code behind then its okay to do it in the code behind.”</p>
+
+<p>He was arguing that a crap load of xaml vs a couple lines of code behind isn’t an argument at all. The code behind is the best choice. Naturally clearer intentions and code maintainability takes precedence over having a dogmatic “everything in xaml” approach.</p>
+
+<p>With this last LoB Prism application, we had some choices to make when we were deciding on how the client should be made up.</p>
+
+<p>Do we use UserControls as Views or (as Ryan Riley brought up) do we use Data Templates as views. I felt at the time the team wasn’t ready for that leap to Data Templates as views. I considered the code behind of a User Control as a placebo safety net for a team struggling with the WPF learning curve. What I did do was firmly encouraged a no code behind policy. A “no code behind” challenge if you will.</p>
+
+<p>If I were to go back to the beginning and make that View decision again, I would go with the Data Templates as views. The team did very well without using the code behind. A Data Template view would have brought more benefits than the cost of having no code behind. Often we found ourselves thinking.. if this view was a data template and not a user control, then we could more easier do X.</p>
+
+<p>I have championed the “no code behind” stance internal to Catapult and to other developers. Yes you can legitimately use the code behind to accomplish certain tasks. More often than not though (in my experience), the use of the code behind has more to do with the prejudices carried over from WinForms development. Having a strict no code behind stance forces developers to learn and change the way they think about coding functionality into the UI.</p>
+
+<p>Glenn came up with a scenario (albiet a overly simplified one) of where he felt a code behind had some value. The scenario described is:</p>
+
+<p>&#8216;”The user clicks a Save button on the Edit Order screen which requires some UI cue to the user such as an hourglass while the order is saving, and another cue once the Order has saved.”</p>
+
+<p>He argues that the code in the xaml is less testable. He even suggests the solution I made. He also recognizes others my disagree. Count me in the disagreement camp.</p>
+
+<p>I created a simple project that uses Attached Dependency properties to accomplish this simple scenario. This isn’t a “throw down the gauntlet” sort of thing and I didn’t really write it for Glenn. A coworker emailed Glenn’s blog and I responded in an email describing my solution. He then asked to see it in action. So I coded it up.</p>
+
+<p>He also asked me to post a comment on Glenn’s post, but I don’t really see the point especially since I agree with the information Glenn is sharing and his opinions are built on experience &amp; expertise. I really had no disagreement and the solution Glenn already knows of. /shrug</p>
+
+<p>Anyway.. you can find the solution here : <a href="http://github.com/RookieOne/AttachedAnimation/tree/master">http://github.com/RookieOne/AttachedAnimation/tree/master</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jonathan Birkholz</span></span>
+
+      
+
+
+
+
+<time datetime="2009-08-05 10:00:00 -0500" pubdate  updated >Aug 5<span>th</span>, 2009</time>
+
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/C-/'>C#</a>, <a class='category' href='/blog/categories/MVVM/'>MVVM</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.iamrookieone.com/blog/2009/08/05/mvvm-no-code-behind-challenge/" data-via="" data-counturl="http://www.iamrookieone.com/blog/2009/08/05/mvvm-no-code-behind-challenge/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2009/12/17/the-goal/">The Goal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/12/16/jaded-net/">Jaded .Net</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/12/15/examining-how-we-develop-software/">Examining how we develop software</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/11/25/named-command-decorator/">Named Command Decorator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/10/29/aop-structure-map/">Aop INotifyPropertyChanged StructureMap</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Jonathan Birkholz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

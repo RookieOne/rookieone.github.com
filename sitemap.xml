@@ -1,19 +1,95 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://yoursite.com/blog/2011/08/28/jb-sample-post/</loc>
-        <lastmod>2011-08-28T20:42:57-05:00</lastmod>
+        <loc>http://www.iamrookieone.com/blog/2009/08/03/hello-open-rasta/</loc>
+        <lastmod>2011-10-26T18:36:49-05:00</lastmod>
     </url>
     <url>
-        <loc>http://yoursite.com/about/</loc>
-        <lastmod>2011-08-28T20:42:57-05:00</lastmod>
+        <loc>http://www.iamrookieone.com/blog/2009/08/03/toggling-read-only-with-WPF/</loc>
+        <lastmod>2011-10-26T18:36:43-05:00</lastmod>
     </url>
     <url>
-        <loc>http://yoursite.com/blog/archives/</loc>
-        <lastmod>2011-08-28T20:42:57-05:00</lastmod>
+        <loc>http://www.iamrookieone.com/blog/2009/08/03/fluent-interfaces/</loc>
+        <lastmod>2011-10-26T18:46:53-05:00</lastmod>
     </url>
     <url>
-        <loc>http://yoursite.com/</loc>
-        <lastmod>2011-08-28T20:42:57-05:00</lastmod>
+        <loc>http://www.iamrookieone.com/blog/2009/08/04/new-pc/</loc>
+        <lastmod>2011-10-26T18:50:22-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/08/05/items-source-changed/</loc>
+        <lastmod>2011-10-26T19:06:06-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/08/05/custom-icommands-to-input-bindings/</loc>
+        <lastmod>2011-10-26T22:06:30-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/08/05/mvvm-no-code-behind-challenge/</loc>
+        <lastmod>2011-10-26T22:09:51-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/08/06/vbb-summary/</loc>
+        <lastmod>2011-10-26T22:12:52-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/08/07/hide-columns-with-wpf-gridview/</loc>
+        <lastmod>2011-10-26T22:16:30-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/08/19/monads/</loc>
+        <lastmod>2011-10-27T23:39:30-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/09/28/houston-techfest/</loc>
+        <lastmod>2011-10-27T23:43:01-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/09/29/catapult-to-eps/</loc>
+        <lastmod>2011-10-27T23:45:16-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/10/19/new-career-at-eps/</loc>
+        <lastmod>2011-10-30T18:14:02-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/10/22/vbb-summary/</loc>
+        <lastmod>2011-10-30T18:27:28-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/10/27/london-time/</loc>
+        <lastmod>2011-11-09T19:41:14-06:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/10/29/aop-structure-map/</loc>
+        <lastmod>2011-11-09T19:47:30-06:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/11/25/named-command-decorator/</loc>
+        <lastmod>2011-11-09T19:49:30-06:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/12/15/examining-how-we-develop-software/</loc>
+        <lastmod>2011-11-09T19:58:25-06:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/12/16/jaded-net/</loc>
+        <lastmod>2011-11-09T20:01:24-06:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/2009/12/17/the-goal/</loc>
+        <lastmod>2011-11-09T20:05:19-06:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/about/</loc>
+        <lastmod>2011-11-09T20:05:19-06:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/blog/archives/</loc>
+        <lastmod>2011-11-09T20:05:19-06:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.iamrookieone.com/</loc>
+        <lastmod>2011-11-09T20:05:19-06:00</lastmod>
     </url>
 </urlset>
