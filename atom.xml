@@ -4,13 +4,307 @@
   <title>I am RookieOne</title>
   <link href="http://www.iamrookieone.com/atom.xml" rel="self"/>
   <link href="http://www.iamrookieone.com/"/>
-  <updated>2011-11-09T20:05:20-06:00</updated>
+  <updated>2011-11-20T17:17:30-06:00</updated>
   <id>http://www.iamrookieone.com/</id>
   <author>
     <name>Jonathan Birkholz</name>
     
   </author>
 
+  
+  <entry>
+    <title>Creating my first TFS 2010 Build</title>
+    <link href="http://www.iamrookieone.com/blog/2010/02/23/creating-first-tfs-build/"/>
+    <updated>2010-02-23T00:00:00-06:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/02/23/creating-first-tfs-build</id>
+    <content type="html">&lt;p&gt;My work this iteration on my project is setting up a CI build and then migrating all our POC code to the solution.&lt;/p&gt;
+
+&lt;p&gt;Right now I am creating a simple build as practice for setting up the actual build.&lt;/p&gt;
+
+&lt;p&gt;I am approaching this from a complete n00b when it comes to creating a TFS build. I have created builds before but they have been small and just simple MSBuild files. This is the first time I am using TFS and creating not only a build but a continuous integration environment.&lt;/p&gt;
+
+&lt;p&gt;I created a Team Project and added a simple C# project to source control. I then looked at the Team Explorer and noticed that there is a Builds section under my project. Intuitively I right clicked and found where I can create a New Build Definition.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail1.png' width='' height='' alt=''New Build Definition'' title=''New Build Definition''&gt;&lt;/p&gt;
+
+&lt;p&gt;I looked at the options available to me on the Build Window and noticed a Trigger section. Investigating the Trigger section allowed me to select what triggers this build. Oh look a CI trigger that builds after each check-in!&lt;/p&gt;
+
+&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail2.png' width='' height='' alt=''Continuous Integration'' title=''Continuous Integration''&gt;&lt;/p&gt;
+
+&lt;p&gt;I then had to set an output folder so I created a folder on our build machine and set the folder to that.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail3.png' width='' height='' alt=''Set output folder'' title=''Set output folder''&gt;&lt;/p&gt;
+
+&lt;p&gt;And then I was done.&lt;/p&gt;
+
+&lt;p&gt;I do have to say we already had a TFS Build Controller setup so I can’t comment on that for now.&lt;/p&gt;
+
+&lt;p&gt;I then ran a couple of experiments. I first added a class foo to my project and checked in. I then double clicked on my Build under the TFS explorer and was given two reports. One report showed the current queued builds and the other had a list of the completed builds.&lt;/p&gt;
+
+&lt;p&gt;After I ran my first successful build I then made a compile error and checked it in. I then had a failed build.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail4.png' width='' height='' alt=''Failed build'' title=''Failed build''&gt;&lt;/p&gt;
+
+&lt;p&gt;When I double clicked the failed build I got this UI.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail5.png' width='' height='' alt=''Failed build report'' title=''Failed build report''&gt;&lt;/p&gt;
+
+&lt;p&gt;I then created a test project and then made a failing test. Now my build looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail6.png' width='' height='' alt=''Build with failing tests'' title=''Build with failing tests''&gt;&lt;/p&gt;
+
+&lt;p&gt;And when I double clicked I got this report.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail7.png' width='' height='' alt=''Build with failing tests report'' title=''Build with failing tests report''&gt;&lt;/p&gt;
+
+&lt;p&gt;So that was a real quick run through with creating a CI build with TFS 2010. I have to say… I was surprised that it was that easy. I am continuing my work with the build but it looks like the simple scenario was incredibly easy!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>ISubscribe</title>
+    <link href="http://www.iamrookieone.com/blog/2010/02/18/isubscribe/"/>
+    <updated>2010-02-18T00:00:00-06:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/02/18/isubscribe</id>
+    <content type="html">&lt;p&gt;I believe Jimmy Bogard has a similar technique (IHandler&lt;T&gt;) with ASP .Net MVC but I thought I would still share the convention I’ve been using to wire up subscriptions to the Prism Event Aggregator.&lt;/p&gt;
+
+&lt;p&gt;Whenever an object is built with StructureMap, it goes through all the TypeInterceptors. I have a SubscriptionTypeInterceptor:&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class SubscriptionInterceptor : TypeInterceptor
+{
+    public object Process(object target, IContext context)
+    {
+        var eventAggregator = context.GetInstance&amp;lt;IEventAggregator&amp;gt;();
+
+        // Get interface ISubscribe&amp;lt;E&amp;gt;
+        var interfaces = target.GetType().GetInterfaces().Where(i =&amp;gt; i.Name.Contains(&quot;ISubscribe&quot;));
+
+        foreach (var type in interfaces)
+        {
+            // typeof(E)
+            var eventType = type.GetGenericArguments()[0];
+
+            var setupMethod = GetType().GetMethod(&quot;Setup&quot;);
+            setupMethod.MakeGenericMethod(eventType).Invoke(this, new[] { target, eventAggregator });
+        }
+
+        return target;
+    }
+
+    public bool MatchesType(Type type)
+    {
+        return type.ImplementsInterfaceTemplate(typeof(ISubscribe&amp;lt;&amp;gt;));
+    }
+
+    public void Setup&amp;lt;T&amp;gt;(ISubscribe&amp;lt;T&amp;gt; subscriber, IEventAggregator eventAggregator)
+    {
+        eventAggregator
+            .GetEvent&amp;lt;CompositePresentationEvent&amp;lt;T&amp;gt;&amp;gt;()
+            .Subscribe(subscriber.Subscribe);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;So it finds all the ISubscribe&lt;T&gt; interfaces the target implements and then subscribes the target to the event T in the event aggregator.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public interface ISubscribe&amp;lt;E&amp;gt;
+{
+    void Subscribe(E e);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;A simple example of usage:&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class SecurityController : IController,
+                                  ISubscribe&amp;lt;RequestUserLoginEvent&amp;gt;
+{
+    public void Subscribe(RequestUserLoginEvent e)
+    {
+        Publish.Event().ShowModal&amp;lt;IRequestUserLoginViewModel&amp;gt;();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>CodeCast #68 : Convention over Configuration</title>
+    <link href="http://www.iamrookieone.com/blog/2010/02/18/convention_over_configuration/"/>
+    <updated>2010-02-18T00:00:00-06:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/02/18/convention_over_configuration</id>
+    <content type="html">&lt;p&gt;I recorded a podcast with Markus and Ken on Tuesday and it was published last night. :)&lt;/p&gt;
+
+&lt;p&gt;We talked about Convention over Configuration using tools like Structure Map, PostSharp, Prism, etc&lt;/p&gt;
+
+&lt;p&gt;You can download the podcast using itunes or online at:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.code-magazine.com/codecast/index.aspx?messageid=0001bf99-1394-45c2-8949-388c673ac7a5&quot;&gt;http://www.code-magazine.com/codecast/index.aspx?messageid=0001bf99-1394-45c2-8949-388c673ac7a5&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>View + ViewModel + ViewRegistry</title>
+    <link href="http://www.iamrookieone.com/blog/2010/02/17/view-viewmodel-viewregistry/"/>
+    <updated>2010-02-17T00:00:00-06:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/02/17/view-viewmodel-viewregistry</id>
+    <content type="html">&lt;p&gt;In preparation for the Advanced WPF Workshop on Saturday Feb 20th, I thought I would throw together some blog posts around some techniques / code I will be sharing. JP asked the other day whether Views should have references to their ViewModels or should ViewModels have references to Views. Unfortunately twitter is a great medium for asking this question but not the best medium for answering the question.&lt;/p&gt;
+
+&lt;p&gt;I am going to try using the dry marker board as a form of communication with my blogs. I have little patience for lining up pretty lines and colored boxes with Visio or Power Point. A dry marker board is fast and allows for a free flowing expression of my ideas.&lt;/p&gt;
+
+&lt;p&gt;Let me try to diagram out how I currently manage my Views and ViewModels.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/view_viewmodel_viewregistry_whiteboard.jpg' width='' height='' alt=''View ViewModel ViewRegistry Whiteboard'' title=''View ViewModel ViewRegistry Whiteboard''&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;We ask the StructureMap container for the ViewModel&lt;/li&gt;
+&lt;li&gt;The VM instance is intercepted by a ViewModelTypeInterceptor&lt;/li&gt;
+&lt;li&gt;Inside the VMTypeInterceptor
+
+&lt;ol&gt;
+&lt;li&gt;Get the V for out VM from the container&lt;/li&gt;
+&lt;li&gt;Get the ViewRegistry from the container&lt;/li&gt;
+&lt;li&gt;Register the V with the VM in the ViewRegistry&lt;/li&gt;
+&lt;li&gt;Return the VM&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;And finally our VM is returned being registered with a V in the ViewRegistry&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;In short my ViewModel has no reference to my View, my View has no reference to my ViewModel (beyond setting the DataContext), and my View Registry registers the mappings between View and ViewModel.&lt;/p&gt;
+
+&lt;p&gt;The best code to look for this is in the ViewModelInterceptor:&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class ViewModelInterceptor : TypeInterceptor
+{
+    public object Process(object target, IContext context)
+    {
+        var name = target.GetType().Name;
+
+        var view = context.GetInstance&amp;lt;IView&amp;gt;(name);
+
+        context.GetInstance&amp;lt;IViewRegistry&amp;gt;()
+            .RegisterViewWith(target as IViewModel, view);
+
+        return target;
+    }
+
+    public bool MatchesType(Type type)
+    {
+        return type.CanBeCastTo(typeof (IViewModel));
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Advanced WPF Workshop</title>
+    <link href="http://www.iamrookieone.com/blog/2010/02/17/adv-wpf-workshop/"/>
+    <updated>2010-02-17T00:00:00-06:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/02/17/adv-wpf-workshop</id>
+    <content type="html">&lt;p&gt;On February 20th from 9 am (central) until we get bored… I guess 1pm, we will be having a free Advanced WPF Workshop here at EPS.&lt;/p&gt;
+
+&lt;p&gt;Let me emphasize ….&lt;/p&gt;
+
+&lt;h2&gt;FREE!!!!!!&lt;/h2&gt;
+
+&lt;p&gt;When : Feb 20th 9am - 1pm+&lt;/p&gt;
+
+&lt;p&gt;Where : EPS Office&lt;/p&gt;
+
+&lt;p&gt;6605 Cypresswood Dr, Suite 300
+Spring, TX 77379&lt;/p&gt;
+
+&lt;iframe height=&quot;350&quot; marginheight=&quot;0&quot; src=&quot;http://maps.google.com/maps?f=q&amp;amp;source=s_q&amp;amp;hl=en&amp;amp;geocode=&amp;amp;q=6605+cypresswood+dr+sprint+tx&amp;amp;sll=37.0625,-95.677068&amp;amp;sspn=64.792576,135.263672&amp;amp;ie=UTF8&amp;amp;hq=&amp;amp;hnear=6605+Cypresswood+Dr,+Spring,+Harris,+Texas+77379&amp;amp;z=17&amp;amp;ll=30.014289,-95.507411&amp;amp;output=embed&quot; frameborder=&quot;0&quot; width=&quot;425&quot; marginwidth=&quot;0&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
+
+
+&lt;p&gt;And online at : https://www2.gotomeeting.com/register/902909498&lt;/p&gt;
+
+&lt;p&gt;There will be lunch which at the moment is BBQ, but I might change my mind. ;)&lt;/p&gt;
+
+&lt;p&gt;Currently the agenda looks like:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;INotifyPropertyChange
+
+&lt;ul&gt;
+&lt;li&gt;Normal&lt;/li&gt;
+&lt;li&gt;Type Safe&lt;/li&gt;
+&lt;li&gt;Dynamic Proxy&lt;/li&gt;
+&lt;li&gt;AOP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;View &amp;amp; ViewModel
+
+&lt;ul&gt;
+&lt;li&gt;Typical methods&lt;/li&gt;
+&lt;li&gt;IView extensions&lt;/li&gt;
+&lt;li&gt;IView&lt;VM&gt;&lt;/li&gt;
+&lt;li&gt;ViewRegistry&lt;/li&gt;
+&lt;li&gt;Also will be covering StructureMap conventions (TypeScanners) and Type Interceptors&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Event Aggregator
+
+&lt;ul&gt;
+&lt;li&gt;using Events&lt;/li&gt;
+&lt;li&gt;Publish extension method&lt;/li&gt;
+&lt;li&gt;ISubscribe&lt;/li&gt;
+&lt;li&gt;Putting it all together with a Region Controller&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Commands
+
+&lt;ul&gt;
+&lt;li&gt;ICommand&lt;/li&gt;
+&lt;li&gt;Action / Delegate Command&lt;/li&gt;
+&lt;li&gt;Decorating with a Named Command&lt;/li&gt;
+&lt;li&gt;might be using commands with a convention&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Resource Locator
+
+&lt;ul&gt;
+&lt;li&gt;Resource Dictionary Convention&lt;/li&gt;
+&lt;li&gt;Image Convention&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;And anything else that comes up during our discussions&lt;/li&gt;
+&lt;li&gt;Potential additions:
+
+&lt;ul&gt;
+&lt;li&gt;Paul Stovell’s MicroModel&lt;/li&gt;
+&lt;li&gt;Dependency Property Inheritance&lt;/li&gt;
+&lt;li&gt;Attached Dep Property Behaviors&lt;/li&gt;
+&lt;li&gt;Blend Behaviors&lt;/li&gt;
+&lt;li&gt;Visual State Manager&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;We will be recording the session so have no fear if you can’t come or join us online.&lt;/p&gt;
+
+&lt;p&gt;I am very excited about the workshop! Its a great opportunity to share some stuff I’ve been doing with WPF. User groups and brown bags offer only limited exposure to these techniques. With this workshop we get to dive into code and get rapid interactions. I hope to see you there.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>The Goal</title>
@@ -824,640 +1118,6 @@ fileStream.Close();
 &lt;p&gt;Naturally the custom input binding is very simple and does not expose the Command Parameter nor the Command Target, etc. But the basic pattern is there so feel free to utilize and extend.&lt;/p&gt;
 
 &lt;p&gt;Happy coding!&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>ItemsSourceChanged Event using Attached Dependency Properties</title>
-    <link href="http://www.iamrookieone.com/blog/2009/08/05/items-source-changed/"/>
-    <updated>2009-08-05T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/08/05/items-source-changed</id>
-    <content type="html">&lt;p&gt;If you stumble across this blog, you might have been searching for the non-existent ItemsSourceChanged event on a ListBox or ListView in Wpf.&lt;/p&gt;
-
-&lt;p&gt;Yeah... it isn't there and it sucks.&lt;/p&gt;
-
-&lt;p&gt;But, there is a workable that I wouldn't define as a hack. More of a Wpf extension. :D&lt;/p&gt;
-
-&lt;p&gt;I am a huge fan of Attached Dependency Properties. They are a perfect tool to extend the functionality of closed controls. Attached Dependency Properties also circumvent the pain of created your own custom control.&lt;/p&gt;
-
-&lt;p&gt;I am going to use an attached dependency property to mimic an ItemsSource Changed event.&lt;/p&gt;
-
-&lt;p&gt;The full code :&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/// &amp;lt;summary&amp;gt;
-/// ItemsSourceChanged Behavior uses an Attached Dependency Property
-/// to add and raise a rotued event whenever an ItemsControl's ItemsSource property
-/// changes. Also looks for INotifyCollectionChanged on the ItemsSource and raises the
-/// event on every collection changed event
-/// &amp;lt;/summary&amp;gt;
-
-public static  class ItemsSourceChangedBehavior
-{
-  /// &amp;lt;summary&amp;gt;
-  /// ItemsSourceChanged Attached Dependency Property with Callback method
-  /// &amp;lt;/summary&amp;gt;
-  public static readonly DependencyProperty ItemsSourceChangedProperty =
-                                            DependencyProperty.RegisterAttached(&quot;ItemsSourceChanged&quot;,
-                                             typeof(bool), typeof(ItemsSourceChangedBehavior),
-                                             new FrameworkPropertyMetadata(false, OnItemsSourceChanged));
-
-  /// &amp;lt;summary&amp;gt;
-  /// Static Get method allowing easy Xaml usage and to simplify the
-  /// GetValue process
-  /// &amp;lt;/summary&amp;gt;
-  /// &amp;lt;param name=&quot;obj&quot;&amp;gt;The dependency obj.&amp;lt;/param&amp;gt;
-  /// &amp;lt;returns&amp;gt;True or False&amp;lt;/returns&amp;gt;
-  public static bool GetItemsSourceChanged(DependencyObject obj)
-  {
-    return (bool)obj.GetValue(ItemsSourceChangedProperty);
-  }
-
-  /// &amp;lt;summary&amp;gt;
-  /// Static Set method allowing easy Xaml usage and to simplify the
-  /// Setvalue process
-  /// &amp;lt;/summary&amp;gt;
-  /// &amp;lt;param name=&quot;obj&quot;&amp;gt;The obj.&amp;lt;/param&amp;gt;
-  /// &amp;lt;param name=&quot;value&quot;&amp;gt;if set to &amp;lt;c&amp;gt;true&amp;lt;/c&amp;gt; [value].&amp;lt;/param&amp;gt;
-  public static void SetItemsSourceChanged(DependencyObject obj, bool value)
-  {
-    obj.SetValue(ItemsSourceChangedProperty, value);
-  }
-
-  /// &amp;lt;summary&amp;gt;
-  /// Dependency Property Changed Call Back method. This will be called anytime
-  /// the ItemsSourceChangedProperty value changes on a Dependency Object
-  /// &amp;lt;/summary&amp;gt;
-  /// &amp;lt;param name=&quot;obj&quot;&amp;gt;The obj.&amp;lt;/param&amp;gt;
-  /// &amp;lt;param name=&quot;e&quot;&amp;gt;The &amp;lt;see cref=&quot;System.Windows.DependencyPropertyChangedEventArgs&quot;/&amp;gt; instance containing the event data.&amp;lt;/param&amp;gt;
-  private static void OnItemsSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-  {
-    ItemsControl itemsControl = obj as ItemsControl;
-
-    if (itemsControl == null)
-      return;
-
-    bool oldValue = (bool)e.OldValue;
-    bool newValue = (bool)e.NewValue;
-
-    if (!oldValue &amp;amp;&amp;amp; newValue) // If changed from false to true
-    {           
-      // Create a binding to the ItemsSourceProperty on the ItemsControl
-      Binding b = new Binding
-                      {
-                         Source = itemsControl,
-                         Path = new PropertyPath(ItemsControl.ItemsSourceProperty)
-                      };
-
-      // Since the ItemsSourceListenerProperty is now bound to the
-      // ItemsSourceProperty on the ItemsControl, whenever the 
-      // ItemsSourceProperty changes the ItemsSourceListenerProperty
-      // callback method will execute
-      itemsControl.SetBinding(ItemsSourceListenerProperty, b);
-    }
-    else if (oldValue &amp;amp;&amp;amp; !newValue) // If changed from true to false
-    {
-      // Clear Binding on the ItemsSourceListenerProperty
-      BindingOperations.ClearBinding(itemsControl, ItemsSourceListenerProperty);
-    }
-  }
-
-  #endregion
-
-  #region Items Source Listener Property
-
-  /// &amp;lt;summary&amp;gt;
-  /// The ItemsSourceListener Attached Dependency Property is a private property
-  /// the ItemsSourceChangedBehavior will use silently to bind to the ItemsControl
-  /// ItemsSourceProperty.
-  /// Once bound, the callback method will execute anytime the ItemsSource property changes
-  /// &amp;lt;/summary&amp;gt;
-  private static readonly DependencyProperty ItemsSourceListenerProperty =
-       DependencyProperty.RegisterAttached(&quot;ItemsSourceListener&quot;,
-                                           typeof(object), typeof(ItemsSourceChangedBehavior),
-                                           new FrameworkPropertyMetadata(null, OnItemsSourceListenerChanged));
-
-
-  /// &amp;lt;summary&amp;gt;
-  /// Dependency Property Changed Call Back method. This will be called anytime
-  /// the ItemsSourceListenerProperty value changes on a Dependency Object
-  /// &amp;lt;/summary&amp;gt;
-  /// &amp;lt;param name=&quot;obj&quot;&amp;gt;The obj.&amp;lt;/param&amp;gt;
-  /// &amp;lt;param name=&quot;e&quot;&amp;gt;The &amp;lt;see cref=&quot;System.Windows.DependencyPropertyChangedEventArgs&quot;/&amp;gt; instance containing the event data.&amp;lt;/param&amp;gt;
-  private static void OnItemsSourceListenerChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-  {
-    ItemsControl itemsControl = obj as ItemsControl;
-
-    if (itemsControl == null)
-      return; 
-
-   INotifyCollectionChanged collection = e.NewValue as INotifyCollectionChanged;
-
-   if (collection != null)
-   {
-     collection.CollectionChanged += delegate
-                                           {
-                                             itemsControl.RaiseEvent(new RoutedEventArgs(ItemsSourceChangedEvent));
-                                           };
-   }
-
-   if (GetItemsSourceChanged(itemsControl))
-     itemsControl.RaiseEvent(new RoutedEventArgs(ItemsSourceChangedEvent));
- }
-
- #endregion
-
- #region Items Source Changed Event
-
- /// &amp;lt;summary&amp;gt;
- /// Routed Event to raise whenever the ItemsSource changes on an ItemsControl
- /// &amp;lt;/summary&amp;gt;
- public static readonly RoutedEvent ItemsSourceChangedEvent =
-      EventManager.RegisterRoutedEvent(&quot;ItemsSourceChanged&quot;, 
-                                       RoutingStrategy.Bubble, 
-                                       typeof(RoutedEventHandler),
-                                       typeof(ItemsControl));
-
- #endregion
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;By setting the ItemsSourceChanged property on any ItemsControl to true, the ItemsSourceListener property will be bound to the ItemsSource property. The ItemsSourceListener callback will be executed anytime the ItemsSource changes and therefore can raise the ItemsSourceChanged routed event.&lt;/p&gt;
-
-&lt;p&gt;Also if the ItemsSource implements INotifyCollectionChanged, I added a delegate so that on the CollectionChanged event, the ItemsSourceChanged event will also be raised.&lt;/p&gt;
-
-&lt;p&gt;Feel free to use the code and adapt it to your needs.&lt;/p&gt;
-
-&lt;p&gt;Peace out!&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>New PC! Hello Win 7 and 64 bit goodness</title>
-    <link href="http://www.iamrookieone.com/blog/2009/08/04/new-pc/"/>
-    <updated>2009-08-04T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/08/04/new-pc</id>
-    <content type="html">&lt;p&gt;About 5 years ago I decided that I had enough of building my own PCs. It stopped being fun for me and became a chore. So at that time I came up with an experimental PC purchasing plan. I would spend $2k-$3k on a PC that will then last 3 years and then upgrade.&lt;/p&gt;
-
-&lt;p&gt;The plan worked great. So great in fact that my last PC lasted 5 years. :D&lt;/p&gt;
-
-&lt;p&gt;Its still a great PC. At the time I mostly gamed. Sure I was coding at work, but when I got home, I was gaming. Therefore, the specifications for the computer were gaming related. In end the PC’s specs were roughly : 3 Ghz intel p4; 3 gigs of ram; 512mb PCI-E x16 Nvidia&lt;/p&gt;
-
-&lt;p&gt;Still a great machine for gaming.&lt;/p&gt;
-
-&lt;p&gt;But now I spend near 100% of my time coding. When I do game, my friends and I all have xboxs. Its cheaper and easier to hook up online and play than a PC. At least I think so.&lt;/p&gt;
-
-&lt;p&gt;Now when I code, I have multiple Visual Studio sessions open, maybe streaming a video, maybe downloading files, etc. My poor single processor PC was under a very demanding load.&lt;/p&gt;
-
-&lt;p&gt;But riding in to save the day is my new PC I bought from Dell.&lt;/p&gt;
-
-&lt;p&gt;Its specs:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;XPS 730X, Intel Core3 I7-950 (3.06GHz, 8MB cache)&lt;/li&gt;
-&lt;li&gt;6GB Multi-Channel DDR3 at 1066MHZ (3x2GB DIMM)&lt;/li&gt;
-&lt;li&gt;SLi, Dual nVidia GeForce 9800G512MB&lt;/li&gt;
-&lt;li&gt;300GB Western Digital Velociraptor - SATA-II, 3GB/S 10000RPM, 16MB Cache&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;Niiiiice. :) The thing is freaking enormous.&lt;/p&gt;
-
-&lt;p&gt;This is my first PC with a multiple core and with a 64 bit processor (and OS).&lt;/p&gt;
-
-&lt;p&gt;So far tonight I’ve done nothing but install Win 7 and an assortment of applications. Its amazing how many little addons and applications you forget you use on a daily basis.&lt;/p&gt;
-
-&lt;p&gt;I am not an OS guy. I don’t really care for command lines nor all the super duper features. I just like things to work. I am one of the few out in there that liked Vista and didn’t find anything wrong with it.&lt;/p&gt;
-
-&lt;p&gt;But Win 7 is supposedly da bomb so why not upgrade? The most I’ve noticed about Windows 7 is the new taskbar (which I like). I think the main trend I’ve noticed going from Vista to Win 7 is that the most common tasks I do are closer… if that makes sense. So things that were 2 clicks away are now 1 click away.&lt;/p&gt;
-
-&lt;p&gt;I’m going to get back to playing with my new toy. I look forward to the many years of development I will get out of this machine.&lt;/p&gt;
-
-&lt;p&gt;Life is good.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Acase().for(patternType.FluentInterfaces).create()</title>
-    <link href="http://www.iamrookieone.com/blog/2009/08/03/fluent-interfaces/"/>
-    <updated>2009-08-03T15:24:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/08/03/fluent-interfaces</id>
-    <content type="html">&lt;p&gt;When I was first exposed to the idea of fluent interfaces my response was… big flipping deal.&lt;/p&gt;
-
-&lt;p&gt;It wasn’t until I actively started using fluent interfaces in my code did I begin to see their power and elegance.&lt;/p&gt;
-
-&lt;p&gt;What is a fluent interface? Here is the obligatory link to wikipedia ;)&lt;/p&gt;
-
-&lt;p&gt;In simple terms, its returning a type instead of void in order to achieve method chaining.&lt;/p&gt;
-
-&lt;p&gt;The end goal of the method chaining is to provide a more readable interface and code.&lt;/p&gt;
-
-&lt;p&gt;First, does it break the Law of Demeter?&lt;/p&gt;
-
-&lt;p&gt;Law of Demeter doesn’t equal the number of periods. I am of the opinion fluent interfaces do not violate the Law of Demeter.&lt;/p&gt;
-
-&lt;p&gt;What is LoD? Another link to wiki and here is a link to a stack overflow on this very subject! :)&lt;/p&gt;
-
-&lt;p&gt;To me, Law of Demeter is about restricting communication between objects.&lt;/p&gt;
-
-&lt;p&gt;A common violation of LoD (imho) is the exposure of a list property on an object. I believe this serves as a good example of LoD as well as being an example on how to make a fluent interface. :)&lt;/p&gt;
-
-&lt;p&gt;A Person object has a name and a list of friends.&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class Person
-{
-  public string Name { get; set; }
-  public List&amp;lt;Person&amp;gt; Friends { get; set; }
-
-  public Person()
-  {
-    Friends = new List&amp;lt;Person&amp;gt;();
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;I could then add friends by…&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var roger = new Person{ Name=&quot;Roger&quot; };
-roger.Friends.Add(new Person { Name = &quot;Eddie&quot; });
-roger.Friends.Add(new Person { Name = &quot;Freddie&quot; });
-roger.Friends.Add(new Person { Name = &quot;Gordie&quot; });
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Now this is pretty typical, so what’s the problem?&lt;/p&gt;
-
-&lt;p&gt;Well my code knows WAY too much about Person. I know it has a list of friends and if they change that list to say a dictionary, I am hosed.&lt;/p&gt;
-
-&lt;p&gt;Not only that, but poor Person class… people can add friends to his collection without him every knowing. What if some additional logic needs to be done when adding a friend?&lt;/p&gt;
-
-&lt;p&gt;What if the person wants to record the birth date of every friend so they can send out birthday cards? Person is SOL.&lt;/p&gt;
-
-&lt;p&gt;As for Law of Demeter, my code is using the Person object to communicate through to the List&lt;Person&gt;. I am exposing my code to changes in Person.&lt;/p&gt;
-
-&lt;p&gt;Let’s change Person to eliminate this problem.&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class Person2
-{
-  public string Name { get; set; }
-  private readonly List&amp;lt;Person2&amp;gt; _friends;
-
-  public Person2()
-  {
-    _friends = new List&amp;lt;Person2&amp;gt;();
-  }
-
-  public void AddFriend(Person2 friend)
-  {
-    _friends.Add(friend);
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Now the only way to add a friend is through Person. Yippie!&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var roger2 = new Person2 {Name = &quot;Roger&quot;};
-roger2.AddFriend(new Person2 { Name = &quot;Eddie&quot; });
-roger2.AddFriend(new Person2 { Name = &quot;Freddie&quot; });
-roger2.AddFriend(new Person2 { Name = &quot;Gordie&quot; });
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;If I wanted to make this a fluent interface all I would need to do is instead of returning void, return the Person class.&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class Person3
-{
-  public string Name { get; set; }
-  private readonly List&amp;lt;Person3&amp;gt; _friends;
-
-  public Person3()
-  {
-    _friends = new List&amp;lt;Person3&amp;gt;();
-  }
-
-  public Person3 AddFriend(Person3 friend)
-  {
-    _friends.Add(friend);
-   return this;
- }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Now I can do the same logic like…&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var roger3 = new Person3 { Name = &quot;Roger&quot; }
-              .AddFriend(new Person3 { Name = &quot;Eddie&quot; })
-              .AddFriend(new Person3 { Name = &quot;Freddie&quot; })
-              .AddFriend(new Person3 { Name = &quot;Gordie&quot; });
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;That is pretty cool, but fluent interfaces really shine with the builder pattern.&lt;/p&gt;
-
-&lt;p&gt;This time around I want to force construction of a person through a builder and have the builder use a fluent interface. Notice my Person’s constructor and fields are private. I embed the builder class within the Person class so the builder has access to the constructor and fields. In this manner only my builder class has access to constructing a person. My builder can now act as an anti-corruption layer for Person.&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class Person4
-{
-  private string _name;
-  private List&amp;lt;Person4&amp;gt; _friends;
-
-  private Person4()
-  {
-    _friends = new List&amp;lt;Person4&amp;gt;();
-  }
-
-  public Person4 AddFriend(Person4 friend)
-  {
-    _friends.Add(friend);
-    return this;
-  }
-
-  public static PersonBuilder createAPerson()
-  {
-    return new PersonBuilder();
-  }
-
-  public class PersonBuilder
-  {
-    private Person4 _person;
-    public PersonBuilder()
-    {
-      _person = new Person4();
-    }
-
-    public PersonBuilder named(string name)
-    {
-      _person._name = name;
-      return this;
-    }
-
-    public PersonBuilder withFriend(Person4 friend)
-    {
-      _person.AddFriend(friend);
-      return this;
-    }
-
-    public PersonBuilder withaFriendNamed(string name)
-    {
-      var friend = createAPerson().named(name).finish();
-      _person.AddFriend(friend);
-      return this;
-    }
-
-    public Person4 finish()
-    {
-      return _person;
-    }
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Now to create Roger and his friends I do..&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var roger4 = Person4.createAPerson()
-                     .named(&quot;Roger&quot;)
-                     .withaFriendNamed(&quot;Eddie&quot;)
-                     .withaFriendNamed(&quot;Freddie&quot;)
-                     .withaFriendNamed(&quot;Gordie&quot;)
-                     .finish();   
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;It’s a simple example but maybe it sparked some ideas on how to use fluent interfaces to chain methods and make your code more approachable to people without Computer Science degrees. :D&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Toggling Read Only with WPF</title>
-    <link href="http://www.iamrookieone.com/blog/2009/08/03/toggling-read-only-with-WPF/"/>
-    <updated>2009-08-03T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/08/03/toggling-read-only-with-WPF</id>
-    <content type="html">&lt;p&gt;Ayende tweeted a brief code snippet of some WPF he threw together (well I assume he threw it together).&lt;/p&gt;
-
-&lt;p&gt;You can see the code snippet here : &lt;a href=&quot;http://pastie.org/568259&quot;&gt;http://pastie.org/568259&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;He asked : Someone PLEASE tell me there is a better way than this (WPF)&lt;/p&gt;
-
-&lt;p&gt;I tweeted a brief snippet response to improve that tiny bit. The snippet can be found here : &lt;a href=&quot;http://codesnippets.joyent.com/posts/show/2221&quot;&gt;http://codesnippets.joyent.com/posts/show/2221&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;But I couldn’t just leave it at that. I wanted to show a different approach to solving the same problem.  * A later tweet explained his problem was more a datacontext issue, which the snippet I provided should fix. This post does take a different look at how to approach handling read only controls.&lt;/p&gt;
-
-&lt;p&gt;How can we make a control ‘read only’ through binding?&lt;/p&gt;
-
-&lt;p&gt;The solution can be found here on my Git Hub Repository : &lt;a href=&quot;http://github.com/RookieOne/WpfTogglingReadOnly&quot;&gt;http://github.com/RookieOne/WpfTogglingReadOnly&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Ignoring all the other machinations, the money xaml is in the TextBoxStyle found in the Styles\TextBoxStyles.xaml resource dictionary.&lt;/p&gt;
-
-&lt;p&gt;``` xml&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;Style x:Key=&quot;TextBoxStyle&quot; TargetType=&quot;TextBox&quot;&amp;gt;        
-
-    &amp;lt;Style.Triggers&amp;gt;
-
-        &amp;lt;Trigger Property=&quot;AttachedBehaviors:ReadOnlyBehavior.IsReadOnly&quot; Value=&quot;True&quot;&amp;gt;
-
-            &amp;lt;!-- Readonly Template --&amp;gt;
-            &amp;lt;Setter Property=&quot;Template&quot;&amp;gt;
-                &amp;lt;Setter.Value&amp;gt;
-                    &amp;lt;ControlTemplate TargetType=&quot;TextBox&quot;&amp;gt;
-                        &amp;lt;TextBlock Text=&quot;{TemplateBinding Text}&quot; /&amp;gt;
-                    &amp;lt;/ControlTemplate&amp;gt;
-                &amp;lt;/Setter.Value&amp;gt;
-            &amp;lt;/Setter&amp;gt;
-
-        &amp;lt;/Trigger&amp;gt;
-
-    &amp;lt;/Style.Triggers&amp;gt;
-
-&amp;lt;/Style&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;As you can see I use the IsReadOnly property on the base view model as a data trigger and then completely swap out the control template for the text box. This allows for complete customization of the read only look. It also pushes this functionality out into a style to be reused through the entire application.&lt;/p&gt;
-
-&lt;p&gt;Other things to note with the project (for those unfamiliar with the following practices):&lt;/p&gt;
-
-&lt;h3&gt;1. Data Templates as Views&lt;/h3&gt;
-
-&lt;p&gt;``` xml&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;DataTemplate DataType=&quot;{x:Type PersonView:PersonViewModel}&quot;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;So whenever WPF tries to resolve the PersonViewModel in a container, it will use this DataTemplate since I did not provide a key but only a DataType.&lt;/p&gt;
-
-&lt;p&gt;So in Window1 I can do…&lt;/p&gt;
-
-&lt;p&gt;``` xml&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;ContentControl&amp;gt;
-    &amp;lt;PersonView:PersonViewModel /&amp;gt;
-&amp;lt;/ContentControl&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Again this is a very simple scenario so I am ignoring any presentation patterns on how the ViewModel is placed or ‘shown’. Also ignoring how dependencies can be resolved, etc.&lt;/p&gt;
-
-&lt;p&gt;And even though this is a content control, this works for items controls as well. So consider a stack of ‘views’. You could be accomplish this simply by placing a collection of ViewModels in an ItemsControl.&lt;/p&gt;
-
-&lt;p&gt;But really… that’s for another post.&lt;/p&gt;
-
-&lt;h3&gt;2. Expression for INotifyPropertyChanged&lt;/h3&gt;
-
-&lt;p&gt;I am also using a LambdaExpression to implement INotifyPropertyChanged. Essentially achieving safe notification and eliminating those nasty magic strings.&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public string FirstName
-{
-    get { return _firstName; }
-    set
-    {
-        _firstName = value;
-        OnPropertyChanged(this, m =&amp;gt; m.FirstName);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Anyway.. that was a quick project I threw together. I hope it was helpful.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Hello Open Rasta</title>
-    <link href="http://www.iamrookieone.com/blog/2009/08/03/hello-open-rasta/"/>
-    <updated>2009-08-03T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/08/03/hello-open-rasta</id>
-    <content type="html">&lt;p&gt;So Ryan, the apostle of everything on the web, has been spreading the gospel of Open Rasta for months. Tonight I decided that finally, I should download and give this fantastical framework a shot.&lt;/p&gt;
-
-&lt;p&gt;For an explanation on what OpenRasta is and is not, I shall direct you to their sites:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://trac.caffeine-it.com/openrasta/wiki/Doc&quot;&gt;Open Rasta Documentation&lt;/a&gt;
-&lt;a href=&quot;http://www.ohloh.net/p/openrasta&quot;&gt;Open Rasta Download Home&lt;/a&gt;
-What I am going to do is just describe my experience trying their framework for the first time.&lt;/p&gt;
-
-&lt;p&gt;I am a person that likes to learn by trying so I immediately jumped to the ‘creating your first OpenRasta website’ (&lt;a href=&quot;http://svn.caffeine-it.com/openrasta/trunk/doc/content/Tutorials/Create-First-Site.html&quot;&gt;here&lt;/a&gt;). I have looked at some of Ryan’s code and have survived several conversations with Ryan over the framework. ;) I believe that is enough preparation for at least a simple tutorial.&lt;/p&gt;
-
-&lt;p&gt;Well I go to the modifying the web.config section and was left with a broken solution. Apparently from the time the tutorial was written and the time I downloaded the version 2.0.2039.312, the handlers and modules all moved to another assembly. I had a gut feeling it moved and when I talked to Ryan, he confirmed my suspicions. Supposedly he is going to try and update the tutorial.&lt;/p&gt;
-
-&lt;p&gt;In the meantime, just change ….&quot;OpenRasta.Web.OpenRastaHandler, OpenRasta&quot;&lt;/p&gt;
-
-&lt;p&gt;to… &quot;OpenRasta.Hosting.AspNet.OpenRastaHandler, OpenRasta.Hosting.AspNet&quot;&lt;/p&gt;
-
-&lt;p&gt;So change the assembly reference from the OpenRasta.dll to the OpenRasta.Hosting.AspNet.dll&lt;/p&gt;
-
-&lt;p&gt;I assume if you are reading this you have the skill set to modify said correction for the other references.&lt;/p&gt;
-
-&lt;p&gt;After that I breezed through the creation of the ‘Home’ resource and the ‘Home’ handler. No duh? Any programmer can make a couple of classes. :)&lt;/p&gt;
-
-&lt;p&gt;I’m at the configuration section and I have to say, I love the fluent interface. Anyone who has talked to me in the past 6 months knows I love the pattern. It instantly makes any framework extremely approachable.&lt;/p&gt;
-
-&lt;p&gt;The tutorial has you making a manual configuration. I tried to find an auto configuration just using some intellisense with no luck. I will investigate this further. If I was going to use OpenRasta I would definitely want a convention based solution. Even with a nice fluent interface, I really don’t want to manually create all my mappings by hand.&lt;/p&gt;
-
-&lt;p&gt;But there is something to be said for simply creating a mapping like :&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ResourceSpace.Has
-    .ResourcesOfType&amp;lt;Home&amp;gt;()
-    .AtUri(&quot;/home&quot;)
-    .HandledBy&amp;lt;HomeHandler&amp;gt;();
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;I ran the app expecting the 405 method error as the tutorial predicts.. and got an empty page. I was using FireFox, so I jumped over to IE and was then greeted by the 405 error. I assume FireFox is either handling the problem gracefully or I don’t have some settings setup to display these errors. /shrug&lt;/p&gt;
-
-&lt;p&gt;So then I created my ‘Get’ method on my HomeHandler. One of the things that did attract me to OpenRasta was the POCO handlers. I’ve grown to appreciate very clean code with some acceptable conventions. Just makes life easier. I can focus on the domain problem and not the intricacies of any given framework.&lt;/p&gt;
-
-&lt;p&gt;Most of this seemingly new re-invention of HTTP as ESB, REST, Atom.. etc is interesting in that its a reexamining of a technology we use all the time. I haven’t done web development in roughly 3 years. The majority of my experience is in smart client apps. That is just the way my career and projects played out for me. The websites I created were always very basic and probably crap if judged by web developer gurus.&lt;/p&gt;
-
-&lt;p&gt;Anyway.&lt;/p&gt;
-
-&lt;p&gt;We click links and magically we get a web page. We don’t really think much about it. Sort of like turning on a light switch or starting your car. We just expect things to work and don’t really worry about it. How many drivers can actually explain a combustion engine?&lt;/p&gt;
-
-&lt;p&gt;There is a lot going on in the background to make the web work. This new (new to me at least) area of development is leveraging the tech the way it was supposed to be used (if I am to believe the pioneers in this arena). A lot of this is a change of perspective. And with any change of perspective it can take awhile to make the transition.&lt;/p&gt;
-
-&lt;p&gt;After that side trip down my ramblings, we come back to me having a handler with a Get method. Now I have graduated to a 406 error (as expected by the tutorial).&lt;/p&gt;
-
-&lt;p&gt;I then created my view as the tutorial suggested. Now upon trying to fluently configure.. I ran into a snag. Again the tutorial is out dated (which is fine for an open source and still growing framework).&lt;/p&gt;
-
-&lt;p&gt;I had to add the “OpenRasta.Codecs.WebForms.dll” to the solution.&lt;/p&gt;
-
-&lt;p&gt;Also the fluent configuration suggested is…&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ResourceSpace.Has.ResourcesOfType&amp;lt;Home&amp;gt;()
-        .AtUri(&quot;/home&quot;)
-        .HandledBy&amp;lt;HomeHandler&amp;gt;()
-        .AndRendededByAspx(&quot;~/Views/HomeView.aspx&quot;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;But since the AndRendededByAspx is obselete, the code should now be:&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ResourceSpace.Has.ResourcesOfType&amp;lt;Home&amp;gt;()
-                    .AtUri(&quot;/home&quot;)
-                    .HandledBy&amp;lt;HomeHandler&amp;gt;()
-                    .RenderedByAspx(&quot;~/Views/HomeView.aspx&quot;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;I then continued the tutorial until I had my Home View that displayed my lovely welcome message.&lt;/p&gt;
-
-&lt;p&gt;Yay! I got my first Open Rasta page to work. :)&lt;/p&gt;
-
-&lt;p&gt;Feel free to investigate my project at my Git Hub repository:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://github.com/RookieOne/OpenRastaExperiment/tree/TutorialCompletion&quot;&gt;http://github.com/RookieOne/OpenRastaExperiment/tree/TutorialCompletion&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I’m going to be continuing to change the master branch but the TutorialCompletion branch should remain unchanged.&lt;/p&gt;
-
-&lt;p&gt;SO check out OpenRasta and their (and my) tutorial. Its short and is a great window into viewing the web in a slightly different manner.&lt;/p&gt;
-
-&lt;p&gt;Thanks for your time!&lt;/p&gt;
 </content>
   </entry>
   

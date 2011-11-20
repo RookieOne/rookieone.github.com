@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>I am RookieOne: Creating my first TFS 2010 Build</title>
+  <meta name="author" content="Jonathan Birkholz">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://www.iamrookieone.com/blog/2010/02/23/creating-first-tfs-build/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="I am RookieOne" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">I am RookieOne</a></h1>
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:www.iamrookieone.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Creating My First TFS 2010 Build</h1>
+    
+    
+
+
+
+
+<time datetime="2010-02-23 00:00:00 -0600" pubdate  updated >Feb 23<span>rd</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+<div class="entry-content"><p>My work this iteration on my project is setting up a CI build and then migrating all our POC code to the solution.</p>
+
+<p>Right now I am creating a simple build as practice for setting up the actual build.</p>
+
+<p>I am approaching this from a complete n00b when it comes to creating a TFS build. I have created builds before but they have been small and just simple MSBuild files. This is the first time I am using TFS and creating not only a build but a continuous integration environment.</p>
+
+<p>I created a Team Project and added a simple C# project to source control. I then looked at the Team Explorer and noticed that there is a Builds section under my project. Intuitively I right clicked and found where I can create a New Build Definition.</p>
+
+<p><img class='' src='/images/tfs_thumbnail1.png' width='' height='' alt=''New Build Definition'' title=''New Build Definition''></p>
+
+<p>I looked at the options available to me on the Build Window and noticed a Trigger section. Investigating the Trigger section allowed me to select what triggers this build. Oh look a CI trigger that builds after each check-in!</p>
+
+<p><img class='' src='/images/tfs_thumbnail2.png' width='' height='' alt=''Continuous Integration'' title=''Continuous Integration''></p>
+
+<p>I then had to set an output folder so I created a folder on our build machine and set the folder to that.</p>
+
+<p><img class='' src='/images/tfs_thumbnail3.png' width='' height='' alt=''Set output folder'' title=''Set output folder''></p>
+
+<p>And then I was done.</p>
+
+<p>I do have to say we already had a TFS Build Controller setup so I can’t comment on that for now.</p>
+
+<p>I then ran a couple of experiments. I first added a class foo to my project and checked in. I then double clicked on my Build under the TFS explorer and was given two reports. One report showed the current queued builds and the other had a list of the completed builds.</p>
+
+<p>After I ran my first successful build I then made a compile error and checked it in. I then had a failed build.</p>
+
+<p><img class='' src='/images/tfs_thumbnail4.png' width='' height='' alt=''Failed build'' title=''Failed build''></p>
+
+<p>When I double clicked the failed build I got this UI.</p>
+
+<p><img class='' src='/images/tfs_thumbnail5.png' width='' height='' alt=''Failed build report'' title=''Failed build report''></p>
+
+<p>I then created a test project and then made a failing test. Now my build looks like this:</p>
+
+<p><img class='' src='/images/tfs_thumbnail6.png' width='' height='' alt=''Build with failing tests'' title=''Build with failing tests''></p>
+
+<p>And when I double clicked I got this report.</p>
+
+<p><img class='' src='/images/tfs_thumbnail7.png' width='' height='' alt=''Build with failing tests report'' title=''Build with failing tests report''></p>
+
+<p>So that was a real quick run through with creating a CI build with TFS 2010. I have to say… I was surprised that it was that easy. I am continuing my work with the build but it looks like the simple scenario was incredibly easy!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jonathan Birkholz</span></span>
+
+      
+
+
+
+
+<time datetime="2010-02-23 00:00:00 -0600" pubdate  updated >Feb 23<span>rd</span>, 2010</time>
+
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/TFS/'>TFS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.iamrookieone.com/blog/2010/02/23/creating-first-tfs-build/" data-via="" data-counturl="http://www.iamrookieone.com/blog/2010/02/23/creating-first-tfs-build/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2010/02/23/creating-first-tfs-build/">Creating my first TFS 2010 Build</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/02/18/isubscribe/">ISubscribe</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/02/18/convention_over_configuration/">CodeCast #68 : Convention over Configuration</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/02/17/view-viewmodel-viewregistry/">View + ViewModel + ViewRegistry</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/02/17/adv-wpf-workshop/">Advanced WPF Workshop</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Jonathan Birkholz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

@@ -86,6 +86,443 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2010/02/23/creating-first-tfs-build/">Creating My First TFS 2010 Build</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-02-23 00:00:00 -0600" pubdate  updated >Feb 23<span>rd</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>My work this iteration on my project is setting up a CI build and then migrating all our POC code to the solution.</p>
+
+<p>Right now I am creating a simple build as practice for setting up the actual build.</p>
+
+<p>I am approaching this from a complete n00b when it comes to creating a TFS build. I have created builds before but they have been small and just simple MSBuild files. This is the first time I am using TFS and creating not only a build but a continuous integration environment.</p>
+
+<p>I created a Team Project and added a simple C# project to source control. I then looked at the Team Explorer and noticed that there is a Builds section under my project. Intuitively I right clicked and found where I can create a New Build Definition.</p>
+
+<p><img class='' src='/images/tfs_thumbnail1.png' width='' height='' alt=''New Build Definition'' title=''New Build Definition''></p>
+
+<p>I looked at the options available to me on the Build Window and noticed a Trigger section. Investigating the Trigger section allowed me to select what triggers this build. Oh look a CI trigger that builds after each check-in!</p>
+
+<p><img class='' src='/images/tfs_thumbnail2.png' width='' height='' alt=''Continuous Integration'' title=''Continuous Integration''></p>
+
+<p>I then had to set an output folder so I created a folder on our build machine and set the folder to that.</p>
+
+<p><img class='' src='/images/tfs_thumbnail3.png' width='' height='' alt=''Set output folder'' title=''Set output folder''></p>
+
+<p>And then I was done.</p>
+
+<p>I do have to say we already had a TFS Build Controller setup so I can’t comment on that for now.</p>
+
+<p>I then ran a couple of experiments. I first added a class foo to my project and checked in. I then double clicked on my Build under the TFS explorer and was given two reports. One report showed the current queued builds and the other had a list of the completed builds.</p>
+
+<p>After I ran my first successful build I then made a compile error and checked it in. I then had a failed build.</p>
+
+<p><img class='' src='/images/tfs_thumbnail4.png' width='' height='' alt=''Failed build'' title=''Failed build''></p>
+
+<p>When I double clicked the failed build I got this UI.</p>
+
+<p><img class='' src='/images/tfs_thumbnail5.png' width='' height='' alt=''Failed build report'' title=''Failed build report''></p>
+
+<p>I then created a test project and then made a failing test. Now my build looks like this:</p>
+
+<p><img class='' src='/images/tfs_thumbnail6.png' width='' height='' alt=''Build with failing tests'' title=''Build with failing tests''></p>
+
+<p>And when I double clicked I got this report.</p>
+
+<p><img class='' src='/images/tfs_thumbnail7.png' width='' height='' alt=''Build with failing tests report'' title=''Build with failing tests report''></p>
+
+<p>So that was a real quick run through with creating a CI build with TFS 2010. I have to say… I was surprised that it was that easy. I am continuing my work with the build but it looks like the simple scenario was incredibly easy!</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/02/18/isubscribe/">ISubscribe</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-02-18 00:00:00 -0600" pubdate  updated >Feb 18<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>I believe Jimmy Bogard has a similar technique (IHandler<T>) with ASP .Net MVC but I thought I would still share the convention I’ve been using to wire up subscriptions to the Prism Event Aggregator.</p>
+
+<p>Whenever an object is built with StructureMap, it goes through all the TypeInterceptors. I have a SubscriptionTypeInterceptor:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">SubscriptionInterceptor</span> <span class="p">:</span> <span class="n">TypeInterceptor</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">object</span> <span class="nf">Process</span><span class="p">(</span><span class="kt">object</span> <span class="n">target</span><span class="p">,</span> <span class="n">IContext</span> <span class="n">context</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">eventAggregator</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IEventAggregator</span><span class="p">&gt;();</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="c1">// Get interface ISubscribe&lt;E&gt;</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">interfaces</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">GetInterfaces</span><span class="p">().</span><span class="n">Where</span><span class="p">(</span><span class="n">i</span> <span class="p">=&gt;</span> <span class="n">i</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">&quot;ISubscribe&quot;</span><span class="p">));</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">foreach</span> <span class="p">(</span><span class="n">var</span> <span class="n">type</span> <span class="k">in</span> <span class="n">interfaces</span><span class="p">)</span>
+</div><div class='line'>        <span class="p">{</span>
+</div><div class='line'>            <span class="c1">// typeof(E)</span>
+</div><div class='line'>            <span class="n">var</span> <span class="n">eventType</span> <span class="p">=</span> <span class="n">type</span><span class="p">.</span><span class="n">GetGenericArguments</span><span class="p">()[</span><span class="m">0</span><span class="p">];</span>
+</div><div class='line'>
+</div><div class='line'>            <span class="n">var</span> <span class="n">setupMethod</span> <span class="p">=</span> <span class="n">GetType</span><span class="p">().</span><span class="n">GetMethod</span><span class="p">(</span><span class="s">&quot;Setup&quot;</span><span class="p">);</span>
+</div><div class='line'>            <span class="n">setupMethod</span><span class="p">.</span><span class="n">MakeGenericMethod</span><span class="p">(</span><span class="n">eventType</span><span class="p">).</span><span class="n">Invoke</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">target</span><span class="p">,</span> <span class="n">eventAggregator</span> <span class="p">});</span>
+</div><div class='line'>        <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">return</span> <span class="n">target</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">bool</span> <span class="nf">MatchesType</span><span class="p">(</span><span class="n">Type</span> <span class="n">type</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="k">return</span> <span class="n">type</span><span class="p">.</span><span class="n">ImplementsInterfaceTemplate</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">ISubscribe</span><span class="p">&lt;&gt;));</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="n">Setup</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">ISubscribe</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">subscriber</span><span class="p">,</span> <span class="n">IEventAggregator</span> <span class="n">eventAggregator</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">eventAggregator</span>
+</div><div class='line'>            <span class="p">.</span><span class="n">GetEvent</span><span class="p">&lt;</span><span class="n">CompositePresentationEvent</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;()</span>
+</div><div class='line'>            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">subscriber</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>So it finds all the ISubscribe<T> interfaces the target implements and then subscribes the target to the event T in the event aggregator.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">ISubscribe</span><span class="p">&lt;</span><span class="n">E</span><span class="p">&gt;</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="n">E</span> <span class="n">e</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>A simple example of usage:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">SecurityController</span> <span class="p">:</span> <span class="n">IController</span><span class="p">,</span>
+</div><div class='line'>                                  <span class="n">ISubscribe</span><span class="p">&lt;</span><span class="n">RequestUserLoginEvent</span><span class="p">&gt;</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="n">RequestUserLoginEvent</span> <span class="n">e</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">Publish</span><span class="p">.</span><span class="n">Event</span><span class="p">().</span><span class="n">ShowModal</span><span class="p">&lt;</span><span class="n">IRequestUserLoginViewModel</span><span class="p">&gt;();</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/02/18/convention_over_configuration/">CodeCast #68 : Convention Over Configuration</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-02-18 00:00:00 -0600" pubdate  updated >Feb 18<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>I recorded a podcast with Markus and Ken on Tuesday and it was published last night. :)</p>
+
+<p>We talked about Convention over Configuration using tools like Structure Map, PostSharp, Prism, etc</p>
+
+<p>You can download the podcast using itunes or online at:</p>
+
+<p><a href="http://www.code-magazine.com/codecast/index.aspx?messageid=0001bf99-1394-45c2-8949-388c673ac7a5">http://www.code-magazine.com/codecast/index.aspx?messageid=0001bf99-1394-45c2-8949-388c673ac7a5</a></p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/02/17/view-viewmodel-viewregistry/">View + ViewModel + ViewRegistry</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-02-17 00:00:00 -0600" pubdate  updated >Feb 17<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>In preparation for the Advanced WPF Workshop on Saturday Feb 20th, I thought I would throw together some blog posts around some techniques / code I will be sharing. JP asked the other day whether Views should have references to their ViewModels or should ViewModels have references to Views. Unfortunately twitter is a great medium for asking this question but not the best medium for answering the question.</p>
+
+<p>I am going to try using the dry marker board as a form of communication with my blogs. I have little patience for lining up pretty lines and colored boxes with Visio or Power Point. A dry marker board is fast and allows for a free flowing expression of my ideas.</p>
+
+<p>Let me try to diagram out how I currently manage my Views and ViewModels.</p>
+
+<p><img class='' src='/images/view_viewmodel_viewregistry_whiteboard.jpg' width='' height='' alt=''View ViewModel ViewRegistry Whiteboard'' title=''View ViewModel ViewRegistry Whiteboard''></p>
+
+<ol>
+<li>We ask the StructureMap container for the ViewModel</li>
+<li>The VM instance is intercepted by a ViewModelTypeInterceptor</li>
+<li>Inside the VMTypeInterceptor
+
+<ol>
+<li>Get the V for out VM from the container</li>
+<li>Get the ViewRegistry from the container</li>
+<li>Register the V with the VM in the ViewRegistry</li>
+<li>Return the VM</li>
+</ol>
+</li>
+<li>And finally our VM is returned being registered with a V in the ViewRegistry</li>
+</ol>
+
+
+<p>In short my ViewModel has no reference to my View, my View has no reference to my ViewModel (beyond setting the DataContext), and my View Registry registers the mappings between View and ViewModel.</p>
+
+<p>The best code to look for this is in the ViewModelInterceptor:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">ViewModelInterceptor</span> <span class="p">:</span> <span class="n">TypeInterceptor</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">object</span> <span class="nf">Process</span><span class="p">(</span><span class="kt">object</span> <span class="n">target</span><span class="p">,</span> <span class="n">IContext</span> <span class="n">context</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">name</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="n">var</span> <span class="n">view</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IView</span><span class="p">&gt;(</span><span class="n">name</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="n">context</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IViewRegistry</span><span class="p">&gt;()</span>
+</div><div class='line'>            <span class="p">.</span><span class="n">RegisterViewWith</span><span class="p">(</span><span class="n">target</span> <span class="k">as</span> <span class="n">IViewModel</span><span class="p">,</span> <span class="n">view</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">return</span> <span class="n">target</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">bool</span> <span class="nf">MatchesType</span><span class="p">(</span><span class="n">Type</span> <span class="n">type</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="k">return</span> <span class="n">type</span><span class="p">.</span><span class="n">CanBeCastTo</span><span class="p">(</span><span class="k">typeof</span> <span class="p">(</span><span class="n">IViewModel</span><span class="p">));</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/02/17/adv-wpf-workshop/">Advanced WPF Workshop</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-02-17 00:00:00 -0600" pubdate  updated >Feb 17<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>On February 20th from 9 am (central) until we get bored… I guess 1pm, we will be having a free Advanced WPF Workshop here at EPS.</p>
+
+<p>Let me emphasize ….</p>
+
+<h2>FREE!!!!!!</h2>
+
+<p>When : Feb 20th 9am - 1pm+</p>
+
+<p>Where : EPS Office</p>
+
+<p>6605 Cypresswood Dr, Suite 300
+Spring, TX 77379</p>
+
+<iframe height="350" marginheight="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=6605+cypresswood+dr+sprint+tx&amp;sll=37.0625,-95.677068&amp;sspn=64.792576,135.263672&amp;ie=UTF8&amp;hq=&amp;hnear=6605+Cypresswood+Dr,+Spring,+Harris,+Texas+77379&amp;z=17&amp;ll=30.014289,-95.507411&amp;output=embed" frameborder="0" width="425" marginwidth="0" scrolling="no"></iframe>
+
+
+<p>And online at : https://www2.gotomeeting.com/register/902909498</p>
+
+<p>There will be lunch which at the moment is BBQ, but I might change my mind. ;)</p>
+
+<p>Currently the agenda looks like:</p>
+
+<ul>
+<li>INotifyPropertyChange
+
+<ul>
+<li>Normal</li>
+<li>Type Safe</li>
+<li>Dynamic Proxy</li>
+<li>AOP</li>
+</ul>
+</li>
+<li>View &amp; ViewModel
+
+<ul>
+<li>Typical methods</li>
+<li>IView extensions</li>
+<li>IView<VM></li>
+<li>ViewRegistry</li>
+<li>Also will be covering StructureMap conventions (TypeScanners) and Type Interceptors</li>
+</ul>
+</li>
+<li>Event Aggregator
+
+<ul>
+<li>using Events</li>
+<li>Publish extension method</li>
+<li>ISubscribe</li>
+<li>Putting it all together with a Region Controller</li>
+</ul>
+</li>
+<li>Commands
+
+<ul>
+<li>ICommand</li>
+<li>Action / Delegate Command</li>
+<li>Decorating with a Named Command</li>
+<li>might be using commands with a convention</li>
+</ul>
+</li>
+<li>Resource Locator
+
+<ul>
+<li>Resource Dictionary Convention</li>
+<li>Image Convention</li>
+</ul>
+</li>
+<li>And anything else that comes up during our discussions</li>
+<li>Potential additions:
+
+<ul>
+<li>Paul Stovell’s MicroModel</li>
+<li>Dependency Property Inheritance</li>
+<li>Attached Dep Property Behaviors</li>
+<li>Blend Behaviors</li>
+<li>Visual State Manager</li>
+</ul>
+</li>
+</ul>
+
+
+<p>We will be recording the session so have no fear if you can’t come or join us online.</p>
+
+<p>I am very excited about the workshop! Its a great opportunity to share some stuff I’ve been doing with WPF. User groups and brown bags offer only limited exposure to these techniques. With this workshop we get to dive into code and get rapid interactions. I hope to see you there.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2009/12/17/the-goal/">The Goal</a></h1>
     
     
@@ -649,296 +1086,6 @@
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/10/27/london-time/">London Time?</a></h1>
-    
-    
-
-
-
-
-<time datetime="2009-10-27 00:00:00 -0500" pubdate  updated >Oct 27<span>th</span>, 2009</time>
-
-
-
-  </header>
-
-
-
-  <div class="entry-content"><p>A friend ping’d me on gchat and asked if he had a DateTime object with our time in Texas, how could he get the time in London.</p>
-
-<p>I quickly threw together this example on how I would do it.</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">DateTime</span> <span class="n">time</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">;</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">TimeZoneInfo</span> <span class="n">londonTimeZone</span> <span class="p">=</span> <span class="n">TimeZoneInfo</span>
-</div><div class='line'>    <span class="p">.</span><span class="n">GetSystemTimeZones</span><span class="p">()</span>
-</div><div class='line'>    <span class="p">.</span><span class="n">FirstOrDefault</span><span class="p">(</span><span class="n">t</span> <span class="p">=&gt;</span> <span class="n">t</span><span class="p">.</span><span class="n">DisplayName</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">&quot;London&quot;</span><span class="p">));</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">DateTime</span> <span class="n">londonTime</span> <span class="p">=</span> <span class="n">TimeZoneInfo</span><span class="p">.</span><span class="n">ConvertTime</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">londonTimeZone</span><span class="p">);</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Its {0} here&quot;</span><span class="p">,</span> <span class="n">time</span><span class="p">);</span>
-</div><div class='line'><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;But its {0} in London&quot;</span><span class="p">,</span> <span class="n">londonTime</span><span class="p">);</span>
-</div><div class='line'><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Blimey!&quot;</span><span class="p">);</span>
-</div><div class='line'><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
-</div></code></pre></td></tr></table></div></figure>
-</div>
-  
-  
-
-
-  </article>
-
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/10/22/vbb-summary/">Virtual Brown Bag 10/22/09</a></h1>
-    
-    
-
-
-
-
-<time datetime="2009-10-22 00:00:00 -0500" pubdate  updated >Oct 22<span>nd</span>, 2009</time>
-
-
-
-  </header>
-
-
-
-  <div class="entry-content"><p>Today was a great virtual brown bag. Claudio will have a more exhaustive list of what was discussed, but I thought I would share some links to stuff I talked about.</p>
-
-<h3>Creating a Generic Type using Reflection</h3>
-
-<p><a href="http://geekswithblogs.net/marcel/archive/2007/03/24/109722.aspx">http://geekswithblogs.net/marcel/archive/2007/03/24/109722.aspx</a></p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">object</span> <span class="nf">CreateGeneric</span><span class="p">(</span><span class="n">Type</span> <span class="n">generic</span><span class="p">,</span> <span class="n">Type</span> <span class="n">innerType</span><span class="p">,</span> <span class="k">params</span> <span class="kt">object</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="n">System</span><span class="p">.</span><span class="n">Type</span> <span class="n">specificType</span> <span class="p">=</span> <span class="n">generic</span><span class="p">.</span><span class="n">MakeGenericType</span><span class="p">(</span><span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">Type</span><span class="p">[]</span> <span class="p">{</span> <span class="n">innerType</span> <span class="p">});</span>
-</div><div class='line'>    <span class="k">return</span> <span class="n">Activator</span><span class="p">.</span><span class="n">CreateInstance</span><span class="p">(</span><span class="n">specificType</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<h3>StackOverflow Question from Marvin</h3>
-
-<p><a href="http://stackoverflow.com/questions/1532991/help-with-a-windows-service-scheduled-task-that-must-use-a-web-browser-and-file-d">http://stackoverflow.com/questions/1532991/help-with-a-windows-service-scheduled-task-that-must-use-a-web-browser-and-file-d </a></p>
-
-<p>As Marvin and Claudio talked, I threw together an example on how I would solve the problem. Hopefully we can hear back from Marvin on whether it worked. :)</p>
-
-<p>The code snippet is here : <a href="http://codesnippets.joyent.com/posts/show/2345">http://codesnippets.joyent.com/posts/show/2345</a></p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-<span class='line'>16</span>
-<span class='line'>17</span>
-<span class='line'>18</span>
-<span class='line'>19</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">var</span> <span class="n">url</span> <span class="p">=</span> <span class="s">&quot;http://www.codinghorror.com/blog/files/exported-font-and-colors-for-jeff-atwood-sept-19.zip&quot;</span><span class="p">;</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">var</span> <span class="n">request</span> <span class="p">=</span> <span class="n">WebRequest</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">HttpWebRequest</span><span class="p">;</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="n">GetResponse</span><span class="p">();</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">var</span> <span class="n">readStream</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">GetResponseStream</span><span class="p">();</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">var</span> <span class="n">fileStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FileStream</span><span class="p">(</span><span class="s">@&quot;C:\temp\dlZip.zip&quot;</span><span class="p">,</span> <span class="n">FileMode</span><span class="p">.</span><span class="n">Create</span><span class="p">);</span>
-</div><div class='line'>
-</div><div class='line'><span class="kt">int</span> <span class="n">readByte</span> <span class="p">=</span> <span class="n">readStream</span><span class="p">.</span><span class="n">ReadByte</span><span class="p">();</span>
-</div><div class='line'><span class="k">while</span><span class="p">(</span><span class="n">readByte</span> <span class="p">!=</span> <span class="p">-</span><span class="m">1</span><span class="p">)</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="n">fileStream</span><span class="p">.</span><span class="n">WriteByte</span><span class="p">((</span><span class="kt">byte</span><span class="p">)</span><span class="n">readByte</span><span class="p">);</span>
-</div><div class='line'>    <span class="n">readByte</span> <span class="p">=</span> <span class="n">readStream</span><span class="p">.</span><span class="n">ReadByte</span><span class="p">();</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">fileStream</span><span class="p">.</span><span class="n">Flush</span><span class="p">();</span>
-</div><div class='line'><span class="n">fileStream</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<h3>Using StructureMap with Castle Dynamic Proxy for INotifyPropertyChanged AOP</h3>
-
-<p>For creating the DynamicProxy interceptor I based my code off of : <a href="http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html">http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html</a></p>
-
-<p>The entire solution can be found here : <a href="http://github.com/RookieOne/StructureMapAopNotify">http://github.com/RookieOne/StructureMapAopNotify</a></p>
-
-<p>All in all, a darn good Virtual Brown Bag. :)</p>
-</div>
-  
-  
-
-
-  </article>
-
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/10/19/new-career-at-eps/">My New Career at Code / EPS</a></h1>
-    
-    
-
-
-
-
-<time datetime="2009-10-19 00:00:00 -0500" pubdate  updated >Oct 19<span>th</span>, 2009</time>
-
-
-
-  </header>
-
-
-
-  <div class="entry-content"><p>It’s been over a week since I started at Code / EPS and I have to say I am loving it here.</p>
-
-<p><img class='right ' src='/images/career-at-eps.jpg' width='224' height='184' alt=''Computer at EPS'' title=''Computer at EPS''></p>
-
-<p>My computer came in on Friday and I spent most of the day setting it up. Everyone knows the drill of installing Visual Studio, Office, third party tools, etc. It’s a ritual of blessing a new computer for programming work. The picture on the right was taken with my iPhone. The two 24 inch monitors are freakin awesome!</p>
-
-<p>There are a lot of intangibles that make working at EPS fun and a perfect fit for me at this time. Sharing an office with Claudio is a huge perk.  Having Markus as a boss is also a pleasant change. Most bosses can be disconnected from the current pulse on software development. Markus stays up to date and is also passionate about being cutting edge. Its nice working with people you respect and can learn from.</p>
-
-<p>I also like that I am not working at the client. Having worked at the clients offices for several years, I began to dislike the random commutes, unknown work conditions, and random hardware configurations. :(</p>
-
-<p>Here I have an office, with a window. I have a nice computer setup so that I can maximize my productivity. I know where I will be 2-3 months out. All in all, a nice change that adds peace of mind. I can now focus on my next phase in my career.</p>
-</div>
-  
-  
-
-
-  </article>
-
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/09/29/catapult-to-eps/">Catapult -> EPS</a></h1>
-    
-    
-
-
-
-
-<time datetime="2009-09-29 00:00:00 -0500" pubdate  updated >Sep 29<span>th</span>, 2009</time>
-
-
-
-  </header>
-
-
-
-  <div class="entry-content"><p>If you have not heard already, I am leaving Catapult Systems to go join the team at EPS Consulting.</p>
-
-<p>Catapult Systems is a fantastic company. They are a NSI (National Systems Integrator) and have 12 Microsoft competencies. They were awarded the 2009 Microsoft Worldwide Partner Conference Award for Custom Development Solutions.</p>
-
-<p><a href="http://www.catapultsystems.com/About/News/Articles/Pages/CatapultSystemsWinsEliteMicrosoftWorldwidePartneroftheYearAward.aspx">http://www.catapultsystems.com/About/News/Articles/Pages/CatapultSystemsWinsEliteMicrosoftWorldwidePartneroftheYearAward.aspx</a></p>
-
-<p>I will have to put a little plug in here and say I was part of the team at Wisenbaker. :)</p>
-
-<p>My departure has nothing to do with an exodus from Catapult. Catapult has positioned itself as a Microsoft Consulting company. I focus on Custom Application Development. What that means is I have very little interest in Sharepoint, EPM, Infrastructure, etc. I view selling and producing custom software products as a very different task than rolling out Windows 7.</p>
-
-<p>I also really want to focus more on training, presenting, and overall community activity. While Catapult encouraged this behavior (particularly Mark Whitmire), it was all done outside my normal duties. With EPS and some changes Markus has in store, we hope to make that part of my duties and expectations.</p>
-
-<p>My move is about my goals being slightly different than Catapult’s goals while EPS’s goals are more aligned with what I want to achieve. For example, at Houston TechFest I had some EPS coworkers come up and offer their support and advice. It was greatly appreciated. Their attendance and conversations made it clear they are pleased to have me on the team and are there to make me better at what I want to do.</p>
-
-<p>I still have lots of good friends at Catapult : Ryan Riley, David Morton, John McPherson, Apollo Gonzalez, Rafael Perez, etc.</p>
-
-<p>They have great ideas on revolutionizing the Application Development practice and I wish them the best of luck.</p>
-
-<p>For me, I am really looking forward to working with the team at EPS. I’ve gotten to know Markus and Claudio (and others at EPS) over the past couple of months and am really impressed with them. This is my first time to be going to a company where I already know people (and respect their professionalism and skill level).</p>
-
-<p>I will still be doing Virtual Brown Bags with Claudio and will now be in a situation where it should be easier for me to participate. Before I had to arrange rooms with the client and never knew if I could have privacy, etc. It was a pain.</p>
-
-<p>My last day at Catapult will be Sept 30th. I then go on a brief vacation to Colorado to visit my Dad at the family mountain home. I come back on the 7th and start the new gig on the 8th. :D</p>
-</div>
-  
-  
-
-
-  </article>
-
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/09/28/houston-techfest/">Houston Techfest 2009</a></h1>
-    
-    
-
-
-
-
-<time datetime="2009-09-28 00:00:00 -0500" pubdate  updated >Sep 28<span>th</span>, 2009</time>
-
-
-
-  </header>
-
-
-
-  <div class="entry-content"><p>Wow! That was lots of fun! I got the chance to see and talk to a lot of my friends who I haven’t seen in awhile.</p>
-
-<p>Also, it was nice to be finally finished with my two presentations. Both were fun but I will admit to liking my Evolve Your Code material a bit more than the WPF Input Validation. They were both a lot of work. Be sure to thank presenters. I knew work went into the presentations but I didn’t appreciate how much until I tried to do two. I learned a lesson with that decision. Never do 2 new presentations. It’s way too much work and both suffer from neglect. I will write a post on all my presentation lessons later.</p>
-
-<p>Without the 2 presentations looming over me and my new job, I should be able to get back to blogging more. I love sharing what I know, even if its just to myself months from now when I forget everything. :)</p>
-
-<p>For the slides I am trying out slideshare and am also using Git Hub for the slides and solutions.</p>
-
-<h4>Evolve Your Code:</h4>
-
-<p><a href="http://www.slideshare.net/RookieOne/evolve-your-code">http://www.slideshare.net/RookieOne/evolve-your-code</a></p>
-
-<p><a href="http://github.com/RookieOne/Evolve-Your-Code">http://github.com/RookieOne/Evolve-Your-Code</a></p>
-
-<h4>WPF Input Validation:</h4>
-
-<p><a href="http://www.slideshare.net/RookieOne/wpf-validation">http://www.slideshare.net/RookieOne/wpf-validation</a></p>
-
-<p><a href="http://github.com/RookieOne/WPF-Input-Validation">http://github.com/RookieOne/WPF-Input-Validation</a></p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -957,23 +1104,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2009/12/17/the-goal/">The Goal</a>
+        <a href="/blog/2010/02/23/creating-first-tfs-build/">Creating my first TFS 2010 Build</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2009/12/16/jaded-net/">Jaded .Net</a>
+        <a href="/blog/2010/02/18/isubscribe/">ISubscribe</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2009/12/15/examining-how-we-develop-software/">Examining how we develop software</a>
+        <a href="/blog/2010/02/18/convention_over_configuration/">CodeCast #68 : Convention over Configuration</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2009/11/25/named-command-decorator/">Named Command Decorator</a>
+        <a href="/blog/2010/02/17/view-viewmodel-viewregistry/">View + ViewModel + ViewRegistry</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2009/10/29/aop-structure-map/">Aop INotifyPropertyChanged StructureMap</a>
+        <a href="/blog/2010/02/17/adv-wpf-workshop/">Advanced WPF Workshop</a>
       </li>
     
   </ul>
