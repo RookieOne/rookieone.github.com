@@ -4,13 +4,203 @@
   <title>I am RookieOne</title>
   <link href="http://www.iamrookieone.com/atom.xml" rel="self"/>
   <link href="http://www.iamrookieone.com/"/>
-  <updated>2011-11-20T17:17:30-06:00</updated>
+  <updated>2011-11-25T17:59:50-06:00</updated>
   <id>http://www.iamrookieone.com/</id>
   <author>
     <name>Jonathan Birkholz</name>
     
   </author>
 
+  
+  <entry>
+    <title>Dynamic + Extension Methods = Fail</title>
+    <link href="http://www.iamrookieone.com/blog/2010/03/17/dynamic-extension-methods-fail/"/>
+    <updated>2010-03-17T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/03/17/dynamic-extension-methods-fail</id>
+    <content type="html">&lt;p&gt;I am playing around with dynamics right now working on a solution for a completely different problem.&lt;/p&gt;
+
+&lt;p&gt;I discovered a issue I didn’t foresee (and maybe I am doing something wrong).&lt;/p&gt;
+
+&lt;p&gt;I use AssertExtensions to make my tests more readable so I created my first extension.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public static class AssertExtensions
+{
+    public static void ShouldBe&amp;lt;T&amp;gt;(this T actual, T expected)
+    {
+        Assert.AreEqual(expected, actual);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;I created a test to ‘get’ a property from a dynamic object.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[TestMethod]
+public void should_be_able_to_get_property()
+{
+    var book = new Book {Title = &quot;Icarus Hunt&quot;, Author = &quot;Timothy Zahn&quot;};
+
+    var d = book as dynamic;
+
+    d.Author.ShouldBe(&quot;Timothy Zahn&quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Should work right?&lt;/p&gt;
+
+&lt;p&gt;Wrong.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/dynamic-fail.png' width='' height='' alt=''Compile fail'' title=''Compile fail''&gt;&lt;/p&gt;
+
+&lt;p&gt;Oh noes!&lt;/p&gt;
+
+&lt;p&gt;Apparently the RuntimeBinder can’t figure out the extension to string. My solution was to do this:&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[TestMethod]
+public void should_be_able_to_get_property()
+{
+    var book = new Book {Title = &quot;Icarus Hunt&quot;, Author = &quot;Timothy Zahn&quot;};
+
+    var d = book as dynamic;
+
+    var author = d.Author as string;
+
+    author.ShouldBe(&quot;Timothy Zahn&quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;I just found it interesting that it didn’t behave the way I would have expected.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>100 Books Every Man Must Read</title>
+    <link href="http://www.iamrookieone.com/blog/2010/03/09/books-every-man-must-read/"/>
+    <updated>2010-03-09T00:00:00-06:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/03/09/books-every-man-must-read</id>
+    <content type="html">&lt;p&gt;So over lunch I decided to mark down which of the 100 books every man must read I have actually read.&lt;/p&gt;
+
+&lt;p&gt;Read&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The Great Gatsby&lt;/li&gt;
+&lt;li&gt;1984 &amp;lt;- multiple times... pure genius&lt;/li&gt;
+&lt;li&gt;The Catcher in the Rye&lt;/li&gt;
+&lt;li&gt;The Picture of Dorian Gray&lt;/li&gt;
+&lt;li&gt;How to Win Friends and Influence People&lt;/li&gt;
+&lt;li&gt;Call of the Wild&lt;/li&gt;
+&lt;li&gt;Swiss Family Robinson&lt;/li&gt;
+&lt;li&gt;Catch-22 &amp;lt;- love it! I need to reread.&lt;/li&gt;
+&lt;li&gt;Lord of the Flies&lt;/li&gt;
+&lt;li&gt;Don Quixote ... yes I've read it. It was long and I don't remember any of it.&lt;/li&gt;
+&lt;li&gt;The Hobbit&lt;/li&gt;
+&lt;li&gt;Huckleberry Finn&lt;/li&gt;
+&lt;li&gt;Animal Farm &amp;lt;- again.. genius.&lt;/li&gt;
+&lt;li&gt;Frankenstein &amp;lt;- Fire.... bad&lt;/li&gt;
+&lt;li&gt;Hamlet&lt;/li&gt;
+&lt;li&gt;The Stranger&lt;/li&gt;
+&lt;li&gt;The Island of Dr Moreau&lt;/li&gt;
+&lt;li&gt;All Quiet on the Western Front &amp;lt;- literally changed my mind about going into the army :)&lt;/li&gt;
+&lt;li&gt;To Kill a Mockingbird&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;Read Excerpts&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The Prince&lt;/li&gt;
+&lt;li&gt;The Republic&lt;/li&gt;
+&lt;li&gt;Brave New World (still need to finish it)&lt;/li&gt;
+&lt;li&gt;The Iliad and Odyssey&lt;/li&gt;
+&lt;li&gt;Walden&lt;/li&gt;
+&lt;li&gt;The Metamorphosis&lt;/li&gt;
+&lt;li&gt;The Art of Warfare&lt;/li&gt;
+&lt;li&gt;The Divine Comedy &amp;lt;- I read Inferno&lt;/li&gt;
+&lt;li&gt;The Politics&lt;/li&gt;
+&lt;li&gt;The Federalist Papers &amp;lt;- genius&lt;/li&gt;
+&lt;li&gt;Moby Dick &amp;lt;- started but never finished&lt;/li&gt;
+&lt;li&gt;Paradise Lost&lt;/li&gt;
+&lt;li&gt;The Red badge of Courage&lt;/li&gt;
+&lt;li&gt;The Bible&lt;/li&gt;
+&lt;li&gt;Zen and the Art of Motorcycle Maintenance&lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <title>Adv WPF Videos</title>
+    <link href="http://www.iamrookieone.com/blog/2010/03/07/adv-wpf-videos/"/>
+    <updated>2010-03-07T00:00:00-06:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/03/07/adv-wpf-videos</id>
+    <content type="html">&lt;p&gt;The videos are up from the Adv WPF Workshop we had here at EPS.&lt;/p&gt;
+
+&lt;p&gt;Videos (the links are kind of slow and funky atm. I will look into it on Monday. I had more luck downloading the file as opposed to streaming it)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;&quot; title=&quot;http://www.epsdownloadsite.com/downloads/7a554107-cdd0-4133-967b-913c595971ee/Advanced_WPF_JB_part1.wmv&quot;&gt;Part 1&lt;/a&gt;
+&lt;a href=&quot;&quot; title=&quot;http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part2.wmv&quot;&gt;Part 2&lt;/a&gt;
+&lt;a href=&quot;&quot; title=&quot;http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part3.wmv&quot;&gt;Part 3&lt;/a&gt;
+&lt;a href=&quot;&quot; title=&quot;http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part4.wmv&quot;&gt;Part 4&lt;/a&gt;
+&lt;a href=&quot;&quot; title=&quot;http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part5.wmv&quot;&gt;Part 5&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I had a great time talking through some of the things we are doing here with WPF. I think it took awhile to get started but towards the end I think we picked up speed.&lt;/p&gt;
+
+&lt;p&gt;I don’t exactly recall the topics right now but I believe we did cover these items from the original agenda:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;INotifyPropertyChange
+
+&lt;ul&gt;
+&lt;li&gt;Normal&lt;/li&gt;
+&lt;li&gt;Type Safe&lt;/li&gt;
+&lt;li&gt;Dynamic Proxy&lt;/li&gt;
+&lt;li&gt;AOP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;View + ViewModel
+
+&lt;ul&gt;
+&lt;li&gt;Typical methods&lt;/li&gt;
+&lt;li&gt;IView extensions&lt;/li&gt;
+&lt;li&gt;IView&lt;VM&gt;&lt;/li&gt;
+&lt;li&gt;ViewRegistry&lt;/li&gt;
+&lt;li&gt;Also will be covering StructureMap conventions (TypeScanners) and Type Interceptors&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Event Aggregator
+
+&lt;ul&gt;
+&lt;li&gt;using Events&lt;/li&gt;
+&lt;li&gt;Publish extension method&lt;/li&gt;
+&lt;li&gt;ISubscribe&lt;/li&gt;
+&lt;li&gt;Putting it all together with a Region Controller&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;I guess one big note would be that PostSharp is no longer open source therefore you need a license for their 2.0 product. At EPS we picked up licenses for our current solution. The benefit we get out of PostSharp and AOP far surpasses the license price even when you have to buy the license for every developer.&lt;/p&gt;
+
+&lt;p&gt;Check PostSharp out at (http://www.sharpcrafters.com/)[http://www.sharpcrafters.com/]&lt;/p&gt;
+
+&lt;p&gt;I think we are going to work on a PostSharp CodeCast or some other informative session on the tool.&lt;/p&gt;
+
+&lt;p&gt;Considering we have the Houston Open Spaces coming up, I will probably delay another workshop for a bit. But I had a good time and will probably do another one around May or June.&lt;/p&gt;
+
+&lt;p&gt;I want to thank everyone who came online and on site. It was a lot of fun! Please provide feedback so we can make the next workshop even better.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Creating my first TFS 2010 Build</title>
@@ -970,154 +1160,6 @@ fileStream.Close();
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;```&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Virtual Brown Bag Summary 8/6/09</title>
-    <link href="http://www.iamrookieone.com/blog/2009/08/06/vbb-summary/"/>
-    <updated>2009-08-06T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/08/06/vbb-summary</id>
-    <content type="html">&lt;p&gt;Today's Brown Bag was lots of fun.&lt;/p&gt;
-
-&lt;p&gt;Claudio was off educating the masses (I believe in Denver when I talked to him last). I gladly picked up the MC duties again. Although I love doing it, there is a good deal of stress preparing for the brown bag.&lt;/p&gt;
-
-&lt;p&gt;Will people show? Will I have to talk all by myself? What the hell am I going to say?!&lt;/p&gt;
-
-&lt;p&gt;But today went great. I read Matthew Podwysocki's blog post &lt;a href=&quot;http://codebetter.com/matthewpodwysocki/2009/08/05/spec-and-boogie-released-on-codeplex/&quot;&gt;Spec# and Boogie Released on CodePlex&lt;/a&gt; and decided I would do a brief demo of Spec#. I spent around 30-40 minutes just playing with the older version of Spec# I found at the &lt;a href=&quot;http://research.microsoft.com/en-us/projects/specsharp/&quot;&gt;Microsoft Research&lt;/a&gt; site in preparation for the BB.&lt;/p&gt;
-
-&lt;p&gt;I was surprised at how much I picked up. Granted I have played with &lt;a href=&quot;http://research.microsoft.com/en-us/projects/contracts/&quot;&gt;CodeContracts&lt;/a&gt; before so I was familiar with some of the concepts. Design by Contract is definitely a new school of coding thought. Its taking some time for me to assimilate the termniology and intentions. I know I have barely begun the journey necessary to fully understand and leverage this coding methodology.&lt;/p&gt;
-
-&lt;p&gt;For the BB, I just opened a Spec# Console project and we just started to code the stuff I learned just 30 minutes ago. I think it went well. We played with the non-null ! ... we set the reference types to default to non null. We setup some pre-conditions using 'requires' and tested some post conditions with 'ensures'. We didn't really use 'modifies' and our one attempt at invariant worked for a simple scenario but failed with another scenario.&lt;/p&gt;
-
-&lt;p&gt;I forgot to record the BB. So I plan on using the new 2009 release of Spec# and doing a screencast covering the same material. At least we can record the same material if not the exact BB.&lt;/p&gt;
-
-&lt;p&gt;Thanks to everyone who attended and especially those who asked questions! I hope to chat with you guys again next week. I always look forward to Brown Bag Thursdays!&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>MVVM - The no code behind challenge</title>
-    <link href="http://www.iamrookieone.com/blog/2009/08/05/mvvm-no-code-behind-challenge/"/>
-    <updated>2009-08-05T10:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/08/05/mvvm-no-code-behind-challenge</id>
-    <content type="html">&lt;p&gt;Glenn Block has an excellent post titled “The spirit of MYYM, it’s not a code counting exercise”. The &lt;a href=&quot;http://codebetter.com/glennblock/2009/08/03/the-spirit-of-mvvm-viewmodel-it-s-not-a-code-counting-exercise/&quot;&gt;post&lt;/a&gt; can be found at CodeBetter.&lt;/p&gt;
-
-&lt;p&gt;I thoroughly enjoyed the post and greatly appreciate practical discussions on WPF/SL application patterns. I am a bit of a WPF nut having lived and breathed xaml for over 2 years. I’ve been a part of 2 successful WPF projects (both in production). In both scenarios I acted as the defacto WPF guru.&lt;/p&gt;
-
-&lt;p&gt;This last project was a typical line of business application and we used the ViewModel pattern with Prism. I bring all this up to share my background with WPF and ViewModels.&lt;/p&gt;
-
-&lt;p&gt;Concerning the content of the post, I agree with Glenn on the majority of the content. The Commands and Parameters especially rings true. I found that whenever I went with option A [using element binding to a command parameter] I ended up refactoring it to option B [binding the ‘selected’ item to a property on the ViewModel]. Although a neat use of xaml, in practice the binding to the property just allowed more flexibility that indubitable becomes necessary with future changes and demands (not to mention testing opportunities).&lt;/p&gt;
-
-&lt;p&gt;With both projects we didn’t have the luxury of a full time designer. In both scenarios I argued there was plenty of work for a designer, but alas the resources just weren’t there. We were able to use a designer for a decent chunk of hours, but more could have been done. The applications were definitely better off for having every hour we could get from any designer resource. I believe the last project persuaded many that indeed there was enough work for a full time designer, so maybe I can hope for a designer with a future application.&lt;/p&gt;
-
-&lt;p&gt;I say this because I can not speak towards what its like having a designer in Blend all the time working on Views. When we used a designer resource, they would work in Blend and then a go-between developer / designer would take the xaml and integrate it with our ResourceDictionaries.&lt;/p&gt;
-
-&lt;p&gt;What I would like to address is the ‘no code behind’ philosophy compared to the code behind practicality.&lt;/p&gt;
-
-&lt;p&gt;Two years ago when I was floundering for WPF information and blogs, I ran across a blog post (I want to say it was Josh Smith) where the writer stated something like : “if something is easier to do in the code behind then its okay to do it in the code behind.”&lt;/p&gt;
-
-&lt;p&gt;He was arguing that a crap load of xaml vs a couple lines of code behind isn’t an argument at all. The code behind is the best choice. Naturally clearer intentions and code maintainability takes precedence over having a dogmatic “everything in xaml” approach.&lt;/p&gt;
-
-&lt;p&gt;With this last LoB Prism application, we had some choices to make when we were deciding on how the client should be made up.&lt;/p&gt;
-
-&lt;p&gt;Do we use UserControls as Views or (as Ryan Riley brought up) do we use Data Templates as views. I felt at the time the team wasn’t ready for that leap to Data Templates as views. I considered the code behind of a User Control as a placebo safety net for a team struggling with the WPF learning curve. What I did do was firmly encouraged a no code behind policy. A “no code behind” challenge if you will.&lt;/p&gt;
-
-&lt;p&gt;If I were to go back to the beginning and make that View decision again, I would go with the Data Templates as views. The team did very well without using the code behind. A Data Template view would have brought more benefits than the cost of having no code behind. Often we found ourselves thinking.. if this view was a data template and not a user control, then we could more easier do X.&lt;/p&gt;
-
-&lt;p&gt;I have championed the “no code behind” stance internal to Catapult and to other developers. Yes you can legitimately use the code behind to accomplish certain tasks. More often than not though (in my experience), the use of the code behind has more to do with the prejudices carried over from WinForms development. Having a strict no code behind stance forces developers to learn and change the way they think about coding functionality into the UI.&lt;/p&gt;
-
-&lt;p&gt;Glenn came up with a scenario (albiet a overly simplified one) of where he felt a code behind had some value. The scenario described is:&lt;/p&gt;
-
-&lt;p&gt;'”The user clicks a Save button on the Edit Order screen which requires some UI cue to the user such as an hourglass while the order is saving, and another cue once the Order has saved.”&lt;/p&gt;
-
-&lt;p&gt;He argues that the code in the xaml is less testable. He even suggests the solution I made. He also recognizes others my disagree. Count me in the disagreement camp.&lt;/p&gt;
-
-&lt;p&gt;I created a simple project that uses Attached Dependency properties to accomplish this simple scenario. This isn’t a “throw down the gauntlet” sort of thing and I didn’t really write it for Glenn. A coworker emailed Glenn’s blog and I responded in an email describing my solution. He then asked to see it in action. So I coded it up.&lt;/p&gt;
-
-&lt;p&gt;He also asked me to post a comment on Glenn’s post, but I don’t really see the point especially since I agree with the information Glenn is sharing and his opinions are built on experience &amp;amp; expertise. I really had no disagreement and the solution Glenn already knows of. /shrug&lt;/p&gt;
-
-&lt;p&gt;Anyway.. you can find the solution here : &lt;a href=&quot;http://github.com/RookieOne/AttachedAnimation/tree/master&quot;&gt;http://github.com/RookieOne/AttachedAnimation/tree/master&lt;/a&gt;&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>How to bind custom ICommands to Input Bindings</title>
-    <link href="http://www.iamrookieone.com/blog/2009/08/05/custom-icommands-to-input-bindings/"/>
-    <updated>2009-08-05T08:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/08/05/custom-icommands-to-input-bindings</id>
-    <content type="html">&lt;p&gt;If you are developing using any sort of V-VM-M pattern, you are already loving the awesome binding powers of Wpf.&lt;/p&gt;
-
-&lt;p&gt;And you should also be loving ICommand and binding buttons to ICommand properties on your VM.&lt;/p&gt;
-
-&lt;p&gt;What you might have discovered is that binding ICommands to Keys and other input gestures is not as easy as it was with vanilla Routed Commands.&lt;/p&gt;
-
-&lt;p&gt;But have no fear! There is a solution.&lt;/p&gt;
-
-&lt;p&gt;By utilizing Josh Smith's &lt;a href=&quot;http://joshsmithonwpf.wordpress.com/2008/07/22/enable-elementname-bindings-with-elementspy/&quot;&gt;Element Spy trick&lt;/a&gt; and creating a custom InputBinding, we can gain the functionality of binding an ICommand to a Key, etc.&lt;/p&gt;
-
-&lt;p&gt;Here is my custom input binding :&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class MyInputBinding : KeyBinding
-{
-  #region Fields
-
-  private static readonly DependencyProperty BoundCommandProperty = 
-                    DependencyProperty.Register(&quot;BoundCommand&quot;,
-                                                typeof (ICommand),
-                                                typeof (MyInputBinding),
-                                                new PropertyMetadata(OnBoundCommandChanged));
-
-  #endregion
-
-  #region Properties
-
-  public ICommand BoundCommand
-  {
-    get { return GetValue(BoundCommandProperty) as ICommand; }
-    set { SetValue(BoundCommandProperty, value);}
-  }
-
-  #endregion
-
-  #region Methods
-
-  private static void OnBoundCommandChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-  {
-    MyInputBinding binding = obj as MyInputBinding;
-
-    if (binding == null) return;
-
-    binding.Command = e.NewValue as ICommand;
-  }
-
-  #endregion
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Then when you combine the use of the ElementSpy, your xaml looks like:&lt;/p&gt;
-
-&lt;p&gt;``` xml&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;Window.Resources&amp;gt; 
-  &amp;lt;InputBindingSandbox:ElementSpy x:Key=&quot;spy&quot; /&amp;gt;
-&amp;lt;/Window.Resources&amp;gt;
-&amp;lt;Window.InputBindings&amp;gt;
-  &amp;lt;InputBindingSandbox:MyInputBinding BoundCommand=&quot;{Binding Source={StaticResource spy},
-                                                           Path=Element.DataContext.MyCommand}&quot;
-                                    Key=&quot;Enter&quot; /&amp;gt;
-&amp;lt;/Window.InputBindings&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Naturally the custom input binding is very simple and does not expose the Command Parameter nor the Command Target, etc. But the basic pattern is there so feel free to utilize and extend.&lt;/p&gt;
-
-&lt;p&gt;Happy coding!&lt;/p&gt;
 </content>
   </entry>
   

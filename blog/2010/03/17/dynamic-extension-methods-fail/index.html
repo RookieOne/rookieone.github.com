@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>I am RookieOne: Dynamic + Extension Methods = Fail</title>
+  <meta name="author" content="Jonathan Birkholz">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://www.iamrookieone.com/blog/2010/03/17/dynamic-extension-methods-fail/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="I am RookieOne" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">I am RookieOne</a></h1>
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:www.iamrookieone.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Dynamic + Extension Methods = Fail</h1>
+    
+    
+
+
+
+
+<time datetime="2010-03-17 00:00:00 -0500" pubdate  updated >Mar 17<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+<div class="entry-content"><p>I am playing around with dynamics right now working on a solution for a completely different problem.</p>
+
+<p>I discovered a issue I didn’t foresee (and maybe I am doing something wrong).</p>
+
+<p>I use AssertExtensions to make my tests more readable so I created my first extension.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">AssertExtensions</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">ShouldBe</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">this</span> <span class="n">T</span> <span class="n">actual</span><span class="p">,</span> <span class="n">T</span> <span class="n">expected</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I created a test to ‘get’ a property from a dynamic object.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[TestMethod]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_be_able_to_get_property</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">var</span> <span class="n">book</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Book</span> <span class="p">{</span><span class="n">Title</span> <span class="p">=</span> <span class="s">&quot;Icarus Hunt&quot;</span><span class="p">,</span> <span class="n">Author</span> <span class="p">=</span> <span class="s">&quot;Timothy Zahn&quot;</span><span class="p">};</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">var</span> <span class="n">d</span> <span class="p">=</span> <span class="n">book</span> <span class="k">as</span> <span class="n">dynamic</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">d</span><span class="p">.</span><span class="n">Author</span><span class="p">.</span><span class="n">ShouldBe</span><span class="p">(</span><span class="s">&quot;Timothy Zahn&quot;</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Should work right?</p>
+
+<p>Wrong.</p>
+
+<p><img class='' src='/images/dynamic-fail.png' width='' height='' alt=''Compile fail'' title=''Compile fail''></p>
+
+<p>Oh noes!</p>
+
+<p>Apparently the RuntimeBinder can’t figure out the extension to string. My solution was to do this:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[TestMethod]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_be_able_to_get_property</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">var</span> <span class="n">book</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Book</span> <span class="p">{</span><span class="n">Title</span> <span class="p">=</span> <span class="s">&quot;Icarus Hunt&quot;</span><span class="p">,</span> <span class="n">Author</span> <span class="p">=</span> <span class="s">&quot;Timothy Zahn&quot;</span><span class="p">};</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">var</span> <span class="n">d</span> <span class="p">=</span> <span class="n">book</span> <span class="k">as</span> <span class="n">dynamic</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">var</span> <span class="n">author</span> <span class="p">=</span> <span class="n">d</span><span class="p">.</span><span class="n">Author</span> <span class="k">as</span> <span class="kt">string</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">author</span><span class="p">.</span><span class="n">ShouldBe</span><span class="p">(</span><span class="s">&quot;Timothy Zahn&quot;</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I just found it interesting that it didn’t behave the way I would have expected.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jonathan Birkholz</span></span>
+
+      
+
+
+
+
+<time datetime="2010-03-17 00:00:00 -0500" pubdate  updated >Mar 17<span>th</span>, 2010</time>
+
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/C-/'>C#</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.iamrookieone.com/blog/2010/03/17/dynamic-extension-methods-fail/" data-via="" data-counturl="http://www.iamrookieone.com/blog/2010/03/17/dynamic-extension-methods-fail/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2010/03/17/dynamic-extension-methods-fail/">Dynamic + Extension Methods = Fail</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/03/09/books-every-man-must-read/">100 Books Every Man Must Read</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/03/07/adv-wpf-videos/">Adv WPF Videos</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/02/23/creating-first-tfs-build/">Creating my first TFS 2010 Build</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/02/18/isubscribe/">ISubscribe</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Jonathan Birkholz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

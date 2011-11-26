@@ -86,6 +86,407 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2009/12/15/examining-how-we-develop-software/">Examining How We Develop Software</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-12-15 00:00:00 -0600" pubdate  updated >Dec 15<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>What I am starting is a mental exercise exploring how my view on software development is changing. Since this is a basically a brain dump, treat it as such. Feel free to comment on what I say&#8230; offer advice and opinions. Maybe there is something you can sympathize with.</p>
+
+<p>What has started me thinking along these lines has been my recent readings of The Toyota Way and my re-reading of The Goal.</p>
+
+<p>The Toyota Way</p>
+
+<p><img class='' src='/images/toyota-way.jpg' width='108' height='160' alt=''The Toyota Way'' title=''The Toyota Way''></p>
+
+<p>The Goal: A Process of Ongoing Improvement</p>
+
+<p><img class='' src='/images/the-goal.jpg' width='108' height='160' alt=''The Goal'' title=''The Goal''></p>
+
+<p>Both readings have me re-examining my career and software development. Asking questions like, Are we focused on the right things?</p>
+
+<p>Anyway here are the posts:</p>
+
+<ul>
+<li>Jaded .Net</li>
+<li>The Goal</li>
+<li>Estimating the Impossible</li>
+</ul>
+
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/11/25/named-command-decorator/">Named Command Decorator</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-11-25 00:00:00 -0600" pubdate  updated >Nov 25<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Here is the problem, we have a list of ‘commands’ we wish to show depending on what view model / entity is active. If we just had a collection of ICommands, we could show buttons but what would their content be?</p>
+
+<p>My solution is to use the decorator pattern to decorate commands with a Name that can be used as the content for the buttons.</p>
+
+<p>My decorator looks like :</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">NamedCommand</span> <span class="p">:</span> <span class="n">ICommand</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="nf">NamedCommand</span><span class="p">(</span><span class="n">ICommand</span> <span class="n">decoratedCommand</span><span class="p">,</span> <span class="kt">string</span> <span class="n">name</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">_DecoratedCommand</span> <span class="p">=</span> <span class="n">decoratedCommand</span><span class="p">;</span>
+</div><div class='line'>        <span class="n">Name</span> <span class="p">=</span> <span class="n">name</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">readonly</span> <span class="n">ICommand</span> <span class="n">_DecoratedCommand</span><span class="p">;</span>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Execute</span><span class="p">(</span><span class="kt">object</span> <span class="n">parameter</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">_DecoratedCommand</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">parameter</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">bool</span> <span class="nf">CanExecute</span><span class="p">(</span><span class="kt">object</span> <span class="n">parameter</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="k">return</span> <span class="n">_DecoratedCommand</span><span class="p">.</span><span class="n">CanExecute</span><span class="p">(</span><span class="n">parameter</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="k">event</span> <span class="n">EventHandler</span> <span class="n">CanExecuteChanged</span><span class="p">;</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I then created an extension method on ICommand :</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">static</span> <span class="n">ICommand</span> <span class="nf">Name</span><span class="p">(</span><span class="k">this</span> <span class="n">ICommand</span> <span class="n">command</span><span class="p">,</span> <span class="kt">string</span> <span class="n">name</span><span class="p">)</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">return</span> <span class="k">new</span> <span class="nf">NamedCommand</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>So in the code I can now do:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">Commands</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">ActionCommand</span><span class="p">(</span><span class="n">OnOpen</span><span class="p">).</span><span class="n">Name</span><span class="p">(</span><span class="s">&quot;Open&quot;</span><span class="p">));</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>For my WPF visual, I have a DataTemplate :</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='xml'><div class='line'><span class="nt">&lt;DataTemplate</span> <span class="na">DataType=</span><span class="s">&quot;{x:Type Commands:NamedCommand}&quot;</span> <span class="nt">&gt;</span>
+</div><div class='line'>    <span class="nt">&lt;Button</span> <span class="na">Content=</span><span class="s">&quot;{Binding Name}&quot;</span>
+</div><div class='line'>           <span class="na">Command=</span><span class="s">&quot;{Binding }&quot;</span> <span class="nt">/&gt;</span>
+</div><div class='line'><span class="nt">&lt;/DataTemplate&gt;</span>
+</div></code></pre></td></tr></table></div></figure>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/10/29/aop-structure-map/">Aop INotifyPropertyChanged StructureMap</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-10-29 00:00:00 -0500" pubdate  updated >Oct 29<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Anyone who has worked with INotifyPropertyChanged knows that this simple interface can be a royal pain in the ass.</p>
+
+<p>To try and eliminate the pain, people have created some great solutions using AOP : IL weaving (<a href="www.postsharp.org">PostSharp</a>) and using a proxy (<a href="http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html">Castle Dynamic Proxy</a>).</p>
+
+<p>PostSharp has a little too much voodoo for me atm. I think I will warm up to it though and re-examine using PostSharp on my next solution. But for now, I wanted to use Castle Project’s Dynamic Proxy.</p>
+
+<p>Naturally since Castle also has a very popular IoC container in Windsor, most examples marry Dynamic Proxy and Windsor to form an AOP INotifyPropertyChanged solution.</p>
+
+<p>Since I am using StructureMap for this project, I endeavored to create my own solution using Dynamic Proxy.</p>
+
+<p>My first attempt I shared at the Virtual Brown Bag look liked it worked but in reality I was constructing my objects twice.</p>
+
+<p>Once with SM and once with the Proxy generator.</p>
+
+<p>I had to go back to the drawing board and posted my problem at the SM google group. <a href="http://groups.google.com/group/structuremap-users/browse_thread/thread/1a6b19ce8152db1b?hl=en">http://groups.google.com/group/structuremap-users/browse_thread/thread/1a6b19ce8152db1b?hl=en</a></p>
+
+<p>I believe the syntax given to me was an older version of SM. For the record, I am using version 2.5.3.0</p>
+
+<p>But it did direct me to the general idea on where I should start looking. I ended up needing to create an IBuildInterceptor.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+<span class='line'>36</span>
+<span class='line'>37</span>
+<span class='line'>38</span>
+<span class='line'>39</span>
+<span class='line'>40</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">MyBuildInterceptor</span> <span class="p">:</span> <span class="n">IBuildInterceptor</span>
+</div><div class='line'>   <span class="p">{</span>
+</div><div class='line'>       <span class="k">public</span> <span class="nf">MyBuildInterceptor</span><span class="p">(</span><span class="n">Type</span> <span class="n">concreteType</span><span class="p">)</span>
+</div><div class='line'>       <span class="p">{</span>
+</div><div class='line'>           <span class="n">_ConcreteType</span> <span class="p">=</span> <span class="n">concreteType</span><span class="p">;</span>
+</div><div class='line'>       <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>       <span class="k">readonly</span> <span class="n">Type</span> <span class="n">_ConcreteType</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>       <span class="k">public</span> <span class="kt">object</span> <span class="nf">Build</span><span class="p">(</span><span class="n">BuildSession</span> <span class="n">buildSession</span><span class="p">,</span> <span class="n">Type</span> <span class="n">pluginType</span><span class="p">,</span> <span class="n">Instance</span> <span class="n">instance</span><span class="p">)</span>
+</div><div class='line'>       <span class="p">{</span>
+</div><div class='line'>           <span class="n">var</span> <span class="n">constructorArgs</span> <span class="p">=</span> <span class="n">_ConcreteType</span>
+</div><div class='line'>               <span class="p">.</span><span class="n">GetConstructors</span><span class="p">()</span>
+</div><div class='line'>               <span class="p">.</span><span class="n">FirstOrDefault</span><span class="p">()</span>
+</div><div class='line'>               <span class="p">.</span><span class="n">GetParameters</span><span class="p">()</span>
+</div><div class='line'>               <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">buildSession</span><span class="p">.</span><span class="n">CreateInstance</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">ParameterType</span><span class="p">))</span>
+</div><div class='line'>               <span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>
+</div><div class='line'>           <span class="n">var</span> <span class="n">interceptors</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">IInterceptor</span><span class="p">&gt;</span>
+</div><div class='line'>                                  <span class="p">{</span>
+</div><div class='line'>                                      <span class="k">new</span> <span class="nf">NotifyInterceptor</span><span class="p">()</span>
+</div><div class='line'>                                  <span class="p">}</span>
+</div><div class='line'>                                  <span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>           <span class="k">return</span> <span class="k">new</span> <span class="nf">ProxyGenerator</span><span class="p">().</span><span class="n">CreateClassProxy</span><span class="p">(</span><span class="n">_ConcreteType</span><span class="p">,</span> <span class="n">interceptors</span><span class="p">,</span> <span class="n">constructorArgs</span><span class="p">);</span>
+</div><div class='line'>       <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>       <span class="k">public</span> <span class="n">IBuildPolicy</span> <span class="nf">Clone</span><span class="p">()</span>
+</div><div class='line'>       <span class="p">{</span>
+</div><div class='line'>           <span class="k">return</span> <span class="n">InnerPolicy</span><span class="p">.</span><span class="n">Clone</span><span class="p">();</span>
+</div><div class='line'>       <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>       <span class="k">public</span> <span class="k">void</span> <span class="nf">EjectAll</span><span class="p">()</span>
+</div><div class='line'>       <span class="p">{</span>
+</div><div class='line'>           <span class="n">InnerPolicy</span><span class="p">.</span><span class="n">EjectAll</span><span class="p">();</span>
+</div><div class='line'>       <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>       <span class="k">public</span> <span class="n">IBuildPolicy</span> <span class="n">InnerPolicy</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>   <span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>To register my ViewModels I created a convention using a TypeScanner</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">MyNotifyConvention</span> <span class="p">:</span> <span class="n">ITypeScanner</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Process</span><span class="p">(</span><span class="n">Type</span> <span class="n">type</span><span class="p">,</span> <span class="n">PluginGraph</span> <span class="n">graph</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">type</span><span class="p">.</span><span class="n">GetInterface</span><span class="p">(</span><span class="s">&quot;IViewModel&quot;</span><span class="p">)</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</div><div class='line'>            <span class="k">return</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="n">var</span> <span class="n">interfaceType</span> <span class="p">=</span> <span class="n">type</span><span class="p">.</span><span class="n">GetInterfaces</span><span class="p">().</span><span class="n">FirstOrDefault</span><span class="p">(</span><span class="n">i</span> <span class="p">=&gt;</span> <span class="n">i</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">&quot;ViewModel&quot;</span><span class="p">)</span>
+</div><div class='line'>                                                            <span class="p">&amp;&amp;</span> <span class="n">i</span><span class="p">.</span><span class="n">Name</span> <span class="p">!=</span> <span class="s">&quot;IViewModel&quot;</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">interfaceType</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</div><div class='line'>            <span class="k">return</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="n">graph</span><span class="p">.</span><span class="n">Configure</span><span class="p">(</span><span class="n">r</span> <span class="p">=&gt;</span>
+</div><div class='line'>                        <span class="n">r</span><span class="p">.</span><span class="n">ForRequestedType</span><span class="p">(</span><span class="n">interfaceType</span><span class="p">)</span>
+</div><div class='line'>                        <span class="p">.</span><span class="n">InterceptConstructionWith</span><span class="p">(</span><span class="k">new</span> <span class="n">MyBuildInterceptor</span><span class="p">(</span><span class="n">type</span><span class="p">))</span>
+</div><div class='line'>                        <span class="p">.</span><span class="n">TheDefaultIsConcreteType</span><span class="p">(</span><span class="n">type</span><span class="p">));</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I then used a Dynamic Proxy Interceptor that I basically copy and pasted from Serial Seb’s example.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">NotifyInterceptor</span> <span class="p">:</span> <span class="n">IInterceptor</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Intercept</span><span class="p">(</span><span class="n">IInvocation</span> <span class="n">invocation</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="c1">// let the original call go through first, so we can notify *after*</span>
+</div><div class='line'>        <span class="n">invocation</span><span class="p">.</span><span class="n">Proceed</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">invocation</span><span class="p">.</span><span class="n">Method</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">StartsWith</span><span class="p">(</span><span class="s">&quot;set_&quot;</span><span class="p">))</span>
+</div><div class='line'>        <span class="p">{</span>
+</div><div class='line'>            <span class="kt">string</span> <span class="n">propertyName</span> <span class="p">=</span> <span class="n">invocation</span><span class="p">.</span><span class="n">Method</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Substring</span><span class="p">(</span><span class="m">4</span><span class="p">);</span>
+</div><div class='line'>            <span class="n">RaisePropertyChangedEvent</span><span class="p">(</span><span class="n">invocation</span><span class="p">,</span> <span class="n">propertyName</span><span class="p">,</span> <span class="n">invocation</span><span class="p">.</span><span class="n">TargetType</span><span class="p">);</span>
+</div><div class='line'>        <span class="p">}</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">RaisePropertyChangedEvent</span><span class="p">(</span><span class="n">IInvocation</span> <span class="n">invocation</span><span class="p">,</span> <span class="kt">string</span> <span class="n">propertyName</span><span class="p">,</span> <span class="n">Type</span> <span class="n">type</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="c1">// get the field storing the delegate list that are stored by the event.</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">methodInfo</span> <span class="p">=</span> <span class="n">type</span><span class="p">.</span><span class="n">GetMethod</span><span class="p">(</span><span class="s">&quot;RaisePropertyChanged&quot;</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">methodInfo</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</div><div class='line'>        <span class="p">{</span>
+</div><div class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">type</span><span class="p">.</span><span class="n">BaseType</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+</div><div class='line'>                <span class="n">RaisePropertyChangedEvent</span><span class="p">(</span><span class="n">invocation</span><span class="p">,</span> <span class="n">propertyName</span><span class="p">,</span> <span class="n">type</span><span class="p">.</span><span class="n">BaseType</span><span class="p">);</span>
+</div><div class='line'>        <span class="p">}</span>
+</div><div class='line'>        <span class="k">else</span> <span class="c1">// info != null</span>
+</div><div class='line'>        <span class="p">{</span>
+</div><div class='line'>            <span class="n">methodInfo</span><span class="p">.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">invocation</span><span class="p">.</span><span class="n">InvocationTarget</span><span class="p">,</span> <span class="k">new</span> <span class="kt">object</span><span class="p">[]</span> <span class="p">{</span><span class="n">propertyName</span><span class="p">});</span>
+</div><div class='line'>        <span class="p">}</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Instead of looking for the PropertyChanged Handler, I create a RaisePropertyChanged method and use that. Although I could raise the event using the field method Seb was using, WPF wasn’t updating the binding. I didn’t really bother to investigate and just rolled with this solution.</p>
+
+<p>So that’s my solution and I’ll start using it in my current solution. Naturally I will clean up the code some more etc. Feel free to use this for any of your own projects. You can also get the solution at my GitHub:</p>
+
+<p><a href="http://github.com/RookieOne/StructureMapAopNotify">http://github.com/RookieOne/StructureMapAopNotify</a></p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2009/10/27/london-time/">London Time?</a></h1>
     
     
@@ -553,246 +954,6 @@
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/08/06/vbb-summary/">Virtual Brown Bag Summary 8/6/09</a></h1>
-    
-    
-
-
-
-
-<time datetime="2009-08-06 00:00:00 -0500" pubdate  updated >Aug 6<span>th</span>, 2009</time>
-
-
-
-  </header>
-
-
-
-  <div class="entry-content"><p>Today&#8217;s Brown Bag was lots of fun.</p>
-
-<p>Claudio was off educating the masses (I believe in Denver when I talked to him last). I gladly picked up the MC duties again. Although I love doing it, there is a good deal of stress preparing for the brown bag.</p>
-
-<p>Will people show? Will I have to talk all by myself? What the hell am I going to say?!</p>
-
-<p>But today went great. I read Matthew Podwysocki&#8217;s blog post <a href="http://codebetter.com/matthewpodwysocki/2009/08/05/spec-and-boogie-released-on-codeplex/">Spec# and Boogie Released on CodePlex</a> and decided I would do a brief demo of Spec#. I spent around 30-40 minutes just playing with the older version of Spec# I found at the <a href="http://research.microsoft.com/en-us/projects/specsharp/">Microsoft Research</a> site in preparation for the BB.</p>
-
-<p>I was surprised at how much I picked up. Granted I have played with <a href="http://research.microsoft.com/en-us/projects/contracts/">CodeContracts</a> before so I was familiar with some of the concepts. Design by Contract is definitely a new school of coding thought. Its taking some time for me to assimilate the termniology and intentions. I know I have barely begun the journey necessary to fully understand and leverage this coding methodology.</p>
-
-<p>For the BB, I just opened a Spec# Console project and we just started to code the stuff I learned just 30 minutes ago. I think it went well. We played with the non-null ! &#8230; we set the reference types to default to non null. We setup some pre-conditions using &#8216;requires&#8217; and tested some post conditions with &#8216;ensures&#8217;. We didn&#8217;t really use &#8216;modifies&#8217; and our one attempt at invariant worked for a simple scenario but failed with another scenario.</p>
-
-<p>I forgot to record the BB. So I plan on using the new 2009 release of Spec# and doing a screencast covering the same material. At least we can record the same material if not the exact BB.</p>
-
-<p>Thanks to everyone who attended and especially those who asked questions! I hope to chat with you guys again next week. I always look forward to Brown Bag Thursdays!</p>
-</div>
-  
-  
-
-
-  </article>
-
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/08/05/mvvm-no-code-behind-challenge/">MVVM - the No Code Behind Challenge</a></h1>
-    
-    
-
-
-
-
-<time datetime="2009-08-05 10:00:00 -0500" pubdate  updated >Aug 5<span>th</span>, 2009</time>
-
-
-
-  </header>
-
-
-
-  <div class="entry-content"><p>Glenn Block has an excellent post titled “The spirit of MYYM, it’s not a code counting exercise”. The <a href="http://codebetter.com/glennblock/2009/08/03/the-spirit-of-mvvm-viewmodel-it-s-not-a-code-counting-exercise/">post</a> can be found at CodeBetter.</p>
-
-<p>I thoroughly enjoyed the post and greatly appreciate practical discussions on WPF/SL application patterns. I am a bit of a WPF nut having lived and breathed xaml for over 2 years. I’ve been a part of 2 successful WPF projects (both in production). In both scenarios I acted as the defacto WPF guru.</p>
-
-<p>This last project was a typical line of business application and we used the ViewModel pattern with Prism. I bring all this up to share my background with WPF and ViewModels.</p>
-
-<p>Concerning the content of the post, I agree with Glenn on the majority of the content. The Commands and Parameters especially rings true. I found that whenever I went with option A [using element binding to a command parameter] I ended up refactoring it to option B [binding the ‘selected’ item to a property on the ViewModel]. Although a neat use of xaml, in practice the binding to the property just allowed more flexibility that indubitable becomes necessary with future changes and demands (not to mention testing opportunities).</p>
-
-<p>With both projects we didn’t have the luxury of a full time designer. In both scenarios I argued there was plenty of work for a designer, but alas the resources just weren’t there. We were able to use a designer for a decent chunk of hours, but more could have been done. The applications were definitely better off for having every hour we could get from any designer resource. I believe the last project persuaded many that indeed there was enough work for a full time designer, so maybe I can hope for a designer with a future application.</p>
-
-<p>I say this because I can not speak towards what its like having a designer in Blend all the time working on Views. When we used a designer resource, they would work in Blend and then a go-between developer / designer would take the xaml and integrate it with our ResourceDictionaries.</p>
-
-<p>What I would like to address is the ‘no code behind’ philosophy compared to the code behind practicality.</p>
-
-<p>Two years ago when I was floundering for WPF information and blogs, I ran across a blog post (I want to say it was Josh Smith) where the writer stated something like : “if something is easier to do in the code behind then its okay to do it in the code behind.”</p>
-
-<p>He was arguing that a crap load of xaml vs a couple lines of code behind isn’t an argument at all. The code behind is the best choice. Naturally clearer intentions and code maintainability takes precedence over having a dogmatic “everything in xaml” approach.</p>
-
-<p>With this last LoB Prism application, we had some choices to make when we were deciding on how the client should be made up.</p>
-
-<p>Do we use UserControls as Views or (as Ryan Riley brought up) do we use Data Templates as views. I felt at the time the team wasn’t ready for that leap to Data Templates as views. I considered the code behind of a User Control as a placebo safety net for a team struggling with the WPF learning curve. What I did do was firmly encouraged a no code behind policy. A “no code behind” challenge if you will.</p>
-
-<p>If I were to go back to the beginning and make that View decision again, I would go with the Data Templates as views. The team did very well without using the code behind. A Data Template view would have brought more benefits than the cost of having no code behind. Often we found ourselves thinking.. if this view was a data template and not a user control, then we could more easier do X.</p>
-
-<p>I have championed the “no code behind” stance internal to Catapult and to other developers. Yes you can legitimately use the code behind to accomplish certain tasks. More often than not though (in my experience), the use of the code behind has more to do with the prejudices carried over from WinForms development. Having a strict no code behind stance forces developers to learn and change the way they think about coding functionality into the UI.</p>
-
-<p>Glenn came up with a scenario (albiet a overly simplified one) of where he felt a code behind had some value. The scenario described is:</p>
-
-<p>&#8216;”The user clicks a Save button on the Edit Order screen which requires some UI cue to the user such as an hourglass while the order is saving, and another cue once the Order has saved.”</p>
-
-<p>He argues that the code in the xaml is less testable. He even suggests the solution I made. He also recognizes others my disagree. Count me in the disagreement camp.</p>
-
-<p>I created a simple project that uses Attached Dependency properties to accomplish this simple scenario. This isn’t a “throw down the gauntlet” sort of thing and I didn’t really write it for Glenn. A coworker emailed Glenn’s blog and I responded in an email describing my solution. He then asked to see it in action. So I coded it up.</p>
-
-<p>He also asked me to post a comment on Glenn’s post, but I don’t really see the point especially since I agree with the information Glenn is sharing and his opinions are built on experience &amp; expertise. I really had no disagreement and the solution Glenn already knows of. /shrug</p>
-
-<p>Anyway.. you can find the solution here : <a href="http://github.com/RookieOne/AttachedAnimation/tree/master">http://github.com/RookieOne/AttachedAnimation/tree/master</a></p>
-</div>
-  
-  
-
-
-  </article>
-
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/08/05/custom-icommands-to-input-bindings/">How to Bind Custom ICommands to Input Bindings</a></h1>
-    
-    
-
-
-
-
-<time datetime="2009-08-05 08:00:00 -0500" pubdate  updated >Aug 5<span>th</span>, 2009</time>
-
-
-
-  </header>
-
-
-
-  <div class="entry-content"><p>If you are developing using any sort of V-VM-M pattern, you are already loving the awesome binding powers of Wpf.</p>
-
-<p>And you should also be loving ICommand and binding buttons to ICommand properties on your VM.</p>
-
-<p>What you might have discovered is that binding ICommands to Keys and other input gestures is not as easy as it was with vanilla Routed Commands.</p>
-
-<p>But have no fear! There is a solution.</p>
-
-<p>By utilizing Josh Smith&#8217;s <a href="http://joshsmithonwpf.wordpress.com/2008/07/22/enable-elementname-bindings-with-elementspy/">Element Spy trick</a> and creating a custom InputBinding, we can gain the functionality of binding an ICommand to a Key, etc.</p>
-
-<p>Here is my custom input binding :</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-<span class='line'>16</span>
-<span class='line'>17</span>
-<span class='line'>18</span>
-<span class='line'>19</span>
-<span class='line'>20</span>
-<span class='line'>21</span>
-<span class='line'>22</span>
-<span class='line'>23</span>
-<span class='line'>24</span>
-<span class='line'>25</span>
-<span class='line'>26</span>
-<span class='line'>27</span>
-<span class='line'>28</span>
-<span class='line'>29</span>
-<span class='line'>30</span>
-<span class='line'>31</span>
-<span class='line'>32</span>
-<span class='line'>33</span>
-<span class='line'>34</span>
-<span class='line'>35</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">MyInputBinding</span> <span class="p">:</span> <span class="n">KeyBinding</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>  <span class="cp">#region Fields</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">DependencyProperty</span> <span class="n">BoundCommandProperty</span> <span class="p">=</span>
-</div><div class='line'>                    <span class="n">DependencyProperty</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="s">&quot;BoundCommand&quot;</span><span class="p">,</span>
-</div><div class='line'>                                                <span class="k">typeof</span> <span class="p">(</span><span class="n">ICommand</span><span class="p">),</span>
-</div><div class='line'>                                                <span class="k">typeof</span> <span class="p">(</span><span class="n">MyInputBinding</span><span class="p">),</span>
-</div><div class='line'>                                                <span class="k">new</span> <span class="nf">PropertyMetadata</span><span class="p">(</span><span class="n">OnBoundCommandChanged</span><span class="p">));</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="cp">#endregion</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="cp">#region Properties</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="k">public</span> <span class="n">ICommand</span> <span class="n">BoundCommand</span>
-</div><div class='line'>  <span class="p">{</span>
-</div><div class='line'>    <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">GetValue</span><span class="p">(</span><span class="n">BoundCommandProperty</span><span class="p">)</span> <span class="k">as</span> <span class="n">ICommand</span><span class="p">;</span> <span class="p">}</span>
-</div><div class='line'>    <span class="k">set</span> <span class="p">{</span> <span class="n">SetValue</span><span class="p">(</span><span class="n">BoundCommandProperty</span><span class="p">,</span> <span class="k">value</span><span class="p">);}</span>
-</div><div class='line'>  <span class="p">}</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="cp">#endregion</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="cp">#region Methods</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">OnBoundCommandChanged</span><span class="p">(</span><span class="n">DependencyObject</span> <span class="n">obj</span><span class="p">,</span> <span class="n">DependencyPropertyChangedEventArgs</span> <span class="n">e</span><span class="p">)</span>
-</div><div class='line'>  <span class="p">{</span>
-</div><div class='line'>    <span class="n">MyInputBinding</span> <span class="n">binding</span> <span class="p">=</span> <span class="n">obj</span> <span class="k">as</span> <span class="n">MyInputBinding</span><span class="p">;</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">binding</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="n">binding</span><span class="p">.</span><span class="n">Command</span> <span class="p">=</span> <span class="n">e</span><span class="p">.</span><span class="n">NewValue</span> <span class="k">as</span> <span class="n">ICommand</span><span class="p">;</span>
-</div><div class='line'>  <span class="p">}</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="cp">#endregion</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>Then when you combine the use of the ElementSpy, your xaml looks like:</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-</pre></td><td class='code' width='100%'><pre><code class='xml'><div class='line'><span class="nt">&lt;Window.Resources&gt;</span>
-</div><div class='line'>  <span class="nt">&lt;InputBindingSandbox:ElementSpy</span> <span class="na">x:Key=</span><span class="s">&quot;spy&quot;</span> <span class="nt">/&gt;</span>
-</div><div class='line'><span class="nt">&lt;/Window.Resources&gt;</span>
-</div><div class='line'><span class="nt">&lt;Window.InputBindings&gt;</span>
-</div><div class='line'>  <span class="nt">&lt;InputBindingSandbox:MyInputBinding</span> <span class="na">BoundCommand=</span><span class="s">&quot;{Binding Source={StaticResource spy},</span>
-</div><div class='line'><span class="s">                                                           Path=Element.DataContext.MyCommand}&quot;</span>
-</div><div class='line'>                                    <span class="na">Key=</span><span class="s">&quot;Enter&quot;</span> <span class="nt">/&gt;</span>
-</div><div class='line'><span class="nt">&lt;/Window.InputBindings&gt;</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>Naturally the custom input binding is very simple and does not expose the Command Parameter nor the Command Target, etc. But the basic pattern is there so feel free to utilize and extend.</p>
-
-<p>Happy coding!</p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -813,23 +974,23 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2010/03/17/dynamic-extension-methods-fail/">Dynamic + Extension Methods = Fail</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/03/09/books-every-man-must-read/">100 Books Every Man Must Read</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/03/07/adv-wpf-videos/">Adv WPF Videos</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2010/02/23/creating-first-tfs-build/">Creating my first TFS 2010 Build</a>
       </li>
     
       <li class="post">
         <a href="/blog/2010/02/18/isubscribe/">ISubscribe</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2010/02/18/convention_over_configuration/">CodeCast #68 : Convention over Configuration</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2010/02/17/view-viewmodel-viewregistry/">View + ViewModel + ViewRegistry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2010/02/17/adv-wpf-workshop/">Advanced WPF Workshop</a>
       </li>
     
   </ul>

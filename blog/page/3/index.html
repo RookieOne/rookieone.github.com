@@ -86,6 +86,246 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2009/08/06/vbb-summary/">Virtual Brown Bag Summary 8/6/09</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-08-06 00:00:00 -0500" pubdate  updated >Aug 6<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Today&#8217;s Brown Bag was lots of fun.</p>
+
+<p>Claudio was off educating the masses (I believe in Denver when I talked to him last). I gladly picked up the MC duties again. Although I love doing it, there is a good deal of stress preparing for the brown bag.</p>
+
+<p>Will people show? Will I have to talk all by myself? What the hell am I going to say?!</p>
+
+<p>But today went great. I read Matthew Podwysocki&#8217;s blog post <a href="http://codebetter.com/matthewpodwysocki/2009/08/05/spec-and-boogie-released-on-codeplex/">Spec# and Boogie Released on CodePlex</a> and decided I would do a brief demo of Spec#. I spent around 30-40 minutes just playing with the older version of Spec# I found at the <a href="http://research.microsoft.com/en-us/projects/specsharp/">Microsoft Research</a> site in preparation for the BB.</p>
+
+<p>I was surprised at how much I picked up. Granted I have played with <a href="http://research.microsoft.com/en-us/projects/contracts/">CodeContracts</a> before so I was familiar with some of the concepts. Design by Contract is definitely a new school of coding thought. Its taking some time for me to assimilate the termniology and intentions. I know I have barely begun the journey necessary to fully understand and leverage this coding methodology.</p>
+
+<p>For the BB, I just opened a Spec# Console project and we just started to code the stuff I learned just 30 minutes ago. I think it went well. We played with the non-null ! &#8230; we set the reference types to default to non null. We setup some pre-conditions using &#8216;requires&#8217; and tested some post conditions with &#8216;ensures&#8217;. We didn&#8217;t really use &#8216;modifies&#8217; and our one attempt at invariant worked for a simple scenario but failed with another scenario.</p>
+
+<p>I forgot to record the BB. So I plan on using the new 2009 release of Spec# and doing a screencast covering the same material. At least we can record the same material if not the exact BB.</p>
+
+<p>Thanks to everyone who attended and especially those who asked questions! I hope to chat with you guys again next week. I always look forward to Brown Bag Thursdays!</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/08/05/mvvm-no-code-behind-challenge/">MVVM - the No Code Behind Challenge</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-08-05 10:00:00 -0500" pubdate  updated >Aug 5<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Glenn Block has an excellent post titled “The spirit of MYYM, it’s not a code counting exercise”. The <a href="http://codebetter.com/glennblock/2009/08/03/the-spirit-of-mvvm-viewmodel-it-s-not-a-code-counting-exercise/">post</a> can be found at CodeBetter.</p>
+
+<p>I thoroughly enjoyed the post and greatly appreciate practical discussions on WPF/SL application patterns. I am a bit of a WPF nut having lived and breathed xaml for over 2 years. I’ve been a part of 2 successful WPF projects (both in production). In both scenarios I acted as the defacto WPF guru.</p>
+
+<p>This last project was a typical line of business application and we used the ViewModel pattern with Prism. I bring all this up to share my background with WPF and ViewModels.</p>
+
+<p>Concerning the content of the post, I agree with Glenn on the majority of the content. The Commands and Parameters especially rings true. I found that whenever I went with option A [using element binding to a command parameter] I ended up refactoring it to option B [binding the ‘selected’ item to a property on the ViewModel]. Although a neat use of xaml, in practice the binding to the property just allowed more flexibility that indubitable becomes necessary with future changes and demands (not to mention testing opportunities).</p>
+
+<p>With both projects we didn’t have the luxury of a full time designer. In both scenarios I argued there was plenty of work for a designer, but alas the resources just weren’t there. We were able to use a designer for a decent chunk of hours, but more could have been done. The applications were definitely better off for having every hour we could get from any designer resource. I believe the last project persuaded many that indeed there was enough work for a full time designer, so maybe I can hope for a designer with a future application.</p>
+
+<p>I say this because I can not speak towards what its like having a designer in Blend all the time working on Views. When we used a designer resource, they would work in Blend and then a go-between developer / designer would take the xaml and integrate it with our ResourceDictionaries.</p>
+
+<p>What I would like to address is the ‘no code behind’ philosophy compared to the code behind practicality.</p>
+
+<p>Two years ago when I was floundering for WPF information and blogs, I ran across a blog post (I want to say it was Josh Smith) where the writer stated something like : “if something is easier to do in the code behind then its okay to do it in the code behind.”</p>
+
+<p>He was arguing that a crap load of xaml vs a couple lines of code behind isn’t an argument at all. The code behind is the best choice. Naturally clearer intentions and code maintainability takes precedence over having a dogmatic “everything in xaml” approach.</p>
+
+<p>With this last LoB Prism application, we had some choices to make when we were deciding on how the client should be made up.</p>
+
+<p>Do we use UserControls as Views or (as Ryan Riley brought up) do we use Data Templates as views. I felt at the time the team wasn’t ready for that leap to Data Templates as views. I considered the code behind of a User Control as a placebo safety net for a team struggling with the WPF learning curve. What I did do was firmly encouraged a no code behind policy. A “no code behind” challenge if you will.</p>
+
+<p>If I were to go back to the beginning and make that View decision again, I would go with the Data Templates as views. The team did very well without using the code behind. A Data Template view would have brought more benefits than the cost of having no code behind. Often we found ourselves thinking.. if this view was a data template and not a user control, then we could more easier do X.</p>
+
+<p>I have championed the “no code behind” stance internal to Catapult and to other developers. Yes you can legitimately use the code behind to accomplish certain tasks. More often than not though (in my experience), the use of the code behind has more to do with the prejudices carried over from WinForms development. Having a strict no code behind stance forces developers to learn and change the way they think about coding functionality into the UI.</p>
+
+<p>Glenn came up with a scenario (albiet a overly simplified one) of where he felt a code behind had some value. The scenario described is:</p>
+
+<p>&#8216;”The user clicks a Save button on the Edit Order screen which requires some UI cue to the user such as an hourglass while the order is saving, and another cue once the Order has saved.”</p>
+
+<p>He argues that the code in the xaml is less testable. He even suggests the solution I made. He also recognizes others my disagree. Count me in the disagreement camp.</p>
+
+<p>I created a simple project that uses Attached Dependency properties to accomplish this simple scenario. This isn’t a “throw down the gauntlet” sort of thing and I didn’t really write it for Glenn. A coworker emailed Glenn’s blog and I responded in an email describing my solution. He then asked to see it in action. So I coded it up.</p>
+
+<p>He also asked me to post a comment on Glenn’s post, but I don’t really see the point especially since I agree with the information Glenn is sharing and his opinions are built on experience &amp; expertise. I really had no disagreement and the solution Glenn already knows of. /shrug</p>
+
+<p>Anyway.. you can find the solution here : <a href="http://github.com/RookieOne/AttachedAnimation/tree/master">http://github.com/RookieOne/AttachedAnimation/tree/master</a></p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/08/05/custom-icommands-to-input-bindings/">How to Bind Custom ICommands to Input Bindings</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-08-05 08:00:00 -0500" pubdate  updated >Aug 5<span>th</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>If you are developing using any sort of V-VM-M pattern, you are already loving the awesome binding powers of Wpf.</p>
+
+<p>And you should also be loving ICommand and binding buttons to ICommand properties on your VM.</p>
+
+<p>What you might have discovered is that binding ICommands to Keys and other input gestures is not as easy as it was with vanilla Routed Commands.</p>
+
+<p>But have no fear! There is a solution.</p>
+
+<p>By utilizing Josh Smith&#8217;s <a href="http://joshsmithonwpf.wordpress.com/2008/07/22/enable-elementname-bindings-with-elementspy/">Element Spy trick</a> and creating a custom InputBinding, we can gain the functionality of binding an ICommand to a Key, etc.</p>
+
+<p>Here is my custom input binding :</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">MyInputBinding</span> <span class="p">:</span> <span class="n">KeyBinding</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>  <span class="cp">#region Fields</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">DependencyProperty</span> <span class="n">BoundCommandProperty</span> <span class="p">=</span>
+</div><div class='line'>                    <span class="n">DependencyProperty</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="s">&quot;BoundCommand&quot;</span><span class="p">,</span>
+</div><div class='line'>                                                <span class="k">typeof</span> <span class="p">(</span><span class="n">ICommand</span><span class="p">),</span>
+</div><div class='line'>                                                <span class="k">typeof</span> <span class="p">(</span><span class="n">MyInputBinding</span><span class="p">),</span>
+</div><div class='line'>                                                <span class="k">new</span> <span class="nf">PropertyMetadata</span><span class="p">(</span><span class="n">OnBoundCommandChanged</span><span class="p">));</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="cp">#endregion</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="cp">#region Properties</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">public</span> <span class="n">ICommand</span> <span class="n">BoundCommand</span>
+</div><div class='line'>  <span class="p">{</span>
+</div><div class='line'>    <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">GetValue</span><span class="p">(</span><span class="n">BoundCommandProperty</span><span class="p">)</span> <span class="k">as</span> <span class="n">ICommand</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>    <span class="k">set</span> <span class="p">{</span> <span class="n">SetValue</span><span class="p">(</span><span class="n">BoundCommandProperty</span><span class="p">,</span> <span class="k">value</span><span class="p">);}</span>
+</div><div class='line'>  <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="cp">#endregion</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="cp">#region Methods</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">OnBoundCommandChanged</span><span class="p">(</span><span class="n">DependencyObject</span> <span class="n">obj</span><span class="p">,</span> <span class="n">DependencyPropertyChangedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</div><div class='line'>  <span class="p">{</span>
+</div><div class='line'>    <span class="n">MyInputBinding</span> <span class="n">binding</span> <span class="p">=</span> <span class="n">obj</span> <span class="k">as</span> <span class="n">MyInputBinding</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">binding</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">binding</span><span class="p">.</span><span class="n">Command</span> <span class="p">=</span> <span class="n">e</span><span class="p">.</span><span class="n">NewValue</span> <span class="k">as</span> <span class="n">ICommand</span><span class="p">;</span>
+</div><div class='line'>  <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="cp">#endregion</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Then when you combine the use of the ElementSpy, your xaml looks like:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+</pre></td><td class='code' width='100%'><pre><code class='xml'><div class='line'><span class="nt">&lt;Window.Resources&gt;</span>
+</div><div class='line'>  <span class="nt">&lt;InputBindingSandbox:ElementSpy</span> <span class="na">x:Key=</span><span class="s">&quot;spy&quot;</span> <span class="nt">/&gt;</span>
+</div><div class='line'><span class="nt">&lt;/Window.Resources&gt;</span>
+</div><div class='line'><span class="nt">&lt;Window.InputBindings&gt;</span>
+</div><div class='line'>  <span class="nt">&lt;InputBindingSandbox:MyInputBinding</span> <span class="na">BoundCommand=</span><span class="s">&quot;{Binding Source={StaticResource spy},</span>
+</div><div class='line'><span class="s">                                                           Path=Element.DataContext.MyCommand}&quot;</span>
+</div><div class='line'>                                    <span class="na">Key=</span><span class="s">&quot;Enter&quot;</span> <span class="nt">/&gt;</span>
+</div><div class='line'><span class="nt">&lt;/Window.InputBindings&gt;</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Naturally the custom input binding is very simple and does not expose the Command Parameter nor the Command Target, etc. But the basic pattern is there so feel free to utilize and extend.</p>
+
+<p>Happy coding!</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2009/08/05/items-source-changed/">ItemsSourceChanged Event Using Attached Dependency Properties</a></h1>
     
     
@@ -1057,23 +1297,23 @@ What I am going to do is just describe my experience trying their framework for 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2010/03/17/dynamic-extension-methods-fail/">Dynamic + Extension Methods = Fail</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/03/09/books-every-man-must-read/">100 Books Every Man Must Read</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/03/07/adv-wpf-videos/">Adv WPF Videos</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2010/02/23/creating-first-tfs-build/">Creating my first TFS 2010 Build</a>
       </li>
     
       <li class="post">
         <a href="/blog/2010/02/18/isubscribe/">ISubscribe</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2010/02/18/convention_over_configuration/">CodeCast #68 : Convention over Configuration</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2010/02/17/view-viewmodel-viewregistry/">View + ViewModel + ViewRegistry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2010/02/17/adv-wpf-workshop/">Advanced WPF Workshop</a>
       </li>
     
   </ul>
