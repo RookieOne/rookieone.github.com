@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title>I am RookieOne</title>
-  <link href="http://www.iamrookieone.com/atom.xml" rel="self"/>
-  <link href="http://www.iamrookieone.com/"/>
-  <updated>2011-12-12T18:04:16-06:00</updated>
-  <id>http://www.iamrookieone.com/</id>
+  <title>Jonathan Birkholz</title>
+  <link href="http://www.jonathanbirkholz.com/atom.xml" rel="self"/>
+  <link href="http://www.jonathanbirkholz.com/"/>
+  <updated>2011-12-12T18:14:25-06:00</updated>
+  <id>http://www.jonathanbirkholz.com/</id>
   <author>
     <name>Jonathan Birkholz</name>
     
@@ -14,9 +14,9 @@
   
   <entry>
     <title>Learning Bash Aliases and Functions</title>
-    <link href="http://www.iamrookieone.com/blog/2010/10/29/learning-bash/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/10/29/learning-bash/"/>
     <updated>2010-10-29T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/10/29/learning-bash</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/10/29/learning-bash</id>
     <content type="html">&lt;p&gt;During our fantastical Lunch and Learn at ChaiOne, we went over customizing bash using aliases and functions. These little tools make normal command line mortals into command line gods… or at least demi-gods.&lt;/p&gt;
 
 &lt;p&gt;If you are new to Macs and other Unix based systems, like I am, then what I am about to share will be new to you. It was new to me until today. And for those Unix gurus, if I describe something incorrectly please let me know.&lt;/p&gt;
@@ -78,9 +78,9 @@
   
   <entry>
     <title>Houston Techfest - Design Patterns</title>
-    <link href="http://www.iamrookieone.com/blog/2010/10/26/techfest-design-patterns/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/10/26/techfest-design-patterns/"/>
     <updated>2010-10-26T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/10/26/techfest-design-patterns</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/10/26/techfest-design-patterns</id>
     <content type="html">&lt;p&gt;An email from Claudio reminded me that I completely forgot to link the slides and code from the Houston Techfest presentation!&lt;/p&gt;
 
 &lt;p&gt;And just a reminder that everything is offered as is. But that doesn’t mean you can’t email me or Claudio for more information. :)&lt;/p&gt;
@@ -101,9 +101,9 @@
   
   <entry>
     <title>Lighten Color in C#</title>
-    <link href="http://www.iamrookieone.com/blog/2010/09/11/lighten-color/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/09/11/lighten-color/"/>
     <updated>2010-09-11T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/09/11/lighten-color</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/09/11/lighten-color</id>
     <content type="html">&lt;p&gt;The following piece of code was originally written by Marcus Egger in a converter. I did a bit of refactoring to clean up the code and moved the code outside a converter and into an extension method.&lt;/p&gt;
 
 &lt;p&gt;The extension method is off of Color and returns another Color. Now since it is an extension method you can use it in a converter or a markup extension (the latter being my favorite use).&lt;/p&gt;
@@ -210,9 +210,9 @@
   
   <entry>
     <title>Wizards of Smart #11 - Glenn Block part 2</title>
-    <link href="http://www.iamrookieone.com/blog/2010/07/29/wizards-of-smart-11/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/07/29/wizards-of-smart-11/"/>
     <updated>2010-07-29T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/07/29/wizards-of-smart-11</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/07/29/wizards-of-smart-11</id>
     <content type="html">&lt;p&gt;A lot of people have asked about the second part of the Glenn Block interview, so here it is. Ok so it is a month late. A lot of stuff was happening in July (I will explain on another post. Lots of good stuff but it just put the podcast on hold for a bit)&lt;/p&gt;
 
 &lt;p&gt;In this podcast Glenn and Ryan dive more into REST. It is a great conversation. I felt like a fly on the wall, but it was a very lucky fly that learned a lot about REST. So enjoy.&lt;/p&gt;
@@ -221,9 +221,9 @@
   
   <entry>
     <title>Wizards of Smart #10 - Glenn Block part 1</title>
-    <link href="http://www.iamrookieone.com/blog/2010/06/24/wizards-of-smart-10/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/06/24/wizards-of-smart-10/"/>
     <updated>2010-06-24T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/06/24/wizards-of-smart-10</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/06/24/wizards-of-smart-10</id>
     <content type="html">&lt;p&gt;Ryan and I had a awesome opportunity of having Glenn Block join us on a Skype call a couple of weeks ago. We wanted to have him on and talk about what he is currently doing and try to avoid the whole MEF topic (we did dive a bit into it, but not too deep).&lt;/p&gt;
 
 &lt;p&gt;So part 1, Glenn introduces himself and gives a history of his current move from MEF to WCF and his vision on what he hopes to do by joining the team.&lt;/p&gt;
@@ -234,9 +234,9 @@
   
   <entry>
     <title>Wizards of Smart #9 - 25 Zeroes + IDEs + SOLID</title>
-    <link href="http://www.iamrookieone.com/blog/2010/06/22/wizards-of-smart-9/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/06/22/wizards-of-smart-9/"/>
     <updated>2010-06-22T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/06/22/wizards-of-smart-9</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/06/22/wizards-of-smart-9</id>
     <content type="html">&lt;p&gt;This conversation centers around Robert Martin’s Rails presentation titled “25 Zeros”.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://en.oreilly.com/rails2010/public/schedule/detail/14134&quot;&gt;http://en.oreilly.com/rails2010/public/schedule/detail/14134&lt;/a&gt;&lt;/p&gt;
@@ -253,9 +253,9 @@
   
   <entry>
     <title>Visual Studio Theme - Bearkat</title>
-    <link href="http://www.iamrookieone.com/blog/2010/06/17/visual-studio-theme/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/06/17/visual-studio-theme/"/>
     <updated>2010-06-17T12:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/06/17/visual-studio-theme</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/06/17/visual-studio-theme</id>
     <content type="html">&lt;p&gt;Sharing my Visual Studio theme has been on my list of things to do for awhile now. When the site &lt;a href=&quot;http://studiostyles.info/&quot;&gt;http://studiostyles.info/&lt;/a&gt; came up, I immediately thought here is an easy way to share my color scheme.&lt;/p&gt;
 
 &lt;p&gt;I finally created my theme on the site: &lt;a href=&quot;http://studiostyles.info/schemes/bearkat&quot;&gt;http://studiostyles.info/schemes/bearkat&lt;/a&gt;&lt;/p&gt;
@@ -280,9 +280,9 @@
   
   <entry>
     <title>Virtual Brown Bag 6/17/2010</title>
-    <link href="http://www.iamrookieone.com/blog/2010/06/17/virtual-brown-bag/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/06/17/virtual-brown-bag/"/>
     <updated>2010-06-17T12:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/06/17/virtual-brown-bag</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/06/17/virtual-brown-bag</id>
     <content type="html">&lt;p&gt;Ed is doing a fantastic job capturing the links and the topics from the Virtual Brown Bags but I think I will still throw some links up on my site.&lt;/p&gt;
 
 &lt;h2&gt;C# and Lambdas + Events&lt;/h2&gt;
@@ -317,9 +317,9 @@
   
   <entry>
     <title>Wizards of Smart - Heroku, Cloud, and Iron Ruby</title>
-    <link href="http://www.iamrookieone.com/blog/2010/06/17/wizards-of-smart-8/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/06/17/wizards-of-smart-8/"/>
     <updated>2010-06-17T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/06/17/wizards-of-smart-8</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/06/17/wizards-of-smart-8</id>
     <content type="html">&lt;p&gt;Sorry for the long delay guys. Ryan and I are both in the middle of deploying applications so other things are on our minds.
 While we wait for me to edit the recording we did last night and we await Glenn Block’s approval on the fantastic 2 shows we did with him, we can enjoy a smaller conversation Ryan and I had on Heroku, Azure, and a bit about Iron Ruby.&lt;/p&gt;
 </content>
@@ -327,9 +327,9 @@ While we wait for me to edit the recording we did last night and we await Glenn 
   
   <entry>
     <title>Reducing Exceptional Cases</title>
-    <link href="http://www.iamrookieone.com/blog/2010/06/08/wizards-of-smart-7/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/06/08/wizards-of-smart-7/"/>
     <updated>2010-06-08T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/06/08/wizards-of-smart-7</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/06/08/wizards-of-smart-7</id>
     <content type="html">&lt;p&gt;Ryan starts with describing his love affair with F#, which leads to a discussion of FubuMVC, which leads to a discussion of Performance Problems (not related to Fubu MVC)… etc. So a standard Wizards of Smart conversation.  :)&lt;/p&gt;
 
 &lt;p&gt;I titled this Performance since most of the conversation centered around our experiences with targeting and improving performance.&lt;/p&gt;
@@ -338,9 +338,9 @@ While we wait for me to edit the recording we did last night and we await Glenn 
   
   <entry>
     <title>Reducing Exceptional Cases</title>
-    <link href="http://www.iamrookieone.com/blog/2010/06/04/reducing-exceptional-cases/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/06/04/reducing-exceptional-cases/"/>
     <updated>2010-06-04T12:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/06/04/reducing-exceptional-cases</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/06/04/reducing-exceptional-cases</id>
     <content type="html">&lt;p&gt;We have a third party control suite that provided some aggregation functionality. The third party controls had some built in aggregate functions but was missing some other more business centric functions.&lt;/p&gt;
 
 &lt;p&gt;We ended up coding every aggregate as a separate custom class and not using any of the built in aggregates. My team member asked me why not use the built in aggregates?&lt;/p&gt;
@@ -355,9 +355,9 @@ While we wait for me to edit the recording we did last night and we await Glenn 
   
   <entry>
     <title>Linq - Sum</title>
-    <link href="http://www.iamrookieone.com/blog/2010/06/04/linq-sum/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/06/04/linq-sum/"/>
     <updated>2010-06-04T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/06/04/linq-sum</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/06/04/linq-sum</id>
     <content type="html">&lt;p&gt;Last week I started an ongoing section during the Virtual Brown Bag where I go over a Linq function (or two). The general idea is that although most people ‘use’ Linq, there are lots of functions that are overlooked.&lt;/p&gt;
 
 &lt;p&gt;In this blog post I will demonstrate basic usage cases for the Linq Sum function.&lt;/p&gt;
@@ -432,18 +432,18 @@ public void should_be_able_to_specify_property_to_sum()
   
   <entry>
     <title>Wizards of Smart - Episode 6</title>
-    <link href="http://www.iamrookieone.com/blog/2010/06/03/wizards-of-smart-6/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/06/03/wizards-of-smart-6/"/>
     <updated>2010-06-03T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/06/03/wizards-of-smart-6</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/06/03/wizards-of-smart-6</id>
     <content type="html">&lt;p&gt;The general theme for this podcast is handling Complexity through Composition. But we end up talking about Entity Framework, Fubu MVC, ISP, Rails, and reach new levels of nerdness with sentence composition.&lt;/p&gt;
 </content>
   </entry>
   
   <entry>
     <title>Virtual Brown Bag - 6/3/2010</title>
-    <link href="http://www.iamrookieone.com/blog/2010/06/03/virtual-brown-bag/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/06/03/virtual-brown-bag/"/>
     <updated>2010-06-03T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/06/03/virtual-brown-bag</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/06/03/virtual-brown-bag</id>
     <content type="html">&lt;p&gt;A rather link filled, topic filled VBB. Not many direct coding examples but lots of great information.&lt;/p&gt;
 
 &lt;h2&gt;LINQ Examples&lt;/h2&gt;
@@ -530,18 +530,18 @@ public void should_be_able_to_specify_property_to_sum()
   
   <entry>
     <title>Wizards of Smart - Episode 5</title>
-    <link href="http://www.iamrookieone.com/blog/2010/06/01/wizards-of-smart-5/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/06/01/wizards-of-smart-5/"/>
     <updated>2010-06-01T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/06/01/wizards-of-smart-5</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/06/01/wizards-of-smart-5</id>
     <content type="html">&lt;p&gt;I recently was doing some volunteer work using Rails and started a conversation about my experience. This went on to general discussions on Ruby, Rails, and benefits of Dynamic Languages.&lt;/p&gt;
 </content>
   </entry>
   
   <entry>
     <title>Interface Segregation Principle in practice</title>
-    <link href="http://www.iamrookieone.com/blog/2010/05/31/interface-segregation-principle/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/05/31/interface-segregation-principle/"/>
     <updated>2010-05-31T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/05/31/interface-segregation-principle</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/05/31/interface-segregation-principle</id>
     <content type="html">&lt;p&gt;I am working with some other team members integrating components to be consumed by different controls. For example someone could use a grid and then opt in to have sorting or filtering etc. It is a rather weird system but was decided upon before I arrived.&lt;/p&gt;
 
 &lt;p&gt;Anyway, I am currently looking to implement an adapter for the formatting component. When I looked at the interface, ISP immediately jumped out at me. So I thought, why not do a blog post about identifying the problem and delivering the solution.&lt;/p&gt;
@@ -749,9 +749,9 @@ public interface IChooseColumn
   
   <entry>
     <title>Structure Map 2.6 Constructing the Concrete Type</title>
-    <link href="http://www.iamrookieone.com/blog/2010/05/28/structure-map-concrete-type/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/05/28/structure-map-concrete-type/"/>
     <updated>2010-05-28T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/05/28/structure-map-concrete-type</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/05/28/structure-map-concrete-type</id>
     <content type="html">&lt;h2&gt;Basic Use with Func&lt;T&gt;&lt;/h2&gt;
 
 &lt;p&gt;Ryan yet again was asking for how to do another crazy thing with Structure Map. :)&lt;/p&gt;
@@ -882,9 +882,9 @@ public void should_set_foo_property_on_bar()
   
   <entry>
     <title>Virtual Brown Bag 5/27/2010</title>
-    <link href="http://www.iamrookieone.com/blog/2010/05/27/virtual-brown-bag/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/05/27/virtual-brown-bag/"/>
     <updated>2010-05-27T12:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/05/27/virtual-brown-bag</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/05/27/virtual-brown-bag</id>
     <content type="html">&lt;p&gt;Claudio was a no show today. As I predicted he had meetings he could not get out of.&lt;/p&gt;
 
 &lt;p&gt;But we powered through and covered a range of topics.&lt;/p&gt;
@@ -951,18 +951,18 @@ I mentioned the Houston Techfest again and discussed some potential presentation
   
   <entry>
     <title>Wizards of Smart - Episode 4</title>
-    <link href="http://www.iamrookieone.com/blog/2010/05/27/wizards-of-smart-4/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/05/27/wizards-of-smart-4/"/>
     <updated>2010-05-27T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/05/27/wizards-of-smart-4</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/05/27/wizards-of-smart-4</id>
     <content type="html">&lt;p&gt;Ryan and I talk about code reviews, work environment, and some traits of a good developer.&lt;/p&gt;
 </content>
   </entry>
   
   <entry>
     <title>Structure Map 2.6 Constructor Arguments</title>
-    <link href="http://www.iamrookieone.com/blog/2010/05/26/structure-map-constructor/"/>
+    <link href="http://www.jonathanbirkholz.com/blog/2010/05/26/structure-map-constructor/"/>
     <updated>2010-05-26T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/05/26/structure-map-constructor</id>
+    <id>http://www.jonathanbirkholz.com/blog/2010/05/26/structure-map-constructor</id>
     <content type="html">&lt;h2&gt;Constructor Injection&lt;/h2&gt;
 
 &lt;p&gt;When we use an IoC tool the most basic functionality we expect is to have constructor injection. That means if we have a type we are resolving and one of the constructor’s parameters is also a type, the container will resolve that type as well.&lt;/p&gt;

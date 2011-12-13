@@ -1,269 +1,275 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/08/03/hello-open-rasta/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/08/03/hello-open-rasta/</loc>
         <lastmod>2011-10-26T18:36:49-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/08/03/toggling-read-only-with-WPF/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/08/03/toggling-read-only-with-WPF/</loc>
         <lastmod>2011-10-26T18:36:43-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/08/03/fluent-interfaces/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/08/03/fluent-interfaces/</loc>
         <lastmod>2011-10-26T18:46:53-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/08/04/new-pc/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/08/04/new-pc/</loc>
         <lastmod>2011-10-26T18:50:22-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/08/05/items-source-changed/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/08/05/items-source-changed/</loc>
         <lastmod>2011-10-26T19:06:06-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/08/05/custom-icommands-to-input-bindings/</loc>
+        <loc>
+            http://www.jonathanbirkholz.com/blog/2009/08/05/custom-icommands-to-input-bindings/
+        </loc>
         <lastmod>2011-10-26T22:06:30-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/08/05/mvvm-no-code-behind-challenge/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/08/05/mvvm-no-code-behind-challenge/</loc>
         <lastmod>2011-10-26T22:09:51-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/08/06/vbb-summary/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/08/06/vbb-summary/</loc>
         <lastmod>2011-10-26T22:12:52-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/08/07/hide-columns-with-wpf-gridview/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/08/07/hide-columns-with-wpf-gridview/</loc>
         <lastmod>2011-10-26T22:16:30-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/08/19/monads/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/08/19/monads/</loc>
         <lastmod>2011-10-27T23:39:30-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/09/28/houston-techfest/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/09/28/houston-techfest/</loc>
         <lastmod>2011-10-27T23:43:01-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/09/29/catapult-to-eps/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/09/29/catapult-to-eps/</loc>
         <lastmod>2011-10-27T23:45:16-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/10/19/new-career-at-eps/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/10/19/new-career-at-eps/</loc>
         <lastmod>2011-10-30T18:14:02-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/10/22/vbb-summary/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/10/22/vbb-summary/</loc>
         <lastmod>2011-10-30T18:27:28-05:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/10/27/london-time/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/10/27/london-time/</loc>
         <lastmod>2011-11-09T19:41:14-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/10/29/aop-structure-map/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/10/29/aop-structure-map/</loc>
         <lastmod>2011-11-09T19:47:30-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/11/25/named-command-decorator/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/11/25/named-command-decorator/</loc>
         <lastmod>2011-11-09T19:49:30-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/12/15/examining-how-we-develop-software/</loc>
+        <loc>
+            http://www.jonathanbirkholz.com/blog/2009/12/15/examining-how-we-develop-software/
+        </loc>
         <lastmod>2011-11-09T19:58:25-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/12/16/jaded-net/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/12/16/jaded-net/</loc>
         <lastmod>2011-11-09T20:01:24-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2009/12/17/the-goal/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2009/12/17/the-goal/</loc>
         <lastmod>2011-11-09T20:05:19-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/02/17/adv-wpf-workshop/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/02/17/adv-wpf-workshop/</loc>
         <lastmod>2011-11-20T17:17:29-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/02/17/view-viewmodel-viewregistry/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/02/17/view-viewmodel-viewregistry/</loc>
         <lastmod>2011-11-20T17:07:58-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/02/18/convention_over_configuration/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/02/18/convention_over_configuration/</loc>
         <lastmod>2011-11-20T16:57:54-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/02/18/isubscribe/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/02/18/isubscribe/</loc>
         <lastmod>2011-11-20T16:56:43-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/02/23/creating-first-tfs-build/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/02/23/creating-first-tfs-build/</loc>
         <lastmod>2011-11-20T16:54:20-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/03/07/adv-wpf-videos/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/03/07/adv-wpf-videos/</loc>
         <lastmod>2011-11-25T17:59:50-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/03/09/books-every-man-must-read/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/03/09/books-every-man-must-read/</loc>
         <lastmod>2011-11-25T17:55:47-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/03/17/dynamic-extension-methods-fail/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/03/17/dynamic-extension-methods-fail/</loc>
         <lastmod>2011-11-25T17:51:55-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/04/04/houston-open-spaces/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/04/04/houston-open-spaces/</loc>
         <lastmod>2011-12-09T12:53:35-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/10/houston-open-spaces/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/10/houston-open-spaces/</loc>
         <lastmod>2011-12-09T13:00:30-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/11/learning-mongo-db/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/11/learning-mongo-db/</loc>
         <lastmod>2011-12-09T13:06:42-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/12/basic-norm-id/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/12/basic-norm-id/</loc>
         <lastmod>2011-12-09T13:20:24-06:00</lastmod>
     </url>
     <url>
         <loc>
-            http://www.iamrookieone.com/blog/2010/05/13/using-extension-methods-to-remove-dependencies/
+            http://www.jonathanbirkholz.com/blog/2010/05/13/using-extension-methods-to-remove-dependencies/
         </loc>
         <lastmod>2011-12-09T15:05:15-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/13/distinct-with-func/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/13/distinct-with-func/</loc>
         <lastmod>2011-12-09T15:09:46-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/13/virtual-brown-bag/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/13/virtual-brown-bag/</loc>
         <lastmod>2011-12-09T15:27:30-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/14/wizards-of-smart-1/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/14/wizards-of-smart-1/</loc>
         <lastmod>2011-12-09T15:30:49-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/14/tools-of-podcasting/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/14/tools-of-podcasting/</loc>
         <lastmod>2011-12-09T15:34:41-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/17/wizards-of-smart2/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/17/wizards-of-smart2/</loc>
         <lastmod>2011-12-09T15:37:25-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/20/evolve-your-code/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/20/evolve-your-code/</loc>
         <lastmod>2011-12-09T16:26:17-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/20/virtual-brown-bag/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/20/virtual-brown-bag/</loc>
         <lastmod>2011-12-09T17:04:26-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/21/structure-map/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/21/structure-map/</loc>
         <lastmod>2011-12-09T17:09:20-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/24/structure-map-conventions/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/24/structure-map-conventions/</loc>
         <lastmod>2011-12-12T15:33:06-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/25/wizards-of-smart-3/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/25/wizards-of-smart-3/</loc>
         <lastmod>2011-12-12T15:35:15-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/26/structure-map-constructor/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/26/structure-map-constructor/</loc>
         <lastmod>2011-12-12T15:40:03-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/27/wizards-of-smart-4/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/27/wizards-of-smart-4/</loc>
         <lastmod>2011-12-12T15:43:28-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/27/virtual-brown-bag/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/27/virtual-brown-bag/</loc>
         <lastmod>2011-12-12T15:53:03-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/28/structure-map-concrete-type/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/05/28/structure-map-concrete-type/</loc>
         <lastmod>2011-12-12T15:57:46-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/05/31/interface-segregation-principle/</loc>
+        <loc>
+            http://www.jonathanbirkholz.com/blog/2010/05/31/interface-segregation-principle/
+        </loc>
         <lastmod>2011-12-12T16:03:14-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/06/01/wizards-of-smart-5/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/06/01/wizards-of-smart-5/</loc>
         <lastmod>2011-12-12T16:05:25-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/06/03/virtual-brown-bag/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/06/03/virtual-brown-bag/</loc>
         <lastmod>2011-12-12T16:12:55-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/06/03/wizards-of-smart-6/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/06/03/wizards-of-smart-6/</loc>
         <lastmod>2011-12-12T17:36:29-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/06/04/linq-sum/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/06/04/linq-sum/</loc>
         <lastmod>2011-12-12T17:38:24-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/06/04/reducing-exceptional-cases/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/06/04/reducing-exceptional-cases/</loc>
         <lastmod>2011-12-12T17:40:11-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/06/08/wizards-of-smart-7/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/06/08/wizards-of-smart-7/</loc>
         <lastmod>2011-12-12T17:41:41-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/06/17/wizards-of-smart-8/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/06/17/wizards-of-smart-8/</loc>
         <lastmod>2011-12-12T17:43:16-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/06/17/virtual-brown-bag/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/06/17/virtual-brown-bag/</loc>
         <lastmod>2011-12-12T17:48:33-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/06/17/visual-studio-theme/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/06/17/visual-studio-theme/</loc>
         <lastmod>2011-12-12T17:45:02-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/06/22/wizards-of-smart-9/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/06/22/wizards-of-smart-9/</loc>
         <lastmod>2011-12-12T17:50:36-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/06/24/wizards-of-smart-10/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/06/24/wizards-of-smart-10/</loc>
         <lastmod>2011-12-12T17:51:29-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/07/29/wizards-of-smart-11/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/07/29/wizards-of-smart-11/</loc>
         <lastmod>2011-12-12T17:53:58-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/09/11/lighten-color/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/09/11/lighten-color/</loc>
         <lastmod>2011-12-12T17:55:31-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/10/26/techfest-design-patterns/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/10/26/techfest-design-patterns/</loc>
         <lastmod>2011-12-12T17:58:06-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/2010/10/29/learning-bash/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/2010/10/29/learning-bash/</loc>
         <lastmod>2011-12-12T18:04:15-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/about/</loc>
+        <loc>http://www.jonathanbirkholz.com/about/</loc>
         <lastmod>2011-12-12T18:04:15-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/blog/archives/</loc>
+        <loc>http://www.jonathanbirkholz.com/blog/archives/</loc>
         <lastmod>2011-12-12T18:04:15-06:00</lastmod>
     </url>
     <url>
-        <loc>http://www.iamrookieone.com/</loc>
+        <loc>http://www.jonathanbirkholz.com/</loc>
         <lastmod>2011-12-12T18:04:15-06:00</lastmod>
     </url>
 </urlset>

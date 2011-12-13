@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>I am RookieOne</title>
+  <title>Jonathan Birkholz</title>
   <meta name="author" content="Jonathan Birkholz">
   
 
@@ -16,13 +16,13 @@
 
   
 
-  <link rel="canonical" href="http://www.iamrookieone.com/index.html"/>
+  <link rel="canonical" href="http://www.jonathanbirkholz.com/index.html"/>
   <link href="/favicon.png" rel="shortcut icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="I am RookieOne" type="application/atom+xml"/>
+  <link href="/atom.xml" rel="alternate" title="Jonathan Birkholz" type="application/atom+xml"/>
   
 
   
@@ -55,7 +55,7 @@
 
 <body  >
   <header><hgroup>
-  <h1><a href="/">I am RookieOne</a></h1>
+  <h1><a href="/">Jonathan Birkholz</a></h1>
 </hgroup>
 
 </header>
@@ -65,7 +65,7 @@
 </ul>
 <form action="http://google.com/search" method="get">
   <fieldset role="site-search">
-    <input type="hidden" name="q" value="site:www.iamrookieone.com" />
+    <input type="hidden" name="q" value="site:www.jonathanbirkholz.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -712,6 +712,22 @@ While we wait for me to edit the recording we did last night and we await Glenn 
       </li>
     
   </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("rookieone", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/rookieone" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @rookieone</a>
+  
 </section>
 
 
