@@ -86,14 +86,14 @@
     
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2010/03/17/dynamic-extension-methods-fail/">Dynamic + Extension Methods = Fail</a></h1>
+      <h1 class="entry-title"><a href="/blog/2010/10/29/learning-bash/">Learning Bash Aliases and Functions</a></h1>
     
     
 
 
 
 
-<time datetime="2010-03-17 00:00:00 -0500" pubdate  updated >Mar 17<span>th</span>, 2010</time>
+<time datetime="2010-10-29 00:00:00 -0500" pubdate  updated >Oct 29<span>th</span>, 2010</time>
 
 
 
@@ -101,29 +101,21 @@
 
 
 
-  <div class="entry-content"><p>I am playing around with dynamics right now working on a solution for a completely different problem.</p>
+  <div class="entry-content"><p>During our fantastical Lunch and Learn at ChaiOne, we went over customizing bash using aliases and functions. These little tools make normal command line mortals into command line gods… or at least demi-gods.</p>
 
-<p>I discovered a issue I didn’t foresee (and maybe I am doing something wrong).</p>
+<p>If you are new to Macs and other Unix based systems, like I am, then what I am about to share will be new to you. It was new to me until today. And for those Unix gurus, if I describe something incorrectly please let me know.</p>
 
-<p>I use AssertExtensions to make my tests more readable so I created my first extension.</p>
+<p>First of all there is a file called .bashrc in your home directory ( ~ ). This file is loaded anytime you run a command script or open a terminal window. In this file we can add aliases, functions, and other customizations for our command line.</p>
+
+<p>With an alias I can create a shortcut ‘g’ for ‘git status’.</p>
 
 <figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">AssertExtensions</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">ShouldBe</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">this</span> <span class="n">T</span> <span class="n">actual</span><span class="p">,</span> <span class="n">T</span> <span class="n">expected</span><span class="p">)</span>
-</div><div class='line'>    <span class="p">{</span>
-</div><div class='line'>        <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">);</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'><span class="p">}</span>
+</pre></td><td class='code' width='100%'><pre><code class='bash'><div class='line'><span class="nb">alias </span><span class="nv">g</span><span class="o">=</span><span class="s1">&#39;git status&#39;</span>
 </div></code></pre></td></tr></table></div></figure>
 
-<p>I created a test to ‘get’ a property from a dynamic object.</p>
+<p>Now I can just type ‘g’ to run ‘git status’.</p>
+
+<p>I can use a function to create a more robust shortcut. For example, I can create a shortcut for ‘git push’. In this function by default I push to ‘origin master’ but if I provide an argument it will push to ‘$argument master’.</p>
 
 <figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
@@ -133,53 +125,33 @@
 <span class='line'>6</span>
 <span class='line'>7</span>
 <span class='line'>8</span>
-<span class='line'>9</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[TestMethod]</span>
-</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_be_able_to_get_property</span><span class="p">()</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="n">var</span> <span class="n">book</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Book</span> <span class="p">{</span><span class="n">Title</span> <span class="p">=</span> <span class="s">&quot;Icarus Hunt&quot;</span><span class="p">,</span> <span class="n">Author</span> <span class="p">=</span> <span class="s">&quot;Timothy Zahn&quot;</span><span class="p">};</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="n">var</span> <span class="n">d</span> <span class="p">=</span> <span class="n">book</span> <span class="k">as</span> <span class="n">dynamic</span><span class="p">;</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="n">d</span><span class="p">.</span><span class="n">Author</span><span class="p">.</span><span class="n">ShouldBe</span><span class="p">(</span><span class="s">&quot;Timothy Zahn&quot;</span><span class="p">);</span>
-</div><div class='line'><span class="p">}</span>
+</pre></td><td class='code' width='100%'><pre><code class='bash'><div class='line'><span class="k">function </span>gpush <span class="o">{</span>
+</div><div class='line'>    <span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$1</span> <span class="o">]]</span>
+</div><div class='line'>    <span class="k">then</span>
+</div><div class='line'><span class="k">     </span>git push origin master
+</div><div class='line'>    <span class="k">else</span>
+</div><div class='line'><span class="k">     </span>git push <span class="nv">$1</span> master
+</div><div class='line'>    <span class="k">fi</span>
+</div><div class='line'><span class="o">}</span>
 </div></code></pre></td></tr></table></div></figure>
 
-<p>Should work right?</p>
+<p>gpush => git push origin master</p>
 
-<p>Wrong.</p>
+<p>gpush heroku => git push heroku master</p>
 
-<p><img class='' src='/images/dynamic-fail.png' width='' height='' alt=''Compile fail'' title=''Compile fail''></p>
-
-<p>Oh noes!</p>
-
-<p>Apparently the RuntimeBinder can’t figure out the extension to string. My solution was to do this:</p>
+<p>Once you add the alias or function to your .bashrc, you can reload the file using</p>
 
 <figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[TestMethod]</span>
-</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_be_able_to_get_property</span><span class="p">()</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="n">var</span> <span class="n">book</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Book</span> <span class="p">{</span><span class="n">Title</span> <span class="p">=</span> <span class="s">&quot;Icarus Hunt&quot;</span><span class="p">,</span> <span class="n">Author</span> <span class="p">=</span> <span class="s">&quot;Timothy Zahn&quot;</span><span class="p">};</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="n">var</span> <span class="n">d</span> <span class="p">=</span> <span class="n">book</span> <span class="k">as</span> <span class="n">dynamic</span><span class="p">;</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="n">var</span> <span class="n">author</span> <span class="p">=</span> <span class="n">d</span><span class="p">.</span><span class="n">Author</span> <span class="k">as</span> <span class="kt">string</span><span class="p">;</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="n">author</span><span class="p">.</span><span class="n">ShouldBe</span><span class="p">(</span><span class="s">&quot;Timothy Zahn&quot;</span><span class="p">);</span>
-</div><div class='line'><span class="p">}</span>
+</pre></td><td class='code' width='100%'><pre><code class='bash'><div class='line'><span class="nb">source</span> ~/.bashrc
 </div></code></pre></td></tr></table></div></figure>
 
-<p>I just found it interesting that it didn’t behave the way I would have expected.</p>
+<p>And there is a shortcut for source ( . ) So you can use</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='bash'><div class='line'>. ~/.bashrc
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Now you know how to create aliases and functions. I must admit, I think its pretty damn cool. This coming from the guy that a year ago was hesitant to use git on the command line.</p>
 </div>
   
   
@@ -192,14 +164,14 @@
     
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2010/03/09/books-every-man-must-read/">100 Books Every Man Must Read</a></h1>
+      <h1 class="entry-title"><a href="/blog/2010/10/26/techfest-design-patterns/">Houston Techfest - Design Patterns</a></h1>
     
     
 
 
 
 
-<time datetime="2010-03-09 00:00:00 -0600" pubdate  updated >Mar 9<span>th</span>, 2010</time>
+<time datetime="2010-10-26 00:00:00 -0500" pubdate  updated >Oct 26<span>th</span>, 2010</time>
 
 
 
@@ -207,53 +179,21 @@
 
 
 
-  <div class="entry-content"><p>So over lunch I decided to mark down which of the 100 books every man must read I have actually read.</p>
+  <div class="entry-content"><p>An email from Claudio reminded me that I completely forgot to link the slides and code from the Houston Techfest presentation!</p>
 
-<p>Read</p>
+<p>And just a reminder that everything is offered as is. But that doesn’t mean you can’t email me or Claudio for more information. :)</p>
 
-<ol>
-<li>The Great Gatsby</li>
-<li>1984 &lt;- multiple times&#8230; pure genius</li>
-<li>The Catcher in the Rye</li>
-<li>The Picture of Dorian Gray</li>
-<li>How to Win Friends and Influence People</li>
-<li>Call of the Wild</li>
-<li>Swiss Family Robinson</li>
-<li>Catch-22 &lt;- love it! I need to reread.</li>
-<li>Lord of the Flies</li>
-<li>Don Quixote &#8230; yes I&#8217;ve read it. It was long and I don&#8217;t remember any of it.</li>
-<li>The Hobbit</li>
-<li>Huckleberry Finn</li>
-<li>Animal Farm &lt;- again.. genius.</li>
-<li>Frankenstein &lt;- Fire&#8230;. bad</li>
-<li>Hamlet</li>
-<li>The Stranger</li>
-<li>The Island of Dr Moreau</li>
-<li>All Quiet on the Western Front &lt;- literally changed my mind about going into the army :)</li>
-<li>To Kill a Mockingbird</li>
-</ol>
+<p>You can find the slides on slideshare at :</p>
 
+<p><a href="http://www.slideshare.net/RookieOne/techfest-design-patterns">http://www.slideshare.net/RookieOne/techfest-design-patterns</a></p>
 
-<p>Read Excerpts</p>
+<p>And the code you can find (as is) at bitbucket :</p>
 
-<ol>
-<li>The Prince</li>
-<li>The Republic</li>
-<li>Brave New World (still need to finish it)</li>
-<li>The Iliad and Odyssey</li>
-<li>Walden</li>
-<li>The Metamorphosis</li>
-<li>The Art of Warfare</li>
-<li>The Divine Comedy &lt;- I read Inferno</li>
-<li>The Politics</li>
-<li>The Federalist Papers &lt;- genius</li>
-<li>Moby Dick &lt;- started but never finished</li>
-<li>Paradise Lost</li>
-<li>The Red badge of Courage</li>
-<li>The Bible</li>
-<li>Zen and the Art of Motorcycle Maintenance</li>
-</ol>
+<p><a href="http://bitbucket.org/rookieone/design-patterns">http://bitbucket.org/rookieone/design-patterns</a></p>
 
+<p>And you can find the code on GitHub at :</p>
+
+<p><a href="http://github.com/RookieOne/Houston-Techfest-Design-Patterns">http://github.com/RookieOne/Houston-Techfest-Design-Patterns</a></p>
 </div>
   
   
@@ -266,14 +206,14 @@
     
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2010/03/07/adv-wpf-videos/">Adv WPF Videos</a></h1>
+      <h1 class="entry-title"><a href="/blog/2010/09/11/lighten-color/">Lighten Color in C#</a></h1>
     
     
 
 
 
 
-<time datetime="2010-03-07 00:00:00 -0600" pubdate  updated >Mar 7<span>th</span>, 2010</time>
+<time datetime="2010-09-11 00:00:00 -0500" pubdate  updated >Sep 11<span>th</span>, 2010</time>
 
 
 
@@ -281,159 +221,13 @@
 
 
 
-  <div class="entry-content"><p>The videos are up from the Adv WPF Workshop we had here at EPS.</p>
+  <div class="entry-content"><p>The following piece of code was originally written by Marcus Egger in a converter. I did a bit of refactoring to clean up the code and moved the code outside a converter and into an extension method.</p>
 
-<p>Videos (the links are kind of slow and funky atm. I will look into it on Monday. I had more luck downloading the file as opposed to streaming it)</p>
+<p>The extension method is off of Color and returns another Color. Now since it is an extension method you can use it in a converter or a markup extension (the latter being my favorite use).</p>
 
-<p><a href="" title="http://www.epsdownloadsite.com/downloads/7a554107-cdd0-4133-967b-913c595971ee/Advanced_WPF_JB_part1.wmv">Part 1</a>
-<a href="" title="http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part2.wmv">Part 2</a>
-<a href="" title="http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part3.wmv">Part 3</a>
-<a href="" title="http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part4.wmv">Part 4</a>
-<a href="" title="http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part5.wmv">Part 5</a></p>
+<p>You can also get this code from my color project on GitHub :</p>
 
-<p>I had a great time talking through some of the things we are doing here with WPF. I think it took awhile to get started but towards the end I think we picked up speed.</p>
-
-<p>I don’t exactly recall the topics right now but I believe we did cover these items from the original agenda:</p>
-
-<ul>
-<li>INotifyPropertyChange
-
-<ul>
-<li>Normal</li>
-<li>Type Safe</li>
-<li>Dynamic Proxy</li>
-<li>AOP</li>
-</ul>
-</li>
-<li>View + ViewModel
-
-<ul>
-<li>Typical methods</li>
-<li>IView extensions</li>
-<li>IView<VM></li>
-<li>ViewRegistry</li>
-<li>Also will be covering StructureMap conventions (TypeScanners) and Type Interceptors</li>
-</ul>
-</li>
-<li>Event Aggregator
-
-<ul>
-<li>using Events</li>
-<li>Publish extension method</li>
-<li>ISubscribe</li>
-<li>Putting it all together with a Region Controller</li>
-</ul>
-</li>
-</ul>
-
-
-<p>I guess one big note would be that PostSharp is no longer open source therefore you need a license for their 2.0 product. At EPS we picked up licenses for our current solution. The benefit we get out of PostSharp and AOP far surpasses the license price even when you have to buy the license for every developer.</p>
-
-<p>Check PostSharp out at (http://www.sharpcrafters.com/)[http://www.sharpcrafters.com/]</p>
-
-<p>I think we are going to work on a PostSharp CodeCast or some other informative session on the tool.</p>
-
-<p>Considering we have the Houston Open Spaces coming up, I will probably delay another workshop for a bit. But I had a good time and will probably do another one around May or June.</p>
-
-<p>I want to thank everyone who came online and on site. It was a lot of fun! Please provide feedback so we can make the next workshop even better.</p>
-</div>
-  
-  
-
-
-  </article>
-
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/02/23/creating-first-tfs-build/">Creating My First TFS 2010 Build</a></h1>
-    
-    
-
-
-
-
-<time datetime="2010-02-23 00:00:00 -0600" pubdate  updated >Feb 23<span>rd</span>, 2010</time>
-
-
-
-  </header>
-
-
-
-  <div class="entry-content"><p>My work this iteration on my project is setting up a CI build and then migrating all our POC code to the solution.</p>
-
-<p>Right now I am creating a simple build as practice for setting up the actual build.</p>
-
-<p>I am approaching this from a complete n00b when it comes to creating a TFS build. I have created builds before but they have been small and just simple MSBuild files. This is the first time I am using TFS and creating not only a build but a continuous integration environment.</p>
-
-<p>I created a Team Project and added a simple C# project to source control. I then looked at the Team Explorer and noticed that there is a Builds section under my project. Intuitively I right clicked and found where I can create a New Build Definition.</p>
-
-<p><img class='' src='/images/tfs_thumbnail1.png' width='' height='' alt=''New Build Definition'' title=''New Build Definition''></p>
-
-<p>I looked at the options available to me on the Build Window and noticed a Trigger section. Investigating the Trigger section allowed me to select what triggers this build. Oh look a CI trigger that builds after each check-in!</p>
-
-<p><img class='' src='/images/tfs_thumbnail2.png' width='' height='' alt=''Continuous Integration'' title=''Continuous Integration''></p>
-
-<p>I then had to set an output folder so I created a folder on our build machine and set the folder to that.</p>
-
-<p><img class='' src='/images/tfs_thumbnail3.png' width='' height='' alt=''Set output folder'' title=''Set output folder''></p>
-
-<p>And then I was done.</p>
-
-<p>I do have to say we already had a TFS Build Controller setup so I can’t comment on that for now.</p>
-
-<p>I then ran a couple of experiments. I first added a class foo to my project and checked in. I then double clicked on my Build under the TFS explorer and was given two reports. One report showed the current queued builds and the other had a list of the completed builds.</p>
-
-<p>After I ran my first successful build I then made a compile error and checked it in. I then had a failed build.</p>
-
-<p><img class='' src='/images/tfs_thumbnail4.png' width='' height='' alt=''Failed build'' title=''Failed build''></p>
-
-<p>When I double clicked the failed build I got this UI.</p>
-
-<p><img class='' src='/images/tfs_thumbnail5.png' width='' height='' alt=''Failed build report'' title=''Failed build report''></p>
-
-<p>I then created a test project and then made a failing test. Now my build looks like this:</p>
-
-<p><img class='' src='/images/tfs_thumbnail6.png' width='' height='' alt=''Build with failing tests'' title=''Build with failing tests''></p>
-
-<p>And when I double clicked I got this report.</p>
-
-<p><img class='' src='/images/tfs_thumbnail7.png' width='' height='' alt=''Build with failing tests report'' title=''Build with failing tests report''></p>
-
-<p>So that was a real quick run through with creating a CI build with TFS 2010. I have to say… I was surprised that it was that easy. I am continuing my work with the build but it looks like the simple scenario was incredibly easy!</p>
-</div>
-  
-  
-
-
-  </article>
-
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/02/18/isubscribe/">ISubscribe</a></h1>
-    
-    
-
-
-
-
-<time datetime="2010-02-18 00:00:00 -0600" pubdate  updated >Feb 18<span>th</span>, 2010</time>
-
-
-
-  </header>
-
-
-
-  <div class="entry-content"><p>I believe Jimmy Bogard has a similar technique (IHandler<T>) with ASP .Net MVC but I thought I would still share the convention I’ve been using to wire up subscriptions to the Prism Event Aggregator.</p>
-
-<p>Whenever an object is built with StructureMap, it goes through all the TypeInterceptors. I have a SubscriptionTypeInterceptor:</p>
+<p><a href="http://github.com/RookieOne/Colors">http://github.com/RookieOne/Colors</a></p>
 
 <figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
@@ -468,69 +262,147 @@
 <span class='line'>31</span>
 <span class='line'>32</span>
 <span class='line'>33</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">SubscriptionInterceptor</span> <span class="p">:</span> <span class="n">TypeInterceptor</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+<span class='line'>36</span>
+<span class='line'>37</span>
+<span class='line'>38</span>
+<span class='line'>39</span>
+<span class='line'>40</span>
+<span class='line'>41</span>
+<span class='line'>42</span>
+<span class='line'>43</span>
+<span class='line'>44</span>
+<span class='line'>45</span>
+<span class='line'>46</span>
+<span class='line'>47</span>
+<span class='line'>48</span>
+<span class='line'>49</span>
+<span class='line'>50</span>
+<span class='line'>51</span>
+<span class='line'>52</span>
+<span class='line'>53</span>
+<span class='line'>54</span>
+<span class='line'>55</span>
+<span class='line'>56</span>
+<span class='line'>57</span>
+<span class='line'>58</span>
+<span class='line'>59</span>
+<span class='line'>60</span>
+<span class='line'>61</span>
+<span class='line'>62</span>
+<span class='line'>63</span>
+<span class='line'>64</span>
+<span class='line'>65</span>
+<span class='line'>66</span>
+<span class='line'>67</span>
+<span class='line'>68</span>
+<span class='line'>69</span>
+<span class='line'>70</span>
+<span class='line'>71</span>
+<span class='line'>72</span>
+<span class='line'>73</span>
+<span class='line'>74</span>
+<span class='line'>75</span>
+<span class='line'>76</span>
+<span class='line'>77</span>
+<span class='line'>78</span>
+<span class='line'>79</span>
+<span class='line'>80</span>
+<span class='line'>81</span>
+<span class='line'>82</span>
+<span class='line'>83</span>
+<span class='line'>84</span>
+<span class='line'>85</span>
+<span class='line'>86</span>
+<span class='line'>87</span>
+<span class='line'>88</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">LightenColorExtension</span>
 </div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="k">public</span> <span class="kt">object</span> <span class="nf">Process</span><span class="p">(</span><span class="kt">object</span> <span class="n">target</span><span class="p">,</span> <span class="n">IContext</span> <span class="n">context</span><span class="p">)</span>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">///   This method applies lighting to a color.</span>
+</div><div class='line'>    <span class="c1">///   For instance, a color that has a lighting factor of 1 applies, appears at its original value.</span>
+</div><div class='line'>    <span class="c1">///   A color with a lighting factor of 0.5 appears only half as bright as it was before.</span>
+</div><div class='line'>    <span class="c1">///   A color with a lighting factor of 1.5 appears roughly twice as bright as before.</span>
+</div><div class='line'>    <span class="c1">///   A color with a lightning factor of 2 appears white.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// &lt;param name=&quot;originalColor&quot;&gt;Base color&lt;/param&gt;</span>
+</div><div class='line'>    <span class="c1">/// &lt;param name=&quot;lightFactor&quot;&gt;</span>
+</div><div class='line'>    <span class="c1">///   Amount of light applied to the color</span>
+</div><div class='line'>    <span class="c1">/// &lt;/param&gt;</span>
+</div><div class='line'>    <span class="c1">/// &lt;returns&gt;Lit color&lt;/returns&gt;</span>
+</div><div class='line'>    <span class="c1">/// &lt;remarks&gt;</span>
+</div><div class='line'>    <span class="c1">///   This routine is very fast. Even when using it in tight loops, I (Markus) have not been able to </span>
+</div><div class='line'>    <span class="c1">///   meassure a significant amount of time spent in this routine (always less than 1ms). I was originally</span>
+</div><div class='line'>    <span class="c1">///   concerened about the performance of this, so I added a caching mechanism, but that slowed things down</span>
+</div><div class='line'>    <span class="c1">///   by 2 orders of magnitude.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/remarks&gt;</span>
+</div><div class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="n">Color</span> <span class="nf">Lighten</span><span class="p">(</span><span class="k">this</span> <span class="n">Color</span> <span class="n">originalColor</span><span class="p">,</span> <span class="kt">float</span> <span class="n">lightFactor</span><span class="p">)</span>
 </div><div class='line'>    <span class="p">{</span>
-</div><div class='line'>        <span class="n">var</span> <span class="n">eventAggregator</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IEventAggregator</span><span class="p">&gt;();</span>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">TransformationNotNeeded</span><span class="p">(</span><span class="n">lightFactor</span><span class="p">))</span>
+</div><div class='line'>            <span class="k">return</span> <span class="n">originalColor</span><span class="p">;</span>
 </div><div class='line'>
-</div><div class='line'>        <span class="c1">// Get interface ISubscribe&lt;E&gt;</span>
-</div><div class='line'>        <span class="n">var</span> <span class="n">interfaces</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">GetInterfaces</span><span class="p">().</span><span class="n">Where</span><span class="p">(</span><span class="n">i</span> <span class="p">=&gt;</span> <span class="n">i</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">&quot;ISubscribe&quot;</span><span class="p">));</span>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">RealBright</span><span class="p">(</span><span class="n">lightFactor</span><span class="p">))</span>
+</div><div class='line'>            <span class="k">return</span> <span class="n">System</span><span class="p">.</span><span class="n">Windows</span><span class="p">.</span><span class="n">Media</span><span class="p">.</span><span class="n">Colors</span><span class="p">.</span><span class="n">White</span><span class="p">;</span>
 </div><div class='line'>
-</div><div class='line'>        <span class="k">foreach</span> <span class="p">(</span><span class="n">var</span> <span class="n">type</span> <span class="k">in</span> <span class="n">interfaces</span><span class="p">)</span>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">ShouldDarken</span><span class="p">(</span><span class="n">lightFactor</span><span class="p">))</span>
+</div><div class='line'>            <span class="k">return</span> <span class="nf">DarkenColor</span><span class="p">(</span><span class="n">originalColor</span><span class="p">,</span> <span class="n">lightFactor</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">return</span> <span class="nf">LightenColor</span><span class="p">(</span><span class="n">originalColor</span><span class="p">,</span> <span class="n">lightFactor</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">private</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">TransformationNotNeeded</span><span class="p">(</span><span class="kt">float</span> <span class="n">lightFactor</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">var</span> <span class="k">value</span> <span class="p">=</span> <span class="n">lightFactor</span> <span class="p">-</span> <span class="m">1.0f</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">return</span> <span class="k">value</span> <span class="p">&lt;</span> <span class="m">0.01f</span>
+</div><div class='line'>               <span class="p">&amp;&amp;</span> <span class="k">value</span> <span class="p">&gt;</span> <span class="p">-</span><span class="m">0.01f</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">private</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">RealBright</span><span class="p">(</span><span class="kt">float</span> <span class="n">lightFactor</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="k">return</span> <span class="n">lightFactor</span> <span class="p">&gt;=</span> <span class="m">2.0f</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">private</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">ShouldDarken</span><span class="p">(</span><span class="kt">float</span> <span class="n">lightFactor</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="k">return</span> <span class="n">lightFactor</span> <span class="p">&lt;</span> <span class="m">1.0f</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">private</span> <span class="k">static</span> <span class="n">Color</span> <span class="nf">DarkenColor</span><span class="p">(</span><span class="n">Color</span> <span class="n">color</span><span class="p">,</span> <span class="kt">float</span> <span class="n">lightFactor</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">red</span> <span class="p">=</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span> <span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">R</span><span class="p">*</span><span class="n">lightFactor</span><span class="p">);</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">green</span> <span class="p">=</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span> <span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">G</span><span class="p">*</span><span class="n">lightFactor</span><span class="p">);</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">blue</span> <span class="p">=</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span> <span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">B</span><span class="p">*</span><span class="n">lightFactor</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">return</span> <span class="n">Color</span><span class="p">.</span><span class="n">FromRgb</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">private</span> <span class="k">static</span> <span class="n">Color</span> <span class="nf">LightenColor</span><span class="p">(</span><span class="n">Color</span> <span class="n">color</span><span class="p">,</span> <span class="kt">float</span> <span class="n">lightFactor</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="c1">// Lighten</span>
+</div><div class='line'>        <span class="c1">// We do this by approaching 256 for a light factor of 2.0f</span>
+</div><div class='line'>        <span class="kt">float</span> <span class="n">fFactor2</span> <span class="p">=</span> <span class="n">lightFactor</span><span class="p">;</span>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">fFactor2</span> <span class="p">&gt;</span> <span class="m">1.0f</span><span class="p">)</span>
 </div><div class='line'>        <span class="p">{</span>
-</div><div class='line'>            <span class="c1">// typeof(E)</span>
-</div><div class='line'>            <span class="n">var</span> <span class="n">eventType</span> <span class="p">=</span> <span class="n">type</span><span class="p">.</span><span class="n">GetGenericArguments</span><span class="p">()[</span><span class="m">0</span><span class="p">];</span>
-</div><div class='line'>
-</div><div class='line'>            <span class="n">var</span> <span class="n">setupMethod</span> <span class="p">=</span> <span class="n">GetType</span><span class="p">().</span><span class="n">GetMethod</span><span class="p">(</span><span class="s">&quot;Setup&quot;</span><span class="p">);</span>
-</div><div class='line'>            <span class="n">setupMethod</span><span class="p">.</span><span class="n">MakeGenericMethod</span><span class="p">(</span><span class="n">eventType</span><span class="p">).</span><span class="n">Invoke</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">target</span><span class="p">,</span> <span class="n">eventAggregator</span> <span class="p">});</span>
+</div><div class='line'>            <span class="n">fFactor2</span> <span class="p">-=</span> <span class="m">1.0f</span><span class="p">;</span>
 </div><div class='line'>        <span class="p">}</span>
 </div><div class='line'>
-</div><div class='line'>        <span class="k">return</span> <span class="n">target</span><span class="p">;</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">red</span> <span class="p">=</span> <span class="n">LightenColorComponent</span><span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">R</span><span class="p">,</span> <span class="n">fFactor2</span><span class="p">);</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">green</span> <span class="p">=</span> <span class="n">LightenColorComponent</span><span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">G</span><span class="p">,</span> <span class="n">fFactor2</span><span class="p">);</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">blue</span> <span class="p">=</span> <span class="n">LightenColorComponent</span><span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">B</span><span class="p">,</span> <span class="n">fFactor2</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">return</span> <span class="n">Color</span><span class="p">.</span><span class="n">FromRgb</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">);</span>
 </div><div class='line'>    <span class="p">}</span>
 </div><div class='line'>
-</div><div class='line'>    <span class="k">public</span> <span class="kt">bool</span> <span class="nf">MatchesType</span><span class="p">(</span><span class="n">Type</span> <span class="n">type</span><span class="p">)</span>
+</div><div class='line'>    <span class="k">private</span> <span class="k">static</span> <span class="kt">byte</span> <span class="nf">LightenColorComponent</span><span class="p">(</span><span class="kt">byte</span> <span class="n">colorComponent</span><span class="p">,</span> <span class="kt">float</span> <span class="n">fFactor</span><span class="p">)</span>
 </div><div class='line'>    <span class="p">{</span>
-</div><div class='line'>        <span class="k">return</span> <span class="n">type</span><span class="p">.</span><span class="n">ImplementsInterfaceTemplate</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">ISubscribe</span><span class="p">&lt;&gt;));</span>
-</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">inverse</span> <span class="p">=</span> <span class="m">255</span> <span class="p">-</span> <span class="n">colorComponent</span><span class="p">;</span>
+</div><div class='line'>        <span class="n">colorComponent</span> <span class="p">+=</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span> <span class="p">(</span><span class="n">inverse</span><span class="p">*</span><span class="n">fFactor</span><span class="p">);</span>
 </div><div class='line'>
-</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="n">Setup</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">ISubscribe</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">subscriber</span><span class="p">,</span> <span class="n">IEventAggregator</span> <span class="n">eventAggregator</span><span class="p">)</span>
-</div><div class='line'>    <span class="p">{</span>
-</div><div class='line'>        <span class="n">eventAggregator</span>
-</div><div class='line'>            <span class="p">.</span><span class="n">GetEvent</span><span class="p">&lt;</span><span class="n">CompositePresentationEvent</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;()</span>
-</div><div class='line'>            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">subscriber</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">);</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>So it finds all the ISubscribe<T> interfaces the target implements and then subscribes the target to the event T in the event aggregator.</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">ISubscribe</span><span class="p">&lt;</span><span class="n">E</span><span class="p">&gt;</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="k">void</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="n">E</span> <span class="n">e</span><span class="p">);</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>A simple example of usage:</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">SecurityController</span> <span class="p">:</span> <span class="n">IController</span><span class="p">,</span>
-</div><div class='line'>                                  <span class="n">ISubscribe</span><span class="p">&lt;</span><span class="n">RequestUserLoginEvent</span><span class="p">&gt;</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="n">RequestUserLoginEvent</span> <span class="n">e</span><span class="p">)</span>
-</div><div class='line'>    <span class="p">{</span>
-</div><div class='line'>        <span class="n">Publish</span><span class="p">.</span><span class="n">Event</span><span class="p">().</span><span class="n">ShowModal</span><span class="p">&lt;</span><span class="n">IRequestUserLoginViewModel</span><span class="p">&gt;();</span>
+</div><div class='line'>        <span class="k">return</span> <span class="n">colorComponent</span> <span class="p">&lt;</span> <span class="m">255</span>
+</div><div class='line'>                   <span class="p">?</span> <span class="n">colorComponent</span>
+</div><div class='line'>                   <span class="p">:</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span> <span class="m">255</span><span class="p">;</span>
 </div><div class='line'>    <span class="p">}</span>
 </div><div class='line'><span class="p">}</span>
 </div></code></pre></td></tr></table></div></figure>
@@ -546,14 +418,14 @@
     
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2010/02/18/convention_over_configuration/">CodeCast #68 : Convention Over Configuration</a></h1>
+      <h1 class="entry-title"><a href="/blog/2010/07/29/wizards-of-smart-11/">Wizards of Smart #11 - Glenn Block Part 2</a></h1>
     
     
 
 
 
 
-<time datetime="2010-02-18 00:00:00 -0600" pubdate  updated >Feb 18<span>th</span>, 2010</time>
+<time datetime="2010-07-29 00:00:00 -0500" pubdate  updated >Jul 29<span>th</span>, 2010</time>
 
 
 
@@ -561,13 +433,9 @@
 
 
 
-  <div class="entry-content"><p>I recorded a podcast with Markus and Ken on Tuesday and it was published last night. :)</p>
+  <div class="entry-content"><p>A lot of people have asked about the second part of the Glenn Block interview, so here it is. Ok so it is a month late. A lot of stuff was happening in July (I will explain on another post. Lots of good stuff but it just put the podcast on hold for a bit)</p>
 
-<p>We talked about Convention over Configuration using tools like Structure Map, PostSharp, Prism, etc</p>
-
-<p>You can download the podcast using itunes or online at:</p>
-
-<p><a href="http://www.code-magazine.com/codecast/index.aspx?messageid=0001bf99-1394-45c2-8949-388c673ac7a5">http://www.code-magazine.com/codecast/index.aspx?messageid=0001bf99-1394-45c2-8949-388c673ac7a5</a></p>
+<p>In this podcast Glenn and Ryan dive more into REST. It is a great conversation. I felt like a fly on the wall, but it was a very lucky fly that learned a lot about REST. So enjoy.</p>
 </div>
   
   
@@ -580,14 +448,14 @@
     
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2010/02/17/view-viewmodel-viewregistry/">View + ViewModel + ViewRegistry</a></h1>
+      <h1 class="entry-title"><a href="/blog/2010/06/24/wizards-of-smart-10/">Wizards of Smart #10 - Glenn Block Part 1</a></h1>
     
     
 
 
 
 
-<time datetime="2010-02-17 00:00:00 -0600" pubdate  updated >Feb 17<span>th</span>, 2010</time>
+<time datetime="2010-06-24 00:00:00 -0500" pubdate  updated >Jun 24<span>th</span>, 2010</time>
 
 
 
@@ -595,73 +463,11 @@
 
 
 
-  <div class="entry-content"><p>In preparation for the Advanced WPF Workshop on Saturday Feb 20th, I thought I would throw together some blog posts around some techniques / code I will be sharing. JP asked the other day whether Views should have references to their ViewModels or should ViewModels have references to Views. Unfortunately twitter is a great medium for asking this question but not the best medium for answering the question.</p>
+  <div class="entry-content"><p>Ryan and I had a awesome opportunity of having Glenn Block join us on a Skype call a couple of weeks ago. We wanted to have him on and talk about what he is currently doing and try to avoid the whole MEF topic (we did dive a bit into it, but not too deep).</p>
 
-<p>I am going to try using the dry marker board as a form of communication with my blogs. I have little patience for lining up pretty lines and colored boxes with Visio or Power Point. A dry marker board is fast and allows for a free flowing expression of my ideas.</p>
+<p>So part 1, Glenn introduces himself and gives a history of his current move from MEF to WCF and his vision on what he hopes to do by joining the team.</p>
 
-<p>Let me try to diagram out how I currently manage my Views and ViewModels.</p>
-
-<p><img class='' src='/images/view_viewmodel_viewregistry_whiteboard.jpg' width='' height='' alt=''View ViewModel ViewRegistry Whiteboard'' title=''View ViewModel ViewRegistry Whiteboard''></p>
-
-<ol>
-<li>We ask the StructureMap container for the ViewModel</li>
-<li>The VM instance is intercepted by a ViewModelTypeInterceptor</li>
-<li>Inside the VMTypeInterceptor
-
-<ol>
-<li>Get the V for out VM from the container</li>
-<li>Get the ViewRegistry from the container</li>
-<li>Register the V with the VM in the ViewRegistry</li>
-<li>Return the VM</li>
-</ol>
-</li>
-<li>And finally our VM is returned being registered with a V in the ViewRegistry</li>
-</ol>
-
-
-<p>In short my ViewModel has no reference to my View, my View has no reference to my ViewModel (beyond setting the DataContext), and my View Registry registers the mappings between View and ViewModel.</p>
-
-<p>The best code to look for this is in the ViewModelInterceptor:</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-<span class='line'>16</span>
-<span class='line'>17</span>
-<span class='line'>18</span>
-<span class='line'>19</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">ViewModelInterceptor</span> <span class="p">:</span> <span class="n">TypeInterceptor</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="k">public</span> <span class="kt">object</span> <span class="nf">Process</span><span class="p">(</span><span class="kt">object</span> <span class="n">target</span><span class="p">,</span> <span class="n">IContext</span> <span class="n">context</span><span class="p">)</span>
-</div><div class='line'>    <span class="p">{</span>
-</div><div class='line'>        <span class="n">var</span> <span class="n">name</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span><span class="p">;</span>
-</div><div class='line'>
-</div><div class='line'>        <span class="n">var</span> <span class="n">view</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IView</span><span class="p">&gt;(</span><span class="n">name</span><span class="p">);</span>
-</div><div class='line'>
-</div><div class='line'>        <span class="n">context</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IViewRegistry</span><span class="p">&gt;()</span>
-</div><div class='line'>            <span class="p">.</span><span class="n">RegisterViewWith</span><span class="p">(</span><span class="n">target</span> <span class="k">as</span> <span class="n">IViewModel</span><span class="p">,</span> <span class="n">view</span><span class="p">);</span>
-</div><div class='line'>
-</div><div class='line'>        <span class="k">return</span> <span class="n">target</span><span class="p">;</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="k">public</span> <span class="kt">bool</span> <span class="nf">MatchesType</span><span class="p">(</span><span class="n">Type</span> <span class="n">type</span><span class="p">)</span>
-</div><div class='line'>    <span class="p">{</span>
-</div><div class='line'>        <span class="k">return</span> <span class="n">type</span><span class="p">.</span><span class="n">CanBeCastTo</span><span class="p">(</span><span class="k">typeof</span> <span class="p">(</span><span class="n">IViewModel</span><span class="p">));</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
+<p>Glenn blogs at codebetter.com : <a href="http://codebetter.com/blogs/glenn.block/">http://codebetter.com/blogs/glenn.block/</a></p>
 </div>
   
   
@@ -674,14 +480,14 @@
     
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2010/02/17/adv-wpf-workshop/">Advanced WPF Workshop</a></h1>
+      <h1 class="entry-title"><a href="/blog/2010/06/22/wizards-of-smart-9/">Wizards of Smart #9 - 25 Zeroes + IDEs + SOLID</a></h1>
     
     
 
 
 
 
-<time datetime="2010-02-17 00:00:00 -0600" pubdate  updated >Feb 17<span>th</span>, 2010</time>
+<time datetime="2010-06-22 00:00:00 -0500" pubdate  updated >Jun 22<span>nd</span>, 2010</time>
 
 
 
@@ -689,90 +495,17 @@
 
 
 
-  <div class="entry-content"><p>On February 20th from 9 am (central) until we get bored… I guess 1pm, we will be having a free Advanced WPF Workshop here at EPS.</p>
+  <div class="entry-content"><p>This conversation centers around Robert Martin’s Rails presentation titled “25 Zeros”.</p>
 
-<p>Let me emphasize ….</p>
+<p><a href="http://en.oreilly.com/rails2010/public/schedule/detail/14134">http://en.oreilly.com/rails2010/public/schedule/detail/14134</a></p>
 
-<h2>FREE!!!!!!</h2>
+<p>Part of the conversation dived into IDEs and Ryan sent me a link to Code Bubbles.</p>
 
-<p>When : Feb 20th 9am - 1pm+</p>
+<p><a href="http://www.cs.brown.edu/people/acb/codebubbles_site.htm">http://www.cs.brown.edu/people/acb/codebubbles_site.htm</a></p>
 
-<p>Where : EPS Office</p>
+<p>Ryan later references the SOLID article in CODE Magazine by Derick Bailey.</p>
 
-<p>6605 Cypresswood Dr, Suite 300
-Spring, TX 77379</p>
-
-<iframe height="350" marginheight="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=6605+cypresswood+dr+sprint+tx&amp;sll=37.0625,-95.677068&amp;sspn=64.792576,135.263672&amp;ie=UTF8&amp;hq=&amp;hnear=6605+Cypresswood+Dr,+Spring,+Harris,+Texas+77379&amp;z=17&amp;ll=30.014289,-95.507411&amp;output=embed" frameborder="0" width="425" marginwidth="0" scrolling="no"></iframe>
-
-
-<p>And online at : https://www2.gotomeeting.com/register/902909498</p>
-
-<p>There will be lunch which at the moment is BBQ, but I might change my mind. ;)</p>
-
-<p>Currently the agenda looks like:</p>
-
-<ul>
-<li>INotifyPropertyChange
-
-<ul>
-<li>Normal</li>
-<li>Type Safe</li>
-<li>Dynamic Proxy</li>
-<li>AOP</li>
-</ul>
-</li>
-<li>View &amp; ViewModel
-
-<ul>
-<li>Typical methods</li>
-<li>IView extensions</li>
-<li>IView<VM></li>
-<li>ViewRegistry</li>
-<li>Also will be covering StructureMap conventions (TypeScanners) and Type Interceptors</li>
-</ul>
-</li>
-<li>Event Aggregator
-
-<ul>
-<li>using Events</li>
-<li>Publish extension method</li>
-<li>ISubscribe</li>
-<li>Putting it all together with a Region Controller</li>
-</ul>
-</li>
-<li>Commands
-
-<ul>
-<li>ICommand</li>
-<li>Action / Delegate Command</li>
-<li>Decorating with a Named Command</li>
-<li>might be using commands with a convention</li>
-</ul>
-</li>
-<li>Resource Locator
-
-<ul>
-<li>Resource Dictionary Convention</li>
-<li>Image Convention</li>
-</ul>
-</li>
-<li>And anything else that comes up during our discussions</li>
-<li>Potential additions:
-
-<ul>
-<li>Paul Stovell’s MicroModel</li>
-<li>Dependency Property Inheritance</li>
-<li>Attached Dep Property Behaviors</li>
-<li>Blend Behaviors</li>
-<li>Visual State Manager</li>
-</ul>
-</li>
-</ul>
-
-
-<p>We will be recording the session so have no fear if you can’t come or join us online.</p>
-
-<p>I am very excited about the workshop! Its a great opportunity to share some stuff I’ve been doing with WPF. User groups and brown bags offer only limited exposure to these techniques. With this workshop we get to dive into code and get rapid interactions. I hope to see you there.</p>
+<p><a href="http://www.code-magazine.com/Article.aspx?quickid=1001061">http://www.code-magazine.com/Article.aspx?quickid=1001061</a></p>
 </div>
   
   
@@ -785,14 +518,14 @@ Spring, TX 77379</p>
     
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2009/12/17/the-goal/">The Goal</a></h1>
+      <h1 class="entry-title"><a href="/blog/2010/06/17/visual-studio-theme/">Visual Studio Theme - Bearkat</a></h1>
     
     
 
 
 
 
-<time datetime="2009-12-17 00:00:00 -0600" pubdate  updated >Dec 17<span>th</span>, 2009</time>
+<time datetime="2010-06-17 12:00:00 -0500" pubdate  updated >Jun 17<span>th</span>, 2010</time>
 
 
 
@@ -800,70 +533,25 @@ Spring, TX 77379</p>
 
 
 
-  <div class="entry-content"><p>With my current mindset that things are broken, I dive into my current readings including The Goal and The Toyota Way.</p>
+  <div class="entry-content"><p>Sharing my Visual Studio theme has been on my list of things to do for awhile now. When the site <a href="http://studiostyles.info/">http://studiostyles.info/</a> came up, I immediately thought here is an easy way to share my color scheme.</p>
 
-<p><a href="http://www.amazon.com/Goal-Process-Ongoing-Improvement/dp/0884271781%3FSubscriptionId%3D0JTCV5ZMHMF7ZYTXGFR2%26tag%3Dbrdicr-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D0884271781">The Goal: A Process of Ongoing Improvement</a></p>
+<p>I finally created my theme on the site: <a href="http://studiostyles.info/schemes/bearkat">http://studiostyles.info/schemes/bearkat</a></p>
 
-<p><img class='' src='/images/the-goal.jpg' width='' height='' alt='' title=''></p>
+<p>Be sure to check it out!</p>
 
-<p>I read The Goal back in my business graduate school days (about 5 years ago), but now its reading has a whole new impact. I am seeing more into the book after 5 years of working in software than I did as a fresh college graduate. Some of the mental exercises the protagonist in the book is going through I am going through as well. As he wrestles answering questions concerning his factory, I am wrestling with the questions concerning my software projects.</p>
-
-<p>The first exercise is to define &#8216;the goal&#8217; for his company and all companies. Of course the protagonist takes a long time to come to the logical conclusion that it&#8217;s to make money.</p>
-
-<blockquote><p>Every company&#8217;s goal is to make money.</p></blockquote>
-
-<p>As a software consulting company, how do we make money?</p>
-
-<blockquote><p>We make money by winning a bid for a project and then performing the work to complete the project within budget.</p></blockquote>
-
-<p>That seems pretty simple. Nothing about data access technologies, TDD, user stories, or any sort of architecture or design pattern.</p>
-
-<blockquote><p>If you need X done and will pay $Y then we should do X for less than $Y.</p></blockquote>
-
-<p>Why is it so hard to deliver on that?</p>
-
-<ol>
-<li>Define X</li>
-<li>Estimate Y</li>
-<li>…something</li>
-<li>Profit!</li>
-</ol>
-
-
-<p>If we scope a project then we need to know what X is. Simple to say, but man is it difficult to capture!</p>
-
-<p>X is always in motion, a moving target. The client changes their mind, we have scope creep, and what appears simple always ends up being more complex. We all know this! Its the one constant with software development. Things are going to change.</p>
-
-<p>From my perspective, SOLID and design patterns focus on writing code that is more adaptive to change.</p>
-
-<blockquote><p>SOLID and design patterns in of themselves do NOT move us towards our goal by reducing the cost of writing software.</p>
-
-<p>SOLID and design patterns move us towards our goal when our software has to change because the cost of the change has been reduced.</p></blockquote>
-
-<p>The principles and patterns also provide a common language for developers. That common language moves us closer to the goal because current and new developers can grok more of the design in less time. And time = money.</p>
-
-<p>Where does testing fit into all this?</p>
-
-<p>Testing allows us to keep track of the quality of our production. Or.. does it? After some re-examination I want to say testing adds no quality. That will have to be another post.</p>
-
-<p>Testing provides a way to measure our progress towards X. We know we are moving towards X because we can have tests that verify we are delivering towards our promise. When I mention testing I am using a broad definition and including all sorts of tests from UAT testers to automated unit tests.</p>
-
-<p>So what does Test Driven Development (TDD) provide? TDD focuses every bit of code towards satisfying a test. If every test is relevant towards progress towards X, then TDD focuses our development towards productive work. Logically any work not moving us towards delivering X to our clients is unproductive work.</p>
-
-<p>What conclusions have I come to?</p>
-
-<p>The goal of a software consulting company is to make money. We make money by completing X under $Y. One of the important steps is to then define what X is. We know X will change so we should write code that is adaptive to change, but we need to balance that with only writing code that moves us towards delivering X.</p>
+<p>For those who might like the colors but not the way I used them (and for me to remember what the colors are):</p>
 
 <ul>
-<li>We achieve more flexible and understandable code by using SOLID and design patterns.</li>
-<li>We measure our progress towards X by passing tests.</li>
-<li>TDD focuses our coding towards productive work.</li>
+<li>Black : R22 G22 B22</li>
+<li>Blue : R43 G145 B175</li>
+<li>Green : R102 G143 B95</li>
+<li>Orange : R255 G116 B0</li>
+<li>Red : R163 G21 B21</li>
+<li>Gray : R128 G128 B128</li>
+<li>Light Green : R206 G255 B132</li>
+<li>Tan : R189 G162 B101</li>
 </ul>
 
-
-<p>I started to write about estimation in this section but have decided to move it to another post.</p>
-
-<p>After thinking about estimation, it has nothing to do with knowing what X is. Estimation has to do with what we think $Y is. X is what X is regardless if it takes you 3 hours or 3 months to deliver.</p>
 </div>
   
   
@@ -876,14 +564,14 @@ Spring, TX 77379</p>
     
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2009/12/16/jaded-net/">Jaded .Net</a></h1>
+      <h1 class="entry-title"><a href="/blog/2010/06/17/virtual-brown-bag/">Virtual Brown Bag 6/17/2010</a></h1>
     
     
 
 
 
 
-<time datetime="2009-12-16 00:00:00 -0600" pubdate  updated >Dec 16<span>th</span>, 2009</time>
+<time datetime="2010-06-17 12:00:00 -0500" pubdate  updated >Jun 17<span>th</span>, 2010</time>
 
 
 
@@ -891,55 +579,94 @@ Spring, TX 77379</p>
 
 
 
-  <div class="entry-content"><p>I love talking with Ryan and others passionate about new technology and languages. Lately though I have been increasingly jaded with anything ‘new’.</p>
+  <div class="entry-content"><p>Ed is doing a fantastic job capturing the links and the topics from the Virtual Brown Bags but I think I will still throw some links up on my site.</p>
 
-<p>How many different data technologies do we need? ADO .Net, Nhibernate, Linq-2-SQL, Entity Framework version.. whatever. We have been connecting to databases for over 20 years so why are we still worrying about this?!</p>
+<h2>C# and Lambdas + Events</h2>
 
-<p>The sheer number of UI frameworks is reaching the point of ridiculousness. I was reading the WPF Disciples Google Group and ran across this post. Paul Stovell listed all the MVVM, MVC, MVC frameworks he knew of (around 11). Then everyone was commenting with their own ‘me too’ response.</p>
+<p>Shared some code on using Lambdas to listen to events. Alan Stevens recommended the reading of C# in Depth : <a href="http://www.manning.com/skeet/">http://www.manning.com/skeet/</a></p>
 
-<p>Am I the only one who finds that utterly hilarious? How many frameworks do we need?!</p>
+<h2>RailsConf + Skills Matter Videos</h2>
 
-<p>Ryan is extremely involved with Ruby, Python, F#, and the other ‘new’ languages to the .Net Framework. I have been delaying learning Ruby for too long, because it&#8217;s hard to get motivated to learn a new language. I see the potential and the possibilities, but I quickly get discouraged and uninterested.</p>
+<p>Uncle Bob : 25-Zeroes : <a href="http://www.youtube.com/watch#!v=mslMLp5bQD0&amp;feature=related">http://www.youtube.com/watch#!v=mslMLp5bQD0&amp;feature=related</a></p>
 
-<p>I have to ask myself… why am I jaded? Why am I disinterested in things that used to excite me?</p>
+<p>Martin Feathers : Good Code : <a href="http://www.youtube.com/watch?v=L9ccnRixyMg&amp;feature=PlayList&amp;p=393ECE649BB3813D&amp;playnext_from=PL&amp;index=6">http://www.youtube.com/watch?v=L9ccnRixyMg&amp;feature=PlayList&amp;p=393ECE649BB3813D&amp;playnext_from=PL&amp;index=6</a></p>
 
-<p>The more I thought about it, the more the conclusion became crystal clear. Every project I have been a part of has had the same problems. None of the problems were technology related.</p>
+<p>Udi Dahan : CQRS : <a href="http://skillsmatter.com/podcast/open-source-dot-net/udi-dahan-command-query-responsibility-segregation">http://skillsmatter.com/podcast/open-source-dot-net/udi-dahan-command-query-responsibility-segregation</a></p>
 
-<p>Why would I get excited about a solution to a problem I don’t have?</p>
+<h2>IDEs</h2>
 
-<p>Reminds me of Karl Pilkington’s comment about this picture of twins on one of the Ricky Gervais podcasts. Karl saw a picture of a set of twins on an office desk (obviously the kids of the guy sitting at the desk). His great idea was since they look alike and are dressed alike, the parent could just have the picture of one of them and save space. Ricky Gervais then commented something like :</p>
+<p>Code Bubble : <a href="http://www.cs.brown.edu/people/acb/codebubbles_site.htm">http://www.cs.brown.edu/people/acb/codebubbles_site.htm</a></p>
 
-<p>What you have there is the best non-solution to a problem that doesn’t exist.</p>
+<p>Code Canvas : <a href="http://research.microsoft.com/apps/pubs/default.aspx?id=80076">http://research.microsoft.com/apps/pubs/default.aspx?id=80076</a></p>
 
-<p>And that is pretty much how I feel about most of the technological innovations these days.</p>
+<p><a href="http://www.youtube.com/watch?v=d4NEaXajiI0">http://www.youtube.com/watch?v=d4NEaXajiI0</a></p>
 
-<p>For example: can someone explain to me how Oslo is going to help me? I am also not sold on RIA or anything Cloud related. The technology is interesting, but I can’t justify where I would use any of this stuff.</p>
+<h2>Software Metaphor</h2>
 
-<p><img class='left ' src='/images/shoveling-coal.jpg' width='240' height='165' alt=''Shoveling Coal'' title=''Shoveling Coal''></p>
+<p>Drive: The Surprising Truth About What Motivates Us : <a href="http://www.amazon.com/Drive-Surprising-Truth-About-Motivates/dp/1594488843/ref=sr_1_1?ie=UTF8&amp;s=books&amp;qid=1276794836&amp;sr=8-1">http://www.amazon.com/Drive-Surprising-Truth-About-Motivates/dp/1594488843/ref=sr_1_1?ie=UTF8&amp;s=books&amp;qid=1276794836&amp;sr=8-1</a></p>
 
-<p>Sometimes I feel like a lone engineer shoveling coal into a furnace on a runaway train. I don&#8217;t know where we are going, where we have been, and all I hear is FASTER, FASTER!</p>
+<p>Film Making: A Better Software Development Metaphor <a href="http://www.lostechies.com/blogs/rodpaddock/archive/2010/04/15/film-making-a-better-software-development-metaphor.aspx">http://www.lostechies.com/blogs/rodpaddock/archive/2010/04/15/film-making-a-better-software-development-metaphor.aspx</a></p>
 
-<p>When I scream for help, I get delivered a better shovel.</p>
+<p>Ayende : Garden : <a href="http://ayende.com/Blog/archive/2007/09/18/The-Right-Metaphor-Software-as-a-garden-not-a-building.aspx">http://ayende.com/Blog/archive/2007/09/18/The-Right-Metaphor-Software-as-a-garden-not-a-building.aspx</a></p>
+</div>
+  
+  
 
-<p>I don&#8217;t want a better shovel, I want to know why I am shoveling so much coal!!!</p>
 
-<p>Can&#8217;t we do more with less? Can’t we slow down? Do we even know why we are in this train?!</p>
+  </article>
 
-<p>Lately the murmurings on different blogs, podcasts, and developers has been that software development has gotten too complicated. How can that be true when we have tons of tools and frameworks that should make life easier? jQuery makes Javascript easier. Pick your favorite Data Access tool / ORM makes data access easier. Any number of UI frameworks makes UI construction easier. So why do we think things are more complicated? Shouldn’t our life be easier?</p>
 
-<p>The majority of projects are always behind, always over budgeted, and always unclear on where they are and where they are going. This has been my experience spanning multiple companies and multiple positions on different teams. I am fully humble enough to recognize that “I” might be the problem, but I doubt it. There is enough shared pain through my conversations with other developers to recognize its a industry wide problem.</p>
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/06/17/wizards-of-smart-8/">Wizards of Smart - Heroku, Cloud, and Iron Ruby</a></h1>
+    
+    
 
-<p>The only project I was a part of that didn’t feel this way had a full time Project Manager and a team full of very skilled developers. To me it didn’t feel like the project was better run, it was just we had enough skilled team members to overcome any poor execution or poor planning. That isn’t saying our PM wasn’t an all star because he was. My point is that although the project was a ‘success’ I didn’t feel like it was successful because we had a great methodology. We just powered through any complications.</p>
 
-<p>Every project (including that last ‘successful’ one) always had mad dashes of insane hours of work followed by listless lulls as we waited for one thing or another. I never felt I had enough time to do my work and other activities related to work (ie blog, present, create frameworks)</p>
 
-<p>Where am I going with this? I wanted to capture my state of mind and why I am re-examining how and why I develop.</p>
 
-<p>The status quo will burn me out.</p>
+<time datetime="2010-06-17 00:00:00 -0500" pubdate  updated >Jun 17<span>th</span>, 2010</time>
 
-<p>The ole definition of insanity : Doing the same thing over and over again expecting different results.</p>
 
-<p>I am tired of doing the same thing, so what can I do different? Why is there this constant pain? I know there are solutions and it&#8217;s time for me to document my mental journey as I search for answers. Maybe my breadcrumbs will help those that follow.</p>
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Sorry for the long delay guys. Ryan and I are both in the middle of deploying applications so other things are on our minds.
+While we wait for me to edit the recording we did last night and we await Glenn Block’s approval on the fantastic 2 shows we did with him, we can enjoy a smaller conversation Ryan and I had on Heroku, Azure, and a bit about Iron Ruby.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/06/08/wizards-of-smart-7/">Reducing Exceptional Cases</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-06-08 00:00:00 -0500" pubdate  updated >Jun 8<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Ryan starts with describing his love affair with F#, which leads to a discussion of FubuMVC, which leads to a discussion of Performance Problems (not related to Fubu MVC)… etc. So a standard Wizards of Smart conversation.  :)</p>
+
+<p>I titled this Performance since most of the conversation centered around our experiences with targeting and improving performance.</p>
 </div>
   
   
@@ -965,23 +692,23 @@ Spring, TX 77379</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2010/03/17/dynamic-extension-methods-fail/">Dynamic + Extension Methods = Fail</a>
+        <a href="/blog/2010/10/29/learning-bash/">Learning Bash Aliases and Functions</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2010/03/09/books-every-man-must-read/">100 Books Every Man Must Read</a>
+        <a href="/blog/2010/10/26/techfest-design-patterns/">Houston Techfest - Design Patterns</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2010/03/07/adv-wpf-videos/">Adv WPF Videos</a>
+        <a href="/blog/2010/09/11/lighten-color/">Lighten Color in C#</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2010/02/23/creating-first-tfs-build/">Creating my first TFS 2010 Build</a>
+        <a href="/blog/2010/07/29/wizards-of-smart-11/">Wizards of Smart #11 - Glenn Block part 2</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2010/02/18/isubscribe/">ISubscribe</a>
+        <a href="/blog/2010/06/24/wizards-of-smart-10/">Wizards of Smart #10 - Glenn Block part 1</a>
       </li>
     
   </ul>

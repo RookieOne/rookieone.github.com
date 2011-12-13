@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>I am RookieOne: Lighten Color in C#</title>
+  <meta name="author" content="Jonathan Birkholz">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://www.iamrookieone.com/blog/2010/09/11/lighten-color/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="I am RookieOne" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">I am RookieOne</a></h1>
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:www.iamrookieone.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Lighten Color in C#</h1>
+    
+    
+
+
+
+
+<time datetime="2010-09-11 00:00:00 -0500" pubdate  updated >Sep 11<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+<div class="entry-content"><p>The following piece of code was originally written by Marcus Egger in a converter. I did a bit of refactoring to clean up the code and moved the code outside a converter and into an extension method.</p>
+
+<p>The extension method is off of Color and returns another Color. Now since it is an extension method you can use it in a converter or a markup extension (the latter being my favorite use).</p>
+
+<p>You can also get this code from my color project on GitHub :</p>
+
+<p><a href="http://github.com/RookieOne/Colors">http://github.com/RookieOne/Colors</a></p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+<span class='line'>36</span>
+<span class='line'>37</span>
+<span class='line'>38</span>
+<span class='line'>39</span>
+<span class='line'>40</span>
+<span class='line'>41</span>
+<span class='line'>42</span>
+<span class='line'>43</span>
+<span class='line'>44</span>
+<span class='line'>45</span>
+<span class='line'>46</span>
+<span class='line'>47</span>
+<span class='line'>48</span>
+<span class='line'>49</span>
+<span class='line'>50</span>
+<span class='line'>51</span>
+<span class='line'>52</span>
+<span class='line'>53</span>
+<span class='line'>54</span>
+<span class='line'>55</span>
+<span class='line'>56</span>
+<span class='line'>57</span>
+<span class='line'>58</span>
+<span class='line'>59</span>
+<span class='line'>60</span>
+<span class='line'>61</span>
+<span class='line'>62</span>
+<span class='line'>63</span>
+<span class='line'>64</span>
+<span class='line'>65</span>
+<span class='line'>66</span>
+<span class='line'>67</span>
+<span class='line'>68</span>
+<span class='line'>69</span>
+<span class='line'>70</span>
+<span class='line'>71</span>
+<span class='line'>72</span>
+<span class='line'>73</span>
+<span class='line'>74</span>
+<span class='line'>75</span>
+<span class='line'>76</span>
+<span class='line'>77</span>
+<span class='line'>78</span>
+<span class='line'>79</span>
+<span class='line'>80</span>
+<span class='line'>81</span>
+<span class='line'>82</span>
+<span class='line'>83</span>
+<span class='line'>84</span>
+<span class='line'>85</span>
+<span class='line'>86</span>
+<span class='line'>87</span>
+<span class='line'>88</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">LightenColorExtension</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">///   This method applies lighting to a color.</span>
+</div><div class='line'>    <span class="c1">///   For instance, a color that has a lighting factor of 1 applies, appears at its original value.</span>
+</div><div class='line'>    <span class="c1">///   A color with a lighting factor of 0.5 appears only half as bright as it was before.</span>
+</div><div class='line'>    <span class="c1">///   A color with a lighting factor of 1.5 appears roughly twice as bright as before.</span>
+</div><div class='line'>    <span class="c1">///   A color with a lightning factor of 2 appears white.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// &lt;param name=&quot;originalColor&quot;&gt;Base color&lt;/param&gt;</span>
+</div><div class='line'>    <span class="c1">/// &lt;param name=&quot;lightFactor&quot;&gt;</span>
+</div><div class='line'>    <span class="c1">///   Amount of light applied to the color</span>
+</div><div class='line'>    <span class="c1">/// &lt;/param&gt;</span>
+</div><div class='line'>    <span class="c1">/// &lt;returns&gt;Lit color&lt;/returns&gt;</span>
+</div><div class='line'>    <span class="c1">/// &lt;remarks&gt;</span>
+</div><div class='line'>    <span class="c1">///   This routine is very fast. Even when using it in tight loops, I (Markus) have not been able to </span>
+</div><div class='line'>    <span class="c1">///   meassure a significant amount of time spent in this routine (always less than 1ms). I was originally</span>
+</div><div class='line'>    <span class="c1">///   concerened about the performance of this, so I added a caching mechanism, but that slowed things down</span>
+</div><div class='line'>    <span class="c1">///   by 2 orders of magnitude.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/remarks&gt;</span>
+</div><div class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="n">Color</span> <span class="nf">Lighten</span><span class="p">(</span><span class="k">this</span> <span class="n">Color</span> <span class="n">originalColor</span><span class="p">,</span> <span class="kt">float</span> <span class="n">lightFactor</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">TransformationNotNeeded</span><span class="p">(</span><span class="n">lightFactor</span><span class="p">))</span>
+</div><div class='line'>            <span class="k">return</span> <span class="n">originalColor</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">RealBright</span><span class="p">(</span><span class="n">lightFactor</span><span class="p">))</span>
+</div><div class='line'>            <span class="k">return</span> <span class="n">System</span><span class="p">.</span><span class="n">Windows</span><span class="p">.</span><span class="n">Media</span><span class="p">.</span><span class="n">Colors</span><span class="p">.</span><span class="n">White</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">ShouldDarken</span><span class="p">(</span><span class="n">lightFactor</span><span class="p">))</span>
+</div><div class='line'>            <span class="k">return</span> <span class="nf">DarkenColor</span><span class="p">(</span><span class="n">originalColor</span><span class="p">,</span> <span class="n">lightFactor</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">return</span> <span class="nf">LightenColor</span><span class="p">(</span><span class="n">originalColor</span><span class="p">,</span> <span class="n">lightFactor</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">private</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">TransformationNotNeeded</span><span class="p">(</span><span class="kt">float</span> <span class="n">lightFactor</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">var</span> <span class="k">value</span> <span class="p">=</span> <span class="n">lightFactor</span> <span class="p">-</span> <span class="m">1.0f</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">return</span> <span class="k">value</span> <span class="p">&lt;</span> <span class="m">0.01f</span>
+</div><div class='line'>               <span class="p">&amp;&amp;</span> <span class="k">value</span> <span class="p">&gt;</span> <span class="p">-</span><span class="m">0.01f</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">private</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">RealBright</span><span class="p">(</span><span class="kt">float</span> <span class="n">lightFactor</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="k">return</span> <span class="n">lightFactor</span> <span class="p">&gt;=</span> <span class="m">2.0f</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">private</span> <span class="k">static</span> <span class="kt">bool</span> <span class="nf">ShouldDarken</span><span class="p">(</span><span class="kt">float</span> <span class="n">lightFactor</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="k">return</span> <span class="n">lightFactor</span> <span class="p">&lt;</span> <span class="m">1.0f</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">private</span> <span class="k">static</span> <span class="n">Color</span> <span class="nf">DarkenColor</span><span class="p">(</span><span class="n">Color</span> <span class="n">color</span><span class="p">,</span> <span class="kt">float</span> <span class="n">lightFactor</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">red</span> <span class="p">=</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span> <span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">R</span><span class="p">*</span><span class="n">lightFactor</span><span class="p">);</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">green</span> <span class="p">=</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span> <span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">G</span><span class="p">*</span><span class="n">lightFactor</span><span class="p">);</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">blue</span> <span class="p">=</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span> <span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">B</span><span class="p">*</span><span class="n">lightFactor</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">return</span> <span class="n">Color</span><span class="p">.</span><span class="n">FromRgb</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">private</span> <span class="k">static</span> <span class="n">Color</span> <span class="nf">LightenColor</span><span class="p">(</span><span class="n">Color</span> <span class="n">color</span><span class="p">,</span> <span class="kt">float</span> <span class="n">lightFactor</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="c1">// Lighten</span>
+</div><div class='line'>        <span class="c1">// We do this by approaching 256 for a light factor of 2.0f</span>
+</div><div class='line'>        <span class="kt">float</span> <span class="n">fFactor2</span> <span class="p">=</span> <span class="n">lightFactor</span><span class="p">;</span>
+</div><div class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">fFactor2</span> <span class="p">&gt;</span> <span class="m">1.0f</span><span class="p">)</span>
+</div><div class='line'>        <span class="p">{</span>
+</div><div class='line'>            <span class="n">fFactor2</span> <span class="p">-=</span> <span class="m">1.0f</span><span class="p">;</span>
+</div><div class='line'>        <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="n">var</span> <span class="n">red</span> <span class="p">=</span> <span class="n">LightenColorComponent</span><span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">R</span><span class="p">,</span> <span class="n">fFactor2</span><span class="p">);</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">green</span> <span class="p">=</span> <span class="n">LightenColorComponent</span><span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">G</span><span class="p">,</span> <span class="n">fFactor2</span><span class="p">);</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">blue</span> <span class="p">=</span> <span class="n">LightenColorComponent</span><span class="p">(</span><span class="n">color</span><span class="p">.</span><span class="n">B</span><span class="p">,</span> <span class="n">fFactor2</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">return</span> <span class="n">Color</span><span class="p">.</span><span class="n">FromRgb</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">private</span> <span class="k">static</span> <span class="kt">byte</span> <span class="nf">LightenColorComponent</span><span class="p">(</span><span class="kt">byte</span> <span class="n">colorComponent</span><span class="p">,</span> <span class="kt">float</span> <span class="n">fFactor</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">inverse</span> <span class="p">=</span> <span class="m">255</span> <span class="p">-</span> <span class="n">colorComponent</span><span class="p">;</span>
+</div><div class='line'>        <span class="n">colorComponent</span> <span class="p">+=</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span> <span class="p">(</span><span class="n">inverse</span><span class="p">*</span><span class="n">fFactor</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">return</span> <span class="n">colorComponent</span> <span class="p">&lt;</span> <span class="m">255</span>
+</div><div class='line'>                   <span class="p">?</span> <span class="n">colorComponent</span>
+</div><div class='line'>                   <span class="p">:</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span> <span class="m">255</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jonathan Birkholz</span></span>
+
+      
+
+
+
+
+<time datetime="2010-09-11 00:00:00 -0500" pubdate  updated >Sep 11<span>th</span>, 2010</time>
+
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/C-/'>C#</a>, <a class='category' href='/blog/categories/WPF/'>WPF</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.iamrookieone.com/blog/2010/09/11/lighten-color/" data-via="" data-counturl="http://www.iamrookieone.com/blog/2010/09/11/lighten-color/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2010/10/29/learning-bash/">Learning Bash Aliases and Functions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/26/techfest-design-patterns/">Houston Techfest - Design Patterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/09/11/lighten-color/">Lighten Color in C#</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/29/wizards-of-smart-11/">Wizards of Smart #11 - Glenn Block part 2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/06/24/wizards-of-smart-10/">Wizards of Smart #10 - Glenn Block part 1</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Jonathan Birkholz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

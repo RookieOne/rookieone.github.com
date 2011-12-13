@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>I am RookieOne: Learning Mongo DB and NoRM</title>
+  <meta name="author" content="Jonathan Birkholz">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://www.iamrookieone.com/blog/2010/05/11/learning-mongo-db/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="I am RookieOne" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">I am RookieOne</a></h1>
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:www.iamrookieone.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Learning Mongo DB and NoRM</h1>
+    
+    
+
+
+
+
+<time datetime="2010-05-11 00:00:00 -0500" pubdate  updated >May 11<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+<div class="entry-content"><p>I am currently working on a WPF application I will be using to manage our TFS system here at SolArc. Well it isn’t for everyone, just for me (for now). I look at the TFS interface and I can’t see what is important to me and doing the operations I want seems counter-intuitive. So what does a programmer do? He naturally writes an app for himself. :D</p>
+
+<p>The problem I am running into is that although the WorkItems API is nice, it isn’t exactly what I want. I would rather not hit the SQL database as well. My current thoughts is to replicate the TFS workitems in a MongoDb. Naturally the WorkItems won’t be ‘workitems’ but will actually be the shape and correct context for how we use them. For example we have work item types for Epic Scenarios, Scenarios, and Tasks. Anyway the nuts and bolts of the app can be another blog post once I have something more concrete to share.</p>
+
+<p>Since I am learning Mongo DB, I decided to write a post so that I will have something I can go back to when I inevitably forget how I got something to work.</p>
+
+<p>I got MongoDB at <a href="http://www.mongodb.org/">http://www.mongodb.org/</a></p>
+
+<p>Then in the bin folder I tried to run mongod. Unfortunately it failed because I had not created a data/db folder. That is the default location for MongoDB to store data files.</p>
+
+<p><img class='' src='/images/mongo_1.png' width='' height='' alt='' title=''></p>
+
+<p>After creating the folders on the C:\ drive, I reran mongod and it started the database.</p>
+
+<p><img class='' src='/images/mongo_2.png' width='' height='' alt='' title=''></p>
+
+<p>I heard a lot about NoRM at Open Spaces so I figured I would use that to work with the MongoDB.</p>
+
+<p>I got NoRM at <a href="http://github.com/atheken/NoRM">http://github.com/atheken/NoRM</a></p>
+
+<p>The NoRM tutorials I found online were using a different code base so the way I connected to the database was a bit different. My first test looks like:</p>
+
+<p><img class='' src='/images/mongo_test.png' width='' height='' alt='' title=''></p>
+
+<p>I am sure there are better ways of writing the tests, but I thought I would share the minimum test that I wrote to prove that NoRM and MongoDB were working.</p>
+
+<p>I will be adding more learning tests and add them to the Learning_NoRM project in my Learning GitHub Repository.</p>
+
+<p><a href="http://github.com/RookieOne/Learning">http://github.com/RookieOne/Learning</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jonathan Birkholz</span></span>
+
+      
+
+
+
+
+<time datetime="2010-05-11 00:00:00 -0500" pubdate  updated >May 11<span>th</span>, 2010</time>
+
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/Learning/'>Learning</a>, <a class='category' href='/blog/categories/MongoDB/'>MongoDB</a>, <a class='category' href='/blog/categories/NoRM/'>NoRM</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.iamrookieone.com/blog/2010/05/11/learning-mongo-db/" data-via="" data-counturl="http://www.iamrookieone.com/blog/2010/05/11/learning-mongo-db/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2010/10/29/learning-bash/">Learning Bash Aliases and Functions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/26/techfest-design-patterns/">Houston Techfest - Design Patterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/09/11/lighten-color/">Lighten Color in C#</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/29/wizards-of-smart-11/">Wizards of Smart #11 - Glenn Block part 2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/06/24/wizards-of-smart-10/">Wizards of Smart #10 - Glenn Block part 1</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Jonathan Birkholz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

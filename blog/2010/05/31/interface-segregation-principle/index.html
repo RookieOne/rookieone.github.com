@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>I am RookieOne: Interface Segregation Principle in practice</title>
+  <meta name="author" content="Jonathan Birkholz">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://www.iamrookieone.com/blog/2010/05/31/interface-segregation-principle/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="I am RookieOne" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">I am RookieOne</a></h1>
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:www.iamrookieone.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Interface Segregation Principle in Practice</h1>
+    
+    
+
+
+
+
+<time datetime="2010-05-31 00:00:00 -0500" pubdate  updated >May 31<span>st</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+<div class="entry-content"><p>I am working with some other team members integrating components to be consumed by different controls. For example someone could use a grid and then opt in to have sorting or filtering etc. It is a rather weird system but was decided upon before I arrived.</p>
+
+<p>Anyway, I am currently looking to implement an adapter for the formatting component. When I looked at the interface, ISP immediately jumped out at me. So I thought, why not do a blog post about identifying the problem and delivering the solution.</p>
+
+<h2>Interface Segregation Principle</h2>
+
+<blockquote><p>The Interface Segregation Principle states that clients should not be forced to implement interfaces they don’t use. Instead of one fat interface many small interfaces are preferred based on groups of methods, each one serving one submodule. - <a href="http://www.oodesign.com/interface-segregation-principle.html">http://www.oodesign.com/interface-segregation-principle.html</a></p></blockquote>
+
+<p>So instead of one large interface we should have many smaller interfaces with grouped behavior.</p>
+
+<p>When we see an interface like this, the violation of ISP should be readily apparent. (warning.. be prepared to scroll…..)</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+<span class='line'>36</span>
+<span class='line'>37</span>
+<span class='line'>38</span>
+<span class='line'>39</span>
+<span class='line'>40</span>
+<span class='line'>41</span>
+<span class='line'>42</span>
+<span class='line'>43</span>
+<span class='line'>44</span>
+<span class='line'>45</span>
+<span class='line'>46</span>
+<span class='line'>47</span>
+<span class='line'>48</span>
+<span class='line'>49</span>
+<span class='line'>50</span>
+<span class='line'>51</span>
+<span class='line'>52</span>
+<span class='line'>53</span>
+<span class='line'>54</span>
+<span class='line'>55</span>
+<span class='line'>56</span>
+<span class='line'>57</span>
+<span class='line'>58</span>
+<span class='line'>59</span>
+<span class='line'>60</span>
+<span class='line'>61</span>
+<span class='line'>62</span>
+<span class='line'>63</span>
+<span class='line'>64</span>
+<span class='line'>65</span>
+<span class='line'>66</span>
+<span class='line'>67</span>
+<span class='line'>68</span>
+<span class='line'>69</span>
+<span class='line'>70</span>
+<span class='line'>71</span>
+<span class='line'>72</span>
+<span class='line'>73</span>
+<span class='line'>74</span>
+<span class='line'>75</span>
+<span class='line'>76</span>
+<span class='line'>77</span>
+<span class='line'>78</span>
+<span class='line'>79</span>
+<span class='line'>80</span>
+<span class='line'>81</span>
+<span class='line'>82</span>
+<span class='line'>83</span>
+<span class='line'>84</span>
+<span class='line'>85</span>
+<span class='line'>86</span>
+<span class='line'>87</span>
+<span class='line'>88</span>
+<span class='line'>89</span>
+<span class='line'>90</span>
+<span class='line'>91</span>
+<span class='line'>92</span>
+<span class='line'>93</span>
+<span class='line'>94</span>
+<span class='line'>95</span>
+<span class='line'>96</span>
+<span class='line'>97</span>
+<span class='line'>98</span>
+<span class='line'>99</span>
+<span class='line'>100</span>
+<span class='line'>101</span>
+<span class='line'>102</span>
+<span class='line'>103</span>
+<span class='line'>104</span>
+<span class='line'>105</span>
+<span class='line'>106</span>
+<span class='line'>107</span>
+<span class='line'>108</span>
+<span class='line'>109</span>
+<span class='line'>110</span>
+<span class='line'>111</span>
+<span class='line'>112</span>
+<span class='line'>113</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'><span class="c1">/// An interface defining the contract for anything that has columns that can be formatted.</span>
+</div><div class='line'><span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IColumnFormattingAdapter</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="cp">#region Methods</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Hides the column.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">HideColumn</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Bests the fit header.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">BestFitHeader</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Bests the fit column.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">BestFitColumn</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Bests the fit header column.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">BestFitHeaderColumn</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Bests the fit all columns/headers.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">BestFitAllHeaderColumns</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Formats the column.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">FormatColumn</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Formats all columns.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">FormatAllColumns</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Shows the advanced formatting.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">ShowAdvancedFormatting</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Shows the advanced report formatting.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">ShowAdvancedReportFormatting</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Chooses the column.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">ChooseColumn</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="cp">#endregion</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="cp">#region Feature Support</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Whether or not the adapter supports hiding of columns</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="n">Boolean</span> <span class="n">AllowHideColumn</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Whether or not the adapter supports best fit based on the header text</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="n">Boolean</span> <span class="n">AllowBestFitHeader</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Whether or not the adapter supports best fit based on the column contents</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="n">Boolean</span> <span class="n">AllowBestFitColumn</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Whether or not the adapter supports best fit based on the longer of header text and column contents</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="n">Boolean</span> <span class="n">AllowBestFitHeaderColumn</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Whether or not the adapter supports best fit on all columns based on the longer of header text and column contents</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="n">Boolean</span> <span class="n">AllowBestFitAllHeaderColumns</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Whether or not the adapter supports formatting of a column</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="n">Boolean</span> <span class="n">AllowFormatColumn</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Whether or not the adapter supports formatting of all columns</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="n">Boolean</span> <span class="n">AllowFormatAllColumns</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Whether or not the adapter supports advanced conditional formatting</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="n">Boolean</span> <span class="n">AllowAdvancedFormatting</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Whether or not the adapter supports advanced report property formatting</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="n">Boolean</span> <span class="n">AllowAdvancedReportFormatting</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Whether or not the adapter supports choosing columns</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="n">Boolean</span> <span class="n">AllowChooseColumn</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="cp">#endregion</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<h2>Identifying ISP Violation</h2>
+
+<p>The first characteristic that the interface violates ISP is the sheer size. This interface weighs in at 117 lines. Granted there are comments, etc but it is still rather large.</p>
+
+<p>The second characteristic that the interface violates ISP (and the biggest eye sore) is all the Allow properties. That should make you stop and scratch your head.</p>
+
+<h2>Fixing the interface</h2>
+
+<p>Let’s simplify the bad interface and then learn how to fix it.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'><span class="c1">/// An interface defining the contract for anything that has columns that can be formatted.</span>
+</div><div class='line'><span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IBadColumnFormattingAdapter</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Hides the column.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">HideColumn</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Chooses the column.</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">ChooseColumn</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Whether or not the adapter supports hiding of columns</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="n">Boolean</span> <span class="n">AllowHideColumn</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>    <span class="c1">/// Whether or not the adapter supports choosing columns</span>
+</div><div class='line'>    <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>    <span class="n">Boolean</span> <span class="n">AllowChooseColumn</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>So in this scenario we can hide a column and then choose a column. Instead of having a large interface for these two behaviors, we should package the behaviors into separate interfaces.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'><span class="c1">/// Interface for supporting Hide Column feature</span>
+</div><div class='line'><span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IHideColumn</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>  <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>  <span class="c1">///Hides the column.</span>
+</div><div class='line'>  <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>  <span class="k">void</span> <span class="nf">HideColumn</span><span class="p">();</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'><span class="c1">/// Interface for supporting Choose Column feature</span>
+</div><div class='line'><span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IChooseColumn</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>   <span class="c1">/// &lt;summary&gt;</span>
+</div><div class='line'>   <span class="c1">///Chooses the column.</span>
+</div><div class='line'>   <span class="c1">/// &lt;/summary&gt;</span>
+</div><div class='line'>   <span class="k">void</span> <span class="nf">ChooseColumn</span><span class="p">();</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Now our functionality is encapsulated into behavior centric interfaces. Our adapters can then opt in to provide the functionality, and we don’t have the superfluous Allow properties.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jonathan Birkholz</span></span>
+
+      
+
+
+
+
+<time datetime="2010-05-31 00:00:00 -0500" pubdate  updated >May 31<span>st</span>, 2010</time>
+
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/C-/'>C#</a>, <a class='category' href='/blog/categories/SOLID/'>SOLID</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.iamrookieone.com/blog/2010/05/31/interface-segregation-principle/" data-via="" data-counturl="http://www.iamrookieone.com/blog/2010/05/31/interface-segregation-principle/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2010/10/29/learning-bash/">Learning Bash Aliases and Functions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/26/techfest-design-patterns/">Houston Techfest - Design Patterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/09/11/lighten-color/">Lighten Color in C#</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/29/wizards-of-smart-11/">Wizards of Smart #11 - Glenn Block part 2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/06/24/wizards-of-smart-10/">Wizards of Smart #10 - Glenn Block part 1</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Jonathan Birkholz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

@@ -1,0 +1,1186 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>I am RookieOne</title>
+  <meta name="author" content="Jonathan Birkholz">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://www.iamrookieone.com/blog/page/4/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="I am RookieOne" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">I am RookieOne</a></h1>
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:www.iamrookieone.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/05/13/using-extension-methods-to-remove-dependencies/">Using Extension Methods to Remove Dependencies</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-05-13 12:00:00 -0500" pubdate  updated >May 13<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Yesterday I had a discussion with a co-worker about extension methods, he was concerned with some of the extension methods I was using and emailed this guidance when to NOT use an extension method:</p>
+
+<blockquote><p>When an instance method would introduce a dependency on some type, but such a dependency would break dependency management rules. For example, a dependency from String to System.Uri is probably not desirable, and so String.ToUri() instance method returning System.Uri would be the wrong design from a dependency management perspective. A static extension method Uri.ToUri(this string str) returning System.Uri would be a much better design.</p></blockquote>
+
+<p>I was confused because I read that guidance and I think that is a perfect time to use an extension method. I asked where he got the guidance and he set me the following links:</p>
+
+<ul>
+<li><a href="http://www.amazon.com/gp/product/0321545613?ie=UTF8&amp;tag=bradabramsblo-20&amp;link_code=wql&amp;camp=212361&amp;creative=380601">Brad Abrams: Framework Design Guidelines: Conventions, Idioms, and Patterns for Reusable .NET Libraries</a></li>
+<li><a href="http://blogs.msdn.com/brada/archive/2009/01/12/framework-design-guidelines-extension-methods.aspx">http://blogs.msdn.com/brada/archive/2009/01/12/framework-design-guidelines-extension-methods.aspx</a></li>
+</ul>
+
+
+<p>If you look at the second link you see that in fact the guidance is FOR when to use extension methods. So apparently there was just a miscommunication on what the guidance was saying.</p>
+
+<p>Here is my feeble attempt at explaining what the guidance is saying.</p>
+
+<p>All the code can be found in my Learning GitHub Repository and the Learning CSharp solution @ <a href="http://github.com/RookieOne/Learning">http://github.com/RookieOne/Learning</a></p>
+
+<p>Suppose we have a class Foo. And with Foo we have a method ‘Whatever’ that returns a type Bar. Normally we would do something like this:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">BadFoo</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="n">Bar</span> <span class="nf">Whatever</span><span class="p">()</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>By writing our method this way, we make the BadFoo class dependent on the Bar namespace / assembly. When someone uses a BadFoo class they get to see the Whatever method and not realize they are going to also be dependent on the Bar namespace / assembly.</p>
+
+<p><img class='' src='/images/ext_method_1.png' width='' height='' alt='' title=''></p>
+
+<p><img class='' src='/images/ext_method_2.png' width='' height='' alt='' title=''></p>
+
+<p>Instead of writing the Whatever method as an <em>instance</em> method, we can write the method as an <em>extension</em>.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">FooExtensions</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="n">Bar</span> <span class="nf">Whatever</span><span class="p">(</span><span class="k">this</span> <span class="n">GoodFoo</span> <span class="n">f</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p><img class='' src='/images/ext_method_3.png' width='' height='' alt='' title=''></p>
+
+<p>I now can see that the Whatever method is clearly an extension method off of Foo. And yes, if I use the method I will then need the Bar namespace / assembly, etc. The difference is that with an extension method it is more of an opt in scenario. I can have users of Foo that don’t need the Bar assembly nor the Whatever method.</p>
+
+<p>This is sort of hard to explain but I am giving it my best shot. :) Maybe some whiteboarding will help.</p>
+
+<p><img class='' src='/images/ext_method_4.jpg' width='' height='' alt='' title=''></p>
+
+<p><img class='' src='/images/ext_method_5.jpg' width='' height='' alt='' title=''></p>
+
+<p>Without the extension method, the Foo.dll has to reference the Bar.dll. If we instead moved the Whatever method out into an extension method in the X.dll we can see that Foo.dll no longer needs to reference the Bar.dll.</p>
+
+<p>Anyway, I like extension methods and think there is a lot of misconceptions surrounding when and how to use them. I think a more interesting topic for extension methods is limiting their scope in order to provide bounded context specific operations. This ‘removing of dependencies’ aspect is just part of that topic.</p>
+
+<p>Again check out some of the code in my Learning solution <a href="http://github.com/RookieOne/Learning">http://github.com/RookieOne/Learning</a></p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/05/12/basic-norm-id/">Basic NoRM Ids</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-05-12 00:00:00 -0500" pubdate  updated >May 12<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Again I want to reiterate I am by no means an expert at Mongo DBs or NoRM, but I am sure there are tons of people like me looking for some of the basics. And maybe some of the things I learn will help others.</p>
+
+<p>When you start with NoRM you might quickly discover that if you don’t have an id for your object, you can’t insert or update that object.</p>
+
+<p>When you try to insert an object without an identifier, you receive an MongoException that says:</p>
+
+<blockquote><p>This collection does not accept insertions/updates, this is due to the fact that the collection&#8217;s type <TYPE> does not specify an identifier property</p></blockquote>
+
+<p>So how can we specify an identifier property?</p>
+
+<p>The basic methods include</p>
+
+<ul>
+<li>Use Id property of ObjectId type</li>
+<li>Use Guid property type and identify with MongoIdentifier attribute</li>
+<li>Use Guid property type and map as id with MongoConfigurationMap</li>
+</ul>
+
+
+<h2>ObjectIds</h2>
+
+<p>The easy method is to use a property of type ObjectId (NoRM type) and named Id. In my learning project I am using this with Book.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Book</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="n">ObjectId</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">string</span> <span class="n">Title</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">string</span> <span class="n">Author</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>This property is also set once you insert a new book into a collection as demonstrated here:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[SetUp]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">setup</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">Mongo</span> <span class="n">mongo</span> <span class="p">=</span> <span class="n">MongoTestHelper</span><span class="p">.</span><span class="n">create_new_database_connection</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">mongo</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">DropCollection</span><span class="p">(</span><span class="k">typeof</span> <span class="p">(</span><span class="n">Book</span><span class="p">).</span><span class="n">Name</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">_book</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Book</span><span class="p">();</span>
+</div><div class='line'>    <span class="n">mongo</span><span class="p">.</span><span class="n">GetCollection</span><span class="p">&lt;</span><span class="n">Book</span><span class="p">&gt;().</span><span class="n">Insert</span><span class="p">(</span><span class="n">_book</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="na">[Test]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_set_id_on_insert</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">_book</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">ShouldNotBe</span><span class="p">(</span><span class="n">ObjectId</span><span class="p">.</span><span class="n">Empty</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<h2>Guid + MongoIdentifier</h2>
+
+<p>Another method is to use a Guid and then mark that Id property with a MongoIdentifier Attribute. In my learning project I am using this with Movie.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Movie</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="nf">Movie</span><span class="p">()</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">Id</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="na">    [MongoIdentifier]</span>
+</div><div class='line'>    <span class="k">public</span> <span class="n">Guid</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">string</span> <span class="n">Title</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Notice that although I labeled the Id property with the MongoIdentifier attribute, it doesn’t automatically get set. I have to set the id to a new guid in the constructor.</p>
+
+<p>Repeating the previous test shows that yes our movie can be inserted and the id set.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[SetUp]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">setup</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">Mongo</span> <span class="n">mongo</span> <span class="p">=</span> <span class="n">MongoTestHelper</span><span class="p">.</span><span class="n">create_new_database_connection</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">mongo</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">DropCollection</span><span class="p">(</span><span class="k">typeof</span> <span class="p">(</span><span class="n">Movie</span><span class="p">).</span><span class="n">Name</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">_movie</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Movie</span><span class="p">();</span>
+</div><div class='line'>    <span class="n">mongo</span><span class="p">.</span><span class="n">GetCollection</span><span class="p">&lt;</span><span class="n">Movie</span><span class="p">&gt;().</span><span class="n">Insert</span><span class="p">(</span><span class="n">_movie</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="na">[Test]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_set_id_on_insert</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">_movie</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">ShouldNotBe</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>This test really isn’t that helpful since we set the new guid in the default constructor. Let’s test that the Id can be read and set from the database.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[Test]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_read_and_set_id</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">MongoQueryProvider</span> <span class="n">provider</span> <span class="p">=</span> <span class="n">MongoTestHelper</span><span class="p">.</span><span class="n">create_query_provider</span><span class="p">();</span>
+</div><div class='line'>    <span class="n">Movie</span> <span class="n">movie</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MongoQuery</span><span class="p">&lt;</span><span class="n">Movie</span><span class="p">&gt;(</span><span class="n">provider</span><span class="p">).</span><span class="n">First</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">movie</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">ShouldBe</span><span class="p">(</span><span class="n">_movie</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<h2>Using Mongo Configuration Map</h2>
+
+<p>If you are like me and prefer the POCO lifestyle, you can use a MongoConfigurationMap to specify the identifier.</p>
+
+<p>In my learning project I am using this with Customer.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Customer</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="nf">Customer</span><span class="p">()</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">Id</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="n">Guid</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>And then I am creating a map for customer.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">CustomerMap</span> <span class="p">:</span> <span class="n">MongoConfigurationMap</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="nf">CustomerMap</span><span class="p">()</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">For</span><span class="p">&lt;</span><span class="n">Customer</span><span class="p">&gt;(</span><span class="n">x</span> <span class="p">=&gt;</span>
+</div><div class='line'>                          <span class="p">{</span>
+</div><div class='line'>                              <span class="n">x</span><span class="p">.</span><span class="n">IdIs</span><span class="p">(</span><span class="n">c</span> <span class="p">=&gt;</span> <span class="n">c</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+</div><div class='line'>                              <span class="n">x</span><span class="p">.</span><span class="n">ForProperty</span><span class="p">(</span><span class="n">c</span> <span class="p">=&gt;</span> <span class="n">c</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+</div><div class='line'>                          <span class="p">});</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>And the tests…</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[SetUp]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">setup</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">Mongo</span> <span class="n">mongo</span> <span class="p">=</span> <span class="n">MongoTestHelper</span><span class="p">.</span><span class="n">create_new_database_connection</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">mongo</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">DropCollection</span><span class="p">(</span><span class="k">typeof</span> <span class="p">(</span><span class="n">Customer</span><span class="p">).</span><span class="n">Name</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">_customer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Customer</span><span class="p">();</span>
+</div><div class='line'>    <span class="n">mongo</span><span class="p">.</span><span class="n">GetCollection</span><span class="p">&lt;</span><span class="n">Customer</span><span class="p">&gt;().</span><span class="n">Insert</span><span class="p">(</span><span class="n">_customer</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">Customer</span> <span class="n">_customer</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'><span class="na">[Test]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_read_and_set_id</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">MongoQueryProvider</span> <span class="n">provider</span> <span class="p">=</span> <span class="n">MongoTestHelper</span><span class="p">.</span><span class="n">create_query_provider</span><span class="p">();</span>
+</div><div class='line'>    <span class="n">Customer</span> <span class="n">customer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MongoQuery</span><span class="p">&lt;</span><span class="n">Customer</span><span class="p">&gt;(</span><span class="n">provider</span><span class="p">).</span><span class="n">First</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">customer</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">ShouldBe</span><span class="p">(</span><span class="n">_customer</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="na">[Test]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_set_id</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">_customer</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">ShouldNotBe</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>So those are three basic methods of setting an identifier for an object to be inserted or updated in a MongoDB with NoRM. All the code is in my learning git hub repository in the Learning_NoRM solution. The source can be found here : <a href="http://github.com/RookieOne/Learning">http://github.com/RookieOne/Learning</a></p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/05/11/learning-mongo-db/">Learning Mongo DB and NoRM</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-05-11 00:00:00 -0500" pubdate  updated >May 11<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>I am currently working on a WPF application I will be using to manage our TFS system here at SolArc. Well it isn’t for everyone, just for me (for now). I look at the TFS interface and I can’t see what is important to me and doing the operations I want seems counter-intuitive. So what does a programmer do? He naturally writes an app for himself. :D</p>
+
+<p>The problem I am running into is that although the WorkItems API is nice, it isn’t exactly what I want. I would rather not hit the SQL database as well. My current thoughts is to replicate the TFS workitems in a MongoDb. Naturally the WorkItems won’t be ‘workitems’ but will actually be the shape and correct context for how we use them. For example we have work item types for Epic Scenarios, Scenarios, and Tasks. Anyway the nuts and bolts of the app can be another blog post once I have something more concrete to share.</p>
+
+<p>Since I am learning Mongo DB, I decided to write a post so that I will have something I can go back to when I inevitably forget how I got something to work.</p>
+
+<p>I got MongoDB at <a href="http://www.mongodb.org/">http://www.mongodb.org/</a></p>
+
+<p>Then in the bin folder I tried to run mongod. Unfortunately it failed because I had not created a data/db folder. That is the default location for MongoDB to store data files.</p>
+
+<p><img class='' src='/images/mongo_1.png' width='' height='' alt='' title=''></p>
+
+<p>After creating the folders on the C:\ drive, I reran mongod and it started the database.</p>
+
+<p><img class='' src='/images/mongo_2.png' width='' height='' alt='' title=''></p>
+
+<p>I heard a lot about NoRM at Open Spaces so I figured I would use that to work with the MongoDB.</p>
+
+<p>I got NoRM at <a href="http://github.com/atheken/NoRM">http://github.com/atheken/NoRM</a></p>
+
+<p>The NoRM tutorials I found online were using a different code base so the way I connected to the database was a bit different. My first test looks like:</p>
+
+<p><img class='' src='/images/mongo_test.png' width='' height='' alt='' title=''></p>
+
+<p>I am sure there are better ways of writing the tests, but I thought I would share the minimum test that I wrote to prove that NoRM and MongoDB were working.</p>
+
+<p>I will be adding more learning tests and add them to the Learning_NoRM project in my Learning GitHub Repository.</p>
+
+<p><a href="http://github.com/RookieOne/Learning">http://github.com/RookieOne/Learning</a></p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/05/10/houston-open-spaces/">Houston Open Spaces</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-05-10 00:00:00 -0500" pubdate  updated >May 10<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>It might be a week late, but I still want to share how awesome Houston Open Spaces was. I was concerned at first when I found out how small it was going to be and that certain intellectual giants were not going to be in attendance.</p>
+
+<p>But… I knew I should have been prepared to be surprised. And I was.</p>
+
+<p>First of all, the WPF Workshop was well attended and I enjoyed presenting. Unfortunately all my recording attempts failed. :( But we live and learn. I figured out my issues with Camtasia. I made some newbie mistakes like not stopping the recording during every break. So although the talk isn’t online or recorded, the slides and code are. They can be found on my GitHub: <a href="http://github.com/RookieOne/JBsWpfExamples">http://github.com/RookieOne/JBsWpfExamples</a></p>
+
+<p>At the conference proper I had a blast and learned a lot. Open Spaces is truly a unique type of conference. The philosophies around the conference and the quality of people in attendance naturally lends itself to fantastic conversations and melding of the minds.</p>
+
+<p>Check out the site here : <a href="http://altnethouston.com/">http://altnethouston.com/</a></p>
+
+<p>For those that could not attend, be sure to go check out the wiki (<a href="http://houstonaltnet.pbworks.com/">http://houstonaltnet.pbworks.com/</a>). A lot of work was put into the wiki by attendees in order to share what was talked about in each of the sessions.</p>
+
+<p>I also brought my recorder to do some trial runs recording sessions. I was extremely pleased with the quality of the audio it recorded. Especially when you consider the size of the rooms and the volume levels people were talking at.</p>
+
+<p>Not all the sessions I attended I was able to record but check out these sessions for the audio.</p>
+
+<p><a href="http://houstonaltnet.pbworks.com/Polyglot">http://houstonaltnet.pbworks.com/Polyglot</a></p>
+
+<p><a href="http://houstonaltnet.pbworks.com/Virtual-Brown-Bag-One-Year-Later">http://houstonaltnet.pbworks.com/Virtual-Brown-Bag-One-Year-Later</a></p>
+
+<p><a href="http://houstonaltnet.pbworks.com/Design-Patterns">http://houstonaltnet.pbworks.com/Design-Patterns</a></p>
+
+<p>I convened the Polyglot and the VBB One Year later sessions. I then attended the Design Patterns and had a blast discussing patterns.</p>
+
+<p>Ruby was discussed a lot and it is on my short to-do list for this year. I was pointed to Why’s Poignant Guide to Ruby (<a href="http://mislav.uniqpath.com/poignant-guide/">http://mislav.uniqpath.com/poignant-guide/</a>) and have begun to go through this hilarious and informative online guide. The writing style and zaniness is exactly what I need in a technical manual. :D</p>
+
+<p>I also really enjoyed Rod Paddock’s session on Movie Making as a metaphor for software. Although nothing concrete came out of the session, I left with a lot to think about. I might look into a book about movie making and see what I can learn. Sometimes you need to take a step back and re-examine what you think you know and this was a great session to challenge me with a new perspective on software development.</p>
+
+<p>I am looking forward to being active in next year’s Open Spaces. I also think I will plan to attend the one in Seattle next year as well.</p>
+
+<p>So a big thank you to all those who put the conference together and those who attended. You guys rock!</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/04/04/houston-open-spaces/">Houston Open Spaces - What It Means to Me</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-04-04 00:00:00 -0500" pubdate  updated >Apr 4<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>As I began preparing for Houston’s Alt .Net’s Open Spaces 2010 Conference (<a href="http://altnethouston.com/">http://altnethouston.com/</a>), I started to reflect on the year since the last Open Spaces. Last year, I had a decision to make: do I go to the already scheduled Nascar weekend with my Godfather’s family or do I attend the inaugural Houston Open Spaces. After lots of time weighing my options, I opted to go to Open Spaces. I am glad I did.</p>
+
+<p>At Open Spaces I got lots of time to meet and interact with some of the greatest minds in .Net. Being able to talk to people like Jeremy Miller and Jeffrey Palermo was invaluable. Numerous sessions introduced me to brand new ways of thinking and solutions to common problems. To say I enjoyed Open Spaces would be an understatement.</p>
+
+<p>But for me, the biggest boon was that I recognized a huge gap in my professional career. Before Open Spaces I didn’t even know who most of the heavy hitters in our professional community even were. Sad? Yes, but true. I decided at Open Spaces to start reaching out and pay more attention to the community. It was time to expand my understanding of the programming world. Also I knew it was time to start blogging more, sharing more, and presenting more.</p>
+
+<p>I think I have a knack for programming and was applying the appropriate principles and patterns; I just had difficulty expressing why I was coding the solution a certain way. I knew I was right but lacked the experience to express why. I remember when Ryan Riley (@panesofglass | <a href="http://wizardsofsmart.net/">http://wizardsofsmart.net/</a>) came over to my computer one day and shared a Hanselminutes podcast featuring Uncle Bob. As I listened I got more and more excited. Uncle Bob was expressing in clear articulate terms exactly the principles I knew and coded by. I knew then that I needed to start learning the appropriate terms, definitions, and principles to express how to produce quality code.</p>
+
+<p>So at Open Spaces when Claudio Lassala (@claudiolassala | <a href="http://claudiolassala.spaces.live.com/blog/">http://claudiolassala.spaces.live.com/blog/</a>) mentioned conducting Virtual Brown Bags, I quickly worked to volunteer and share what I was doing. The led to me being the substitute coordinator for several meetings. And now the one year anniversary for Virtual Brown Bags is coming up. What is a VBB?</p>
+
+<p>Check out Claudio on CodeCast: <a href="http://www.code-magazine.com/codecast/index.aspx?messageid=d0e149ed-d8e7-44d2-bf7e-94d68ef4c1c3">http://www.code-magazine.com/codecast/index.aspx?messageid=d0e149ed-d8e7-44d2-bf7e-94d68ef4c1c3</a></p>
+
+<p>In short, we meet over Live Meeting every Thursday 12pm-1pm (central) and share whatever we are working on or feel like talking about. :)</p>
+
+<p>Every week I pressure myself to talk and share whatever I am working on. It has been great practice in talking as I code, expressing what and why I am doing something. I also surprised myself that every week I have something to share. I have a hard time sitting down and writing a blog post, but it’s easy for me to plug into Live Meeting and just go over whatever code or blog post has my current attention.</p>
+
+<p>Beyond Virtual Brown Bags, I started to do public presentations at user groups and conferences.</p>
+
+<p>Here is the list of presentations I have done this last year:</p>
+
+<p>WPF Substance over Style - South Harris Dot Net User Group
+Evolve Your Code - Houston Tech Fest &amp; C# SIG
+INETA recorded this session (<a href="http://live.ineta.org/Videos/Player.aspx?video=1ce91b60-5e4b-416d-9cb2-34740fdab8c6">http://live.ineta.org/Videos/Player.aspx?video=1ce91b60-5e4b-416d-9cb2-34740fdab8c6</a>)
+WPF Input Validation – Houston Tech Fest
+WPF in an Hour – EPOG
+Silverlight 4 – Aggieland DNUG
+I also was able to do a podcast episode on CodeCast talking about Convention over Configuration:</p>
+
+<p><a href="http://www.code-magazine.com/codecast/index.aspx?messageid=0001bf99-1394-45c2-8949-388c673ac7a5">http://www.code-magazine.com/codecast/index.aspx?messageid=0001bf99-1394-45c2-8949-388c673ac7a5</a></p>
+
+<p>And I volunteered to conduct a free Advanced WPF Workshop.</p>
+
+<p>Also at EPS I presented 2 3-day WPF Training Sessions. Now if that doesn’t challenge you on how long you can talk, then nothing will. :D</p>
+
+<p>As you can see, this was a busy year. Open Spaces allowed me to meet incredibly talented people and engage them in shop talk. It encouraged me to reach out and start mastering my craft, so I can teach others. Open Spaces 2009 was one of the most influential events in my career.</p>
+
+<p>And now we have 2010’s Open Spaces coming up and it should be fantastic!! Not only will I be attending, but I will also be conducting another WPF workshop for Open Spaces 2010. More details will be shared later, but I am very excited about this presentation.</p>
+
+<p>The quality of the discussion and individuals at last year’s conference led to my expansion this last year. I was blessed with so many opportunities to talk, share, and grow. I know that this year’s session will provide me with the fuel to take 2010 to that next level.</p>
+
+<p>I hope to see you all there.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/03/17/dynamic-extension-methods-fail/">Dynamic + Extension Methods = Fail</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-03-17 00:00:00 -0500" pubdate  updated >Mar 17<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>I am playing around with dynamics right now working on a solution for a completely different problem.</p>
+
+<p>I discovered a issue I didn’t foresee (and maybe I am doing something wrong).</p>
+
+<p>I use AssertExtensions to make my tests more readable so I created my first extension.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">AssertExtensions</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">ShouldBe</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">this</span> <span class="n">T</span> <span class="n">actual</span><span class="p">,</span> <span class="n">T</span> <span class="n">expected</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I created a test to ‘get’ a property from a dynamic object.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[TestMethod]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_be_able_to_get_property</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">var</span> <span class="n">book</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Book</span> <span class="p">{</span><span class="n">Title</span> <span class="p">=</span> <span class="s">&quot;Icarus Hunt&quot;</span><span class="p">,</span> <span class="n">Author</span> <span class="p">=</span> <span class="s">&quot;Timothy Zahn&quot;</span><span class="p">};</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">var</span> <span class="n">d</span> <span class="p">=</span> <span class="n">book</span> <span class="k">as</span> <span class="n">dynamic</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">d</span><span class="p">.</span><span class="n">Author</span><span class="p">.</span><span class="n">ShouldBe</span><span class="p">(</span><span class="s">&quot;Timothy Zahn&quot;</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Should work right?</p>
+
+<p>Wrong.</p>
+
+<p><img class='' src='/images/dynamic-fail.png' width='' height='' alt=''Compile fail'' title=''Compile fail''></p>
+
+<p>Oh noes!</p>
+
+<p>Apparently the RuntimeBinder can’t figure out the extension to string. My solution was to do this:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[TestMethod]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_be_able_to_get_property</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">var</span> <span class="n">book</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Book</span> <span class="p">{</span><span class="n">Title</span> <span class="p">=</span> <span class="s">&quot;Icarus Hunt&quot;</span><span class="p">,</span> <span class="n">Author</span> <span class="p">=</span> <span class="s">&quot;Timothy Zahn&quot;</span><span class="p">};</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">var</span> <span class="n">d</span> <span class="p">=</span> <span class="n">book</span> <span class="k">as</span> <span class="n">dynamic</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">var</span> <span class="n">author</span> <span class="p">=</span> <span class="n">d</span><span class="p">.</span><span class="n">Author</span> <span class="k">as</span> <span class="kt">string</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">author</span><span class="p">.</span><span class="n">ShouldBe</span><span class="p">(</span><span class="s">&quot;Timothy Zahn&quot;</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I just found it interesting that it didn’t behave the way I would have expected.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/03/09/books-every-man-must-read/">100 Books Every Man Must Read</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-03-09 00:00:00 -0600" pubdate  updated >Mar 9<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>So over lunch I decided to mark down which of the 100 books every man must read I have actually read.</p>
+
+<p>Read</p>
+
+<ol>
+<li>The Great Gatsby</li>
+<li>1984 &lt;- multiple times&#8230; pure genius</li>
+<li>The Catcher in the Rye</li>
+<li>The Picture of Dorian Gray</li>
+<li>How to Win Friends and Influence People</li>
+<li>Call of the Wild</li>
+<li>Swiss Family Robinson</li>
+<li>Catch-22 &lt;- love it! I need to reread.</li>
+<li>Lord of the Flies</li>
+<li>Don Quixote &#8230; yes I&#8217;ve read it. It was long and I don&#8217;t remember any of it.</li>
+<li>The Hobbit</li>
+<li>Huckleberry Finn</li>
+<li>Animal Farm &lt;- again.. genius.</li>
+<li>Frankenstein &lt;- Fire&#8230;. bad</li>
+<li>Hamlet</li>
+<li>The Stranger</li>
+<li>The Island of Dr Moreau</li>
+<li>All Quiet on the Western Front &lt;- literally changed my mind about going into the army :)</li>
+<li>To Kill a Mockingbird</li>
+</ol>
+
+
+<p>Read Excerpts</p>
+
+<ol>
+<li>The Prince</li>
+<li>The Republic</li>
+<li>Brave New World (still need to finish it)</li>
+<li>The Iliad and Odyssey</li>
+<li>Walden</li>
+<li>The Metamorphosis</li>
+<li>The Art of Warfare</li>
+<li>The Divine Comedy &lt;- I read Inferno</li>
+<li>The Politics</li>
+<li>The Federalist Papers &lt;- genius</li>
+<li>Moby Dick &lt;- started but never finished</li>
+<li>Paradise Lost</li>
+<li>The Red badge of Courage</li>
+<li>The Bible</li>
+<li>Zen and the Art of Motorcycle Maintenance</li>
+</ol>
+
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/03/07/adv-wpf-videos/">Adv WPF Videos</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-03-07 00:00:00 -0600" pubdate  updated >Mar 7<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>The videos are up from the Adv WPF Workshop we had here at EPS.</p>
+
+<p>Videos (the links are kind of slow and funky atm. I will look into it on Monday. I had more luck downloading the file as opposed to streaming it)</p>
+
+<p><a href="" title="http://www.epsdownloadsite.com/downloads/7a554107-cdd0-4133-967b-913c595971ee/Advanced_WPF_JB_part1.wmv">Part 1</a>
+<a href="" title="http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part2.wmv">Part 2</a>
+<a href="" title="http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part3.wmv">Part 3</a>
+<a href="" title="http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part4.wmv">Part 4</a>
+<a href="" title="http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part5.wmv">Part 5</a></p>
+
+<p>I had a great time talking through some of the things we are doing here with WPF. I think it took awhile to get started but towards the end I think we picked up speed.</p>
+
+<p>I don’t exactly recall the topics right now but I believe we did cover these items from the original agenda:</p>
+
+<ul>
+<li>INotifyPropertyChange
+
+<ul>
+<li>Normal</li>
+<li>Type Safe</li>
+<li>Dynamic Proxy</li>
+<li>AOP</li>
+</ul>
+</li>
+<li>View + ViewModel
+
+<ul>
+<li>Typical methods</li>
+<li>IView extensions</li>
+<li>IView<VM></li>
+<li>ViewRegistry</li>
+<li>Also will be covering StructureMap conventions (TypeScanners) and Type Interceptors</li>
+</ul>
+</li>
+<li>Event Aggregator
+
+<ul>
+<li>using Events</li>
+<li>Publish extension method</li>
+<li>ISubscribe</li>
+<li>Putting it all together with a Region Controller</li>
+</ul>
+</li>
+</ul>
+
+
+<p>I guess one big note would be that PostSharp is no longer open source therefore you need a license for their 2.0 product. At EPS we picked up licenses for our current solution. The benefit we get out of PostSharp and AOP far surpasses the license price even when you have to buy the license for every developer.</p>
+
+<p>Check PostSharp out at (http://www.sharpcrafters.com/)[http://www.sharpcrafters.com/]</p>
+
+<p>I think we are going to work on a PostSharp CodeCast or some other informative session on the tool.</p>
+
+<p>Considering we have the Houston Open Spaces coming up, I will probably delay another workshop for a bit. But I had a good time and will probably do another one around May or June.</p>
+
+<p>I want to thank everyone who came online and on site. It was a lot of fun! Please provide feedback so we can make the next workshop even better.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/02/23/creating-first-tfs-build/">Creating My First TFS 2010 Build</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-02-23 00:00:00 -0600" pubdate  updated >Feb 23<span>rd</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>My work this iteration on my project is setting up a CI build and then migrating all our POC code to the solution.</p>
+
+<p>Right now I am creating a simple build as practice for setting up the actual build.</p>
+
+<p>I am approaching this from a complete n00b when it comes to creating a TFS build. I have created builds before but they have been small and just simple MSBuild files. This is the first time I am using TFS and creating not only a build but a continuous integration environment.</p>
+
+<p>I created a Team Project and added a simple C# project to source control. I then looked at the Team Explorer and noticed that there is a Builds section under my project. Intuitively I right clicked and found where I can create a New Build Definition.</p>
+
+<p><img class='' src='/images/tfs_thumbnail1.png' width='' height='' alt=''New Build Definition'' title=''New Build Definition''></p>
+
+<p>I looked at the options available to me on the Build Window and noticed a Trigger section. Investigating the Trigger section allowed me to select what triggers this build. Oh look a CI trigger that builds after each check-in!</p>
+
+<p><img class='' src='/images/tfs_thumbnail2.png' width='' height='' alt=''Continuous Integration'' title=''Continuous Integration''></p>
+
+<p>I then had to set an output folder so I created a folder on our build machine and set the folder to that.</p>
+
+<p><img class='' src='/images/tfs_thumbnail3.png' width='' height='' alt=''Set output folder'' title=''Set output folder''></p>
+
+<p>And then I was done.</p>
+
+<p>I do have to say we already had a TFS Build Controller setup so I can’t comment on that for now.</p>
+
+<p>I then ran a couple of experiments. I first added a class foo to my project and checked in. I then double clicked on my Build under the TFS explorer and was given two reports. One report showed the current queued builds and the other had a list of the completed builds.</p>
+
+<p>After I ran my first successful build I then made a compile error and checked it in. I then had a failed build.</p>
+
+<p><img class='' src='/images/tfs_thumbnail4.png' width='' height='' alt=''Failed build'' title=''Failed build''></p>
+
+<p>When I double clicked the failed build I got this UI.</p>
+
+<p><img class='' src='/images/tfs_thumbnail5.png' width='' height='' alt=''Failed build report'' title=''Failed build report''></p>
+
+<p>I then created a test project and then made a failing test. Now my build looks like this:</p>
+
+<p><img class='' src='/images/tfs_thumbnail6.png' width='' height='' alt=''Build with failing tests'' title=''Build with failing tests''></p>
+
+<p>And when I double clicked I got this report.</p>
+
+<p><img class='' src='/images/tfs_thumbnail7.png' width='' height='' alt=''Build with failing tests report'' title=''Build with failing tests report''></p>
+
+<p>So that was a real quick run through with creating a CI build with TFS 2010. I have to say… I was surprised that it was that easy. I am continuing my work with the build but it looks like the simple scenario was incredibly easy!</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/02/18/isubscribe/">ISubscribe</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-02-18 00:00:00 -0600" pubdate  updated >Feb 18<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>I believe Jimmy Bogard has a similar technique (IHandler<T>) with ASP .Net MVC but I thought I would still share the convention I’ve been using to wire up subscriptions to the Prism Event Aggregator.</p>
+
+<p>Whenever an object is built with StructureMap, it goes through all the TypeInterceptors. I have a SubscriptionTypeInterceptor:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">SubscriptionInterceptor</span> <span class="p">:</span> <span class="n">TypeInterceptor</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">object</span> <span class="nf">Process</span><span class="p">(</span><span class="kt">object</span> <span class="n">target</span><span class="p">,</span> <span class="n">IContext</span> <span class="n">context</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">eventAggregator</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IEventAggregator</span><span class="p">&gt;();</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="c1">// Get interface ISubscribe&lt;E&gt;</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">interfaces</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">GetInterfaces</span><span class="p">().</span><span class="n">Where</span><span class="p">(</span><span class="n">i</span> <span class="p">=&gt;</span> <span class="n">i</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">&quot;ISubscribe&quot;</span><span class="p">));</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">foreach</span> <span class="p">(</span><span class="n">var</span> <span class="n">type</span> <span class="k">in</span> <span class="n">interfaces</span><span class="p">)</span>
+</div><div class='line'>        <span class="p">{</span>
+</div><div class='line'>            <span class="c1">// typeof(E)</span>
+</div><div class='line'>            <span class="n">var</span> <span class="n">eventType</span> <span class="p">=</span> <span class="n">type</span><span class="p">.</span><span class="n">GetGenericArguments</span><span class="p">()[</span><span class="m">0</span><span class="p">];</span>
+</div><div class='line'>
+</div><div class='line'>            <span class="n">var</span> <span class="n">setupMethod</span> <span class="p">=</span> <span class="n">GetType</span><span class="p">().</span><span class="n">GetMethod</span><span class="p">(</span><span class="s">&quot;Setup&quot;</span><span class="p">);</span>
+</div><div class='line'>            <span class="n">setupMethod</span><span class="p">.</span><span class="n">MakeGenericMethod</span><span class="p">(</span><span class="n">eventType</span><span class="p">).</span><span class="n">Invoke</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">target</span><span class="p">,</span> <span class="n">eventAggregator</span> <span class="p">});</span>
+</div><div class='line'>        <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">return</span> <span class="n">target</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">bool</span> <span class="nf">MatchesType</span><span class="p">(</span><span class="n">Type</span> <span class="n">type</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="k">return</span> <span class="n">type</span><span class="p">.</span><span class="n">ImplementsInterfaceTemplate</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">ISubscribe</span><span class="p">&lt;&gt;));</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="n">Setup</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">ISubscribe</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">subscriber</span><span class="p">,</span> <span class="n">IEventAggregator</span> <span class="n">eventAggregator</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">eventAggregator</span>
+</div><div class='line'>            <span class="p">.</span><span class="n">GetEvent</span><span class="p">&lt;</span><span class="n">CompositePresentationEvent</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;()</span>
+</div><div class='line'>            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">subscriber</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>So it finds all the ISubscribe<T> interfaces the target implements and then subscribes the target to the event T in the event aggregator.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">ISubscribe</span><span class="p">&lt;</span><span class="n">E</span><span class="p">&gt;</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="n">E</span> <span class="n">e</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>A simple example of usage:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">SecurityController</span> <span class="p">:</span> <span class="n">IController</span><span class="p">,</span>
+</div><div class='line'>                                  <span class="n">ISubscribe</span><span class="p">&lt;</span><span class="n">RequestUserLoginEvent</span><span class="p">&gt;</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="n">RequestUserLoginEvent</span> <span class="n">e</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">Publish</span><span class="p">.</span><span class="n">Event</span><span class="p">().</span><span class="n">ShowModal</span><span class="p">&lt;</span><span class="n">IRequestUserLoginViewModel</span><span class="p">&gt;();</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+</div>
+  
+  
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/blog/page/5/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/3/">Newer &rarr;</a>
+    
+  </div>
+</nav>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2010/10/29/learning-bash/">Learning Bash Aliases and Functions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/26/techfest-design-patterns/">Houston Techfest - Design Patterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/09/11/lighten-color/">Lighten Color in C#</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/29/wizards-of-smart-11/">Wizards of Smart #11 - Glenn Block part 2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/06/24/wizards-of-smart-10/">Wizards of Smart #10 - Glenn Block part 1</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Jonathan Birkholz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

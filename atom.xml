@@ -4,7 +4,7 @@
   <title>I am RookieOne</title>
   <link href="http://www.iamrookieone.com/atom.xml" rel="self"/>
   <link href="http://www.iamrookieone.com/"/>
-  <updated>2011-11-25T17:59:50-06:00</updated>
+  <updated>2011-12-12T18:04:16-06:00</updated>
   <id>http://www.iamrookieone.com/</id>
   <author>
     <name>Jonathan Birkholz</name>
@@ -13,314 +13,193 @@
 
   
   <entry>
-    <title>Dynamic + Extension Methods = Fail</title>
-    <link href="http://www.iamrookieone.com/blog/2010/03/17/dynamic-extension-methods-fail/"/>
-    <updated>2010-03-17T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/03/17/dynamic-extension-methods-fail</id>
-    <content type="html">&lt;p&gt;I am playing around with dynamics right now working on a solution for a completely different problem.&lt;/p&gt;
+    <title>Learning Bash Aliases and Functions</title>
+    <link href="http://www.iamrookieone.com/blog/2010/10/29/learning-bash/"/>
+    <updated>2010-10-29T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/10/29/learning-bash</id>
+    <content type="html">&lt;p&gt;During our fantastical Lunch and Learn at ChaiOne, we went over customizing bash using aliases and functions. These little tools make normal command line mortals into command line gods… or at least demi-gods.&lt;/p&gt;
 
-&lt;p&gt;I discovered a issue I didn’t foresee (and maybe I am doing something wrong).&lt;/p&gt;
+&lt;p&gt;If you are new to Macs and other Unix based systems, like I am, then what I am about to share will be new to you. It was new to me until today. And for those Unix gurus, if I describe something incorrectly please let me know.&lt;/p&gt;
 
-&lt;p&gt;I use AssertExtensions to make my tests more readable so I created my first extension.&lt;/p&gt;
+&lt;p&gt;First of all there is a file called .bashrc in your home directory ( ~ ). This file is loaded anytime you run a command script or open a terminal window. In this file we can add aliases, functions, and other customizations for our command line.&lt;/p&gt;
+
+&lt;p&gt;With an alias I can create a shortcut ‘g’ for ‘git status’.&lt;/p&gt;
+
+&lt;p&gt;``` bash&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;alias g='git status'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Now I can just type ‘g’ to run ‘git status’.&lt;/p&gt;
+
+&lt;p&gt;I can use a function to create a more robust shortcut. For example, I can create a shortcut for ‘git push’. In this function by default I push to ‘origin master’ but if I provide an argument it will push to ‘$argument master’.&lt;/p&gt;
+
+&lt;p&gt;``` bash&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function gpush {
+    if [[ -z $1 ]]
+    then
+     git push origin master    
+    else
+     git push $1 master
+    fi
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;gpush =&gt; git push origin master&lt;/p&gt;
+
+&lt;p&gt;gpush heroku =&gt; git push heroku master&lt;/p&gt;
+
+&lt;p&gt;Once you add the alias or function to your .bashrc, you can reload the file using&lt;/p&gt;
+
+&lt;p&gt;``` bash&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;And there is a shortcut for source ( . ) So you can use&lt;/p&gt;
+
+&lt;p&gt;``` bash&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;. ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Now you know how to create aliases and functions. I must admit, I think its pretty damn cool. This coming from the guy that a year ago was hesitant to use git on the command line.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Houston Techfest - Design Patterns</title>
+    <link href="http://www.iamrookieone.com/blog/2010/10/26/techfest-design-patterns/"/>
+    <updated>2010-10-26T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/10/26/techfest-design-patterns</id>
+    <content type="html">&lt;p&gt;An email from Claudio reminded me that I completely forgot to link the slides and code from the Houston Techfest presentation!&lt;/p&gt;
+
+&lt;p&gt;And just a reminder that everything is offered as is. But that doesn’t mean you can’t email me or Claudio for more information. :)&lt;/p&gt;
+
+&lt;p&gt;You can find the slides on slideshare at :&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.slideshare.net/RookieOne/techfest-design-patterns&quot;&gt;http://www.slideshare.net/RookieOne/techfest-design-patterns&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;And the code you can find (as is) at bitbucket :&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://bitbucket.org/rookieone/design-patterns&quot;&gt;http://bitbucket.org/rookieone/design-patterns&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;And you can find the code on GitHub at :&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://github.com/RookieOne/Houston-Techfest-Design-Patterns&quot;&gt;http://github.com/RookieOne/Houston-Techfest-Design-Patterns&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Lighten Color in C#</title>
+    <link href="http://www.iamrookieone.com/blog/2010/09/11/lighten-color/"/>
+    <updated>2010-09-11T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/09/11/lighten-color</id>
+    <content type="html">&lt;p&gt;The following piece of code was originally written by Marcus Egger in a converter. I did a bit of refactoring to clean up the code and moved the code outside a converter and into an extension method.&lt;/p&gt;
+
+&lt;p&gt;The extension method is off of Color and returns another Color. Now since it is an extension method you can use it in a converter or a markup extension (the latter being my favorite use).&lt;/p&gt;
+
+&lt;p&gt;You can also get this code from my color project on GitHub :&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://github.com/RookieOne/Colors&quot;&gt;http://github.com/RookieOne/Colors&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;``` csharp&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;public static class AssertExtensions
+&lt;pre&gt;&lt;code&gt;public static class LightenColorExtension
 {
-    public static void ShouldBe&amp;lt;T&amp;gt;(this T actual, T expected)
+    /// &amp;lt;summary&amp;gt;
+    ///   This method applies lighting to a color.
+    ///   For instance, a color that has a lighting factor of 1 applies, appears at its original value.
+    ///   A color with a lighting factor of 0.5 appears only half as bright as it was before.
+    ///   A color with a lighting factor of 1.5 appears roughly twice as bright as before.
+    ///   A color with a lightning factor of 2 appears white.
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;param name=&quot;originalColor&quot;&amp;gt;Base color&amp;lt;/param&amp;gt;
+    /// &amp;lt;param name=&quot;lightFactor&quot;&amp;gt;
+    ///   Amount of light applied to the color
+    /// &amp;lt;/param&amp;gt;
+    /// &amp;lt;returns&amp;gt;Lit color&amp;lt;/returns&amp;gt;
+    /// &amp;lt;remarks&amp;gt;
+    ///   This routine is very fast. Even when using it in tight loops, I (Markus) have not been able to 
+    ///   meassure a significant amount of time spent in this routine (always less than 1ms). I was originally
+    ///   concerened about the performance of this, so I added a caching mechanism, but that slowed things down
+    ///   by 2 orders of magnitude.
+    /// &amp;lt;/remarks&amp;gt;
+    public static Color Lighten(this Color originalColor, float lightFactor)
     {
-        Assert.AreEqual(expected, actual);
+        if (TransformationNotNeeded(lightFactor))
+            return originalColor;
+
+        if (RealBright(lightFactor))
+            return System.Windows.Media.Colors.White;
+
+        if (ShouldDarken(lightFactor))
+            return DarkenColor(originalColor, lightFactor);
+
+        return LightenColor(originalColor, lightFactor);
     }
-}
-&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;I created a test to ‘get’ a property from a dynamic object.&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[TestMethod]
-public void should_be_able_to_get_property()
-{
-    var book = new Book {Title = &quot;Icarus Hunt&quot;, Author = &quot;Timothy Zahn&quot;};
-
-    var d = book as dynamic;
-
-    d.Author.ShouldBe(&quot;Timothy Zahn&quot;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Should work right?&lt;/p&gt;
-
-&lt;p&gt;Wrong.&lt;/p&gt;
-
-&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/dynamic-fail.png' width='' height='' alt=''Compile fail'' title=''Compile fail''&gt;&lt;/p&gt;
-
-&lt;p&gt;Oh noes!&lt;/p&gt;
-
-&lt;p&gt;Apparently the RuntimeBinder can’t figure out the extension to string. My solution was to do this:&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[TestMethod]
-public void should_be_able_to_get_property()
-{
-    var book = new Book {Title = &quot;Icarus Hunt&quot;, Author = &quot;Timothy Zahn&quot;};
-
-    var d = book as dynamic;
-
-    var author = d.Author as string;
-
-    author.ShouldBe(&quot;Timothy Zahn&quot;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;I just found it interesting that it didn’t behave the way I would have expected.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>100 Books Every Man Must Read</title>
-    <link href="http://www.iamrookieone.com/blog/2010/03/09/books-every-man-must-read/"/>
-    <updated>2010-03-09T00:00:00-06:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/03/09/books-every-man-must-read</id>
-    <content type="html">&lt;p&gt;So over lunch I decided to mark down which of the 100 books every man must read I have actually read.&lt;/p&gt;
-
-&lt;p&gt;Read&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;The Great Gatsby&lt;/li&gt;
-&lt;li&gt;1984 &amp;lt;- multiple times... pure genius&lt;/li&gt;
-&lt;li&gt;The Catcher in the Rye&lt;/li&gt;
-&lt;li&gt;The Picture of Dorian Gray&lt;/li&gt;
-&lt;li&gt;How to Win Friends and Influence People&lt;/li&gt;
-&lt;li&gt;Call of the Wild&lt;/li&gt;
-&lt;li&gt;Swiss Family Robinson&lt;/li&gt;
-&lt;li&gt;Catch-22 &amp;lt;- love it! I need to reread.&lt;/li&gt;
-&lt;li&gt;Lord of the Flies&lt;/li&gt;
-&lt;li&gt;Don Quixote ... yes I've read it. It was long and I don't remember any of it.&lt;/li&gt;
-&lt;li&gt;The Hobbit&lt;/li&gt;
-&lt;li&gt;Huckleberry Finn&lt;/li&gt;
-&lt;li&gt;Animal Farm &amp;lt;- again.. genius.&lt;/li&gt;
-&lt;li&gt;Frankenstein &amp;lt;- Fire.... bad&lt;/li&gt;
-&lt;li&gt;Hamlet&lt;/li&gt;
-&lt;li&gt;The Stranger&lt;/li&gt;
-&lt;li&gt;The Island of Dr Moreau&lt;/li&gt;
-&lt;li&gt;All Quiet on the Western Front &amp;lt;- literally changed my mind about going into the army :)&lt;/li&gt;
-&lt;li&gt;To Kill a Mockingbird&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;Read Excerpts&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;The Prince&lt;/li&gt;
-&lt;li&gt;The Republic&lt;/li&gt;
-&lt;li&gt;Brave New World (still need to finish it)&lt;/li&gt;
-&lt;li&gt;The Iliad and Odyssey&lt;/li&gt;
-&lt;li&gt;Walden&lt;/li&gt;
-&lt;li&gt;The Metamorphosis&lt;/li&gt;
-&lt;li&gt;The Art of Warfare&lt;/li&gt;
-&lt;li&gt;The Divine Comedy &amp;lt;- I read Inferno&lt;/li&gt;
-&lt;li&gt;The Politics&lt;/li&gt;
-&lt;li&gt;The Federalist Papers &amp;lt;- genius&lt;/li&gt;
-&lt;li&gt;Moby Dick &amp;lt;- started but never finished&lt;/li&gt;
-&lt;li&gt;Paradise Lost&lt;/li&gt;
-&lt;li&gt;The Red badge of Courage&lt;/li&gt;
-&lt;li&gt;The Bible&lt;/li&gt;
-&lt;li&gt;Zen and the Art of Motorcycle Maintenance&lt;/li&gt;
-&lt;/ol&gt;
-
-</content>
-  </entry>
-  
-  <entry>
-    <title>Adv WPF Videos</title>
-    <link href="http://www.iamrookieone.com/blog/2010/03/07/adv-wpf-videos/"/>
-    <updated>2010-03-07T00:00:00-06:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/03/07/adv-wpf-videos</id>
-    <content type="html">&lt;p&gt;The videos are up from the Adv WPF Workshop we had here at EPS.&lt;/p&gt;
-
-&lt;p&gt;Videos (the links are kind of slow and funky atm. I will look into it on Monday. I had more luck downloading the file as opposed to streaming it)&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;&quot; title=&quot;http://www.epsdownloadsite.com/downloads/7a554107-cdd0-4133-967b-913c595971ee/Advanced_WPF_JB_part1.wmv&quot;&gt;Part 1&lt;/a&gt;
-&lt;a href=&quot;&quot; title=&quot;http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part2.wmv&quot;&gt;Part 2&lt;/a&gt;
-&lt;a href=&quot;&quot; title=&quot;http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part3.wmv&quot;&gt;Part 3&lt;/a&gt;
-&lt;a href=&quot;&quot; title=&quot;http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part4.wmv&quot;&gt;Part 4&lt;/a&gt;
-&lt;a href=&quot;&quot; title=&quot;http://www.epsdownloadsite.com/downloads/8adbd281-908b-4301-8135-daddc13361f6/Advanced_WPF_JB_part5.wmv&quot;&gt;Part 5&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I had a great time talking through some of the things we are doing here with WPF. I think it took awhile to get started but towards the end I think we picked up speed.&lt;/p&gt;
-
-&lt;p&gt;I don’t exactly recall the topics right now but I believe we did cover these items from the original agenda:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;INotifyPropertyChange
-
-&lt;ul&gt;
-&lt;li&gt;Normal&lt;/li&gt;
-&lt;li&gt;Type Safe&lt;/li&gt;
-&lt;li&gt;Dynamic Proxy&lt;/li&gt;
-&lt;li&gt;AOP&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;View + ViewModel
-
-&lt;ul&gt;
-&lt;li&gt;Typical methods&lt;/li&gt;
-&lt;li&gt;IView extensions&lt;/li&gt;
-&lt;li&gt;IView&lt;VM&gt;&lt;/li&gt;
-&lt;li&gt;ViewRegistry&lt;/li&gt;
-&lt;li&gt;Also will be covering StructureMap conventions (TypeScanners) and Type Interceptors&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Event Aggregator
-
-&lt;ul&gt;
-&lt;li&gt;using Events&lt;/li&gt;
-&lt;li&gt;Publish extension method&lt;/li&gt;
-&lt;li&gt;ISubscribe&lt;/li&gt;
-&lt;li&gt;Putting it all together with a Region Controller&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;I guess one big note would be that PostSharp is no longer open source therefore you need a license for their 2.0 product. At EPS we picked up licenses for our current solution. The benefit we get out of PostSharp and AOP far surpasses the license price even when you have to buy the license for every developer.&lt;/p&gt;
-
-&lt;p&gt;Check PostSharp out at (http://www.sharpcrafters.com/)[http://www.sharpcrafters.com/]&lt;/p&gt;
-
-&lt;p&gt;I think we are going to work on a PostSharp CodeCast or some other informative session on the tool.&lt;/p&gt;
-
-&lt;p&gt;Considering we have the Houston Open Spaces coming up, I will probably delay another workshop for a bit. But I had a good time and will probably do another one around May or June.&lt;/p&gt;
-
-&lt;p&gt;I want to thank everyone who came online and on site. It was a lot of fun! Please provide feedback so we can make the next workshop even better.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Creating my first TFS 2010 Build</title>
-    <link href="http://www.iamrookieone.com/blog/2010/02/23/creating-first-tfs-build/"/>
-    <updated>2010-02-23T00:00:00-06:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/02/23/creating-first-tfs-build</id>
-    <content type="html">&lt;p&gt;My work this iteration on my project is setting up a CI build and then migrating all our POC code to the solution.&lt;/p&gt;
-
-&lt;p&gt;Right now I am creating a simple build as practice for setting up the actual build.&lt;/p&gt;
-
-&lt;p&gt;I am approaching this from a complete n00b when it comes to creating a TFS build. I have created builds before but they have been small and just simple MSBuild files. This is the first time I am using TFS and creating not only a build but a continuous integration environment.&lt;/p&gt;
-
-&lt;p&gt;I created a Team Project and added a simple C# project to source control. I then looked at the Team Explorer and noticed that there is a Builds section under my project. Intuitively I right clicked and found where I can create a New Build Definition.&lt;/p&gt;
-
-&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail1.png' width='' height='' alt=''New Build Definition'' title=''New Build Definition''&gt;&lt;/p&gt;
-
-&lt;p&gt;I looked at the options available to me on the Build Window and noticed a Trigger section. Investigating the Trigger section allowed me to select what triggers this build. Oh look a CI trigger that builds after each check-in!&lt;/p&gt;
-
-&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail2.png' width='' height='' alt=''Continuous Integration'' title=''Continuous Integration''&gt;&lt;/p&gt;
-
-&lt;p&gt;I then had to set an output folder so I created a folder on our build machine and set the folder to that.&lt;/p&gt;
-
-&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail3.png' width='' height='' alt=''Set output folder'' title=''Set output folder''&gt;&lt;/p&gt;
-
-&lt;p&gt;And then I was done.&lt;/p&gt;
-
-&lt;p&gt;I do have to say we already had a TFS Build Controller setup so I can’t comment on that for now.&lt;/p&gt;
-
-&lt;p&gt;I then ran a couple of experiments. I first added a class foo to my project and checked in. I then double clicked on my Build under the TFS explorer and was given two reports. One report showed the current queued builds and the other had a list of the completed builds.&lt;/p&gt;
-
-&lt;p&gt;After I ran my first successful build I then made a compile error and checked it in. I then had a failed build.&lt;/p&gt;
-
-&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail4.png' width='' height='' alt=''Failed build'' title=''Failed build''&gt;&lt;/p&gt;
-
-&lt;p&gt;When I double clicked the failed build I got this UI.&lt;/p&gt;
-
-&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail5.png' width='' height='' alt=''Failed build report'' title=''Failed build report''&gt;&lt;/p&gt;
-
-&lt;p&gt;I then created a test project and then made a failing test. Now my build looks like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail6.png' width='' height='' alt=''Build with failing tests'' title=''Build with failing tests''&gt;&lt;/p&gt;
-
-&lt;p&gt;And when I double clicked I got this report.&lt;/p&gt;
-
-&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/tfs_thumbnail7.png' width='' height='' alt=''Build with failing tests report'' title=''Build with failing tests report''&gt;&lt;/p&gt;
-
-&lt;p&gt;So that was a real quick run through with creating a CI build with TFS 2010. I have to say… I was surprised that it was that easy. I am continuing my work with the build but it looks like the simple scenario was incredibly easy!&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>ISubscribe</title>
-    <link href="http://www.iamrookieone.com/blog/2010/02/18/isubscribe/"/>
-    <updated>2010-02-18T00:00:00-06:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/02/18/isubscribe</id>
-    <content type="html">&lt;p&gt;I believe Jimmy Bogard has a similar technique (IHandler&lt;T&gt;) with ASP .Net MVC but I thought I would still share the convention I’ve been using to wire up subscriptions to the Prism Event Aggregator.&lt;/p&gt;
-
-&lt;p&gt;Whenever an object is built with StructureMap, it goes through all the TypeInterceptors. I have a SubscriptionTypeInterceptor:&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class SubscriptionInterceptor : TypeInterceptor
-{
-    public object Process(object target, IContext context)
+    private static bool TransformationNotNeeded(float lightFactor)
     {
-        var eventAggregator = context.GetInstance&amp;lt;IEventAggregator&amp;gt;();
+        var value = lightFactor - 1.0f;
 
-        // Get interface ISubscribe&amp;lt;E&amp;gt;
-        var interfaces = target.GetType().GetInterfaces().Where(i =&amp;gt; i.Name.Contains(&quot;ISubscribe&quot;));
+        return value &amp;lt; 0.01f
+               &amp;amp;&amp;amp; value &amp;gt; -0.01f;
+    }
 
-        foreach (var type in interfaces)
+    private static bool RealBright(float lightFactor)
+    {
+        return lightFactor &amp;gt;= 2.0f;
+    }
+
+    private static bool ShouldDarken(float lightFactor)
+    {
+        return lightFactor &amp;lt; 1.0f;
+    }
+
+    private static Color DarkenColor(Color color, float lightFactor)
+    {
+        var red = (byte) (color.R*lightFactor);
+        var green = (byte) (color.G*lightFactor);
+        var blue = (byte) (color.B*lightFactor);
+
+        return Color.FromRgb(red, green, blue);
+    }
+
+    private static Color LightenColor(Color color, float lightFactor)
+    {
+        // Lighten
+        // We do this by approaching 256 for a light factor of 2.0f
+        float fFactor2 = lightFactor;
+        if (fFactor2 &amp;gt; 1.0f)
         {
-            // typeof(E)
-            var eventType = type.GetGenericArguments()[0];
-
-            var setupMethod = GetType().GetMethod(&quot;Setup&quot;);
-            setupMethod.MakeGenericMethod(eventType).Invoke(this, new[] { target, eventAggregator });
+            fFactor2 -= 1.0f;
         }
 
-        return target;
+        var red = LightenColorComponent(color.R, fFactor2);
+        var green = LightenColorComponent(color.G, fFactor2);
+        var blue = LightenColorComponent(color.B, fFactor2);
+
+        return Color.FromRgb(red, green, blue);
     }
 
-    public bool MatchesType(Type type)
+    private static byte LightenColorComponent(byte colorComponent, float fFactor)
     {
-        return type.ImplementsInterfaceTemplate(typeof(ISubscribe&amp;lt;&amp;gt;));
-    }
+        var inverse = 255 - colorComponent;
+        colorComponent += (byte) (inverse*fFactor);
 
-    public void Setup&amp;lt;T&amp;gt;(ISubscribe&amp;lt;T&amp;gt; subscriber, IEventAggregator eventAggregator)
-    {
-        eventAggregator
-            .GetEvent&amp;lt;CompositePresentationEvent&amp;lt;T&amp;gt;&amp;gt;()
-            .Subscribe(subscriber.Subscribe);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;So it finds all the ISubscribe&lt;T&gt; interfaces the target implements and then subscribes the target to the event T in the event aggregator.&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public interface ISubscribe&amp;lt;E&amp;gt;
-{
-    void Subscribe(E e);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;A simple example of usage:&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class SecurityController : IController,
-                                  ISubscribe&amp;lt;RequestUserLoginEvent&amp;gt;
-{
-    public void Subscribe(RequestUserLoginEvent e)
-    {
-        Publish.Event().ShowModal&amp;lt;IRequestUserLoginViewModel&amp;gt;();
+        return colorComponent &amp;lt; 255
+                   ? colorComponent
+                   : (byte) 255;
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -330,836 +209,978 @@ public void should_be_able_to_get_property()
   </entry>
   
   <entry>
-    <title>CodeCast #68 : Convention over Configuration</title>
-    <link href="http://www.iamrookieone.com/blog/2010/02/18/convention_over_configuration/"/>
-    <updated>2010-02-18T00:00:00-06:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/02/18/convention_over_configuration</id>
-    <content type="html">&lt;p&gt;I recorded a podcast with Markus and Ken on Tuesday and it was published last night. :)&lt;/p&gt;
+    <title>Wizards of Smart #11 - Glenn Block part 2</title>
+    <link href="http://www.iamrookieone.com/blog/2010/07/29/wizards-of-smart-11/"/>
+    <updated>2010-07-29T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/07/29/wizards-of-smart-11</id>
+    <content type="html">&lt;p&gt;A lot of people have asked about the second part of the Glenn Block interview, so here it is. Ok so it is a month late. A lot of stuff was happening in July (I will explain on another post. Lots of good stuff but it just put the podcast on hold for a bit)&lt;/p&gt;
 
-&lt;p&gt;We talked about Convention over Configuration using tools like Structure Map, PostSharp, Prism, etc&lt;/p&gt;
-
-&lt;p&gt;You can download the podcast using itunes or online at:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.code-magazine.com/codecast/index.aspx?messageid=0001bf99-1394-45c2-8949-388c673ac7a5&quot;&gt;http://www.code-magazine.com/codecast/index.aspx?messageid=0001bf99-1394-45c2-8949-388c673ac7a5&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In this podcast Glenn and Ryan dive more into REST. It is a great conversation. I felt like a fly on the wall, but it was a very lucky fly that learned a lot about REST. So enjoy.&lt;/p&gt;
 </content>
   </entry>
   
   <entry>
-    <title>View + ViewModel + ViewRegistry</title>
-    <link href="http://www.iamrookieone.com/blog/2010/02/17/view-viewmodel-viewregistry/"/>
-    <updated>2010-02-17T00:00:00-06:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/02/17/view-viewmodel-viewregistry</id>
-    <content type="html">&lt;p&gt;In preparation for the Advanced WPF Workshop on Saturday Feb 20th, I thought I would throw together some blog posts around some techniques / code I will be sharing. JP asked the other day whether Views should have references to their ViewModels or should ViewModels have references to Views. Unfortunately twitter is a great medium for asking this question but not the best medium for answering the question.&lt;/p&gt;
+    <title>Wizards of Smart #10 - Glenn Block part 1</title>
+    <link href="http://www.iamrookieone.com/blog/2010/06/24/wizards-of-smart-10/"/>
+    <updated>2010-06-24T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/06/24/wizards-of-smart-10</id>
+    <content type="html">&lt;p&gt;Ryan and I had a awesome opportunity of having Glenn Block join us on a Skype call a couple of weeks ago. We wanted to have him on and talk about what he is currently doing and try to avoid the whole MEF topic (we did dive a bit into it, but not too deep).&lt;/p&gt;
 
-&lt;p&gt;I am going to try using the dry marker board as a form of communication with my blogs. I have little patience for lining up pretty lines and colored boxes with Visio or Power Point. A dry marker board is fast and allows for a free flowing expression of my ideas.&lt;/p&gt;
+&lt;p&gt;So part 1, Glenn introduces himself and gives a history of his current move from MEF to WCF and his vision on what he hopes to do by joining the team.&lt;/p&gt;
 
-&lt;p&gt;Let me try to diagram out how I currently manage my Views and ViewModels.&lt;/p&gt;
+&lt;p&gt;Glenn blogs at codebetter.com : &lt;a href=&quot;http://codebetter.com/blogs/glenn.block/&quot;&gt;http://codebetter.com/blogs/glenn.block/&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Wizards of Smart #9 - 25 Zeroes + IDEs + SOLID</title>
+    <link href="http://www.iamrookieone.com/blog/2010/06/22/wizards-of-smart-9/"/>
+    <updated>2010-06-22T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/06/22/wizards-of-smart-9</id>
+    <content type="html">&lt;p&gt;This conversation centers around Robert Martin’s Rails presentation titled “25 Zeros”.&lt;/p&gt;
 
-&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/view_viewmodel_viewregistry_whiteboard.jpg' width='' height='' alt=''View ViewModel ViewRegistry Whiteboard'' title=''View ViewModel ViewRegistry Whiteboard''&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.oreilly.com/rails2010/public/schedule/detail/14134&quot;&gt;http://en.oreilly.com/rails2010/public/schedule/detail/14134&lt;/a&gt;&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;We ask the StructureMap container for the ViewModel&lt;/li&gt;
-&lt;li&gt;The VM instance is intercepted by a ViewModelTypeInterceptor&lt;/li&gt;
-&lt;li&gt;Inside the VMTypeInterceptor
+&lt;p&gt;Part of the conversation dived into IDEs and Ryan sent me a link to Code Bubbles.&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;Get the V for out VM from the container&lt;/li&gt;
-&lt;li&gt;Get the ViewRegistry from the container&lt;/li&gt;
-&lt;li&gt;Register the V with the VM in the ViewRegistry&lt;/li&gt;
-&lt;li&gt;Return the VM&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;And finally our VM is returned being registered with a V in the ViewRegistry&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cs.brown.edu/people/acb/codebubbles_site.htm&quot;&gt;http://www.cs.brown.edu/people/acb/codebubbles_site.htm&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;Ryan later references the SOLID article in CODE Magazine by Derick Bailey.&lt;/p&gt;
 
-&lt;p&gt;In short my ViewModel has no reference to my View, my View has no reference to my ViewModel (beyond setting the DataContext), and my View Registry registers the mappings between View and ViewModel.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.code-magazine.com/Article.aspx?quickid=1001061&quot;&gt;http://www.code-magazine.com/Article.aspx?quickid=1001061&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Visual Studio Theme - Bearkat</title>
+    <link href="http://www.iamrookieone.com/blog/2010/06/17/visual-studio-theme/"/>
+    <updated>2010-06-17T12:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/06/17/visual-studio-theme</id>
+    <content type="html">&lt;p&gt;Sharing my Visual Studio theme has been on my list of things to do for awhile now. When the site &lt;a href=&quot;http://studiostyles.info/&quot;&gt;http://studiostyles.info/&lt;/a&gt; came up, I immediately thought here is an easy way to share my color scheme.&lt;/p&gt;
 
-&lt;p&gt;The best code to look for this is in the ViewModelInterceptor:&lt;/p&gt;
+&lt;p&gt;I finally created my theme on the site: &lt;a href=&quot;http://studiostyles.info/schemes/bearkat&quot;&gt;http://studiostyles.info/schemes/bearkat&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Be sure to check it out!&lt;/p&gt;
+
+&lt;p&gt;For those who might like the colors but not the way I used them (and for me to remember what the colors are):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Black : R22 G22 B22&lt;/li&gt;
+&lt;li&gt;Blue : R43 G145 B175&lt;/li&gt;
+&lt;li&gt;Green : R102 G143 B95&lt;/li&gt;
+&lt;li&gt;Orange : R255 G116 B0&lt;/li&gt;
+&lt;li&gt;Red : R163 G21 B21&lt;/li&gt;
+&lt;li&gt;Gray : R128 G128 B128&lt;/li&gt;
+&lt;li&gt;Light Green : R206 G255 B132&lt;/li&gt;
+&lt;li&gt;Tan : R189 G162 B101&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <title>Virtual Brown Bag 6/17/2010</title>
+    <link href="http://www.iamrookieone.com/blog/2010/06/17/virtual-brown-bag/"/>
+    <updated>2010-06-17T12:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/06/17/virtual-brown-bag</id>
+    <content type="html">&lt;p&gt;Ed is doing a fantastic job capturing the links and the topics from the Virtual Brown Bags but I think I will still throw some links up on my site.&lt;/p&gt;
+
+&lt;h2&gt;C# and Lambdas + Events&lt;/h2&gt;
+
+&lt;p&gt;Shared some code on using Lambdas to listen to events. Alan Stevens recommended the reading of C# in Depth : &lt;a href=&quot;http://www.manning.com/skeet/&quot;&gt;http://www.manning.com/skeet/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;RailsConf + Skills Matter Videos&lt;/h2&gt;
+
+&lt;p&gt;Uncle Bob : 25-Zeroes : &lt;a href=&quot;http://www.youtube.com/watch#!v=mslMLp5bQD0&amp;amp;feature=related&quot;&gt;http://www.youtube.com/watch#!v=mslMLp5bQD0&amp;amp;feature=related&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Martin Feathers : Good Code : &lt;a href=&quot;http://www.youtube.com/watch?v=L9ccnRixyMg&amp;amp;feature=PlayList&amp;amp;p=393ECE649BB3813D&amp;amp;playnext_from=PL&amp;amp;index=6&quot;&gt;http://www.youtube.com/watch?v=L9ccnRixyMg&amp;amp;feature=PlayList&amp;amp;p=393ECE649BB3813D&amp;amp;playnext_from=PL&amp;amp;index=6&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Udi Dahan : CQRS : &lt;a href=&quot;http://skillsmatter.com/podcast/open-source-dot-net/udi-dahan-command-query-responsibility-segregation&quot;&gt;http://skillsmatter.com/podcast/open-source-dot-net/udi-dahan-command-query-responsibility-segregation&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;IDEs&lt;/h2&gt;
+
+&lt;p&gt;Code Bubble : &lt;a href=&quot;http://www.cs.brown.edu/people/acb/codebubbles_site.htm&quot;&gt;http://www.cs.brown.edu/people/acb/codebubbles_site.htm&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Code Canvas : &lt;a href=&quot;http://research.microsoft.com/apps/pubs/default.aspx?id=80076&quot;&gt;http://research.microsoft.com/apps/pubs/default.aspx?id=80076&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.youtube.com/watch?v=d4NEaXajiI0&quot;&gt;http://www.youtube.com/watch?v=d4NEaXajiI0&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Software Metaphor&lt;/h2&gt;
+
+&lt;p&gt;Drive: The Surprising Truth About What Motivates Us : &lt;a href=&quot;http://www.amazon.com/Drive-Surprising-Truth-About-Motivates/dp/1594488843/ref=sr_1_1?ie=UTF8&amp;amp;s=books&amp;amp;qid=1276794836&amp;amp;sr=8-1&quot;&gt;http://www.amazon.com/Drive-Surprising-Truth-About-Motivates/dp/1594488843/ref=sr_1_1?ie=UTF8&amp;amp;s=books&amp;amp;qid=1276794836&amp;amp;sr=8-1&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Film Making: A Better Software Development Metaphor &lt;a href=&quot;http://www.lostechies.com/blogs/rodpaddock/archive/2010/04/15/film-making-a-better-software-development-metaphor.aspx&quot;&gt;http://www.lostechies.com/blogs/rodpaddock/archive/2010/04/15/film-making-a-better-software-development-metaphor.aspx&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ayende : Garden : &lt;a href=&quot;http://ayende.com/Blog/archive/2007/09/18/The-Right-Metaphor-Software-as-a-garden-not-a-building.aspx&quot;&gt;http://ayende.com/Blog/archive/2007/09/18/The-Right-Metaphor-Software-as-a-garden-not-a-building.aspx&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Wizards of Smart - Heroku, Cloud, and Iron Ruby</title>
+    <link href="http://www.iamrookieone.com/blog/2010/06/17/wizards-of-smart-8/"/>
+    <updated>2010-06-17T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/06/17/wizards-of-smart-8</id>
+    <content type="html">&lt;p&gt;Sorry for the long delay guys. Ryan and I are both in the middle of deploying applications so other things are on our minds.
+While we wait for me to edit the recording we did last night and we await Glenn Block’s approval on the fantastic 2 shows we did with him, we can enjoy a smaller conversation Ryan and I had on Heroku, Azure, and a bit about Iron Ruby.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Reducing Exceptional Cases</title>
+    <link href="http://www.iamrookieone.com/blog/2010/06/08/wizards-of-smart-7/"/>
+    <updated>2010-06-08T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/06/08/wizards-of-smart-7</id>
+    <content type="html">&lt;p&gt;Ryan starts with describing his love affair with F#, which leads to a discussion of FubuMVC, which leads to a discussion of Performance Problems (not related to Fubu MVC)… etc. So a standard Wizards of Smart conversation.  :)&lt;/p&gt;
+
+&lt;p&gt;I titled this Performance since most of the conversation centered around our experiences with targeting and improving performance.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Reducing Exceptional Cases</title>
+    <link href="http://www.iamrookieone.com/blog/2010/06/04/reducing-exceptional-cases/"/>
+    <updated>2010-06-04T12:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/06/04/reducing-exceptional-cases</id>
+    <content type="html">&lt;p&gt;We have a third party control suite that provided some aggregation functionality. The third party controls had some built in aggregate functions but was missing some other more business centric functions.&lt;/p&gt;
+
+&lt;p&gt;We ended up coding every aggregate as a separate custom class and not using any of the built in aggregates. My team member asked me why not use the built in aggregates?&lt;/p&gt;
+
+&lt;p&gt;The reasoning is that if we used some built-in aggregates and then built the custom aggregates for the other functions, we would have 2 methods of aggregation to maintain. If we treat all the aggregates as custom, then instead of having 2 scenarios, we have one. We don’t have any exceptions. All aggregates are custom aggregates.&lt;/p&gt;
+
+&lt;p&gt;Not only do we simplify our code and future maintenance, we eliminate any dependency on the third party aggregates. Now we are free to change control vendors and not worry about losing our aggregation functionality.&lt;/p&gt;
+
+&lt;p&gt;The point I want to make is look to simplify your code. Eliminate exceptional cases as much as possible. Make everything the same and you achieve simplicity and flexibility.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Linq - Sum</title>
+    <link href="http://www.iamrookieone.com/blog/2010/06/04/linq-sum/"/>
+    <updated>2010-06-04T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/06/04/linq-sum</id>
+    <content type="html">&lt;p&gt;Last week I started an ongoing section during the Virtual Brown Bag where I go over a Linq function (or two). The general idea is that although most people ‘use’ Linq, there are lots of functions that are overlooked.&lt;/p&gt;
+
+&lt;p&gt;In this blog post I will demonstrate basic usage cases for the Linq Sum function.&lt;/p&gt;
+
+&lt;h2&gt;Numbers&lt;/h2&gt;
+
+&lt;p&gt;If you have a collection of numbers and you want the sum of their values, then  simply call Sum. It can’t get any easier.&lt;/p&gt;
 
 &lt;p&gt;``` csharp&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;public class ViewModelInterceptor : TypeInterceptor
+&lt;pre&gt;&lt;code&gt;[Test]
+public void should_sum_values()
 {
-    public object Process(object target, IContext context)
-    {
-        var name = target.GetType().Name;
-
-        var view = context.GetInstance&amp;lt;IView&amp;gt;(name);
-
-        context.GetInstance&amp;lt;IViewRegistry&amp;gt;()
-            .RegisterViewWith(target as IViewModel, view);
-
-        return target;
-    }
-
-    public bool MatchesType(Type type)
-    {
-        return type.CanBeCastTo(typeof (IViewModel));
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Advanced WPF Workshop</title>
-    <link href="http://www.iamrookieone.com/blog/2010/02/17/adv-wpf-workshop/"/>
-    <updated>2010-02-17T00:00:00-06:00</updated>
-    <id>http://www.iamrookieone.com/blog/2010/02/17/adv-wpf-workshop</id>
-    <content type="html">&lt;p&gt;On February 20th from 9 am (central) until we get bored… I guess 1pm, we will be having a free Advanced WPF Workshop here at EPS.&lt;/p&gt;
-
-&lt;p&gt;Let me emphasize ….&lt;/p&gt;
-
-&lt;h2&gt;FREE!!!!!!&lt;/h2&gt;
-
-&lt;p&gt;When : Feb 20th 9am - 1pm+&lt;/p&gt;
-
-&lt;p&gt;Where : EPS Office&lt;/p&gt;
-
-&lt;p&gt;6605 Cypresswood Dr, Suite 300
-Spring, TX 77379&lt;/p&gt;
-
-&lt;iframe height=&quot;350&quot; marginheight=&quot;0&quot; src=&quot;http://maps.google.com/maps?f=q&amp;amp;source=s_q&amp;amp;hl=en&amp;amp;geocode=&amp;amp;q=6605+cypresswood+dr+sprint+tx&amp;amp;sll=37.0625,-95.677068&amp;amp;sspn=64.792576,135.263672&amp;amp;ie=UTF8&amp;amp;hq=&amp;amp;hnear=6605+Cypresswood+Dr,+Spring,+Harris,+Texas+77379&amp;amp;z=17&amp;amp;ll=30.014289,-95.507411&amp;amp;output=embed&quot; frameborder=&quot;0&quot; width=&quot;425&quot; marginwidth=&quot;0&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
-
-
-&lt;p&gt;And online at : https://www2.gotomeeting.com/register/902909498&lt;/p&gt;
-
-&lt;p&gt;There will be lunch which at the moment is BBQ, but I might change my mind. ;)&lt;/p&gt;
-
-&lt;p&gt;Currently the agenda looks like:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;INotifyPropertyChange
-
-&lt;ul&gt;
-&lt;li&gt;Normal&lt;/li&gt;
-&lt;li&gt;Type Safe&lt;/li&gt;
-&lt;li&gt;Dynamic Proxy&lt;/li&gt;
-&lt;li&gt;AOP&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;View &amp;amp; ViewModel
-
-&lt;ul&gt;
-&lt;li&gt;Typical methods&lt;/li&gt;
-&lt;li&gt;IView extensions&lt;/li&gt;
-&lt;li&gt;IView&lt;VM&gt;&lt;/li&gt;
-&lt;li&gt;ViewRegistry&lt;/li&gt;
-&lt;li&gt;Also will be covering StructureMap conventions (TypeScanners) and Type Interceptors&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Event Aggregator
-
-&lt;ul&gt;
-&lt;li&gt;using Events&lt;/li&gt;
-&lt;li&gt;Publish extension method&lt;/li&gt;
-&lt;li&gt;ISubscribe&lt;/li&gt;
-&lt;li&gt;Putting it all together with a Region Controller&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Commands
-
-&lt;ul&gt;
-&lt;li&gt;ICommand&lt;/li&gt;
-&lt;li&gt;Action / Delegate Command&lt;/li&gt;
-&lt;li&gt;Decorating with a Named Command&lt;/li&gt;
-&lt;li&gt;might be using commands with a convention&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Resource Locator
-
-&lt;ul&gt;
-&lt;li&gt;Resource Dictionary Convention&lt;/li&gt;
-&lt;li&gt;Image Convention&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;And anything else that comes up during our discussions&lt;/li&gt;
-&lt;li&gt;Potential additions:
-
-&lt;ul&gt;
-&lt;li&gt;Paul Stovell’s MicroModel&lt;/li&gt;
-&lt;li&gt;Dependency Property Inheritance&lt;/li&gt;
-&lt;li&gt;Attached Dep Property Behaviors&lt;/li&gt;
-&lt;li&gt;Blend Behaviors&lt;/li&gt;
-&lt;li&gt;Visual State Manager&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;We will be recording the session so have no fear if you can’t come or join us online.&lt;/p&gt;
-
-&lt;p&gt;I am very excited about the workshop! Its a great opportunity to share some stuff I’ve been doing with WPF. User groups and brown bags offer only limited exposure to these techniques. With this workshop we get to dive into code and get rapid interactions. I hope to see you there.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>The Goal</title>
-    <link href="http://www.iamrookieone.com/blog/2009/12/17/the-goal/"/>
-    <updated>2009-12-17T00:00:00-06:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/12/17/the-goal</id>
-    <content type="html">&lt;p&gt;With my current mindset that things are broken, I dive into my current readings including The Goal and The Toyota Way.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Goal-Process-Ongoing-Improvement/dp/0884271781%3FSubscriptionId%3D0JTCV5ZMHMF7ZYTXGFR2%26tag%3Dbrdicr-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D0884271781&quot;&gt;The Goal: A Process of Ongoing Improvement&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/the-goal.jpg' width='' height='' alt='' title=''&gt;&lt;/p&gt;
-
-&lt;p&gt;I read The Goal back in my business graduate school days (about 5 years ago), but now its reading has a whole new impact. I am seeing more into the book after 5 years of working in software than I did as a fresh college graduate. Some of the mental exercises the protagonist in the book is going through I am going through as well. As he wrestles answering questions concerning his factory, I am wrestling with the questions concerning my software projects.&lt;/p&gt;
-
-&lt;p&gt;The first exercise is to define 'the goal' for his company and all companies. Of course the protagonist takes a long time to come to the logical conclusion that it's to make money.&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;p&gt;Every company's goal is to make money.&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;p&gt;As a software consulting company, how do we make money?&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;p&gt;We make money by winning a bid for a project and then performing the work to complete the project within budget.&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;p&gt;That seems pretty simple. Nothing about data access technologies, TDD, user stories, or any sort of architecture or design pattern.&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;p&gt;If you need X done and will pay $Y then we should do X for less than $Y.&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;p&gt;Why is it so hard to deliver on that?&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Define X&lt;/li&gt;
-&lt;li&gt;Estimate Y&lt;/li&gt;
-&lt;li&gt;…something&lt;/li&gt;
-&lt;li&gt;Profit!&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;If we scope a project then we need to know what X is. Simple to say, but man is it difficult to capture!&lt;/p&gt;
-
-&lt;p&gt;X is always in motion, a moving target. The client changes their mind, we have scope creep, and what appears simple always ends up being more complex. We all know this! Its the one constant with software development. Things are going to change.&lt;/p&gt;
-
-&lt;p&gt;From my perspective, SOLID and design patterns focus on writing code that is more adaptive to change.&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;p&gt;SOLID and design patterns in of themselves do NOT move us towards our goal by reducing the cost of writing software.&lt;/p&gt;
-
-&lt;p&gt;SOLID and design patterns move us towards our goal when our software has to change because the cost of the change has been reduced.&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;p&gt;The principles and patterns also provide a common language for developers. That common language moves us closer to the goal because current and new developers can grok more of the design in less time. And time = money.&lt;/p&gt;
-
-&lt;p&gt;Where does testing fit into all this?&lt;/p&gt;
-
-&lt;p&gt;Testing allows us to keep track of the quality of our production. Or.. does it? After some re-examination I want to say testing adds no quality. That will have to be another post.&lt;/p&gt;
-
-&lt;p&gt;Testing provides a way to measure our progress towards X. We know we are moving towards X because we can have tests that verify we are delivering towards our promise. When I mention testing I am using a broad definition and including all sorts of tests from UAT testers to automated unit tests.&lt;/p&gt;
-
-&lt;p&gt;So what does Test Driven Development (TDD) provide? TDD focuses every bit of code towards satisfying a test. If every test is relevant towards progress towards X, then TDD focuses our development towards productive work. Logically any work not moving us towards delivering X to our clients is unproductive work.&lt;/p&gt;
-
-&lt;p&gt;What conclusions have I come to?&lt;/p&gt;
-
-&lt;p&gt;The goal of a software consulting company is to make money. We make money by completing X under $Y. One of the important steps is to then define what X is. We know X will change so we should write code that is adaptive to change, but we need to balance that with only writing code that moves us towards delivering X.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;We achieve more flexible and understandable code by using SOLID and design patterns.&lt;/li&gt;
-&lt;li&gt;We measure our progress towards X by passing tests.&lt;/li&gt;
-&lt;li&gt;TDD focuses our coding towards productive work.&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;I started to write about estimation in this section but have decided to move it to another post.&lt;/p&gt;
-
-&lt;p&gt;After thinking about estimation, it has nothing to do with knowing what X is. Estimation has to do with what we think $Y is. X is what X is regardless if it takes you 3 hours or 3 months to deliver.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Jaded .Net</title>
-    <link href="http://www.iamrookieone.com/blog/2009/12/16/jaded-net/"/>
-    <updated>2009-12-16T00:00:00-06:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/12/16/jaded-net</id>
-    <content type="html">&lt;p&gt;I love talking with Ryan and others passionate about new technology and languages. Lately though I have been increasingly jaded with anything ‘new’.&lt;/p&gt;
-
-&lt;p&gt;How many different data technologies do we need? ADO .Net, Nhibernate, Linq-2-SQL, Entity Framework version.. whatever. We have been connecting to databases for over 20 years so why are we still worrying about this?!&lt;/p&gt;
-
-&lt;p&gt;The sheer number of UI frameworks is reaching the point of ridiculousness. I was reading the WPF Disciples Google Group and ran across this post. Paul Stovell listed all the MVVM, MVC, MVC frameworks he knew of (around 11). Then everyone was commenting with their own ‘me too’ response.&lt;/p&gt;
-
-&lt;p&gt;Am I the only one who finds that utterly hilarious? How many frameworks do we need?!&lt;/p&gt;
-
-&lt;p&gt;Ryan is extremely involved with Ruby, Python, F#, and the other ‘new’ languages to the .Net Framework. I have been delaying learning Ruby for too long, because it's hard to get motivated to learn a new language. I see the potential and the possibilities, but I quickly get discouraged and uninterested.&lt;/p&gt;
-
-&lt;p&gt;I have to ask myself… why am I jaded? Why am I disinterested in things that used to excite me?&lt;/p&gt;
-
-&lt;p&gt;The more I thought about it, the more the conclusion became crystal clear. Every project I have been a part of has had the same problems. None of the problems were technology related.&lt;/p&gt;
-
-&lt;p&gt;Why would I get excited about a solution to a problem I don’t have?&lt;/p&gt;
-
-&lt;p&gt;Reminds me of Karl Pilkington’s comment about this picture of twins on one of the Ricky Gervais podcasts. Karl saw a picture of a set of twins on an office desk (obviously the kids of the guy sitting at the desk). His great idea was since they look alike and are dressed alike, the parent could just have the picture of one of them and save space. Ricky Gervais then commented something like :&lt;/p&gt;
-
-&lt;p&gt;What you have there is the best non-solution to a problem that doesn’t exist.&lt;/p&gt;
-
-&lt;p&gt;And that is pretty much how I feel about most of the technological innovations these days.&lt;/p&gt;
-
-&lt;p&gt;For example: can someone explain to me how Oslo is going to help me? I am also not sold on RIA or anything Cloud related. The technology is interesting, but I can’t justify where I would use any of this stuff.&lt;/p&gt;
-
-&lt;p&gt;&lt;img class='left ' src='http://www.iamrookieone.com/images/shoveling-coal.jpg' width='240' height='165' alt=''Shoveling Coal'' title=''Shoveling Coal''&gt;&lt;/p&gt;
-
-&lt;p&gt;Sometimes I feel like a lone engineer shoveling coal into a furnace on a runaway train. I don't know where we are going, where we have been, and all I hear is FASTER, FASTER!&lt;/p&gt;
-
-&lt;p&gt;When I scream for help, I get delivered a better shovel.&lt;/p&gt;
-
-&lt;p&gt;I don't want a better shovel, I want to know why I am shoveling so much coal!!!&lt;/p&gt;
-
-&lt;p&gt;Can't we do more with less? Can’t we slow down? Do we even know why we are in this train?!&lt;/p&gt;
-
-&lt;p&gt;Lately the murmurings on different blogs, podcasts, and developers has been that software development has gotten too complicated. How can that be true when we have tons of tools and frameworks that should make life easier? jQuery makes Javascript easier. Pick your favorite Data Access tool / ORM makes data access easier. Any number of UI frameworks makes UI construction easier. So why do we think things are more complicated? Shouldn’t our life be easier?&lt;/p&gt;
-
-&lt;p&gt;The majority of projects are always behind, always over budgeted, and always unclear on where they are and where they are going. This has been my experience spanning multiple companies and multiple positions on different teams. I am fully humble enough to recognize that “I” might be the problem, but I doubt it. There is enough shared pain through my conversations with other developers to recognize its a industry wide problem.&lt;/p&gt;
-
-&lt;p&gt;The only project I was a part of that didn’t feel this way had a full time Project Manager and a team full of very skilled developers. To me it didn’t feel like the project was better run, it was just we had enough skilled team members to overcome any poor execution or poor planning. That isn’t saying our PM wasn’t an all star because he was. My point is that although the project was a ‘success’ I didn’t feel like it was successful because we had a great methodology. We just powered through any complications.&lt;/p&gt;
-
-&lt;p&gt;Every project (including that last ‘successful’ one) always had mad dashes of insane hours of work followed by listless lulls as we waited for one thing or another. I never felt I had enough time to do my work and other activities related to work (ie blog, present, create frameworks)&lt;/p&gt;
-
-&lt;p&gt;Where am I going with this? I wanted to capture my state of mind and why I am re-examining how and why I develop.&lt;/p&gt;
-
-&lt;p&gt;The status quo will burn me out.&lt;/p&gt;
-
-&lt;p&gt;The ole definition of insanity : Doing the same thing over and over again expecting different results.&lt;/p&gt;
-
-&lt;p&gt;I am tired of doing the same thing, so what can I do different? Why is there this constant pain? I know there are solutions and it's time for me to document my mental journey as I search for answers. Maybe my breadcrumbs will help those that follow.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Examining how we develop software</title>
-    <link href="http://www.iamrookieone.com/blog/2009/12/15/examining-how-we-develop-software/"/>
-    <updated>2009-12-15T00:00:00-06:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/12/15/examining-how-we-develop-software</id>
-    <content type="html">&lt;p&gt;What I am starting is a mental exercise exploring how my view on software development is changing. Since this is a basically a brain dump, treat it as such. Feel free to comment on what I say... offer advice and opinions. Maybe there is something you can sympathize with.&lt;/p&gt;
-
-&lt;p&gt;What has started me thinking along these lines has been my recent readings of The Toyota Way and my re-reading of The Goal.&lt;/p&gt;
-
-&lt;p&gt;The Toyota Way&lt;/p&gt;
-
-&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/toyota-way.jpg' width='108' height='160' alt=''The Toyota Way'' title=''The Toyota Way''&gt;&lt;/p&gt;
-
-&lt;p&gt;The Goal: A Process of Ongoing Improvement&lt;/p&gt;
-
-&lt;p&gt;&lt;img class='' src='http://www.iamrookieone.com/images/the-goal.jpg' width='108' height='160' alt=''The Goal'' title=''The Goal''&gt;&lt;/p&gt;
-
-&lt;p&gt;Both readings have me re-examining my career and software development. Asking questions like, Are we focused on the right things?&lt;/p&gt;
-
-&lt;p&gt;Anyway here are the posts:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Jaded .Net&lt;/li&gt;
-&lt;li&gt;The Goal&lt;/li&gt;
-&lt;li&gt;Estimating the Impossible&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-  </entry>
-  
-  <entry>
-    <title>Named Command Decorator</title>
-    <link href="http://www.iamrookieone.com/blog/2009/11/25/named-command-decorator/"/>
-    <updated>2009-11-25T00:00:00-06:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/11/25/named-command-decorator</id>
-    <content type="html">&lt;p&gt;Here is the problem, we have a list of ‘commands’ we wish to show depending on what view model / entity is active. If we just had a collection of ICommands, we could show buttons but what would their content be?&lt;/p&gt;
-
-&lt;p&gt;My solution is to use the decorator pattern to decorate commands with a Name that can be used as the content for the buttons.&lt;/p&gt;
-
-&lt;p&gt;My decorator looks like :&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class NamedCommand : ICommand
-{
-    public NamedCommand(ICommand decoratedCommand, string name)
-    {
-        _DecoratedCommand = decoratedCommand;
-        Name = name;
-    }
-
-    readonly ICommand _DecoratedCommand;
-    public string Name { get; set; }
-
-    public void Execute(object parameter)
-    {
-        _DecoratedCommand.Execute(parameter);
-    }
-
-    public bool CanExecute(object parameter)
-    {
-        return _DecoratedCommand.CanExecute(parameter);
-    }
-
-    public event EventHandler CanExecuteChanged;
-} 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;I then created an extension method on ICommand :&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public static ICommand Name(this ICommand command, string name)
-{
-    return new NamedCommand(command, name);
+    var nums = new List&amp;lt;int&amp;gt;
+                   {
+                       5,
+                       9,
+                       1,
+                       10
+                   };
+    int sum = nums.Sum();
+
+    sum.ShouldBe(25);
 }
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;```&lt;/p&gt;
 
-&lt;p&gt;So in the code I can now do:&lt;/p&gt;
+&lt;h2&gt;Non-Numbers&lt;/h2&gt;
+
+&lt;p&gt;If you want to sum a collection that isn’t made up of numbers, then you will be forced to specify which number property you would like to sum.&lt;/p&gt;
 
 &lt;p&gt;``` csharp&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;Commands.Add(new ActionCommand(OnOpen).Name(&quot;Open&quot;));
+&lt;pre&gt;&lt;code&gt;[Test]
+public void summing_non_number_collection()
+{
+    var jedi = new List&amp;lt;Jedi&amp;gt;
+                   {
+                       new Jedi(&quot;Yoda&quot;).MidichlorianCountIs(1000),
+                       new Jedi(&quot;Anakin Skywalker&quot;).MidichlorianCountIs(3000),
+                       new Jedi(&quot;Luke Skywalker&quot;).MidichlorianCountIs(1500),
+                       new Jedi(&quot;Obi-wan Kenobi&quot;).MidichlorianCountIs(500),
+                   };
+    // can't compile
+    //var sum = jedi.Sum();
+}
+
+
+[Test]
+public void should_be_able_to_specify_property_to_sum()
+{
+    var jedi = new List&amp;lt;Jedi&amp;gt;
+                   {
+                       new Jedi(&quot;Yoda&quot;).MidichlorianCountIs(1000),
+                       new Jedi(&quot;Anakin Skywalker&quot;).MidichlorianCountIs(3000),
+                       new Jedi(&quot;Luke Skywalker&quot;).MidichlorianCountIs(1500),
+                       new Jedi(&quot;Obi-wan Kenobi&quot;).MidichlorianCountIs(500),
+                   };
+
+    int sum = jedi.Sum(j =&amp;gt; j.MidichlorianCount);
+
+    sum.ShouldBe(6000);
+}
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;```&lt;/p&gt;
 
-&lt;p&gt;For my WPF visual, I have a DataTemplate :&lt;/p&gt;
-
-&lt;p&gt;``` xml&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;DataTemplate DataType=&quot;{x:Type Commands:NamedCommand}&quot; &amp;gt;
-    &amp;lt;Button Content=&quot;{Binding Name}&quot;
-           Command=&quot;{Binding }&quot; /&amp;gt;
-&amp;lt;/DataTemplate&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;p&gt;These tests can be found in my Learning Solution on GitHub and found in the Learning CSharp project : &lt;a href=&quot;http://github.com/RookieOne/Learning&quot;&gt;http://github.com/RookieOne/Learning&lt;/a&gt;&lt;/p&gt;
 </content>
   </entry>
   
   <entry>
-    <title>Aop INotifyPropertyChanged StructureMap</title>
-    <link href="http://www.iamrookieone.com/blog/2009/10/29/aop-structure-map/"/>
-    <updated>2009-10-29T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/10/29/aop-structure-map</id>
-    <content type="html">&lt;p&gt;Anyone who has worked with INotifyPropertyChanged knows that this simple interface can be a royal pain in the ass.&lt;/p&gt;
+    <title>Wizards of Smart - Episode 6</title>
+    <link href="http://www.iamrookieone.com/blog/2010/06/03/wizards-of-smart-6/"/>
+    <updated>2010-06-03T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/06/03/wizards-of-smart-6</id>
+    <content type="html">&lt;p&gt;The general theme for this podcast is handling Complexity through Composition. But we end up talking about Entity Framework, Fubu MVC, ISP, Rails, and reach new levels of nerdness with sentence composition.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Virtual Brown Bag - 6/3/2010</title>
+    <link href="http://www.iamrookieone.com/blog/2010/06/03/virtual-brown-bag/"/>
+    <updated>2010-06-03T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/06/03/virtual-brown-bag</id>
+    <content type="html">&lt;p&gt;A rather link filled, topic filled VBB. Not many direct coding examples but lots of great information.&lt;/p&gt;
 
-&lt;p&gt;To try and eliminate the pain, people have created some great solutions using AOP : IL weaving (&lt;a href=&quot;www.postsharp.org&quot;&gt;PostSharp&lt;/a&gt;) and using a proxy (&lt;a href=&quot;http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html&quot;&gt;Castle Dynamic Proxy&lt;/a&gt;).&lt;/p&gt;
+&lt;h2&gt;LINQ Examples&lt;/h2&gt;
 
-&lt;p&gt;PostSharp has a little too much voodoo for me atm. I think I will warm up to it though and re-examine using PostSharp on my next solution. But for now, I wanted to use Castle Project’s Dynamic Proxy.&lt;/p&gt;
+&lt;p&gt;I did share how to use Sum, Select Many, and Aggregate. The code was put into my learning csharp project in my learning solution on GitHub.&lt;/p&gt;
 
-&lt;p&gt;Naturally since Castle also has a very popular IoC container in Windsor, most examples marry Dynamic Proxy and Windsor to form an AOP INotifyPropertyChanged solution.&lt;/p&gt;
+&lt;p&gt;I plan on writing a couple of blog posts on these LINQ items so stay tuned if you want more LINQ goodness.&lt;/p&gt;
 
-&lt;p&gt;Since I am using StructureMap for this project, I endeavored to create my own solution using Dynamic Proxy.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://github.com/RookieOne/Learning&quot;&gt;http://github.com/RookieOne/Learning&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;My first attempt I shared at the Virtual Brown Bag look liked it worked but in reality I was constructing my objects twice.&lt;/p&gt;
+&lt;h2&gt;Wizards of Smart Podcast – Episode 5&lt;/h2&gt;
 
-&lt;p&gt;Once with SM and once with the Proxy generator.&lt;/p&gt;
+&lt;p&gt;More rails talk on this episode. But I did share the link with the VBB. &lt;a href=&quot;http://www.theabsentmindedcoder.com/2010/06/wizards-of-smart-episode-5_01.html&quot;&gt;http://www.theabsentmindedcoder.com/2010/06/wizards-of-smart-episode-5_01.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;I had to go back to the drawing board and posted my problem at the SM google group. &lt;a href=&quot;http://groups.google.com/group/structuremap-users/browse_thread/thread/1a6b19ce8152db1b?hl=en&quot;&gt;http://groups.google.com/group/structuremap-users/browse_thread/thread/1a6b19ce8152db1b?hl=en&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Absent Minded Coder Posts&lt;/h2&gt;
 
-&lt;p&gt;I believe the syntax given to me was an older version of SM. For the record, I am using version 2.5.3.0&lt;/p&gt;
+&lt;p&gt;I shared my 2 posts from the last brown bag…&lt;/p&gt;
 
-&lt;p&gt;But it did direct me to the general idea on where I should start looking. I ended up needing to create an IBuildInterceptor.&lt;/p&gt;
+&lt;p&gt;Structure Map 2.6 constructing the concrete type
+&lt;a href=&quot;http://www.theabsentmindedcoder.com/2010/05/structure-map-26-constructing-concrete.html&quot;&gt;http://www.theabsentmindedcoder.com/2010/05/structure-map-26-constructing-concrete.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Interface Segregation Principle
+&lt;a href=&quot;http://www.theabsentmindedcoder.com/2010/05/interface-segregation-principle-in.html&quot;&gt;http://www.theabsentmindedcoder.com/2010/05/interface-segregation-principle-in.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I also shared George’s comment on the Udi InfoQ article : &lt;a href=&quot;http://www.infoq.com/presentations/Making-Roles-Explicit-Udi-Dahan&quot;&gt;http://www.infoq.com/presentations/Making-Roles-Explicit-Udi-Dahan&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Unlocker&lt;/h2&gt;
+
+&lt;p&gt;Claudio shared a helpful tool to get rid of an annoying Windows error. &lt;a href=&quot;http://ccollomb.free.fr/unlocker/&quot;&gt;http://ccollomb.free.fr/unlocker/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;VS 2010 Step into .Net Framework&lt;/h2&gt;
+
+&lt;p&gt;Claudio also shared a blog post showing how to setup Visual Studio 2010 to allow stepping into .Net Framework code. &lt;a href=&quot;http://weblogs.asp.net/rajbk/archive/2010/04/21/setting-up-visual-studio-2010-to-step-into-microsoft-net-source-code.aspx&quot;&gt;http://weblogs.asp.net/rajbk/archive/2010/04/21/setting-up-visual-studio-2010-to-step-into-microsoft-net-source-code.aspx&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Why Your Code Sucks&lt;/h2&gt;
+
+&lt;p&gt;This might be my favorite link Claudio shared. The blog post talks about why your code sucks… yes he is talking to you. (and me…) :D&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.artima.com/weblogs/viewpost.jsp?thread=71730&quot;&gt;http://www.artima.com/weblogs/viewpost.jsp?thread=71730&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Resharper and Regions&lt;/h2&gt;
+
+&lt;p&gt;Find out how to configure Resharper to remove regions &lt;a href=&quot;http://bit.ly/wtjK3&quot;&gt;http://bit.ly/wtjK3&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can also prevent Resharper from adding regions &lt;a href=&quot;http://bit.ly/9QgLYe&quot;&gt;http://bit.ly/9QgLYe&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Monads&lt;/h2&gt;
+
+&lt;p&gt;Uncle Bob uploaded a WTF is a Monad presentation : &lt;a href=&quot;http://bit.ly/aBMIaL&quot;&gt;http://bit.ly/aBMIaL&lt;/a&gt; &amp;lt;- I plan to look at this tonight ;D&lt;/p&gt;
+
+&lt;h2&gt;Revamp Your Code Review&lt;/h2&gt;
+
+&lt;p&gt;Ryan wanted me to share a blog post by Kyle Baley discussing the code review process : &lt;a href=&quot;http://codebetter.com/blogs/kyle.baley/archive/2010/06/01/rietveld-or-how-to-revamp-your-code-review-process.aspx&quot;&gt;http://codebetter.com/blogs/kyle.baley/archive/2010/06/01/rietveld-or-how-to-revamp-your-code-review-process.aspx&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Nine Things ie9 is doing Right&lt;/h2&gt;
+
+&lt;p&gt;Ryan also wanted me to share : &lt;a href=&quot;http://sixrevisions.com/web-development/five-things-ie9-is-actually-doing-right/&quot;&gt;http://sixrevisions.com/web-development/five-things-ie9-is-actually-doing-right/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;RSA Animate - Drive: The surprising truth about what motivates us&lt;/h2&gt;
+
+&lt;p&gt;I think @TheCodeFoundary tweet’d this link earlier this week. It is an interesting video discussing how we are actually motivated by more than money. :D&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.youtube.com/watch?v=u6XAPnuFjJc&quot;&gt;http://www.youtube.com/watch?v=u6XAPnuFjJc&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Git + GitHub&lt;/h2&gt;
+
+&lt;p&gt;Claudio was asking about Git so I shared some links and walked through a simple workflow into how I commit locally and then push to my GitHub repository.&lt;/p&gt;
+
+&lt;p&gt;Git Extensions can be found here : &lt;a href=&quot;http://sourceforge.net/projects/gitextensions/&quot;&gt;http://sourceforge.net/projects/gitextensions/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We also discovered this : &lt;a href=&quot;http://learn.github.com/&quot;&gt;http://learn.github.com/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Architecting TekPub&lt;/h2&gt;
+
+&lt;p&gt;Great article on InfoQ. In the article they interview James Avery and Rob Conery about their experience with TekPub going from MVC to Ruby on Rails and the reasoning why.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.infoq.com/articles/architecting-tekpub&quot;&gt;http://www.infoq.com/articles/architecting-tekpub&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Future Rails Hands-On Demo?&lt;/h2&gt;
+
+&lt;p&gt;I tossed out the idea of having a rails hands on talk where as Claudio talks, I code the application in rails. The purpose is to showcase how rapidly we can build an application and deploy the application using rails.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Wizards of Smart - Episode 5</title>
+    <link href="http://www.iamrookieone.com/blog/2010/06/01/wizards-of-smart-5/"/>
+    <updated>2010-06-01T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/06/01/wizards-of-smart-5</id>
+    <content type="html">&lt;p&gt;I recently was doing some volunteer work using Rails and started a conversation about my experience. This went on to general discussions on Ruby, Rails, and benefits of Dynamic Languages.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Interface Segregation Principle in practice</title>
+    <link href="http://www.iamrookieone.com/blog/2010/05/31/interface-segregation-principle/"/>
+    <updated>2010-05-31T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/05/31/interface-segregation-principle</id>
+    <content type="html">&lt;p&gt;I am working with some other team members integrating components to be consumed by different controls. For example someone could use a grid and then opt in to have sorting or filtering etc. It is a rather weird system but was decided upon before I arrived.&lt;/p&gt;
+
+&lt;p&gt;Anyway, I am currently looking to implement an adapter for the formatting component. When I looked at the interface, ISP immediately jumped out at me. So I thought, why not do a blog post about identifying the problem and delivering the solution.&lt;/p&gt;
+
+&lt;h2&gt;Interface Segregation Principle&lt;/h2&gt;
+
+&lt;blockquote&gt;&lt;p&gt;The Interface Segregation Principle states that clients should not be forced to implement interfaces they don’t use. Instead of one fat interface many small interfaces are preferred based on groups of methods, each one serving one submodule. - &lt;a href=&quot;http://www.oodesign.com/interface-segregation-principle.html&quot;&gt;http://www.oodesign.com/interface-segregation-principle.html&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;So instead of one large interface we should have many smaller interfaces with grouped behavior.&lt;/p&gt;
+
+&lt;p&gt;When we see an interface like this, the violation of ISP should be readily apparent. (warning.. be prepared to scroll…..)&lt;/p&gt;
 
 &lt;p&gt;``` csharp&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;public class MyBuildInterceptor : IBuildInterceptor
-   {
-       public MyBuildInterceptor(Type concreteType)
-       {
-           _ConcreteType = concreteType;
-       }
+&lt;pre&gt;&lt;code&gt;/// &amp;lt;summary&amp;gt;
+/// An interface defining the contract for anything that has columns that can be formatted.
+/// &amp;lt;/summary&amp;gt;
+public interface IColumnFormattingAdapter
+{
+    #region Methods
 
-       readonly Type _ConcreteType;
+    /// &amp;lt;summary&amp;gt;
+    /// Hides the column.
+    /// &amp;lt;/summary&amp;gt;
+    void HideColumn();
 
-       public object Build(BuildSession buildSession, Type pluginType, Instance instance)
-       {
-           var constructorArgs = _ConcreteType
-               .GetConstructors()
-               .FirstOrDefault()
-               .GetParameters()
-               .Select(p =&amp;gt; buildSession.CreateInstance(p.ParameterType))
-               .ToArray();
+    /// &amp;lt;summary&amp;gt;
+    /// Bests the fit header.
+    /// &amp;lt;/summary&amp;gt;
+    void BestFitHeader();
 
+    /// &amp;lt;summary&amp;gt;
+    /// Bests the fit column.
+    /// &amp;lt;/summary&amp;gt;
+    void BestFitColumn();
 
-           var interceptors = new List&amp;lt;IInterceptor&amp;gt;
-                                  {
-                                      new NotifyInterceptor()
-                                  }
-                                  .ToArray();
+    /// &amp;lt;summary&amp;gt;
+    /// Bests the fit header column.
+    /// &amp;lt;/summary&amp;gt;
+    void BestFitHeaderColumn();
 
-           return new ProxyGenerator().CreateClassProxy(_ConcreteType, interceptors, constructorArgs);
-       }
+    /// &amp;lt;summary&amp;gt;
+    /// Bests the fit all columns/headers.
+    /// &amp;lt;/summary&amp;gt;
+    void BestFitAllHeaderColumns();
 
-       public IBuildPolicy Clone()
-       {
-           return InnerPolicy.Clone();
-       }
+    /// &amp;lt;summary&amp;gt;
+    /// Formats the column.
+    /// &amp;lt;/summary&amp;gt;
+    void FormatColumn();
 
-       public void EjectAll()
-       {
-           InnerPolicy.EjectAll();
-       }
+    /// &amp;lt;summary&amp;gt;
+    /// Formats all columns.
+    /// &amp;lt;/summary&amp;gt;
+    void FormatAllColumns();
 
-       public IBuildPolicy InnerPolicy { get; set; }
-   }
+    /// &amp;lt;summary&amp;gt;
+    /// Shows the advanced formatting.
+    /// &amp;lt;/summary&amp;gt;
+    void ShowAdvancedFormatting();
+
+    /// &amp;lt;summary&amp;gt;
+    /// Shows the advanced report formatting.
+    /// &amp;lt;/summary&amp;gt;
+    void ShowAdvancedReportFormatting();
+
+    /// &amp;lt;summary&amp;gt;
+    /// Chooses the column.
+    /// &amp;lt;/summary&amp;gt;
+    void ChooseColumn();
+
+    #endregion
+
+    #region Feature Support
+
+    /// &amp;lt;summary&amp;gt;
+    /// Whether or not the adapter supports hiding of columns
+    /// &amp;lt;/summary&amp;gt;
+    Boolean AllowHideColumn { get; }
+
+    /// &amp;lt;summary&amp;gt;
+    /// Whether or not the adapter supports best fit based on the header text
+    /// &amp;lt;/summary&amp;gt;
+    Boolean AllowBestFitHeader { get; }
+
+    /// &amp;lt;summary&amp;gt;
+    /// Whether or not the adapter supports best fit based on the column contents
+    /// &amp;lt;/summary&amp;gt;
+    Boolean AllowBestFitColumn { get; }
+
+    /// &amp;lt;summary&amp;gt;
+    /// Whether or not the adapter supports best fit based on the longer of header text and column contents
+    /// &amp;lt;/summary&amp;gt;
+    Boolean AllowBestFitHeaderColumn { get; }
+
+    /// &amp;lt;summary&amp;gt;
+    /// Whether or not the adapter supports best fit on all columns based on the longer of header text and column contents
+    /// &amp;lt;/summary&amp;gt;
+    Boolean AllowBestFitAllHeaderColumns { get; }
+
+    /// &amp;lt;summary&amp;gt;
+    /// Whether or not the adapter supports formatting of a column
+    /// &amp;lt;/summary&amp;gt;
+    Boolean AllowFormatColumn { get; }
+
+    /// &amp;lt;summary&amp;gt;
+    /// Whether or not the adapter supports formatting of all columns
+    /// &amp;lt;/summary&amp;gt;
+    Boolean AllowFormatAllColumns { get; }
+
+    /// &amp;lt;summary&amp;gt;
+    /// Whether or not the adapter supports advanced conditional formatting
+    /// &amp;lt;/summary&amp;gt;
+    Boolean AllowAdvancedFormatting { get; }
+
+    /// &amp;lt;summary&amp;gt;
+    /// Whether or not the adapter supports advanced report property formatting
+    /// &amp;lt;/summary&amp;gt;
+    Boolean AllowAdvancedReportFormatting { get; }
+
+    /// &amp;lt;summary&amp;gt;
+    /// Whether or not the adapter supports choosing columns
+    /// &amp;lt;/summary&amp;gt;
+    Boolean AllowChooseColumn { get; }
+
+    #endregion
+}
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;```&lt;/p&gt;
 
-&lt;p&gt;To register my ViewModels I created a convention using a TypeScanner&lt;/p&gt;
+&lt;h2&gt;Identifying ISP Violation&lt;/h2&gt;
+
+&lt;p&gt;The first characteristic that the interface violates ISP is the sheer size. This interface weighs in at 117 lines. Granted there are comments, etc but it is still rather large.&lt;/p&gt;
+
+&lt;p&gt;The second characteristic that the interface violates ISP (and the biggest eye sore) is all the Allow properties. That should make you stop and scratch your head.&lt;/p&gt;
+
+&lt;h2&gt;Fixing the interface&lt;/h2&gt;
+
+&lt;p&gt;Let’s simplify the bad interface and then learn how to fix it.&lt;/p&gt;
 
 &lt;p&gt;``` csharp&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;public class MyNotifyConvention : ITypeScanner
+&lt;pre&gt;&lt;code&gt;/// &amp;lt;summary&amp;gt;
+/// An interface defining the contract for anything that has columns that can be formatted.
+/// &amp;lt;/summary&amp;gt;
+public interface IBadColumnFormattingAdapter
 {
-    public void Process(Type type, PluginGraph graph)
+    /// &amp;lt;summary&amp;gt;
+    /// Hides the column.
+    /// &amp;lt;/summary&amp;gt;
+    void HideColumn();
+
+    /// &amp;lt;summary&amp;gt;
+    /// Chooses the column.
+    /// &amp;lt;/summary&amp;gt;
+    void ChooseColumn();
+
+    /// &amp;lt;summary&amp;gt;
+    /// Whether or not the adapter supports hiding of columns
+    /// &amp;lt;/summary&amp;gt;
+    Boolean AllowHideColumn { get; }
+
+    /// &amp;lt;summary&amp;gt;
+    /// Whether or not the adapter supports choosing columns
+    /// &amp;lt;/summary&amp;gt;
+    Boolean AllowChooseColumn { get; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;So in this scenario we can hide a column and then choose a column. Instead of having a large interface for these two behaviors, we should package the behaviors into separate interfaces.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/// &amp;lt;summary&amp;gt;
+/// Interface for supporting Hide Column feature
+/// &amp;lt;/summary&amp;gt;
+public interface IHideColumn
+{
+  /// &amp;lt;summary&amp;gt;
+  ///Hides the column.
+  /// &amp;lt;/summary&amp;gt;
+  void HideColumn();
+}
+
+/// &amp;lt;summary&amp;gt;
+/// Interface for supporting Choose Column feature
+/// &amp;lt;/summary&amp;gt;
+public interface IChooseColumn
+{
+   /// &amp;lt;summary&amp;gt;
+   ///Chooses the column.
+   /// &amp;lt;/summary&amp;gt;
+   void ChooseColumn();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Now our functionality is encapsulated into behavior centric interfaces. Our adapters can then opt in to provide the functionality, and we don’t have the superfluous Allow properties.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Structure Map 2.6 Constructing the Concrete Type</title>
+    <link href="http://www.iamrookieone.com/blog/2010/05/28/structure-map-concrete-type/"/>
+    <updated>2010-05-28T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/05/28/structure-map-concrete-type</id>
+    <content type="html">&lt;h2&gt;Basic Use with Func&lt;T&gt;&lt;/h2&gt;
+
+&lt;p&gt;Ryan yet again was asking for how to do another crazy thing with Structure Map. :)&lt;/p&gt;
+
+&lt;p&gt;He wanted to know if there was a way to control the construction of a concrete type. Well.. he didn’t put it that way but it is what he wanted to know.&lt;/p&gt;
+
+&lt;p&gt;Besides the regular For&lt;I&gt;().Use&lt;C&gt;()… we have the ability to construct the concrete type ourselves with a simple action.&lt;/p&gt;
+
+&lt;p&gt;To demo this I have a Foo class that accepts a string in the constructor.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Foo : IFoo
+{
+    public Foo(string message)
     {
+        Message = message;
+    }
 
-        if (type.GetInterface(&quot;IViewModel&quot;) == null)
-            return;
+    public string Message { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
 
-        var interfaceType = type.GetInterfaces().FirstOrDefault(i =&amp;gt; i.Name.Contains(&quot;ViewModel&quot;)
-                                                            &amp;amp;&amp;amp; i.Name != &quot;IViewModel&quot;);
+&lt;p&gt;```&lt;/p&gt;
 
-        if (interfaceType == null)
-            return;
+&lt;p&gt;We want to pass in the message explicitly so we configure our container and tell it how to provide the concrete implementation.&lt;/p&gt;
 
-        graph.Configure(r =&amp;gt;
-                        r.ForRequestedType(interfaceType)
-                        .InterceptConstructionWith(new MyBuildInterceptor(type))
-                        .TheDefaultIsConcreteType(type));
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;_container = new Container();
+_container.Configure(x =&amp;gt; x.For&amp;lt;IFoo&amp;gt;().Use(() =&amp;gt; new Foo(&quot;Hello&quot;)));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;And the tests to verify it works :&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[Test]
+public void IFoo_should_resolve_to_Foo()
+{
+    var foo = _container.GetInstance&amp;lt;IFoo&amp;gt;();
+
+    foo.ShouldBeType&amp;lt;Foo&amp;gt;();            
+}
+
+[Test]
+public void message_should_be_set_during_construction()
+{
+    var foo = _container.GetInstance&amp;lt;IFoo&amp;gt;();
+
+    foo.Message.ShouldBe(&quot;Hello&quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;h2&gt;Using Func&amp;lt;IContext, T&gt;&lt;/h2&gt;
+
+&lt;p&gt;There are other scenarios where not only do you want more control on a concrete types construction, but also need to resolve other dependencies. SM also allows you to specify a Func&amp;lt;IContext,T&gt; where the IContext allows you to resolve classes from the container.&lt;/p&gt;
+
+&lt;p&gt;So if we have a scenario with an IBar and an IFoo:&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Bar : IBar
+{
+    public IFoo Foo { get; set; }
+}
+
+class Foo : IFoo
+{
+}
+
+interface IBar
+{
+    IFoo Foo { get; }
+}
+
+interface IFoo
+{
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;We can use the Func&amp;lt;IContext,T&gt; similar to how we used the Func&lt;T&gt;.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;_container = new Container();
+
+_container.Configure(x =&amp;gt;
+{
+    x.For&amp;lt;IFoo&amp;gt;().Use&amp;lt;Foo&amp;gt;();
+    x.For&amp;lt;IBar&amp;gt;().Use(c =&amp;gt;
+                          {
+                              var bar = new Bar();
+                              bar.Foo = c.GetInstance&amp;lt;IFoo&amp;gt;();
+                              return bar;
+                          });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;And naturally our test to verify it works:&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[Test]
+public void should_set_foo_property_on_bar()
+{
+    var bar = _container.GetInstance&amp;lt;IBar&amp;gt;();
+
+    bar.Foo.ShouldBeType&amp;lt;Foo&amp;gt;();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;So that was a brief introduction into using Funcs to provide the concrete implementation of an interface for Structure Map.&lt;/p&gt;
+
+&lt;p&gt;All the Learning Structure Map code can be found in my Learning solution on Git Hub : &lt;a href=&quot;http://github.com/RookieOne/Learning&quot;&gt;http://github.com/RookieOne/Learning&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Virtual Brown Bag 5/27/2010</title>
+    <link href="http://www.iamrookieone.com/blog/2010/05/27/virtual-brown-bag/"/>
+    <updated>2010-05-27T12:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/05/27/virtual-brown-bag</id>
+    <content type="html">&lt;p&gt;Claudio was a no show today. As I predicted he had meetings he could not get out of.&lt;/p&gt;
+
+&lt;p&gt;But we powered through and covered a range of topics.&lt;/p&gt;
+
+&lt;h2&gt;Wizards of Smart podcasts&lt;/h2&gt;
+
+&lt;p&gt;Since our last meeting there have been 2 episodes of Wizards of Smart.&lt;/p&gt;
+
+&lt;p&gt;Episode 3 – Testing : &lt;a href=&quot;http://www.theabsentmindedcoder.com/2010/05/wizards-of-smart-episode-3-testing.html&quot;&gt;http://www.theabsentmindedcoder.com/2010/05/wizards-of-smart-episode-3-testing.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Episode 4 – Code Reviews, Work Environment, Developers : &lt;a href=&quot;http://www.theabsentmindedcoder.com/2010/05/wizards-of-smart-episode-4.html&quot;&gt;http://www.theabsentmindedcoder.com/2010/05/wizards-of-smart-episode-4.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ruby on Rails
+I talked a bit about my experience this week with Ruby on Rails. In particular I pointed out how I enjoyed the migration functionality.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://guides.rubyonrails.org/migrations.html&quot;&gt;http://guides.rubyonrails.org/migrations.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Alper pointed out that c4mvc also has a session on some .net tools for migration :&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.c4mvc.net/Home/Events&quot;&gt;http://www.c4mvc.net/Home/Events&lt;/a&gt; –&gt; March Show and Tell : Topic Database Migration Frameworks : MigratorDotNet and RikMigrations&lt;/p&gt;
+
+&lt;p&gt;I also point out the Dev Chix wiki for learning Ruby on Rails : &lt;a href=&quot;http://wiki.devchix.com/index.php?title=Server_2003&quot;&gt;http://wiki.devchix.com/index.php?title=Server_2003&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The guide walks through every step from installing Ruby, rails gems, setting up git, heroku, and pushing your app to heroku. It’s a great guide for those new to rails (like me!)&lt;/p&gt;
+
+&lt;h2&gt;SQLite Database Browser&lt;/h2&gt;
+
+&lt;p&gt;I pointed out this tool for looking at Sqlite databases. I am using it to look at my rails database.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://sourceforge.net/projects/sqlitebrowser/&quot;&gt;http://sourceforge.net/projects/sqlitebrowser/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Domain Driven Design&lt;/h2&gt;
+
+&lt;p&gt;Ed asked about DDD for everyday apps. I then fumbled around and gave a high level talk on how to apply some DDD principles to everyday code. I think I will work on a presentation on the subject because I find it an interesting perspective.&lt;/p&gt;
+
+&lt;p&gt;We did point out some DDD resources :&lt;/p&gt;
+
+&lt;p&gt;Greg Young on Herding Code : &lt;a href=&quot;http://herdingcode.com/?p=189&quot;&gt;http://herdingcode.com/?p=189&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Greg Young on InfoQ : &lt;a href=&quot;http://www.infoq.com/interviews/greg-young-ddd&quot;&gt;http://www.infoq.com/interviews/greg-young-ddd&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;David Laribee on Deep Fried Bytes : &lt;a href=&quot;http://deepfriedbytes.com/podcast/episode-6-talking-domain-driven-design-with-david-laribee-part-1/&quot;&gt;http://deepfriedbytes.com/podcast/episode-6-talking-domain-driven-design-with-david-laribee-part-1/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Eric Evan’s book : &lt;a href=&quot;http://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215/ref=sr_1_1?ie=UTF8&amp;amp;s=books&amp;amp;qid=1274981635&amp;amp;sr=8-1&quot;&gt;http://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215/ref=sr_1_1?ie=UTF8&amp;amp;s=books&amp;amp;qid=1274981635&amp;amp;sr=8-1&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Jimmy Nilsson’s book : &lt;a href=&quot;http://www.amazon.com/Applying-Domain-Driven-Design-Patterns-Examples/dp/0321268202/ref=sr_1_2?ie=UTF8&amp;amp;s=books&amp;amp;qid=1274981635&amp;amp;sr=8-2&quot;&gt;http://www.amazon.com/Applying-Domain-Driven-Design-Patterns-Examples/dp/0321268202/ref=sr_1_2?ie=UTF8&amp;amp;s=books&amp;amp;qid=1274981635&amp;amp;sr=8-2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Houston Techfest
+I mentioned the Houston Techfest again and discussed some potential presentations Claudio and I might be doing.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.houstontechfest.com/dotnetnuke/default.aspx&quot;&gt;http://www.houstontechfest.com/dotnetnuke/default.aspx&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;They are still taking abstracts. Email your abstracts and bio to speakers@houstontechfest.com&lt;/p&gt;
+
+&lt;h2&gt;Linq&lt;/h2&gt;
+
+&lt;p&gt;I walked through some linq examples that can be found in my learning C# project in my Learning Repository : &lt;a href=&quot;http://github.com/RookieOne/Learning&quot;&gt;http://github.com/RookieOne/Learning&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We looked at Select, my pet peeve of using a Where and then FirstorDefault, and also how to use Any instead of Count to verify if a list is not empty.&lt;/p&gt;
+
+&lt;p&gt;I took a poll and there was a lot of interest in doing more Linq best practices and techniques. I am working on a presentation as well and it was nice to see there was a good deal of interest.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Wizards of Smart - Episode 4</title>
+    <link href="http://www.iamrookieone.com/blog/2010/05/27/wizards-of-smart-4/"/>
+    <updated>2010-05-27T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/05/27/wizards-of-smart-4</id>
+    <content type="html">&lt;p&gt;Ryan and I talk about code reviews, work environment, and some traits of a good developer.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Structure Map 2.6 Constructor Arguments</title>
+    <link href="http://www.iamrookieone.com/blog/2010/05/26/structure-map-constructor/"/>
+    <updated>2010-05-26T00:00:00-05:00</updated>
+    <id>http://www.iamrookieone.com/blog/2010/05/26/structure-map-constructor</id>
+    <content type="html">&lt;h2&gt;Constructor Injection&lt;/h2&gt;
+
+&lt;p&gt;When we use an IoC tool the most basic functionality we expect is to have constructor injection. That means if we have a type we are resolving and one of the constructor’s parameters is also a type, the container will resolve that type as well.&lt;/p&gt;
+
+&lt;p&gt;And turtles all the way down…&lt;/p&gt;
+
+&lt;p&gt;If we have two types(Foo : IFoo and Bar : IBar) and in Bar’s constructor it has an IFoo parameter, we should expect the IFoo parameter to be resolved to an instance of Foo.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Bar : IBar
+{
+    public Bar(IFoo foo)
+    {
+        Foo = foo;
+    }
+
+    public IFoo Foo { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Our container is setup like :&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;_container = new Container();
+
+_container.Configure(x =&amp;gt;
+                         {
+                             x.For&amp;lt;IFoo&amp;gt;().Use&amp;lt;Foo&amp;gt;();
+                             x.For&amp;lt;IBar&amp;gt;().Use&amp;lt;Bar&amp;gt;();
+                         });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;We then expect :&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[Test]
+public void IBar_should_resolve_to_Bar()
+{
+    var bar = _container.GetInstance&amp;lt;IBar&amp;gt;();
+
+    bar.ShouldBeType&amp;lt;Bar&amp;gt;();
+}
+
+[Test]
+public void IBars_IFoo_dependency_should_resolve_to_Foo()
+{
+    var bar = _container.GetInstance&amp;lt;IBar&amp;gt;();
+
+    bar.Foo.ShouldBeType&amp;lt;Foo&amp;gt;();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;h2&gt;Constructor Arguments&lt;/h2&gt;
+
+&lt;p&gt;Sometimes you need to specify the exact argument for a given type when it is constructed. Structure Map allows you to provide specific values for resolving a constructors argument.&lt;/p&gt;
+
+&lt;p&gt;For example, Ryan was asking if there is a method with SM to resolve an “id” value from an HttpContext. I know SM has some fancy session management lifecycle features built in, but since I don’t live in the Web world I have never explored what can and can not be done with those features.&lt;/p&gt;
+
+&lt;p&gt;What I do know is that I can specify where my “id” parameter comes from.&lt;/p&gt;
+
+&lt;p&gt;Let’s look at this simple example.&lt;/p&gt;
+
+&lt;p&gt;In my scenario I have a Foo class.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Foo : IFoo
+{
+    public Foo(int id, IBar bar)
+    {
+        Id = id;
+        Bar = bar;
+    }
+
+    public int Id { get; set; }
+    public IBar Bar { get; set; }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;The id that is passed into Foo is providing by some mysterious X. In my case my X is an IIdProvider.&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class IdProvider : IIdProvider
+{
+    public int GetId()
+    {
+        return 1;
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;```&lt;/p&gt;
 
-&lt;p&gt;I then used a Dynamic Proxy Interceptor that I basically copy and pasted from Serial Seb’s example.&lt;/p&gt;
+&lt;p&gt;Now I want to tell SM that when it resolves an IFoo, I want it to use the IIdProvider to get the “id”.&lt;/p&gt;
 
 &lt;p&gt;``` csharp&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;public class NotifyInterceptor : IInterceptor
-{
-    public void Intercept(IInvocation invocation)
-    {
-        // let the original call go through first, so we can notify *after*
-        invocation.Proceed();
+&lt;pre&gt;&lt;code&gt;x.For&amp;lt;IFoo&amp;gt;().Use&amp;lt;Foo&amp;gt;()
+    .Ctor&amp;lt;int&amp;gt;(&quot;id&quot;)
+    .Is(c =&amp;gt; c.GetInstance&amp;lt;IIdProvider&amp;gt;().GetId());
+&lt;/code&gt;&lt;/pre&gt;
 
-        if (invocation.Method.Name.StartsWith(&quot;set_&quot;))
-        {
-            string propertyName = invocation.Method.Name.Substring(4);
-            RaisePropertyChangedEvent(invocation, propertyName, invocation.TargetType);
-        }
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;All together the configuration is:&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;_container = new Container();
+_container.Configure(x =&amp;gt;
+                         {
+                             x.For&amp;lt;IIdProvider&amp;gt;().Use&amp;lt;IdProvider&amp;gt;();
+                             x.For&amp;lt;IBar&amp;gt;().Use&amp;lt;Bar&amp;gt;();
+                             x.For&amp;lt;IFoo&amp;gt;().Use&amp;lt;Foo&amp;gt;()
+                                 .Ctor&amp;lt;int&amp;gt;(&quot;id&quot;)
+                                 .Is(c =&amp;gt; c.GetInstance&amp;lt;IIdProvider&amp;gt;().GetId());
+                         });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;And my tests to verify it works:&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[Test]
+public void should_resolve_Bar()
+{
+    var foo = _container.GetInstance&amp;lt;IFoo&amp;gt;();
+
+    foo.Bar.ShouldBeType&amp;lt;Bar&amp;gt;();
+}
+
+[Test]
+public void should_resolve_id()
+{
+    var foo = _container.GetInstance&amp;lt;IFoo&amp;gt;();
+
+    foo.Id.ShouldBe(1);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;h2&gt;Lazy Constructor Arguments&lt;/h2&gt;
+
+&lt;p&gt;Then Ryan tells me, he would really like to be lazy because he might not need the id for all requests. There are some Lazy features added to SM 2.6 but let’s just use what we already know to solve this problem.&lt;/p&gt;
+
+&lt;p&gt;Instead of having an int Id parameter, let’s have a Func&lt;int&gt; getId parameter.&lt;/p&gt;
+
+&lt;p&gt;Foo changes to :&lt;/p&gt;
+
+&lt;p&gt;``` csharp&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Foo : IFoo
+{
+    public Foo(Func&amp;lt;int&amp;gt; getId, IBar bar)
+    {
+        GetId = getId;
+        Bar = bar;
     }
 
-    void RaisePropertyChangedEvent(IInvocation invocation, string propertyName, Type type)
-    {
-        // get the field storing the delegate list that are stored by the event.
-        var methodInfo = type.GetMethod(&quot;RaisePropertyChanged&quot;);
-
-        if (methodInfo == null)
-        {
-            if (type.BaseType != null)
-                RaisePropertyChangedEvent(invocation, propertyName, type.BaseType);
-        }
-        else // info != null
-        {
-            methodInfo.Invoke(invocation.InvocationTarget, new object[] {propertyName});
-        }
-    }
+    public Func&amp;lt;int&amp;gt; GetId { get; set; }
+    public IBar Bar { get; set; }
 }
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;```&lt;/p&gt;
 
-&lt;p&gt;Instead of looking for the PropertyChanged Handler, I create a RaisePropertyChanged method and use that. Although I could raise the event using the field method Seb was using, WPF wasn’t updating the binding. I didn’t really bother to investigate and just rolled with this solution.&lt;/p&gt;
-
-&lt;p&gt;So that’s my solution and I’ll start using it in my current solution. Naturally I will clean up the code some more etc. Feel free to use this for any of your own projects. You can also get the solution at my GitHub:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://github.com/RookieOne/StructureMapAopNotify&quot;&gt;http://github.com/RookieOne/StructureMapAopNotify&lt;/a&gt;&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>London Time?</title>
-    <link href="http://www.iamrookieone.com/blog/2009/10/27/london-time/"/>
-    <updated>2009-10-27T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/10/27/london-time</id>
-    <content type="html">&lt;p&gt;A friend ping’d me on gchat and asked if he had a DateTime object with our time in Texas, how could he get the time in London.&lt;/p&gt;
-
-&lt;p&gt;I quickly threw together this example on how I would do it.&lt;/p&gt;
+&lt;p&gt;Now our constructor configuration changes to :&lt;/p&gt;
 
 &lt;p&gt;``` csharp&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;DateTime time = DateTime.Now;
-
-TimeZoneInfo londonTimeZone = TimeZoneInfo
-    .GetSystemTimeZones()
-    .FirstOrDefault(t =&amp;gt; t.DisplayName.Contains(&quot;London&quot;));
-
-DateTime londonTime = TimeZoneInfo.ConvertTime(time, londonTimeZone);
-
-Console.WriteLine(&quot;Its {0} here&quot;, time);
-Console.WriteLine(&quot;But its {0} in London&quot;, londonTime);
-Console.WriteLine(&quot;Blimey!&quot;);
-Console.ReadLine();
+&lt;pre&gt;&lt;code&gt;x.For&amp;lt;IFoo&amp;gt;().Use&amp;lt;Foo&amp;gt;()
+    .Ctor&amp;lt;Func&amp;lt;int&amp;gt;&amp;gt;(&quot;getId&quot;)
+    .Is(c =&amp;gt; c.GetInstance&amp;lt;IIdProvider&amp;gt;().GetId);
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;```&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Virtual Brown Bag 10/22/09</title>
-    <link href="http://www.iamrookieone.com/blog/2009/10/22/vbb-summary/"/>
-    <updated>2009-10-22T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/10/22/vbb-summary</id>
-    <content type="html">&lt;p&gt;Today was a great virtual brown bag. Claudio will have a more exhaustive list of what was discussed, but I thought I would share some links to stuff I talked about.&lt;/p&gt;
 
-&lt;h3&gt;Creating a Generic Type using Reflection&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://geekswithblogs.net/marcel/archive/2007/03/24/109722.aspx&quot;&gt;http://geekswithblogs.net/marcel/archive/2007/03/24/109722.aspx&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;And our tests become :&lt;/p&gt;
 
 &lt;p&gt;``` csharp&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;public static object CreateGeneric(Type generic, Type innerType, params object[] args)
+&lt;pre&gt;&lt;code&gt;[Test]
+public void should_resolve_Bar()
 {
-    System.Type specificType = generic.MakeGenericType(new System.Type[] { innerType });
-    return Activator.CreateInstance(specificType, args);
+    var foo = _container.GetInstance&amp;lt;IFoo&amp;gt;();
+
+    foo.Bar.ShouldBeType&amp;lt;Bar&amp;gt;();
 }
-&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;h3&gt;StackOverflow Question from Marvin&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/1532991/help-with-a-windows-service-scheduled-task-that-must-use-a-web-browser-and-file-d&quot;&gt;http://stackoverflow.com/questions/1532991/help-with-a-windows-service-scheduled-task-that-must-use-a-web-browser-and-file-d &lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;As Marvin and Claudio talked, I threw together an example on how I would solve the problem. Hopefully we can hear back from Marvin on whether it worked. :)&lt;/p&gt;
-
-&lt;p&gt;The code snippet is here : &lt;a href=&quot;http://codesnippets.joyent.com/posts/show/2345&quot;&gt;http://codesnippets.joyent.com/posts/show/2345&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var url = &quot;http://www.codinghorror.com/blog/files/exported-font-and-colors-for-jeff-atwood-sept-19.zip&quot;;
-
-var request = WebRequest.Create(url) as HttpWebRequest;
-
-var response = request.GetResponse();
-
-var readStream = response.GetResponseStream();
-
-var fileStream = new FileStream(@&quot;C:\temp\dlZip.zip&quot;, FileMode.Create);
-
-int readByte = readStream.ReadByte();
-while(readByte != -1)
+[Test]
+public void should_resolve_id()
 {
-    fileStream.WriteByte((byte)readByte);
-    readByte = readStream.ReadByte();
+    var foo = _container.GetInstance&amp;lt;IFoo&amp;gt;();
+
+    foo.GetId().ShouldBe(1);
 }
-
-fileStream.Flush();
-fileStream.Close();
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;```&lt;/p&gt;
 
-&lt;h3&gt;Using StructureMap with Castle Dynamic Proxy for INotifyPropertyChanged AOP&lt;/h3&gt;
+&lt;p&gt;Yes it is a poor man’s lazy instantiation. But in many ways its the clearest way to have the functionality.&lt;/p&gt;
 
-&lt;p&gt;For creating the DynamicProxy interceptor I based my code off of : &lt;a href=&quot;http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html&quot;&gt;http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;The entire solution can be found here : &lt;a href=&quot;http://github.com/RookieOne/StructureMapAopNotify&quot;&gt;http://github.com/RookieOne/StructureMapAopNotify&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;All in all, a darn good Virtual Brown Bag. :)&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>My New Career at Code / EPS</title>
-    <link href="http://www.iamrookieone.com/blog/2009/10/19/new-career-at-eps/"/>
-    <updated>2009-10-19T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/10/19/new-career-at-eps</id>
-    <content type="html">&lt;p&gt;It’s been over a week since I started at Code / EPS and I have to say I am loving it here.&lt;/p&gt;
-
-&lt;p&gt;&lt;img class='right ' src='http://www.iamrookieone.com/images/career-at-eps.jpg' width='224' height='184' alt=''Computer at EPS'' title=''Computer at EPS''&gt;&lt;/p&gt;
-
-&lt;p&gt;My computer came in on Friday and I spent most of the day setting it up. Everyone knows the drill of installing Visual Studio, Office, third party tools, etc. It’s a ritual of blessing a new computer for programming work. The picture on the right was taken with my iPhone. The two 24 inch monitors are freakin awesome!&lt;/p&gt;
-
-&lt;p&gt;There are a lot of intangibles that make working at EPS fun and a perfect fit for me at this time. Sharing an office with Claudio is a huge perk.  Having Markus as a boss is also a pleasant change. Most bosses can be disconnected from the current pulse on software development. Markus stays up to date and is also passionate about being cutting edge. Its nice working with people you respect and can learn from.&lt;/p&gt;
-
-&lt;p&gt;I also like that I am not working at the client. Having worked at the clients offices for several years, I began to dislike the random commutes, unknown work conditions, and random hardware configurations. :(&lt;/p&gt;
-
-&lt;p&gt;Here I have an office, with a window. I have a nice computer setup so that I can maximize my productivity. I know where I will be 2-3 months out. All in all, a nice change that adds peace of mind. I can now focus on my next phase in my career.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Catapult -> EPS</title>
-    <link href="http://www.iamrookieone.com/blog/2009/09/29/catapult-to-eps/"/>
-    <updated>2009-09-29T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/09/29/catapult-to-eps</id>
-    <content type="html">&lt;p&gt;If you have not heard already, I am leaving Catapult Systems to go join the team at EPS Consulting.&lt;/p&gt;
-
-&lt;p&gt;Catapult Systems is a fantastic company. They are a NSI (National Systems Integrator) and have 12 Microsoft competencies. They were awarded the 2009 Microsoft Worldwide Partner Conference Award for Custom Development Solutions.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.catapultsystems.com/About/News/Articles/Pages/CatapultSystemsWinsEliteMicrosoftWorldwidePartneroftheYearAward.aspx&quot;&gt;http://www.catapultsystems.com/About/News/Articles/Pages/CatapultSystemsWinsEliteMicrosoftWorldwidePartneroftheYearAward.aspx&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I will have to put a little plug in here and say I was part of the team at Wisenbaker. :)&lt;/p&gt;
-
-&lt;p&gt;My departure has nothing to do with an exodus from Catapult. Catapult has positioned itself as a Microsoft Consulting company. I focus on Custom Application Development. What that means is I have very little interest in Sharepoint, EPM, Infrastructure, etc. I view selling and producing custom software products as a very different task than rolling out Windows 7.&lt;/p&gt;
-
-&lt;p&gt;I also really want to focus more on training, presenting, and overall community activity. While Catapult encouraged this behavior (particularly Mark Whitmire), it was all done outside my normal duties. With EPS and some changes Markus has in store, we hope to make that part of my duties and expectations.&lt;/p&gt;
-
-&lt;p&gt;My move is about my goals being slightly different than Catapult’s goals while EPS’s goals are more aligned with what I want to achieve. For example, at Houston TechFest I had some EPS coworkers come up and offer their support and advice. It was greatly appreciated. Their attendance and conversations made it clear they are pleased to have me on the team and are there to make me better at what I want to do.&lt;/p&gt;
-
-&lt;p&gt;I still have lots of good friends at Catapult : Ryan Riley, David Morton, John McPherson, Apollo Gonzalez, Rafael Perez, etc.&lt;/p&gt;
-
-&lt;p&gt;They have great ideas on revolutionizing the Application Development practice and I wish them the best of luck.&lt;/p&gt;
-
-&lt;p&gt;For me, I am really looking forward to working with the team at EPS. I’ve gotten to know Markus and Claudio (and others at EPS) over the past couple of months and am really impressed with them. This is my first time to be going to a company where I already know people (and respect their professionalism and skill level).&lt;/p&gt;
-
-&lt;p&gt;I will still be doing Virtual Brown Bags with Claudio and will now be in a situation where it should be easier for me to participate. Before I had to arrange rooms with the client and never knew if I could have privacy, etc. It was a pain.&lt;/p&gt;
-
-&lt;p&gt;My last day at Catapult will be Sept 30th. I then go on a brief vacation to Colorado to visit my Dad at the family mountain home. I come back on the 7th and start the new gig on the 8th. :D&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Houston Techfest 2009</title>
-    <link href="http://www.iamrookieone.com/blog/2009/09/28/houston-techfest/"/>
-    <updated>2009-09-28T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/09/28/houston-techfest</id>
-    <content type="html">&lt;p&gt;Wow! That was lots of fun! I got the chance to see and talk to a lot of my friends who I haven’t seen in awhile.&lt;/p&gt;
-
-&lt;p&gt;Also, it was nice to be finally finished with my two presentations. Both were fun but I will admit to liking my Evolve Your Code material a bit more than the WPF Input Validation. They were both a lot of work. Be sure to thank presenters. I knew work went into the presentations but I didn’t appreciate how much until I tried to do two. I learned a lesson with that decision. Never do 2 new presentations. It’s way too much work and both suffer from neglect. I will write a post on all my presentation lessons later.&lt;/p&gt;
-
-&lt;p&gt;Without the 2 presentations looming over me and my new job, I should be able to get back to blogging more. I love sharing what I know, even if its just to myself months from now when I forget everything. :)&lt;/p&gt;
-
-&lt;p&gt;For the slides I am trying out slideshare and am also using Git Hub for the slides and solutions.&lt;/p&gt;
-
-&lt;h4&gt;Evolve Your Code:&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.slideshare.net/RookieOne/evolve-your-code&quot;&gt;http://www.slideshare.net/RookieOne/evolve-your-code&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://github.com/RookieOne/Evolve-Your-Code&quot;&gt;http://github.com/RookieOne/Evolve-Your-Code&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4&gt;WPF Input Validation:&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.slideshare.net/RookieOne/wpf-validation&quot;&gt;http://www.slideshare.net/RookieOne/wpf-validation&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://github.com/RookieOne/WPF-Input-Validation&quot;&gt;http://github.com/RookieOne/WPF-Input-Validation&lt;/a&gt;&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Monads</title>
-    <link href="http://www.iamrookieone.com/blog/2009/08/19/monads/"/>
-    <updated>2009-08-19T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/08/19/monads</id>
-    <content type="html">&lt;p&gt;Ryan is the monad king. Ok.. well maybe not the king. But he has a big megaphone and drops a ‘monad’ bomb daily. He has been doing some fantastic work in F# and C# using monads. He shares his code and I just stare… going WTF is this!&lt;/p&gt;
-
-&lt;p&gt;I know the basic concepts of what a monad is mostly due to random discussions. I never put any solid research time into what it is… why I would use it… and where does it fit into the larger scheme of my personal development toolkit.&lt;/p&gt;
-
-&lt;p&gt;I started my adventure in learning where I normally start… wikipedia.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Monad_%28functional_programming%29&quot;&gt;http://en.wikipedia.org/wiki/Monad_%28functional_programming%29&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Whoa.. lots of new terms thrown at me. Here are some random notes and crazy thoughts I am pulling out (mostly for myself).&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;p&gt;a monad is a kind of &lt;a href=&quot;http://en.wikipedia.org/wiki/Abstract_data_type&quot;&gt;abstract data type&lt;/a&gt; used to represent &lt;a href=&quot;http://en.wikipedia.org/wiki/Computation&quot;&gt;computations&lt;/a&gt; (instead of data in the &lt;a href=&quot;http://en.wikipedia.org/wiki/Domain_model&quot;&gt;domain model&lt;/a&gt;)&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;p&gt;That sparks some ideas. Anyone who talks to me on a regular basis knows I am a huge Greg Young CQS fan. I think I’ve always been circling around these ideas but Greg’s insights just pulled away the haze and brought into focus the essence of what always bothered me.&lt;/p&gt;
-
-&lt;p&gt;For more information on Greg Young’s CQS, I would suggest &lt;a href=&quot;http://jonathan-oliver.blogspot.com/2009/03/dddd-and-cqs-getting-started.html&quot;&gt;http://jonathan-oliver.blogspot.com/2009/03/dddd-and-cqs-getting-started.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Jonathan has compiled a great set of links to get introduced to the ideas. I am by no means an expert, but I consider myself a CQS disciple. :)&lt;/p&gt;
-
-&lt;p&gt;Back to monads.&lt;/p&gt;
-
-&lt;p&gt;The idea of the ‘domain’ being a ‘computation’ or ‘action’ more than data makes me think there might be a connection to explore.&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;p&gt;Monads allow the programmer to chain actions together to build a pipeline, in which each action is decorated with additional processing rules provided by the monad.&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;p&gt;This makes me think of the ‘reconstruction’ of a domain object by processing its events. That would be a neat POC to put together.&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;p&gt;The return operation puts a value from a plain type into a monadic container of type M. The bind operation performs the reverse process, extracting the original value from the container and passing it to the associated next function in the pipeline.&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;p&gt;I am still unclear on the whole wrapping business. I think I will revisit this again after going to another location to learn about monads.&lt;/p&gt;
-
-&lt;p&gt;So I moved over to Channel 9 and began to watch:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/shows/Going+Deep/Brian-Beckman-The-Zen-of-Expressing-State-The-State-Monad/&quot;&gt;http://channel9.msdn.com/shows/Going+Deep/Brian-Beckman-The-Zen-of-Expressing-State-The-State-Monad/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Here are some random notes / quotes:&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;p&gt;Only two types of variables. A bound variable and a free variable. Bound variable is a function argument. A free variable has to be looked up somewhere else.&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;p&gt;State monad takes a state and spits out a state, content pair.&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;p&gt;Composition is good :)&lt;/p&gt;
-
-&lt;p&gt;Mathematics is the art of abstraction and precision&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;p&gt;Is functional programming and monads a disruptive technology? Although it technically isn’t that ‘new’. I think it might be. The comments around an army of OO programmers and the difficulty for learning to think functionally just resonates with the idea that functional programming is a disruptive technology (even though functional programming isn’t new).&lt;/p&gt;
-
-&lt;p&gt;Ok… That was a pretty rough first day. Lots of terms and pictures and strange code thrown my way. It’s time to process the information. I’m pretty sure I will need to watch that video about 5 times in-between coding this stuff. I plan on trying Brian’s exercises along with watching ‘&lt;a href=&quot;http://channel9.msdn.com/shows/Going+Deep/Brian-Beckman-Dont-fear-the-Monads/&quot;&gt;Don’t Fear the Monad&lt;/a&gt;’ (another Brian Beckman presentation).&lt;/p&gt;
-
-&lt;p&gt;Ryan already has completed the first exercise in C# and F#. I will work on my own version of the C# exercise and then look at his code. I don’t think I will dive into F# right now. I played with the language about 2 weeks ago but all I did was create ‘Hello World’. There is a F# user group meeting on August 27th where I ‘might’ try to code these exercises.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>How do I hide columns with a Wpf GridView</title>
-    <link href="http://www.iamrookieone.com/blog/2009/08/07/hide-columns-with-wpf-gridview/"/>
-    <updated>2009-08-07T00:00:00-05:00</updated>
-    <id>http://www.iamrookieone.com/blog/2009/08/07/hide-columns-with-wpf-gridview</id>
-    <content type="html">&lt;p&gt;In my current project we ran across a problem where we wanted to hide certain columns in a grid view based on domain criteria.&lt;/p&gt;
-
-&lt;p&gt;We looked into custom grid headers, attached properties, custom controls, etc. Every path lead to a very complex and more importantly custom solution.&lt;/p&gt;
-
-&lt;p&gt;I spent an afternoon playing around and came up with this solution which we are using today.&lt;/p&gt;
-
-&lt;p&gt;It’s simple, easy to follow, and doesn’t require any custom code. All it uses is the power of style and triggers. The biggest knock is OH NOES! you have a bit of duplication in your xaml.&lt;/p&gt;
-
-&lt;p&gt;What is it?&lt;/p&gt;
-
-&lt;p&gt;Well, you set the ‘View’ property in your style. Then you utilize style triggers to swap out the View.&lt;/p&gt;
-
-&lt;p&gt;Yup.. easy.. simple… no mess.&lt;/p&gt;
-
-&lt;p&gt;Example :&lt;/p&gt;
-
-&lt;p&gt;``` xml&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;Style x:Key=&quot;listViewStyle&quot; TargetType=&quot;ListView&quot;&amp;gt; 
-    &amp;lt;Setter Property=&quot;View&quot;&amp;gt; 
-        &amp;lt;Setter.Value&amp;gt;
-
-            &amp;lt;GridView&amp;gt; 
-                &amp;lt;GridViewColumn Header=&quot;Name&quot; 
-                                DisplayMemberBinding=&quot;{Binding Name}&quot; /&amp;gt;                        
-                &amp;lt;GridViewColumn Header=&quot;Salary&quot; 
-                                DisplayMemberBinding=&quot;{Binding Salary}&quot; /&amp;gt; 
-            &amp;lt;/GridView&amp;gt;
-
-        &amp;lt;/Setter.Value&amp;gt; 
-    &amp;lt;/Setter&amp;gt;
-
-    &amp;lt;Style.Triggers&amp;gt; 
-        &amp;lt;DataTrigger Binding=&quot;{Binding HideCols}&quot; Value=&quot;True&quot;&amp;gt;
-
-            &amp;lt;Setter Property=&quot;View&quot;&amp;gt; 
-                &amp;lt;Setter.Value&amp;gt;
-
-                    &amp;lt;GridView&amp;gt; 
-                        &amp;lt;GridViewColumn Header=&quot;Name&quot; 
-                                        DisplayMemberBinding=&quot;{Binding Name}&quot; /&amp;gt;                                
-                    &amp;lt;/GridView&amp;gt;
-
-                &amp;lt;/Setter.Value&amp;gt; 
-            &amp;lt;/Setter&amp;gt;
-
-        &amp;lt;/DataTrigger&amp;gt; 
-    &amp;lt;/Style.Triggers&amp;gt; 
-&amp;lt;/Style&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;p&gt;You can find all this code in my Git Hub Learning Repository and the Learning Structure Map solution : &lt;a href=&quot;http://github.com/RookieOne/Learning&quot;&gt;http://github.com/RookieOne/Learning&lt;/a&gt;&lt;/p&gt;
 </content>
   </entry>
   

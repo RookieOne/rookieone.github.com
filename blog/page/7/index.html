@@ -1,0 +1,715 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>I am RookieOne</title>
+  <meta name="author" content="Jonathan Birkholz">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://www.iamrookieone.com/blog/page/7/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="I am RookieOne" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">I am RookieOne</a></h1>
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:www.iamrookieone.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/08/03/fluent-interfaces/">Acase().for(patternType.FluentInterfaces).create()</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-08-03 15:24:00 -0500" pubdate  updated >Aug 3<span>rd</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>When I was first exposed to the idea of fluent interfaces my response was… big flipping deal.</p>
+
+<p>It wasn’t until I actively started using fluent interfaces in my code did I begin to see their power and elegance.</p>
+
+<p>What is a fluent interface? Here is the obligatory link to wikipedia ;)</p>
+
+<p>In simple terms, its returning a type instead of void in order to achieve method chaining.</p>
+
+<p>The end goal of the method chaining is to provide a more readable interface and code.</p>
+
+<p>First, does it break the Law of Demeter?</p>
+
+<p>Law of Demeter doesn’t equal the number of periods. I am of the opinion fluent interfaces do not violate the Law of Demeter.</p>
+
+<p>What is LoD? Another link to wiki and here is a link to a stack overflow on this very subject! :)</p>
+
+<p>To me, Law of Demeter is about restricting communication between objects.</p>
+
+<p>A common violation of LoD (imho) is the exposure of a list property on an object. I believe this serves as a good example of LoD as well as being an example on how to make a fluent interface. :)</p>
+
+<p>A Person object has a name and a list of friends.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Person</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>  <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>  <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Person</span><span class="p">&gt;</span> <span class="n">Friends</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">public</span> <span class="nf">Person</span><span class="p">()</span>
+</div><div class='line'>  <span class="p">{</span>
+</div><div class='line'>    <span class="n">Friends</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Person</span><span class="p">&gt;();</span>
+</div><div class='line'>  <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I could then add friends by…</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">var</span> <span class="n">roger</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s">&quot;Roger&quot;</span> <span class="p">};</span>
+</div><div class='line'><span class="n">roger</span><span class="p">.</span><span class="n">Friends</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">Person</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Eddie&quot;</span> <span class="p">});</span>
+</div><div class='line'><span class="n">roger</span><span class="p">.</span><span class="n">Friends</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">Person</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Freddie&quot;</span> <span class="p">});</span>
+</div><div class='line'><span class="n">roger</span><span class="p">.</span><span class="n">Friends</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">Person</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Gordie&quot;</span> <span class="p">});</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Now this is pretty typical, so what’s the problem?</p>
+
+<p>Well my code knows WAY too much about Person. I know it has a list of friends and if they change that list to say a dictionary, I am hosed.</p>
+
+<p>Not only that, but poor Person class… people can add friends to his collection without him every knowing. What if some additional logic needs to be done when adding a friend?</p>
+
+<p>What if the person wants to record the birth date of every friend so they can send out birthday cards? Person is SOL.</p>
+
+<p>As for Law of Demeter, my code is using the Person object to communicate through to the List<Person>. I am exposing my code to changes in Person.</p>
+
+<p>Let’s change Person to eliminate this problem.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Person2</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>  <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>  <span class="k">private</span> <span class="k">readonly</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Person2</span><span class="p">&gt;</span> <span class="n">_friends</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">public</span> <span class="nf">Person2</span><span class="p">()</span>
+</div><div class='line'>  <span class="p">{</span>
+</div><div class='line'>    <span class="n">_friends</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Person2</span><span class="p">&gt;();</span>
+</div><div class='line'>  <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">AddFriend</span><span class="p">(</span><span class="n">Person2</span> <span class="n">friend</span><span class="p">)</span>
+</div><div class='line'>  <span class="p">{</span>
+</div><div class='line'>    <span class="n">_friends</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">friend</span><span class="p">);</span>
+</div><div class='line'>  <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Now the only way to add a friend is through Person. Yippie!</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">var</span> <span class="n">roger2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Person2</span> <span class="p">{</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Roger&quot;</span><span class="p">};</span>
+</div><div class='line'><span class="n">roger2</span><span class="p">.</span><span class="n">AddFriend</span><span class="p">(</span><span class="k">new</span> <span class="n">Person2</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Eddie&quot;</span> <span class="p">});</span>
+</div><div class='line'><span class="n">roger2</span><span class="p">.</span><span class="n">AddFriend</span><span class="p">(</span><span class="k">new</span> <span class="n">Person2</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Freddie&quot;</span> <span class="p">});</span>
+</div><div class='line'><span class="n">roger2</span><span class="p">.</span><span class="n">AddFriend</span><span class="p">(</span><span class="k">new</span> <span class="n">Person2</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Gordie&quot;</span> <span class="p">});</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>If I wanted to make this a fluent interface all I would need to do is instead of returning void, return the Person class.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Person3</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>  <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>  <span class="k">private</span> <span class="k">readonly</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Person3</span><span class="p">&gt;</span> <span class="n">_friends</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">public</span> <span class="nf">Person3</span><span class="p">()</span>
+</div><div class='line'>  <span class="p">{</span>
+</div><div class='line'>    <span class="n">_friends</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Person3</span><span class="p">&gt;();</span>
+</div><div class='line'>  <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">public</span> <span class="n">Person3</span> <span class="nf">AddFriend</span><span class="p">(</span><span class="n">Person3</span> <span class="n">friend</span><span class="p">)</span>
+</div><div class='line'>  <span class="p">{</span>
+</div><div class='line'>    <span class="n">_friends</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">friend</span><span class="p">);</span>
+</div><div class='line'>   <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+</div><div class='line'> <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Now I can do the same logic like…</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">var</span> <span class="n">roger3</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Person3</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Roger&quot;</span> <span class="p">}</span>
+</div><div class='line'>              <span class="p">.</span><span class="n">AddFriend</span><span class="p">(</span><span class="k">new</span> <span class="n">Person3</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Eddie&quot;</span> <span class="p">})</span>
+</div><div class='line'>              <span class="p">.</span><span class="n">AddFriend</span><span class="p">(</span><span class="k">new</span> <span class="n">Person3</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Freddie&quot;</span> <span class="p">})</span>
+</div><div class='line'>              <span class="p">.</span><span class="n">AddFriend</span><span class="p">(</span><span class="k">new</span> <span class="n">Person3</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Gordie&quot;</span> <span class="p">});</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>That is pretty cool, but fluent interfaces really shine with the builder pattern.</p>
+
+<p>This time around I want to force construction of a person through a builder and have the builder use a fluent interface. Notice my Person’s constructor and fields are private. I embed the builder class within the Person class so the builder has access to the constructor and fields. In this manner only my builder class has access to constructing a person. My builder can now act as an anti-corruption layer for Person.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+<span class='line'>36</span>
+<span class='line'>37</span>
+<span class='line'>38</span>
+<span class='line'>39</span>
+<span class='line'>40</span>
+<span class='line'>41</span>
+<span class='line'>42</span>
+<span class='line'>43</span>
+<span class='line'>44</span>
+<span class='line'>45</span>
+<span class='line'>46</span>
+<span class='line'>47</span>
+<span class='line'>48</span>
+<span class='line'>49</span>
+<span class='line'>50</span>
+<span class='line'>51</span>
+<span class='line'>52</span>
+<span class='line'>53</span>
+<span class='line'>54</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Person4</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>  <span class="k">private</span> <span class="kt">string</span> <span class="n">_name</span><span class="p">;</span>
+</div><div class='line'>  <span class="k">private</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Person4</span><span class="p">&gt;</span> <span class="n">_friends</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">private</span> <span class="nf">Person4</span><span class="p">()</span>
+</div><div class='line'>  <span class="p">{</span>
+</div><div class='line'>    <span class="n">_friends</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Person4</span><span class="p">&gt;();</span>
+</div><div class='line'>  <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">public</span> <span class="n">Person4</span> <span class="nf">AddFriend</span><span class="p">(</span><span class="n">Person4</span> <span class="n">friend</span><span class="p">)</span>
+</div><div class='line'>  <span class="p">{</span>
+</div><div class='line'>    <span class="n">_friends</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">friend</span><span class="p">);</span>
+</div><div class='line'>    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+</div><div class='line'>  <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">public</span> <span class="k">static</span> <span class="n">PersonBuilder</span> <span class="nf">createAPerson</span><span class="p">()</span>
+</div><div class='line'>  <span class="p">{</span>
+</div><div class='line'>    <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonBuilder</span><span class="p">();</span>
+</div><div class='line'>  <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">public</span> <span class="k">class</span> <span class="nc">PersonBuilder</span>
+</div><div class='line'>  <span class="p">{</span>
+</div><div class='line'>    <span class="k">private</span> <span class="n">Person4</span> <span class="n">_person</span><span class="p">;</span>
+</div><div class='line'>    <span class="k">public</span> <span class="nf">PersonBuilder</span><span class="p">()</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>      <span class="n">_person</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Person4</span><span class="p">();</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="n">PersonBuilder</span> <span class="nf">named</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>      <span class="n">_person</span><span class="p">.</span><span class="n">_name</span> <span class="p">=</span> <span class="n">name</span><span class="p">;</span>
+</div><div class='line'>      <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="n">PersonBuilder</span> <span class="nf">withFriend</span><span class="p">(</span><span class="n">Person4</span> <span class="n">friend</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>      <span class="n">_person</span><span class="p">.</span><span class="n">AddFriend</span><span class="p">(</span><span class="n">friend</span><span class="p">);</span>
+</div><div class='line'>      <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="n">PersonBuilder</span> <span class="nf">withaFriendNamed</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>      <span class="n">var</span> <span class="n">friend</span> <span class="p">=</span> <span class="n">createAPerson</span><span class="p">().</span><span class="n">named</span><span class="p">(</span><span class="n">name</span><span class="p">).</span><span class="n">finish</span><span class="p">();</span>
+</div><div class='line'>      <span class="n">_person</span><span class="p">.</span><span class="n">AddFriend</span><span class="p">(</span><span class="n">friend</span><span class="p">);</span>
+</div><div class='line'>      <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="n">Person4</span> <span class="nf">finish</span><span class="p">()</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>      <span class="k">return</span> <span class="n">_person</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>  <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Now to create Roger and his friends I do..</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">var</span> <span class="n">roger4</span> <span class="p">=</span> <span class="n">Person4</span><span class="p">.</span><span class="n">createAPerson</span><span class="p">()</span>
+</div><div class='line'>                     <span class="p">.</span><span class="n">named</span><span class="p">(</span><span class="s">&quot;Roger&quot;</span><span class="p">)</span>
+</div><div class='line'>                     <span class="p">.</span><span class="n">withaFriendNamed</span><span class="p">(</span><span class="s">&quot;Eddie&quot;</span><span class="p">)</span>
+</div><div class='line'>                     <span class="p">.</span><span class="n">withaFriendNamed</span><span class="p">(</span><span class="s">&quot;Freddie&quot;</span><span class="p">)</span>
+</div><div class='line'>                     <span class="p">.</span><span class="n">withaFriendNamed</span><span class="p">(</span><span class="s">&quot;Gordie&quot;</span><span class="p">)</span>
+</div><div class='line'>                     <span class="p">.</span><span class="n">finish</span><span class="p">();</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>It’s a simple example but maybe it sparked some ideas on how to use fluent interfaces to chain methods and make your code more approachable to people without Computer Science degrees. :D</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/08/03/toggling-read-only-with-WPF/">Toggling Read Only With WPF</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-08-03 00:00:00 -0500" pubdate  updated >Aug 3<span>rd</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Ayende tweeted a brief code snippet of some WPF he threw together (well I assume he threw it together).</p>
+
+<p>You can see the code snippet here : <a href="http://pastie.org/568259">http://pastie.org/568259</a></p>
+
+<p>He asked : Someone PLEASE tell me there is a better way than this (WPF)</p>
+
+<p>I tweeted a brief snippet response to improve that tiny bit. The snippet can be found here : <a href="http://codesnippets.joyent.com/posts/show/2221">http://codesnippets.joyent.com/posts/show/2221</a></p>
+
+<p>But I couldn’t just leave it at that. I wanted to show a different approach to solving the same problem.  * A later tweet explained his problem was more a datacontext issue, which the snippet I provided should fix. This post does take a different look at how to approach handling read only controls.</p>
+
+<p>How can we make a control ‘read only’ through binding?</p>
+
+<p>The solution can be found here on my Git Hub Repository : <a href="http://github.com/RookieOne/WpfTogglingReadOnly">http://github.com/RookieOne/WpfTogglingReadOnly</a></p>
+
+<p>Ignoring all the other machinations, the money xaml is in the TextBoxStyle found in the Styles\TextBoxStyles.xaml resource dictionary.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+</pre></td><td class='code' width='100%'><pre><code class='xml'><div class='line'><span class="nt">&lt;Style</span> <span class="na">x:Key=</span><span class="s">&quot;TextBoxStyle&quot;</span> <span class="na">TargetType=</span><span class="s">&quot;TextBox&quot;</span><span class="nt">&gt;</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="nt">&lt;Style.Triggers&gt;</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="nt">&lt;Trigger</span> <span class="na">Property=</span><span class="s">&quot;AttachedBehaviors:ReadOnlyBehavior.IsReadOnly&quot;</span> <span class="na">Value=</span><span class="s">&quot;True&quot;</span><span class="nt">&gt;</span>
+</div><div class='line'>
+</div><div class='line'>            <span class="c">&lt;!-- Readonly Template --&gt;</span>
+</div><div class='line'>            <span class="nt">&lt;Setter</span> <span class="na">Property=</span><span class="s">&quot;Template&quot;</span><span class="nt">&gt;</span>
+</div><div class='line'>                <span class="nt">&lt;Setter.Value&gt;</span>
+</div><div class='line'>                    <span class="nt">&lt;ControlTemplate</span> <span class="na">TargetType=</span><span class="s">&quot;TextBox&quot;</span><span class="nt">&gt;</span>
+</div><div class='line'>                        <span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&quot;{TemplateBinding Text}&quot;</span> <span class="nt">/&gt;</span>
+</div><div class='line'>                    <span class="nt">&lt;/ControlTemplate&gt;</span>
+</div><div class='line'>                <span class="nt">&lt;/Setter.Value&gt;</span>
+</div><div class='line'>            <span class="nt">&lt;/Setter&gt;</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="nt">&lt;/Trigger&gt;</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="nt">&lt;/Style.Triggers&gt;</span>
+</div><div class='line'>
+</div><div class='line'><span class="nt">&lt;/Style&gt;</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>As you can see I use the IsReadOnly property on the base view model as a data trigger and then completely swap out the control template for the text box. This allows for complete customization of the read only look. It also pushes this functionality out into a style to be reused through the entire application.</p>
+
+<p>Other things to note with the project (for those unfamiliar with the following practices):</p>
+
+<h3>1. Data Templates as Views</h3>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='xml'><div class='line'><span class="nt">&lt;DataTemplate</span> <span class="na">DataType=</span><span class="s">&quot;{x:Type PersonView:PersonViewModel}&quot;</span><span class="nt">&gt;</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>So whenever WPF tries to resolve the PersonViewModel in a container, it will use this DataTemplate since I did not provide a key but only a DataType.</p>
+
+<p>So in Window1 I can do…</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class='xml'><div class='line'><span class="nt">&lt;ContentControl&gt;</span>
+</div><div class='line'>    <span class="nt">&lt;PersonView:PersonViewModel</span> <span class="nt">/&gt;</span>
+</div><div class='line'><span class="nt">&lt;/ContentControl&gt;</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Again this is a very simple scenario so I am ignoring any presentation patterns on how the ViewModel is placed or ‘shown’. Also ignoring how dependencies can be resolved, etc.</p>
+
+<p>And even though this is a content control, this works for items controls as well. So consider a stack of ‘views’. You could be accomplish this simply by placing a collection of ViewModels in an ItemsControl.</p>
+
+<p>But really… that’s for another post.</p>
+
+<h3>2. Expression for INotifyPropertyChanged</h3>
+
+<p>I am also using a LambdaExpression to implement INotifyPropertyChanged. Essentially achieving safe notification and eliminating those nasty magic strings.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="kt">string</span> <span class="n">FirstName</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_firstName</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'>    <span class="k">set</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">_firstName</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span>
+</div><div class='line'>        <span class="n">OnPropertyChanged</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">m</span> <span class="p">=&gt;</span> <span class="n">m</span><span class="p">.</span><span class="n">FirstName</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Anyway.. that was a quick project I threw together. I hope it was helpful.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/08/03/hello-open-rasta/">Hello Open Rasta</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-08-03 00:00:00 -0500" pubdate  updated >Aug 3<span>rd</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>So Ryan, the apostle of everything on the web, has been spreading the gospel of Open Rasta for months. Tonight I decided that finally, I should download and give this fantastical framework a shot.</p>
+
+<p>For an explanation on what OpenRasta is and is not, I shall direct you to their sites:</p>
+
+<p><a href="http://trac.caffeine-it.com/openrasta/wiki/Doc">Open Rasta Documentation</a>
+<a href="http://www.ohloh.net/p/openrasta">Open Rasta Download Home</a>
+What I am going to do is just describe my experience trying their framework for the first time.</p>
+
+<p>I am a person that likes to learn by trying so I immediately jumped to the ‘creating your first OpenRasta website’ (<a href="http://svn.caffeine-it.com/openrasta/trunk/doc/content/Tutorials/Create-First-Site.html">here</a>). I have looked at some of Ryan’s code and have survived several conversations with Ryan over the framework. ;) I believe that is enough preparation for at least a simple tutorial.</p>
+
+<p>Well I go to the modifying the web.config section and was left with a broken solution. Apparently from the time the tutorial was written and the time I downloaded the version 2.0.2039.312, the handlers and modules all moved to another assembly. I had a gut feeling it moved and when I talked to Ryan, he confirmed my suspicions. Supposedly he is going to try and update the tutorial.</p>
+
+<p>In the meantime, just change ….&#8221;OpenRasta.Web.OpenRastaHandler, OpenRasta&#8221;</p>
+
+<p>to… &#8220;OpenRasta.Hosting.AspNet.OpenRastaHandler, OpenRasta.Hosting.AspNet&#8221;</p>
+
+<p>So change the assembly reference from the OpenRasta.dll to the OpenRasta.Hosting.AspNet.dll</p>
+
+<p>I assume if you are reading this you have the skill set to modify said correction for the other references.</p>
+
+<p>After that I breezed through the creation of the ‘Home’ resource and the ‘Home’ handler. No duh? Any programmer can make a couple of classes. :)</p>
+
+<p>I’m at the configuration section and I have to say, I love the fluent interface. Anyone who has talked to me in the past 6 months knows I love the pattern. It instantly makes any framework extremely approachable.</p>
+
+<p>The tutorial has you making a manual configuration. I tried to find an auto configuration just using some intellisense with no luck. I will investigate this further. If I was going to use OpenRasta I would definitely want a convention based solution. Even with a nice fluent interface, I really don’t want to manually create all my mappings by hand.</p>
+
+<p>But there is something to be said for simply creating a mapping like :</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">ResourceSpace</span><span class="p">.</span><span class="n">Has</span>
+</div><div class='line'>    <span class="p">.</span><span class="n">ResourcesOfType</span><span class="p">&lt;</span><span class="n">Home</span><span class="p">&gt;()</span>
+</div><div class='line'>    <span class="p">.</span><span class="n">AtUri</span><span class="p">(</span><span class="s">&quot;/home&quot;</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">.</span><span class="n">HandledBy</span><span class="p">&lt;</span><span class="n">HomeHandler</span><span class="p">&gt;();</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I ran the app expecting the 405 method error as the tutorial predicts.. and got an empty page. I was using FireFox, so I jumped over to IE and was then greeted by the 405 error. I assume FireFox is either handling the problem gracefully or I don’t have some settings setup to display these errors. /shrug</p>
+
+<p>So then I created my ‘Get’ method on my HomeHandler. One of the things that did attract me to OpenRasta was the POCO handlers. I’ve grown to appreciate very clean code with some acceptable conventions. Just makes life easier. I can focus on the domain problem and not the intricacies of any given framework.</p>
+
+<p>Most of this seemingly new re-invention of HTTP as ESB, REST, Atom.. etc is interesting in that its a reexamining of a technology we use all the time. I haven’t done web development in roughly 3 years. The majority of my experience is in smart client apps. That is just the way my career and projects played out for me. The websites I created were always very basic and probably crap if judged by web developer gurus.</p>
+
+<p>Anyway.</p>
+
+<p>We click links and magically we get a web page. We don’t really think much about it. Sort of like turning on a light switch or starting your car. We just expect things to work and don’t really worry about it. How many drivers can actually explain a combustion engine?</p>
+
+<p>There is a lot going on in the background to make the web work. This new (new to me at least) area of development is leveraging the tech the way it was supposed to be used (if I am to believe the pioneers in this arena). A lot of this is a change of perspective. And with any change of perspective it can take awhile to make the transition.</p>
+
+<p>After that side trip down my ramblings, we come back to me having a handler with a Get method. Now I have graduated to a 406 error (as expected by the tutorial).</p>
+
+<p>I then created my view as the tutorial suggested. Now upon trying to fluently configure.. I ran into a snag. Again the tutorial is out dated (which is fine for an open source and still growing framework).</p>
+
+<p>I had to add the “OpenRasta.Codecs.WebForms.dll” to the solution.</p>
+
+<p>Also the fluent configuration suggested is…</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">ResourceSpace</span><span class="p">.</span><span class="n">Has</span><span class="p">.</span><span class="n">ResourcesOfType</span><span class="p">&lt;</span><span class="n">Home</span><span class="p">&gt;()</span>
+</div><div class='line'>        <span class="p">.</span><span class="n">AtUri</span><span class="p">(</span><span class="s">&quot;/home&quot;</span><span class="p">)</span>
+</div><div class='line'>        <span class="p">.</span><span class="n">HandledBy</span><span class="p">&lt;</span><span class="n">HomeHandler</span><span class="p">&gt;()</span>
+</div><div class='line'>        <span class="p">.</span><span class="n">AndRendededByAspx</span><span class="p">(</span><span class="s">&quot;~/Views/HomeView.aspx&quot;</span><span class="p">);</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>But since the AndRendededByAspx is obselete, the code should now be:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">ResourceSpace</span><span class="p">.</span><span class="n">Has</span><span class="p">.</span><span class="n">ResourcesOfType</span><span class="p">&lt;</span><span class="n">Home</span><span class="p">&gt;()</span>
+</div><div class='line'>                    <span class="p">.</span><span class="n">AtUri</span><span class="p">(</span><span class="s">&quot;/home&quot;</span><span class="p">)</span>
+</div><div class='line'>                    <span class="p">.</span><span class="n">HandledBy</span><span class="p">&lt;</span><span class="n">HomeHandler</span><span class="p">&gt;()</span>
+</div><div class='line'>                    <span class="p">.</span><span class="n">RenderedByAspx</span><span class="p">(</span><span class="s">&quot;~/Views/HomeView.aspx&quot;</span><span class="p">);</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I then continued the tutorial until I had my Home View that displayed my lovely welcome message.</p>
+
+<p>Yay! I got my first Open Rasta page to work. :)</p>
+
+<p>Feel free to investigate my project at my Git Hub repository:</p>
+
+<p><a href="http://github.com/RookieOne/OpenRastaExperiment/tree/TutorialCompletion">http://github.com/RookieOne/OpenRastaExperiment/tree/TutorialCompletion</a></p>
+
+<p>I’m going to be continuing to change the master branch but the TutorialCompletion branch should remain unchanged.</p>
+
+<p>SO check out OpenRasta and their (and my) tutorial. Its short and is a great window into viewing the web in a slightly different manner.</p>
+
+<p>Thanks for your time!</p>
+</div>
+  
+  
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/6/">Newer &rarr;</a>
+    
+  </div>
+</nav>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2010/10/29/learning-bash/">Learning Bash Aliases and Functions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/26/techfest-design-patterns/">Houston Techfest - Design Patterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/09/11/lighten-color/">Lighten Color in C#</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/29/wizards-of-smart-11/">Wizards of Smart #11 - Glenn Block part 2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/06/24/wizards-of-smart-10/">Wizards of Smart #10 - Glenn Block part 1</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Jonathan Birkholz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

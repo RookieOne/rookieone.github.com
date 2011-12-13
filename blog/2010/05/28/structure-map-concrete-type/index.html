@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>I am RookieOne: Structure Map 2.6 Constructing the Concrete Type</title>
+  <meta name="author" content="Jonathan Birkholz">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://www.iamrookieone.com/blog/2010/05/28/structure-map-concrete-type/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="I am RookieOne" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">I am RookieOne</a></h1>
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:www.iamrookieone.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Structure Map 2.6 Constructing the Concrete Type</h1>
+    
+    
+
+
+
+
+<time datetime="2010-05-28 00:00:00 -0500" pubdate  updated >May 28<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+<div class="entry-content"><h2>Basic Use with Func<T></h2>
+
+<p>Ryan yet again was asking for how to do another crazy thing with Structure Map. :)</p>
+
+<p>He wanted to know if there was a way to control the construction of a concrete type. Well.. he didn’t put it that way but it is what he wanted to know.</p>
+
+<p>Besides the regular For<I>().Use<C>()… we have the ability to construct the concrete type ourselves with a simple action.</p>
+
+<p>To demo this I have a Foo class that accepts a string in the constructor.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">class</span> <span class="nc">Foo</span> <span class="p">:</span> <span class="n">IFoo</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="nf">Foo</span><span class="p">(</span><span class="kt">string</span> <span class="n">message</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">Message</span> <span class="p">=</span> <span class="n">message</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">string</span> <span class="n">Message</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>We want to pass in the message explicitly so we configure our container and tell it how to provide the concrete implementation.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">_container</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Container</span><span class="p">();</span>
+</div><div class='line'><span class="n">_container</span><span class="p">.</span><span class="n">Configure</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">For</span><span class="p">&lt;</span><span class="n">IFoo</span><span class="p">&gt;().</span><span class="n">Use</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">)));</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>And the tests to verify it works :</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[Test]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">IFoo_should_resolve_to_Foo</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="n">_container</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IFoo</span><span class="p">&gt;();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">foo</span><span class="p">.</span><span class="n">ShouldBeType</span><span class="p">&lt;</span><span class="n">Foo</span><span class="p">&gt;();</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="na">[Test]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">message_should_be_set_during_construction</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="n">_container</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IFoo</span><span class="p">&gt;();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">foo</span><span class="p">.</span><span class="n">Message</span><span class="p">.</span><span class="n">ShouldBe</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<h2>Using Func&lt;IContext, T></h2>
+
+<p>There are other scenarios where not only do you want more control on a concrete types construction, but also need to resolve other dependencies. SM also allows you to specify a Func&lt;IContext,T> where the IContext allows you to resolve classes from the container.</p>
+
+<p>So if we have a scenario with an IBar and an IFoo:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="p">:</span> <span class="n">IBar</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="n">IFoo</span> <span class="n">Foo</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">class</span> <span class="nc">Foo</span> <span class="p">:</span> <span class="n">IFoo</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">interface</span> <span class="n">IBar</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">IFoo</span> <span class="n">Foo</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">interface</span> <span class="n">IFoo</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>We can use the Func&lt;IContext,T> similar to how we used the Func<T>.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">_container</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Container</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">_container</span><span class="p">.</span><span class="n">Configure</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">x</span><span class="p">.</span><span class="n">For</span><span class="p">&lt;</span><span class="n">IFoo</span><span class="p">&gt;().</span><span class="n">Use</span><span class="p">&lt;</span><span class="n">Foo</span><span class="p">&gt;();</span>
+</div><div class='line'>    <span class="n">x</span><span class="p">.</span><span class="n">For</span><span class="p">&lt;</span><span class="n">IBar</span><span class="p">&gt;().</span><span class="n">Use</span><span class="p">(</span><span class="n">c</span> <span class="p">=&gt;</span>
+</div><div class='line'>                          <span class="p">{</span>
+</div><div class='line'>                              <span class="n">var</span> <span class="n">bar</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Bar</span><span class="p">();</span>
+</div><div class='line'>                              <span class="n">bar</span><span class="p">.</span><span class="n">Foo</span> <span class="p">=</span> <span class="n">c</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IFoo</span><span class="p">&gt;();</span>
+</div><div class='line'>                              <span class="k">return</span> <span class="n">bar</span><span class="p">;</span>
+</div><div class='line'>                          <span class="p">});</span>
+</div><div class='line'><span class="p">});</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>And naturally our test to verify it works:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[Test]</span>
+</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_set_foo_property_on_bar</span><span class="p">()</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">var</span> <span class="n">bar</span> <span class="p">=</span> <span class="n">_container</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IBar</span><span class="p">&gt;();</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">bar</span><span class="p">.</span><span class="n">Foo</span><span class="p">.</span><span class="n">ShouldBeType</span><span class="p">&lt;</span><span class="n">Foo</span><span class="p">&gt;();</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>So that was a brief introduction into using Funcs to provide the concrete implementation of an interface for Structure Map.</p>
+
+<p>All the Learning Structure Map code can be found in my Learning solution on Git Hub : <a href="http://github.com/RookieOne/Learning">http://github.com/RookieOne/Learning</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jonathan Birkholz</span></span>
+
+      
+
+
+
+
+<time datetime="2010-05-28 00:00:00 -0500" pubdate  updated >May 28<span>th</span>, 2010</time>
+
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/C-/'>C#</a>, <a class='category' href='/blog/categories/Learning/'>Learning</a>, <a class='category' href='/blog/categories/Structure-Map/'>Structure Map</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.iamrookieone.com/blog/2010/05/28/structure-map-concrete-type/" data-via="" data-counturl="http://www.iamrookieone.com/blog/2010/05/28/structure-map-concrete-type/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2010/10/29/learning-bash/">Learning Bash Aliases and Functions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/26/techfest-design-patterns/">Houston Techfest - Design Patterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/09/11/lighten-color/">Lighten Color in C#</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/29/wizards-of-smart-11/">Wizards of Smart #11 - Glenn Block part 2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/06/24/wizards-of-smart-10/">Wizards of Smart #10 - Glenn Block part 1</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Jonathan Birkholz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>
