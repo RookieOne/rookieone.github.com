@@ -86,6 +86,106 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2009/10/22/vbb-summary/">Virtual Brown Bag 10/22/09</a></h1>
+    
+    
+
+
+
+
+<time datetime="2009-10-22 00:00:00 -0500" pubdate  updated >Oct 22<span>nd</span>, 2009</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Today was a great virtual brown bag. Claudio will have a more exhaustive list of what was discussed, but I thought I would share some links to stuff I talked about.</p>
+
+<h3>Creating a Generic Type using Reflection</h3>
+
+<p><a href="http://geekswithblogs.net/marcel/archive/2007/03/24/109722.aspx">http://geekswithblogs.net/marcel/archive/2007/03/24/109722.aspx</a></p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">object</span> <span class="nf">CreateGeneric</span><span class="p">(</span><span class="n">Type</span> <span class="n">generic</span><span class="p">,</span> <span class="n">Type</span> <span class="n">innerType</span><span class="p">,</span> <span class="k">params</span> <span class="kt">object</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">System</span><span class="p">.</span><span class="n">Type</span> <span class="n">specificType</span> <span class="p">=</span> <span class="n">generic</span><span class="p">.</span><span class="n">MakeGenericType</span><span class="p">(</span><span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">Type</span><span class="p">[]</span> <span class="p">{</span> <span class="n">innerType</span> <span class="p">});</span>
+</div><div class='line'>    <span class="k">return</span> <span class="n">Activator</span><span class="p">.</span><span class="n">CreateInstance</span><span class="p">(</span><span class="n">specificType</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<h3>StackOverflow Question from Marvin</h3>
+
+<p><a href="http://stackoverflow.com/questions/1532991/help-with-a-windows-service-scheduled-task-that-must-use-a-web-browser-and-file-d">http://stackoverflow.com/questions/1532991/help-with-a-windows-service-scheduled-task-that-must-use-a-web-browser-and-file-d </a></p>
+
+<p>As Marvin and Claudio talked, I threw together an example on how I would solve the problem. Hopefully we can hear back from Marvin on whether it worked. :)</p>
+
+<p>The code snippet is here : <a href="http://codesnippets.joyent.com/posts/show/2345">http://codesnippets.joyent.com/posts/show/2345</a></p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">var</span> <span class="n">url</span> <span class="p">=</span> <span class="s">&quot;http://www.codinghorror.com/blog/files/exported-font-and-colors-for-jeff-atwood-sept-19.zip&quot;</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">var</span> <span class="n">request</span> <span class="p">=</span> <span class="n">WebRequest</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">HttpWebRequest</span><span class="p">;</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="n">GetResponse</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">var</span> <span class="n">readStream</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">GetResponseStream</span><span class="p">();</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">var</span> <span class="n">fileStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FileStream</span><span class="p">(</span><span class="s">@&quot;C:\temp\dlZip.zip&quot;</span><span class="p">,</span> <span class="n">FileMode</span><span class="p">.</span><span class="n">Create</span><span class="p">);</span>
+</div><div class='line'>
+</div><div class='line'><span class="kt">int</span> <span class="n">readByte</span> <span class="p">=</span> <span class="n">readStream</span><span class="p">.</span><span class="n">ReadByte</span><span class="p">();</span>
+</div><div class='line'><span class="k">while</span><span class="p">(</span><span class="n">readByte</span> <span class="p">!=</span> <span class="p">-</span><span class="m">1</span><span class="p">)</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="n">fileStream</span><span class="p">.</span><span class="n">WriteByte</span><span class="p">((</span><span class="kt">byte</span><span class="p">)</span><span class="n">readByte</span><span class="p">);</span>
+</div><div class='line'>    <span class="n">readByte</span> <span class="p">=</span> <span class="n">readStream</span><span class="p">.</span><span class="n">ReadByte</span><span class="p">();</span>
+</div><div class='line'><span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">fileStream</span><span class="p">.</span><span class="n">Flush</span><span class="p">();</span>
+</div><div class='line'><span class="n">fileStream</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<h3>Using StructureMap with Castle Dynamic Proxy for INotifyPropertyChanged AOP</h3>
+
+<p>For creating the DynamicProxy interceptor I based my code off of : <a href="http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html">http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html</a></p>
+
+<p>The entire solution can be found here : <a href="http://github.com/RookieOne/StructureMapAopNotify">http://github.com/RookieOne/StructureMapAopNotify</a></p>
+
+<p>All in all, a darn good Virtual Brown Bag. :)</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2009/10/19/new-career-at-eps/">My New Career at Code / EPS</a></h1>
     
     
@@ -955,70 +1055,6 @@
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/08/04/new-pc/">New PC! Hello Win 7 and 64 Bit Goodness</a></h1>
-    
-    
-
-
-
-
-<time datetime="2009-08-04 00:00:00 -0500" pubdate  updated >Aug 4<span>th</span>, 2009</time>
-
-
-
-  </header>
-
-
-
-  <div class="entry-content"><p>About 5 years ago I decided that I had enough of building my own PCs. It stopped being fun for me and became a chore. So at that time I came up with an experimental PC purchasing plan. I would spend $2k-$3k on a PC that will then last 3 years and then upgrade.</p>
-
-<p>The plan worked great. So great in fact that my last PC lasted 5 years. :D</p>
-
-<p>Its still a great PC. At the time I mostly gamed. Sure I was coding at work, but when I got home, I was gaming. Therefore, the specifications for the computer were gaming related. In end the PC’s specs were roughly : 3 Ghz intel p4; 3 gigs of ram; 512mb PCI-E x16 Nvidia</p>
-
-<p>Still a great machine for gaming.</p>
-
-<p>But now I spend near 100% of my time coding. When I do game, my friends and I all have xboxs. Its cheaper and easier to hook up online and play than a PC. At least I think so.</p>
-
-<p>Now when I code, I have multiple Visual Studio sessions open, maybe streaming a video, maybe downloading files, etc. My poor single processor PC was under a very demanding load.</p>
-
-<p>But riding in to save the day is my new PC I bought from Dell.</p>
-
-<p>Its specs:</p>
-
-<ul>
-<li>XPS 730X, Intel Core3 I7-950 (3.06GHz, 8MB cache)</li>
-<li>6GB Multi-Channel DDR3 at 1066MHZ (3x2GB DIMM)</li>
-<li>SLi, Dual nVidia GeForce 9800G512MB</li>
-<li>300GB Western Digital Velociraptor - SATA-II, 3GB/S 10000RPM, 16MB Cache</li>
-</ul>
-
-
-<p>Niiiiice. :) The thing is freaking enormous.</p>
-
-<p>This is my first PC with a multiple core and with a 64 bit processor (and OS).</p>
-
-<p>So far tonight I’ve done nothing but install Win 7 and an assortment of applications. Its amazing how many little addons and applications you forget you use on a daily basis.</p>
-
-<p>I am not an OS guy. I don’t really care for command lines nor all the super duper features. I just like things to work. I am one of the few out in there that liked Vista and didn’t find anything wrong with it.</p>
-
-<p>But Win 7 is supposedly da bomb so why not upgrade? The most I’ve noticed about Windows 7 is the new taskbar (which I like). I think the main trend I’ve noticed going from Vista to Win 7 is that the most common tasks I do are closer… if that makes sense. So things that were 2 clicks away are now 1 click away.</p>
-
-<p>I’m going to get back to playing with my new toy. I look forward to the many years of development I will get out of this machine.</p>
-
-<p>Life is good.</p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -1039,6 +1075,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/01/16/houston-js-first-meeting/">Introducing Houston JS</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2010/10/29/learning-bash/">Learning Bash Aliases and Functions</a>
       </li>
     
@@ -1052,10 +1092,6 @@
     
       <li class="post">
         <a href="/blog/2010/07/29/wizards-of-smart-11/">Wizards of Smart #11 - Glenn Block part 2</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2010/06/24/wizards-of-smart-10/">Wizards of Smart #10 - Glenn Block part 1</a>
       </li>
     
   </ul>
@@ -1086,7 +1122,7 @@
     </div>
   </div>
   <footer><p>
-  Copyright &copy; 2011 - Jonathan Birkholz -
+  Copyright &copy; 2012 - Jonathan Birkholz -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

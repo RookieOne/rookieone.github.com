@@ -4,13 +4,37 @@
   <title>Jonathan Birkholz</title>
   <link href="http://www.jonathanbirkholz.com/atom.xml" rel="self"/>
   <link href="http://www.jonathanbirkholz.com/"/>
-  <updated>2011-12-12T18:14:25-06:00</updated>
+  <updated>2012-01-17T08:44:57-06:00</updated>
   <id>http://www.jonathanbirkholz.com/</id>
   <author>
     <name>Jonathan Birkholz</name>
     
   </author>
 
+  
+  <entry>
+    <title>Introducing Houston JS</title>
+    <link href="http://www.jonathanbirkholz.com/blog/2012/01/16/houston-js-first-meeting/"/>
+    <updated>2012-01-16T00:00:00-06:00</updated>
+    <id>http://www.jonathanbirkholz.com/blog/2012/01/16/houston-js-first-meeting</id>
+    <content type="html">&lt;p&gt;It's about time for a Houston javascript group. So say hello to &lt;a href=&quot;http://www.meetup.com/houston-js/&quot;&gt;HoustonJS&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Kevin Lee and I were talking a few weeks ago about how so many people were wishing there was a Houston javascript group. I then replied, well why don't we start up one. There you have it. The origin of HoustonJS.&lt;/p&gt;
+
+&lt;p&gt;We later discovered Brian Garcia was thinking the same thing. And now with our powers combined we set our first meeting date and time.&lt;/p&gt;
+
+&lt;p&gt;This &lt;a href=&quot;http://www.meetup.com/houston-js/events/42584102/&quot;&gt;Wednesday, Jan 18th at 7pm at the ChaiONE office&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://maps.google.com/maps?q=4900+Woodway+Drive+%23880+houston,+tx&amp;amp;hl=en&amp;amp;sll=37.0625,-95.677068&amp;amp;sspn=47.215051,82.880859&amp;amp;vpsrc=0&amp;amp;hnear=4900+Woodway+Dr,+Houston,+Texas+77056&amp;amp;t=m&amp;amp;z=17&amp;amp;iwloc=A&quot;&gt;4900 Woodway Drive #880
+Houston, TX&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;There won't be an official topic or speaker this meeting. We were going to talk a bit about Backbone.js but decided it would be best to do that another meeting.&lt;/p&gt;
+
+&lt;p&gt;This meeting will be a meet and greet. We will also bring up potential topics and gauge their interests. We also want to hear from the people attending what they want to get out of HoustonJS.&lt;/p&gt;
+
+&lt;p&gt;I am look forward to seeing everyone there and hope they are as excited as I am for HoustonJS 2012.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Learning Bash Aliases and Functions</title>
@@ -955,232 +979,6 @@ I mentioned the Houston Techfest again and discussed some potential presentation
     <updated>2010-05-27T00:00:00-05:00</updated>
     <id>http://www.jonathanbirkholz.com/blog/2010/05/27/wizards-of-smart-4</id>
     <content type="html">&lt;p&gt;Ryan and I talk about code reviews, work environment, and some traits of a good developer.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Structure Map 2.6 Constructor Arguments</title>
-    <link href="http://www.jonathanbirkholz.com/blog/2010/05/26/structure-map-constructor/"/>
-    <updated>2010-05-26T00:00:00-05:00</updated>
-    <id>http://www.jonathanbirkholz.com/blog/2010/05/26/structure-map-constructor</id>
-    <content type="html">&lt;h2&gt;Constructor Injection&lt;/h2&gt;
-
-&lt;p&gt;When we use an IoC tool the most basic functionality we expect is to have constructor injection. That means if we have a type we are resolving and one of the constructor’s parameters is also a type, the container will resolve that type as well.&lt;/p&gt;
-
-&lt;p&gt;And turtles all the way down…&lt;/p&gt;
-
-&lt;p&gt;If we have two types(Foo : IFoo and Bar : IBar) and in Bar’s constructor it has an IFoo parameter, we should expect the IFoo parameter to be resolved to an instance of Foo.&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class Bar : IBar
-{
-    public Bar(IFoo foo)
-    {
-        Foo = foo;
-    }
-
-    public IFoo Foo { get; set; }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Our container is setup like :&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;_container = new Container();
-
-_container.Configure(x =&amp;gt;
-                         {
-                             x.For&amp;lt;IFoo&amp;gt;().Use&amp;lt;Foo&amp;gt;();
-                             x.For&amp;lt;IBar&amp;gt;().Use&amp;lt;Bar&amp;gt;();
-                         });
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;We then expect :&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[Test]
-public void IBar_should_resolve_to_Bar()
-{
-    var bar = _container.GetInstance&amp;lt;IBar&amp;gt;();
-
-    bar.ShouldBeType&amp;lt;Bar&amp;gt;();
-}
-
-[Test]
-public void IBars_IFoo_dependency_should_resolve_to_Foo()
-{
-    var bar = _container.GetInstance&amp;lt;IBar&amp;gt;();
-
-    bar.Foo.ShouldBeType&amp;lt;Foo&amp;gt;();
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;h2&gt;Constructor Arguments&lt;/h2&gt;
-
-&lt;p&gt;Sometimes you need to specify the exact argument for a given type when it is constructed. Structure Map allows you to provide specific values for resolving a constructors argument.&lt;/p&gt;
-
-&lt;p&gt;For example, Ryan was asking if there is a method with SM to resolve an “id” value from an HttpContext. I know SM has some fancy session management lifecycle features built in, but since I don’t live in the Web world I have never explored what can and can not be done with those features.&lt;/p&gt;
-
-&lt;p&gt;What I do know is that I can specify where my “id” parameter comes from.&lt;/p&gt;
-
-&lt;p&gt;Let’s look at this simple example.&lt;/p&gt;
-
-&lt;p&gt;In my scenario I have a Foo class.&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class Foo : IFoo
-{
-    public Foo(int id, IBar bar)
-    {
-        Id = id;
-        Bar = bar;
-    }
-
-    public int Id { get; set; }
-    public IBar Bar { get; set; }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;The id that is passed into Foo is providing by some mysterious X. In my case my X is an IIdProvider.&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class IdProvider : IIdProvider
-{
-    public int GetId()
-    {
-        return 1;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Now I want to tell SM that when it resolves an IFoo, I want it to use the IIdProvider to get the “id”.&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;x.For&amp;lt;IFoo&amp;gt;().Use&amp;lt;Foo&amp;gt;()
-    .Ctor&amp;lt;int&amp;gt;(&quot;id&quot;)
-    .Is(c =&amp;gt; c.GetInstance&amp;lt;IIdProvider&amp;gt;().GetId());
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;All together the configuration is:&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;_container = new Container();
-_container.Configure(x =&amp;gt;
-                         {
-                             x.For&amp;lt;IIdProvider&amp;gt;().Use&amp;lt;IdProvider&amp;gt;();
-                             x.For&amp;lt;IBar&amp;gt;().Use&amp;lt;Bar&amp;gt;();
-                             x.For&amp;lt;IFoo&amp;gt;().Use&amp;lt;Foo&amp;gt;()
-                                 .Ctor&amp;lt;int&amp;gt;(&quot;id&quot;)
-                                 .Is(c =&amp;gt; c.GetInstance&amp;lt;IIdProvider&amp;gt;().GetId());
-                         });
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;And my tests to verify it works:&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[Test]
-public void should_resolve_Bar()
-{
-    var foo = _container.GetInstance&amp;lt;IFoo&amp;gt;();
-
-    foo.Bar.ShouldBeType&amp;lt;Bar&amp;gt;();
-}
-
-[Test]
-public void should_resolve_id()
-{
-    var foo = _container.GetInstance&amp;lt;IFoo&amp;gt;();
-
-    foo.Id.ShouldBe(1);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;h2&gt;Lazy Constructor Arguments&lt;/h2&gt;
-
-&lt;p&gt;Then Ryan tells me, he would really like to be lazy because he might not need the id for all requests. There are some Lazy features added to SM 2.6 but let’s just use what we already know to solve this problem.&lt;/p&gt;
-
-&lt;p&gt;Instead of having an int Id parameter, let’s have a Func&lt;int&gt; getId parameter.&lt;/p&gt;
-
-&lt;p&gt;Foo changes to :&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class Foo : IFoo
-{
-    public Foo(Func&amp;lt;int&amp;gt; getId, IBar bar)
-    {
-        GetId = getId;
-        Bar = bar;
-    }
-
-    public Func&amp;lt;int&amp;gt; GetId { get; set; }
-    public IBar Bar { get; set; }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Now our constructor configuration changes to :&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;x.For&amp;lt;IFoo&amp;gt;().Use&amp;lt;Foo&amp;gt;()
-    .Ctor&amp;lt;Func&amp;lt;int&amp;gt;&amp;gt;(&quot;getId&quot;)
-    .Is(c =&amp;gt; c.GetInstance&amp;lt;IIdProvider&amp;gt;().GetId);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;And our tests become :&lt;/p&gt;
-
-&lt;p&gt;``` csharp&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[Test]
-public void should_resolve_Bar()
-{
-    var foo = _container.GetInstance&amp;lt;IFoo&amp;gt;();
-
-    foo.Bar.ShouldBeType&amp;lt;Bar&amp;gt;();
-}
-
-[Test]
-public void should_resolve_id()
-{
-    var foo = _container.GetInstance&amp;lt;IFoo&amp;gt;();
-
-    foo.GetId().ShouldBe(1);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Yes it is a poor man’s lazy instantiation. But in many ways its the clearest way to have the functionality.&lt;/p&gt;
-
-&lt;p&gt;You can find all this code in my Git Hub Learning Repository and the Learning Structure Map solution : &lt;a href=&quot;http://github.com/RookieOne/Learning&quot;&gt;http://github.com/RookieOne/Learning&lt;/a&gt;&lt;/p&gt;
 </content>
   </entry>
   

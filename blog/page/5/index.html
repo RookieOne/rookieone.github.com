@@ -86,6 +86,136 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2010/02/18/isubscribe/">ISubscribe</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-02-18 00:00:00 -0600" pubdate  updated >Feb 18<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>I believe Jimmy Bogard has a similar technique (IHandler<T>) with ASP .Net MVC but I thought I would still share the convention I’ve been using to wire up subscriptions to the Prism Event Aggregator.</p>
+
+<p>Whenever an object is built with StructureMap, it goes through all the TypeInterceptors. I have a SubscriptionTypeInterceptor:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">SubscriptionInterceptor</span> <span class="p">:</span> <span class="n">TypeInterceptor</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">object</span> <span class="nf">Process</span><span class="p">(</span><span class="kt">object</span> <span class="n">target</span><span class="p">,</span> <span class="n">IContext</span> <span class="n">context</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">eventAggregator</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IEventAggregator</span><span class="p">&gt;();</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="c1">// Get interface ISubscribe&lt;E&gt;</span>
+</div><div class='line'>        <span class="n">var</span> <span class="n">interfaces</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">GetInterfaces</span><span class="p">().</span><span class="n">Where</span><span class="p">(</span><span class="n">i</span> <span class="p">=&gt;</span> <span class="n">i</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">&quot;ISubscribe&quot;</span><span class="p">));</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">foreach</span> <span class="p">(</span><span class="n">var</span> <span class="n">type</span> <span class="k">in</span> <span class="n">interfaces</span><span class="p">)</span>
+</div><div class='line'>        <span class="p">{</span>
+</div><div class='line'>            <span class="c1">// typeof(E)</span>
+</div><div class='line'>            <span class="n">var</span> <span class="n">eventType</span> <span class="p">=</span> <span class="n">type</span><span class="p">.</span><span class="n">GetGenericArguments</span><span class="p">()[</span><span class="m">0</span><span class="p">];</span>
+</div><div class='line'>
+</div><div class='line'>            <span class="n">var</span> <span class="n">setupMethod</span> <span class="p">=</span> <span class="n">GetType</span><span class="p">().</span><span class="n">GetMethod</span><span class="p">(</span><span class="s">&quot;Setup&quot;</span><span class="p">);</span>
+</div><div class='line'>            <span class="n">setupMethod</span><span class="p">.</span><span class="n">MakeGenericMethod</span><span class="p">(</span><span class="n">eventType</span><span class="p">).</span><span class="n">Invoke</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">target</span><span class="p">,</span> <span class="n">eventAggregator</span> <span class="p">});</span>
+</div><div class='line'>        <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>        <span class="k">return</span> <span class="n">target</span><span class="p">;</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="kt">bool</span> <span class="nf">MatchesType</span><span class="p">(</span><span class="n">Type</span> <span class="n">type</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="k">return</span> <span class="n">type</span><span class="p">.</span><span class="n">ImplementsInterfaceTemplate</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">ISubscribe</span><span class="p">&lt;&gt;));</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="n">Setup</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">ISubscribe</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">subscriber</span><span class="p">,</span> <span class="n">IEventAggregator</span> <span class="n">eventAggregator</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">eventAggregator</span>
+</div><div class='line'>            <span class="p">.</span><span class="n">GetEvent</span><span class="p">&lt;</span><span class="n">CompositePresentationEvent</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;()</span>
+</div><div class='line'>            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">subscriber</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">);</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>So it finds all the ISubscribe<T> interfaces the target implements and then subscribes the target to the event T in the event aggregator.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">ISubscribe</span><span class="p">&lt;</span><span class="n">E</span><span class="p">&gt;</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">void</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="n">E</span> <span class="n">e</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>A simple example of usage:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">SecurityController</span> <span class="p">:</span> <span class="n">IController</span><span class="p">,</span>
+</div><div class='line'>                                  <span class="n">ISubscribe</span><span class="p">&lt;</span><span class="n">RequestUserLoginEvent</span><span class="p">&gt;</span>
+</div><div class='line'><span class="p">{</span>
+</div><div class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="n">RequestUserLoginEvent</span> <span class="n">e</span><span class="p">)</span>
+</div><div class='line'>    <span class="p">{</span>
+</div><div class='line'>        <span class="n">Publish</span><span class="p">.</span><span class="n">Event</span><span class="p">().</span><span class="n">ShowModal</span><span class="p">&lt;</span><span class="n">IRequestUserLoginViewModel</span><span class="p">&gt;();</span>
+</div><div class='line'>    <span class="p">}</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2010/02/18/convention_over_configuration/">CodeCast #68 : Convention Over Configuration</a></h1>
     
     
@@ -944,106 +1074,6 @@ Spring, TX 77379</p>
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/10/22/vbb-summary/">Virtual Brown Bag 10/22/09</a></h1>
-    
-    
-
-
-
-
-<time datetime="2009-10-22 00:00:00 -0500" pubdate  updated >Oct 22<span>nd</span>, 2009</time>
-
-
-
-  </header>
-
-
-
-  <div class="entry-content"><p>Today was a great virtual brown bag. Claudio will have a more exhaustive list of what was discussed, but I thought I would share some links to stuff I talked about.</p>
-
-<h3>Creating a Generic Type using Reflection</h3>
-
-<p><a href="http://geekswithblogs.net/marcel/archive/2007/03/24/109722.aspx">http://geekswithblogs.net/marcel/archive/2007/03/24/109722.aspx</a></p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">object</span> <span class="nf">CreateGeneric</span><span class="p">(</span><span class="n">Type</span> <span class="n">generic</span><span class="p">,</span> <span class="n">Type</span> <span class="n">innerType</span><span class="p">,</span> <span class="k">params</span> <span class="kt">object</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="n">System</span><span class="p">.</span><span class="n">Type</span> <span class="n">specificType</span> <span class="p">=</span> <span class="n">generic</span><span class="p">.</span><span class="n">MakeGenericType</span><span class="p">(</span><span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">Type</span><span class="p">[]</span> <span class="p">{</span> <span class="n">innerType</span> <span class="p">});</span>
-</div><div class='line'>    <span class="k">return</span> <span class="n">Activator</span><span class="p">.</span><span class="n">CreateInstance</span><span class="p">(</span><span class="n">specificType</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<h3>StackOverflow Question from Marvin</h3>
-
-<p><a href="http://stackoverflow.com/questions/1532991/help-with-a-windows-service-scheduled-task-that-must-use-a-web-browser-and-file-d">http://stackoverflow.com/questions/1532991/help-with-a-windows-service-scheduled-task-that-must-use-a-web-browser-and-file-d </a></p>
-
-<p>As Marvin and Claudio talked, I threw together an example on how I would solve the problem. Hopefully we can hear back from Marvin on whether it worked. :)</p>
-
-<p>The code snippet is here : <a href="http://codesnippets.joyent.com/posts/show/2345">http://codesnippets.joyent.com/posts/show/2345</a></p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-<span class='line'>16</span>
-<span class='line'>17</span>
-<span class='line'>18</span>
-<span class='line'>19</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">var</span> <span class="n">url</span> <span class="p">=</span> <span class="s">&quot;http://www.codinghorror.com/blog/files/exported-font-and-colors-for-jeff-atwood-sept-19.zip&quot;</span><span class="p">;</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">var</span> <span class="n">request</span> <span class="p">=</span> <span class="n">WebRequest</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">HttpWebRequest</span><span class="p">;</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">var</span> <span class="n">response</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="n">GetResponse</span><span class="p">();</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">var</span> <span class="n">readStream</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">GetResponseStream</span><span class="p">();</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">var</span> <span class="n">fileStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FileStream</span><span class="p">(</span><span class="s">@&quot;C:\temp\dlZip.zip&quot;</span><span class="p">,</span> <span class="n">FileMode</span><span class="p">.</span><span class="n">Create</span><span class="p">);</span>
-</div><div class='line'>
-</div><div class='line'><span class="kt">int</span> <span class="n">readByte</span> <span class="p">=</span> <span class="n">readStream</span><span class="p">.</span><span class="n">ReadByte</span><span class="p">();</span>
-</div><div class='line'><span class="k">while</span><span class="p">(</span><span class="n">readByte</span> <span class="p">!=</span> <span class="p">-</span><span class="m">1</span><span class="p">)</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="n">fileStream</span><span class="p">.</span><span class="n">WriteByte</span><span class="p">((</span><span class="kt">byte</span><span class="p">)</span><span class="n">readByte</span><span class="p">);</span>
-</div><div class='line'>    <span class="n">readByte</span> <span class="p">=</span> <span class="n">readStream</span><span class="p">.</span><span class="n">ReadByte</span><span class="p">();</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">fileStream</span><span class="p">.</span><span class="n">Flush</span><span class="p">();</span>
-</div><div class='line'><span class="n">fileStream</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<h3>Using StructureMap with Castle Dynamic Proxy for INotifyPropertyChanged AOP</h3>
-
-<p>For creating the DynamicProxy interceptor I based my code off of : <a href="http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html">http://serialseb.blogspot.com/2008/05/implementing-inotifypropertychanged.html</a></p>
-
-<p>The entire solution can be found here : <a href="http://github.com/RookieOne/StructureMapAopNotify">http://github.com/RookieOne/StructureMapAopNotify</a></p>
-
-<p>All in all, a darn good Virtual Brown Bag. :)</p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -1064,6 +1094,10 @@ Spring, TX 77379</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/01/16/houston-js-first-meeting/">Introducing Houston JS</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2010/10/29/learning-bash/">Learning Bash Aliases and Functions</a>
       </li>
     
@@ -1077,10 +1111,6 @@ Spring, TX 77379</p>
     
       <li class="post">
         <a href="/blog/2010/07/29/wizards-of-smart-11/">Wizards of Smart #11 - Glenn Block part 2</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2010/06/24/wizards-of-smart-10/">Wizards of Smart #10 - Glenn Block part 1</a>
       </li>
     
   </ul>
@@ -1111,7 +1141,7 @@ Spring, TX 77379</p>
     </div>
   </div>
   <footer><p>
-  Copyright &copy; 2011 - Jonathan Birkholz -
+  Copyright &copy; 2012 - Jonathan Birkholz -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

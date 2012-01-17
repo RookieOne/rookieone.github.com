@@ -86,6 +86,36 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2010/06/08/wizards-of-smart-7/">Reducing Exceptional Cases</a></h1>
+    
+    
+
+
+
+
+<time datetime="2010-06-08 00:00:00 -0500" pubdate  updated >Jun 8<span>th</span>, 2010</time>
+
+
+
+  </header>
+
+
+
+  <div class="entry-content"><p>Ryan starts with describing his love affair with F#, which leads to a discussion of FubuMVC, which leads to a discussion of Performance Problems (not related to Fubu MVC)… etc. So a standard Wizards of Smart conversation.  :)</p>
+
+<p>I titled this Performance since most of the conversation centered around our experiences with targeting and improving performance.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2010/06/04/reducing-exceptional-cases/">Reducing Exceptional Cases</a></h1>
     
     
@@ -1095,312 +1125,6 @@ I mentioned the Houston Techfest again and discussed some potential presentation
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/05/26/structure-map-constructor/">Structure Map 2.6 Constructor Arguments</a></h1>
-    
-    
-
-
-
-
-<time datetime="2010-05-26 00:00:00 -0500" pubdate  updated >May 26<span>th</span>, 2010</time>
-
-
-
-  </header>
-
-
-
-  <div class="entry-content"><h2>Constructor Injection</h2>
-
-<p>When we use an IoC tool the most basic functionality we expect is to have constructor injection. That means if we have a type we are resolving and one of the constructor’s parameters is also a type, the container will resolve that type as well.</p>
-
-<p>And turtles all the way down…</p>
-
-<p>If we have two types(Foo : IFoo and Bar : IBar) and in Bar’s constructor it has an IFoo parameter, we should expect the IFoo parameter to be resolved to an instance of Foo.</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="p">:</span> <span class="n">IBar</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="k">public</span> <span class="nf">Bar</span><span class="p">(</span><span class="n">IFoo</span> <span class="n">foo</span><span class="p">)</span>
-</div><div class='line'>    <span class="p">{</span>
-</div><div class='line'>        <span class="n">Foo</span> <span class="p">=</span> <span class="n">foo</span><span class="p">;</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="k">public</span> <span class="n">IFoo</span> <span class="n">Foo</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>Our container is setup like :</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">_container</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Container</span><span class="p">();</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">_container</span><span class="p">.</span><span class="n">Configure</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span>
-</div><div class='line'>                         <span class="p">{</span>
-</div><div class='line'>                             <span class="n">x</span><span class="p">.</span><span class="n">For</span><span class="p">&lt;</span><span class="n">IFoo</span><span class="p">&gt;().</span><span class="n">Use</span><span class="p">&lt;</span><span class="n">Foo</span><span class="p">&gt;();</span>
-</div><div class='line'>                             <span class="n">x</span><span class="p">.</span><span class="n">For</span><span class="p">&lt;</span><span class="n">IBar</span><span class="p">&gt;().</span><span class="n">Use</span><span class="p">&lt;</span><span class="n">Bar</span><span class="p">&gt;();</span>
-</div><div class='line'>                         <span class="p">});</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>We then expect :</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[Test]</span>
-</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">IBar_should_resolve_to_Bar</span><span class="p">()</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="n">var</span> <span class="n">bar</span> <span class="p">=</span> <span class="n">_container</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IBar</span><span class="p">&gt;();</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="n">bar</span><span class="p">.</span><span class="n">ShouldBeType</span><span class="p">&lt;</span><span class="n">Bar</span><span class="p">&gt;();</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'>
-</div><div class='line'><span class="na">[Test]</span>
-</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">IBars_IFoo_dependency_should_resolve_to_Foo</span><span class="p">()</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="n">var</span> <span class="n">bar</span> <span class="p">=</span> <span class="n">_container</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IBar</span><span class="p">&gt;();</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="n">bar</span><span class="p">.</span><span class="n">Foo</span><span class="p">.</span><span class="n">ShouldBeType</span><span class="p">&lt;</span><span class="n">Foo</span><span class="p">&gt;();</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<h2>Constructor Arguments</h2>
-
-<p>Sometimes you need to specify the exact argument for a given type when it is constructed. Structure Map allows you to provide specific values for resolving a constructors argument.</p>
-
-<p>For example, Ryan was asking if there is a method with SM to resolve an “id” value from an HttpContext. I know SM has some fancy session management lifecycle features built in, but since I don’t live in the Web world I have never explored what can and can not be done with those features.</p>
-
-<p>What I do know is that I can specify where my “id” parameter comes from.</p>
-
-<p>Let’s look at this simple example.</p>
-
-<p>In my scenario I have a Foo class.</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">class</span> <span class="nc">Foo</span> <span class="p">:</span> <span class="n">IFoo</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="k">public</span> <span class="nf">Foo</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="n">IBar</span> <span class="n">bar</span><span class="p">)</span>
-</div><div class='line'>    <span class="p">{</span>
-</div><div class='line'>        <span class="n">Id</span> <span class="p">=</span> <span class="n">id</span><span class="p">;</span>
-</div><div class='line'>        <span class="n">Bar</span> <span class="p">=</span> <span class="n">bar</span><span class="p">;</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="k">public</span> <span class="kt">int</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-</div><div class='line'>    <span class="k">public</span> <span class="n">IBar</span> <span class="n">Bar</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>The id that is passed into Foo is providing by some mysterious X. In my case my X is an IIdProvider.</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">class</span> <span class="nc">IdProvider</span> <span class="p">:</span> <span class="n">IIdProvider</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="k">public</span> <span class="kt">int</span> <span class="nf">GetId</span><span class="p">()</span>
-</div><div class='line'>    <span class="p">{</span>
-</div><div class='line'>        <span class="k">return</span> <span class="m">1</span><span class="p">;</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>Now I want to tell SM that when it resolves an IFoo, I want it to use the IIdProvider to get the “id”.</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">x</span><span class="p">.</span><span class="n">For</span><span class="p">&lt;</span><span class="n">IFoo</span><span class="p">&gt;().</span><span class="n">Use</span><span class="p">&lt;</span><span class="n">Foo</span><span class="p">&gt;()</span>
-</div><div class='line'>    <span class="p">.</span><span class="n">Ctor</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
-</div><div class='line'>    <span class="p">.</span><span class="n">Is</span><span class="p">(</span><span class="n">c</span> <span class="p">=&gt;</span> <span class="n">c</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IIdProvider</span><span class="p">&gt;().</span><span class="n">GetId</span><span class="p">());</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>All together the configuration is:</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">_container</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Container</span><span class="p">();</span>
-</div><div class='line'><span class="n">_container</span><span class="p">.</span><span class="n">Configure</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span>
-</div><div class='line'>                         <span class="p">{</span>
-</div><div class='line'>                             <span class="n">x</span><span class="p">.</span><span class="n">For</span><span class="p">&lt;</span><span class="n">IIdProvider</span><span class="p">&gt;().</span><span class="n">Use</span><span class="p">&lt;</span><span class="n">IdProvider</span><span class="p">&gt;();</span>
-</div><div class='line'>                             <span class="n">x</span><span class="p">.</span><span class="n">For</span><span class="p">&lt;</span><span class="n">IBar</span><span class="p">&gt;().</span><span class="n">Use</span><span class="p">&lt;</span><span class="n">Bar</span><span class="p">&gt;();</span>
-</div><div class='line'>                             <span class="n">x</span><span class="p">.</span><span class="n">For</span><span class="p">&lt;</span><span class="n">IFoo</span><span class="p">&gt;().</span><span class="n">Use</span><span class="p">&lt;</span><span class="n">Foo</span><span class="p">&gt;()</span>
-</div><div class='line'>                                 <span class="p">.</span><span class="n">Ctor</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
-</div><div class='line'>                                 <span class="p">.</span><span class="n">Is</span><span class="p">(</span><span class="n">c</span> <span class="p">=&gt;</span> <span class="n">c</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IIdProvider</span><span class="p">&gt;().</span><span class="n">GetId</span><span class="p">());</span>
-</div><div class='line'>                         <span class="p">});</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>And my tests to verify it works:</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[Test]</span>
-</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_resolve_Bar</span><span class="p">()</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="n">_container</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IFoo</span><span class="p">&gt;();</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="n">foo</span><span class="p">.</span><span class="n">Bar</span><span class="p">.</span><span class="n">ShouldBeType</span><span class="p">&lt;</span><span class="n">Bar</span><span class="p">&gt;();</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'>
-</div><div class='line'><span class="na">[Test]</span>
-</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_resolve_id</span><span class="p">()</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="n">_container</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IFoo</span><span class="p">&gt;();</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="n">foo</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">ShouldBe</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<h2>Lazy Constructor Arguments</h2>
-
-<p>Then Ryan tells me, he would really like to be lazy because he might not need the id for all requests. There are some Lazy features added to SM 2.6 but let’s just use what we already know to solve this problem.</p>
-
-<p>Instead of having an int Id parameter, let’s have a Func<int> getId parameter.</p>
-
-<p>Foo changes to :</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="k">class</span> <span class="nc">Foo</span> <span class="p">:</span> <span class="n">IFoo</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="k">public</span> <span class="nf">Foo</span><span class="p">(</span><span class="n">Func</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">getId</span><span class="p">,</span> <span class="n">IBar</span> <span class="n">bar</span><span class="p">)</span>
-</div><div class='line'>    <span class="p">{</span>
-</div><div class='line'>        <span class="n">GetId</span> <span class="p">=</span> <span class="n">getId</span><span class="p">;</span>
-</div><div class='line'>        <span class="n">Bar</span> <span class="p">=</span> <span class="n">bar</span><span class="p">;</span>
-</div><div class='line'>    <span class="p">}</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="k">public</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">GetId</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-</div><div class='line'>    <span class="k">public</span> <span class="n">IBar</span> <span class="n">Bar</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>Now our constructor configuration changes to :</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="n">x</span><span class="p">.</span><span class="n">For</span><span class="p">&lt;</span><span class="n">IFoo</span><span class="p">&gt;().</span><span class="n">Use</span><span class="p">&lt;</span><span class="n">Foo</span><span class="p">&gt;()</span>
-</div><div class='line'>    <span class="p">.</span><span class="n">Ctor</span><span class="p">&lt;</span><span class="n">Func</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;&gt;(</span><span class="s">&quot;getId&quot;</span><span class="p">)</span>
-</div><div class='line'>    <span class="p">.</span><span class="n">Is</span><span class="p">(</span><span class="n">c</span> <span class="p">=&gt;</span> <span class="n">c</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IIdProvider</span><span class="p">&gt;().</span><span class="n">GetId</span><span class="p">);</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>And our tests become :</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-</pre></td><td class='code' width='100%'><pre><code class='csharp'><div class='line'><span class="na">[Test]</span>
-</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_resolve_Bar</span><span class="p">()</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="n">_container</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IFoo</span><span class="p">&gt;();</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="n">foo</span><span class="p">.</span><span class="n">Bar</span><span class="p">.</span><span class="n">ShouldBeType</span><span class="p">&lt;</span><span class="n">Bar</span><span class="p">&gt;();</span>
-</div><div class='line'><span class="p">}</span>
-</div><div class='line'>
-</div><div class='line'><span class="na">[Test]</span>
-</div><div class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">should_resolve_id</span><span class="p">()</span>
-</div><div class='line'><span class="p">{</span>
-</div><div class='line'>    <span class="n">var</span> <span class="n">foo</span> <span class="p">=</span> <span class="n">_container</span><span class="p">.</span><span class="n">GetInstance</span><span class="p">&lt;</span><span class="n">IFoo</span><span class="p">&gt;();</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="n">foo</span><span class="p">.</span><span class="n">GetId</span><span class="p">().</span><span class="n">ShouldBe</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>Yes it is a poor man’s lazy instantiation. But in many ways its the clearest way to have the functionality.</p>
-
-<p>You can find all this code in my Git Hub Learning Repository and the Learning Structure Map solution : <a href="http://github.com/RookieOne/Learning">http://github.com/RookieOne/Learning</a></p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -1421,6 +1145,10 @@ I mentioned the Houston Techfest again and discussed some potential presentation
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/01/16/houston-js-first-meeting/">Introducing Houston JS</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2010/10/29/learning-bash/">Learning Bash Aliases and Functions</a>
       </li>
     
@@ -1434,10 +1162,6 @@ I mentioned the Houston Techfest again and discussed some potential presentation
     
       <li class="post">
         <a href="/blog/2010/07/29/wizards-of-smart-11/">Wizards of Smart #11 - Glenn Block part 2</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2010/06/24/wizards-of-smart-10/">Wizards of Smart #10 - Glenn Block part 1</a>
       </li>
     
   </ul>
@@ -1468,7 +1192,7 @@ I mentioned the Houston Techfest again and discussed some potential presentation
     </div>
   </div>
   <footer><p>
-  Copyright &copy; 2011 - Jonathan Birkholz -
+  Copyright &copy; 2012 - Jonathan Birkholz -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
